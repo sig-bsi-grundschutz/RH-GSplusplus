@@ -1,0 +1,5 @@
+upstream_repo=https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek
+upstream_path=Anwenderkataloge/Grundschutz++/Grundschutz++-catalog.json
+catalog_last_modified=2026-04-02T05:14:32.900005269Z
+catalog_uuid=a6c95117-54b0-41ca-a631-db788650adf0
+notes=Vendored copy committed under catalogs/bsi-grundschutz-plus-plus/catalog.json for offline trestle validate.

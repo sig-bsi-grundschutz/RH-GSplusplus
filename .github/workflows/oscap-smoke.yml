@@ -1,0 +1,44 @@
+name: OpenSCAP smoke (optional)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  oscap:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+    continue-on-error: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OpenSCAP and scap-security-guide
+        run: |
+          dnf install -y openscap-scanner scap-security-guide jq
+          test -f /usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml
+
+      - name: Run targeted rule evaluations (non-gating on pass/fail)
+        run: |
+          DS=/usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml
+          mkdir -p oscap-reports
+          RULES=$(jq -r '.oscap_smoke_rules[]' mappings/rhel9_gsplusplus_slice.json)
+          for r in $RULES; do
+            echo "=== Rule: $r ==="
+            oscap xccdf eval \
+              --rule "xccdf_org.ssgproject.content_rule_${r}" \
+              --profile xccdf_org.ssgproject.content_profile_ospp \
+              --results "oscap-reports/results-${r}.xml" \
+              --report "oscap-reports/report-${r}.html" \
+              "$DS" || true
+          done
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oscap-smoke-reports
+          path: oscap-reports/

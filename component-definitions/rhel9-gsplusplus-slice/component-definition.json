@@ -1,0 +1,448 @@
+{
+  "component-definition": {
+    "uuid": "8376b619-3755-4be7-afa7-5f58c014779b",
+    "metadata": {
+      "title": "Red Hat Enterprise Linux 9 — Grundschutz++ implementation (pilot slice)",
+      "last-modified": "2026-04-08T00:00:00.000Z",
+      "version": "0.1.0",
+      "oscal-version": "1.1.3",
+      "remarks": "Implementation statements describe how Red Hat Enterprise Linux 9 can contribute to selected Grundschutz++ controls when deployed and operated by the customer. This is not a certification or legal interpretation of BSI requirements."
+    },
+    "components": [
+      {
+        "uuid": "e5f5e589-d6a7-4530-b40b-25c50dfe97ad",
+        "type": "software",
+        "title": "Red Hat Enterprise Linux 9",
+        "description": "Red Hat Enterprise Linux 9 is a general-purpose operating environment. Technical effectiveness depends on image selection, configuration, connected services, and organizational processes described in Red Hat product documentation.",
+        "links": [
+          {
+            "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+            "rel": "reference",
+            "text": "RHEL 9 Security hardening (docs.redhat.com)"
+          },
+          {
+            "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek",
+            "rel": "reference",
+            "text": "BSI Stand der Technik Bibliothek (Grundschutz++)"
+          }
+        ],
+        "control-implementations": [
+          {
+            "uuid": "ac121dff-877d-4be2-8aa1-a6961bf05242",
+            "source": "trestle://profiles/rhel9-gsplusplus-slice/profile.json",
+            "description": "Control implementations mapped from the pilot Grundschutz++ profile slice; see mappings/rhel9_gsplusplus_slice.json and ComplianceAsCode rule identifiers where present.",
+            "implemented-requirements": [
+              {
+                "uuid": "2630a8d4-0d2f-5495-94b3-ceab4a2b36f0",
+                "control-id": "GC.1.1",
+                "description": "RHEL 9 is a controlled platform for building an ISMS scope; organizational scoping, asset inventory, and governance remain customer responsibilities. Product documentation supports security-relevant deployment and lifecycle practices.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  }
+                ]
+              },
+              {
+                "uuid": "b49207b3-a10b-510b-9393-0d3008be50f0",
+                "control-id": "GC.2.1",
+                "description": "Regulatory and contractual requirements are interpreted and applied by the customer; RHEL provides configurable technical controls (audit, crypto, identity, MAC) to help meet common obligations when properly deployed.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  }
+                ]
+              },
+              {
+                "uuid": "62472d7a-94b2-5ee8-91c1-df1ee0719d4f",
+                "control-id": "GC.3.1",
+                "description": "Policies and procedures are owned by the institution; RHEL supplies security hardening guides, crypto frameworks, and automation-friendly interfaces (e.g. OpenSCAP, system roles).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  }
+                ]
+              },
+              {
+                "uuid": "0e2ae4f0-9088-5953-af5e-6bbb1ed9a1e8",
+                "control-id": "GC.4.1",
+                "description": "Management commitment and roles are organizational; RHEL supports delegated administration (sudo, RBAC integrations via SSSD) consistent with customer-defined roles.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index",
+                    "rel": "reference",
+                    "text": "sssd"
+                  }
+                ]
+              },
+              {
+                "uuid": "4f933d71-3604-59b5-a335-5d5fbeeff42b",
+                "control-id": "GC.5.1",
+                "description": "Risk treatment plans are customer-owned; RHEL offers documented hardening paths and compliance-oriented profiles in scap-security-guide to reduce technical risk when selected and applied.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "installed_OS_is_vendor_supported"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  },
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_software_with_the_dnf_tool/index",
+                    "rel": "reference",
+                    "text": "updates"
+                  }
+                ]
+              },
+              {
+                "uuid": "744e5b5b-7e3b-584c-81e4-d248ea62db3f",
+                "control-id": "GC.6.1",
+                "description": "Third-party and supply-chain governance is shared: Red Hat signs content and publishes errata; customers verify signatures and subscribe to update channels appropriate to their assurance needs.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "ensure_redhat_gpgkey_installed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "ensure_gpgcheck_globally_activated"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_software_with_the_dnf_tool/index",
+                    "rel": "reference",
+                    "text": "updates"
+                  }
+                ]
+              },
+              {
+                "uuid": "0b350ae4-9dd5-50d4-b957-5880bd91f9a5",
+                "control-id": "GC.7.1",
+                "description": "Incident handling processes are organizational; RHEL provides auditd, journaling, and integrations for centralized logging when configured by the customer.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_auditd_enabled"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "audit"
+                  }
+                ]
+              },
+              {
+                "uuid": "8b6ea3fa-4407-5448-befc-3ba86d008907",
+                "control-id": "GC.8.1",
+                "description": "Business continuity is customer-designed; RHEL supports backup-friendly storage, high-availability patterns, and reproducible configuration via automation.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  }
+                ]
+              },
+              {
+                "uuid": "0f1b5d29-7cbb-55ea-a2c6-f8ed18dd691c",
+                "control-id": "GC.9.1",
+                "description": "Data protection impact and privacy engineering are contextual; RHEL provides disk encryption (LUKS), TLS stacks, and MAC (SELinux) as technical building blocks.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "enable_dracut_fips_module"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_managing-encryption-and-public-key-infrastructure_security-hardening",
+                    "rel": "reference",
+                    "text": "managing encryption"
+                  },
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/using_selinux/index",
+                    "rel": "reference",
+                    "text": "selinux"
+                  }
+                ]
+              },
+              {
+                "uuid": "bf90cc4d-9f6f-55a7-ba67-f0dea0e3c0f5",
+                "control-id": "GC.10.1",
+                "description": "Awareness and training are organizational; Red Hat documents security features so administrators can operate RHEL consistently with institutional standards.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  }
+                ]
+              },
+              {
+                "uuid": "628ff9d1-8247-5a42-a9a4-4368a55ac99b",
+                "control-id": "STM.1.1",
+                "description": "Network segmentation and zoning are implemented with customer topology; RHEL provides firewalld, nftables, and routing features to enforce host-level network policy.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_firewalld_enabled"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/securing_networks/index",
+                    "rel": "reference",
+                    "text": "firewalld"
+                  }
+                ]
+              },
+              {
+                "uuid": "bbe9cb22-e2fb-5cfe-a246-ba8ce8779dc4",
+                "control-id": "STM.1.2",
+                "description": "Remote access controls depend on customer services; RHEL ships OpenSSH and PAM, configurable to disallow root login, enforce key-based auth, and integrate with enterprise identity.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_disable_root_login"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  }
+                ]
+              },
+              {
+                "uuid": "68c80536-2b97-5f86-b88c-a16883ddbcc5",
+                "control-id": "STM.2.1",
+                "description": "RHEL 9 includes SELinux (MAC) and documented policies; enforcing mode is supported and recommended for many deployments when compatible with workloads.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "selinux_state"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/using_selinux/index",
+                    "rel": "reference",
+                    "text": "selinux"
+                  }
+                ]
+              },
+              {
+                "uuid": "ec218b5d-dcdc-574e-a8b3-38cbc9f46e1a",
+                "control-id": "STM.3.1",
+                "description": "Malware mitigation combines customer process with technical controls: package signing, minimal installation, and Security-Enhanced Linux reduce exposure; additional AV/EDR is customer-chosen.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_aide_installed"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  }
+                ]
+              },
+              {
+                "uuid": "efa4f0d7-311e-5bb0-a0de-15ca789815fe",
+                "control-id": "STM.4.1",
+                "description": "Patch and vulnerability management uses customer processes; RHEL provides dnf, Red Hat Errata, and tools to evaluate system security posture (OpenSCAP) when installed.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "security_patches_up_to_date"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_software_with_the_dnf_tool/index",
+                    "rel": "reference",
+                    "text": "updates"
+                  }
+                ]
+              },
+              {
+                "uuid": "90f0ae4b-35bb-50d5-b522-d8cd3c096e0c",
+                "control-id": "STM.4.2",
+                "description": "Secure configuration baselines can be applied using scap-security-guide profiles, system roles, or image builders; the exact baseline is customer-selected.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  }
+                ]
+              },
+              {
+                "uuid": "0700f009-268a-50dc-ba24-9d0941ad156b",
+                "control-id": "STM.5.1",
+                "description": "Logging and monitoring use auditd, systemd journal, and rsyslog; forwarding to SIEM is customer-configured.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_auditd_enabled"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "audit"
+                  }
+                ]
+              },
+              {
+                "uuid": "a3049da2-acc5-5328-a1a0-592dd319bfcc",
+                "control-id": "STM.5.2",
+                "description": "Time synchronization for audit correlation is typically provided by chrony; customers point strata to trusted time sources.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+                    "rel": "reference",
+                    "text": "security hardening"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

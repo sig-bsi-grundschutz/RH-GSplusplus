@@ -1,0 +1,29 @@
+name: Validate OSCAL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  trestle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install compliance-trestle
+        run: pip install -r requirements.txt
+
+      - name: Regenerate component definition (deterministic)
+        run: python3 scripts/generate_component_definition.py
+
+      - name: Fail if generated artifacts drift
+        run: git diff --exit-code -- component-definitions/
+
+      - name: Validate all models
+        run: python3 -m trestle validate -a
