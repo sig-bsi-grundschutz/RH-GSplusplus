@@ -25,7 +25,7 @@ jobs:
         run: |
           DS=/usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml
           mkdir -p oscap-reports
-          RULES=$(jq -r '.oscap_smoke_rules[]' mappings/rhel9_gsplusplus_slice.json)
+          RULES=$(jq -r '.oscap_smoke_rules[]' mappings/rhel9_gsplusplus.json)
           for r in $RULES; do
             echo "=== Rule: $r ==="
             oscap xccdf eval \

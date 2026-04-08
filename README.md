@@ -1,18 +1,20 @@
 # RH-GSplusplus
 
-OSCAL **Implementation Layer** artifacts for **Red Hat Enterprise Linux** aligned to the BSI **Grundschutz++** user catalog from the [Stand-der-Technik-Bibliothek](https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek). The goal is machine-readable **component definitions** (and supporting **profiles**) that security planners can import into SSP and GRC tooling, together with traceability toward technical checks in [ComplianceAsCode/content](https://github.com/ComplianceAsCode/content).
+OSCAL **Implementation Layer** artifacts for **Red Hat Enterprise Linux 9** aligned to the full BSI **Grundschutz++** *Anwenderkatalog* from the [Stand-der-Technik-Bibliothek](https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek). The repository publishes a **profile** that selects **all** catalog controls and a **component definition** with one `implemented-requirement` per control, plus optional curated links to [ComplianceAsCode/content](https://github.com/ComplianceAsCode/content) rule IDs where overrides exist.
 
-This repository is intentionally **narrow**: it does not recreate the full multi-framework OSCAL library maintained upstream in [ComplianceAsCode/oscal-content](https://github.com/ComplianceAsCode/oscal-content).
+This repository does not recreate the broad multi-framework OSCAL library in [ComplianceAsCode/oscal-content](https://github.com/ComplianceAsCode/oscal-content).
 
 ## Contents
 
 | Path | Purpose |
 |------|---------|
 | [`catalogs/bsi-grundschutz-plus-plus/catalog.json`](catalogs/bsi-grundschutz-plus-plus/catalog.json) | Vendored BSI Grundschutz++ **catalog** (snapshot for offline validation). |
-| [`profiles/rhel9-gsplusplus-slice/profile.json`](profiles/rhel9-gsplusplus-slice/profile.json) | OSCAL **profile** selecting a pilot subset of controls for RHEL 9 authoring. |
-| [`component-definitions/rhel9-gsplusplus-slice/component-definition.json`](component-definitions/rhel9-gsplusplus-slice/component-definition.json) | OSCAL **component definition** for RHEL 9 (generated; see below). |
-| [`mappings/rhel9_gsplusplus_slice.json`](mappings/rhel9_gsplusplus_slice.json) | Mapping source: statements, implementation status, optional SSG rule IDs, docs.redhat.com links. |
-| [`scripts/generate_component_definition.py`](scripts/generate_component_definition.py) | Regenerates the component definition from the mapping. |
+| [`profiles/rhel9-gsplusplus-full/profile.json`](profiles/rhel9-gsplusplus-full/profile.json) | OSCAL **profile** including **every** Grundschutz++ control (generated). |
+| [`component-definitions/rhel9-gsplusplus-full/component-definition.json`](component-definitions/rhel9-gsplusplus-full/component-definition.json) | OSCAL **component definition** for RHEL 9 (generated). |
+| [`mappings/rhel9_gsplusplus.json`](mappings/rhel9_gsplusplus.json) | Generator config: defaults, doc URLs, artifact paths, smoke-test rule list. |
+| [`mappings/rhel9_gsplusplus_overrides.json`](mappings/rhel9_gsplusplus_overrides.json) | Per-control overrides for **all** catalog controls (docs.redhat.com `doc_keys`, statements; bulk rows from [`scripts/build_gsplusplus_overrides.py`](scripts/build_gsplusplus_overrides.py)). |
+| [`scripts/build_gsplusplus_overrides.py`](scripts/build_gsplusplus_overrides.py) | Rebuilds `rhel9_gsplusplus_overrides.json` from the BSI catalog (preserves `CURATED` controls). |
+| [`scripts/generate_component_definition.py`](scripts/generate_component_definition.py) | Regenerates **profile** and **component definition** from the catalog + mappings. |
 | [`scripts/fetch_bsi_catalog.sh`](scripts/fetch_bsi_catalog.sh) | Refreshes the vendored BSI catalog from GitHub. |
 
 ## Prerequisites
@@ -31,10 +33,12 @@ python3 scripts/generate_component_definition.py
 python3 -m trestle validate -a
 ```
 
+After changing the vendored catalog (new control IDs), re-run the generator so the profile `with-ids` list and component stay in sync.
+
 ## CI
 
-- **Validate OSCAL** — installs Trestle, regenerates the component definition, fails on git drift, runs `trestle validate -a`.
-- **OpenSCAP smoke** — Fedora container, evaluates a small rule list from `oscap_smoke_rules` against `ssg-rhel9-ds.xml` (reports uploaded; rule results may be *fail* on an unhardened image — the job still produces artifacts).
+- **Validate OSCAL** — installs Trestle, regenerates profile + component definition, fails on git drift under `component-definitions/` and `profiles/`, runs `trestle validate -a`.
+- **OpenSCAP smoke** — Fedora container, evaluates `oscap_smoke_rules` from `mappings/rhel9_gsplusplus.json` against `ssg-rhel9-ds.xml` (reports uploaded; individual rules may *fail* on an unhardened image).
 
 ## Updating the BSI catalog snapshot
 
@@ -42,7 +46,7 @@ python3 -m trestle validate -a
 ./scripts/fetch_bsi_catalog.sh
 ```
 
-Record the upstream state in [`third_party/bsi/VERSION`](third_party/bsi/VERSION).
+Update [`third_party/bsi/VERSION`](third_party/bsi/VERSION), bump `artifact_metadata` timestamps in `mappings/rhel9_gsplusplus.json` if document semantics change, then run `python3 scripts/generate_component_definition.py`.
 
 ## License and attribution
 

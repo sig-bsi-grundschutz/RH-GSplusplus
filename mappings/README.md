@@ -1,26 +1,27 @@
 # Control mappings
 
-## `rhel9_gsplusplus_slice.json`
+## `rhel9_gsplusplus.json`
 
-Machine-readable mapping from **BSI Grundschutz++** catalog control IDs (pilot subset) to:
+Main **generator configuration**: artifact UUIDs and timestamps, paths, default template (used only if an override omits fields — overrides now cover all controls), `docs` map (**docs.redhat.com** URLs), OpenSCAP smoke rules, and `gaps`.
 
-- **implementation_status** — OSCAL-oriented status for the component-definition generator (`partial`, `implemented`, …).
-- **statement** — Short Red Hat product positioning text (not a legal interpretation of BSI wording).
-- **rule_ids** — Optional ComplianceAsCode / scap-security-guide rule short names for automation (see [ComplianceAsCode/content](https://github.com/ComplianceAsCode/content)).
-- **doc_keys** — Keys into the `docs` map (docs.redhat.com URLs).
+## `rhel9_gsplusplus_overrides.json`
 
-### Gaps and limitations
+**Per-control data** for every Grundschutz++ catalog control (`647` entries):
 
-The `gaps` array in the JSON file lists known limitations. In particular:
+- **doc_keys** — Keys into `docs` in `rhel9_gsplusplus.json` so the component definition gets concrete **docs.redhat.com** links.
+- **statement** — English implementation narrative (curated for 18 controls; the rest generated from BSI practice area + German title keywords).
+- **implementation_status** — Mostly `partial`; curated exceptions (e.g. SELinux) may use `implemented`.
+- **rule_ids** — Optional ComplianceAsCode rule short names (currently only on the **curated** subset).
 
-- Organizational controls (**GC.**\*) often remain **`partial`** because RHEL alone cannot satisfy governance without customer process.
-- **Rule IDs** are indicative; profile choice (e.g. OSPP, CIS) changes whether a rule exists or is selected.
-- OpenSCAP smoke tests in CI use **`oscap_smoke_rules`** — a small subset that is expected to be present in common RHEL 9 data streams.
+### Regenerating generated overrides
 
-Regenerate the component definition after editing the mapping:
+Hand-edits inside `controls` will be **overwritten** if you run the builder. To change bulk behavior, edit [`scripts/build_gsplusplus_overrides.py`](../scripts/build_gsplusplus_overrides.py) (`GROUP_META`, `KEYWORD_RULES`, or `CURATED`), then:
 
 ```bash
+python3 scripts/build_gsplusplus_overrides.py
 python3 scripts/generate_component_definition.py
 ```
 
-Bump `artifact_metadata.component_definition_last_modified` when you change statements or control coverage so OSCAL document identity tracking stays honest.
+Bump `artifact_metadata.component_definition_last_modified` in `rhel9_gsplusplus.json` when OSCAL output meaningfully changes.
+
+To **preserve** a one-off control: add or update it in the `CURATED` dict in `build_gsplusplus_overrides.py`, then rebuild.
