@@ -1,0 +1,12 @@
+{
+  "id": "rhel-host",
+  "description": "RHEL 9/10 host applicability filter: Stand-der-Technik Kernel controls in Konfiguration, Berechtigungen and Detektion (KONF, BER, DET).",
+  "kernel_class_prefix": "BSI-Stand-der-Technik-Kernel",
+  "practice_area_allowlist": ["KONF", "BER", "DET"],
+  "component_by_practice_area": {
+    "KONF": "rhel-hardening",
+    "BER": "rhel-identity",
+    "DET": "rhel-audit"
+  },
+  "tier1_overrides_relative_path": "mappings/shared/controls/rhel-audit.json"
+}

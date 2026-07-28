@@ -1,0 +1,1393 @@
+{
+  "controls": {
+    "BER.1.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.1.1.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.1.1.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.1.1.3": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.1.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.1.3": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.1.4": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.2.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.2.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.2.3": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.2.4": {
+      "component": "rhel-audit",
+      "tier": 1,
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit",
+        "sssd"
+      ],
+      "rule_ids": [
+        "audit_rules_usergroup_modification_passwd"
+      ],
+      "statement": "Änderungen an identitätsrelevanten Dateien können mit auditd-Regeln erfasst werden; Identitätslebenszyklus und IAM-Prozesse verbleiben in der Verantwortung der Institution (PAM, SSSD, Verzeichnisintegration)."
+    },
+    "BER.2.5": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.2.6": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.3": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.4": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.5": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.6": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.7": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.8": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.9": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.10": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.11": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.12": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.13": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.14": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.15": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.16": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.17": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.18": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.19": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.20": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.21": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.22": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.23": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.24": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.3.25": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.1.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.1.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.3": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.4": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.4.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.5": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.6": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.7": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.4.8": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.1.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.3": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.4": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.5": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.6": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.7": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.8": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.9": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.10": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.11": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.12": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.13": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.5.14": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.6.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.6.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.6.3": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.6.4": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.6.5": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.6.6": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.3": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.4": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.5": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.6": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.7": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.8": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.9": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.10": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.11": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.12": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.13": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.14": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.15": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.16": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.16.1": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.16.2": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.16.3": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.16.4": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.16.5": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "BER.7.16.6": {
+      "component": "rhel-identity",
+      "tier": 2
+    },
+    "DET.1.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.1.1.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.1.1.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.1.1.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.1.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.2.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.2.1.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.2.1.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.2.1.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.2.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.2.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.1.1": {
+      "component": "rhel-audit",
+      "tier": 1,
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit"
+      ],
+      "rule_ids": [
+        "audit_rules_login_events_faillog"
+      ],
+      "statement": "RHEL auditd kann Erfolg und Fehlschlag von Authentisierungen protokollieren, wenn Audit-Regeln gemäß Produktdokumentation und scap-security-guide-Baselines konfiguriert sind."
+    },
+    "DET.3.1.2": {
+      "component": "rhel-audit",
+      "tier": 2,
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit",
+        "openscap"
+      ],
+      "rule_ids": [],
+      "statement": "RHEL stellt konfigurierbare Audit-Regeln (einschließlich privilegierter Befehle und Syscall-Auditing) über auditd bereit; Regelsätze wählt die Institution. Siehe Sicherheitshärtung und OpenSCAP-Inhalte für Beispiele."
+    },
+    "DET.3.1.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.1.4": {
+      "component": "rhel-audit",
+      "tier": 2,
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit",
+        "monitoring"
+      ],
+      "rule_ids": [
+        "audit_rules_var_log_journal"
+      ],
+      "statement": "RHEL erfasst Systemfehler über das systemd-Journal und das Audit-Subsystem; Aufbewahrung und zentrale Sammlung legt die Institution fest."
+    },
+    "DET.3.1.5": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.1.6": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.1.7": {
+      "component": "rhel-audit",
+      "tier": 2,
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit"
+      ],
+      "rule_ids": [],
+      "statement": "RHEL unterstützt die Protokollierung von Zeitpunkt, Quelle und Zielobjekt sicherheitsrelevanter Ereignisse über auditd und Journal, sofern entsprechend konfiguriert."
+    },
+    "DET.3.1.8": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.1.9": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.1.10": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.1.11": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.1.12": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.3": {
+      "component": "rhel-audit",
+      "tier": 1,
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit"
+      ],
+      "rule_ids": [
+        "auditd_data_retention_space_left"
+      ],
+      "statement": "auditd unterstützt Aktionen bei vollem Datenträger und Schwellwerte für freien Speicherplatz, wie in der RHEL-Dokumentation beschrieben; Partitionierung und Archivierung verbleiben bei der Institution."
+    },
+    "DET.3.4": {
+      "component": "rhel-audit",
+      "tier": 1,
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit"
+      ],
+      "rule_ids": [
+        "file_permissions_var_log_audit",
+        "audit_rules_immutable"
+      ],
+      "statement": "RHEL dokumentiert restriktive Berechtigungen auf Audit-Protokolldateien und optionale unveränderliche Audit-Regeln zum Schutz vor Manipulation; Weiterleitung an einen separaten Log-Host oder SIEM konfiguriert die Institution."
+    },
+    "DET.3.5": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.3.6": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.4": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.5": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.6": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.6.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.7": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.8": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.9": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.10": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.11": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.11.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.11.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.11.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.12": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.12.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.13": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.14": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.15": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.16": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.17": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.18": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.4.19": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.1.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.3.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.3.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.3.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.4": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.5": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.6": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.7": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.8": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.8.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.8.1.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.9": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.9.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.10": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.10.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.10.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.10.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.10.4": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.5.10.5": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.6.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.6.1.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.6.1.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.6.1.3": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.6.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.6.2.1": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "DET.6.2.2": {
+      "component": "rhel-audit",
+      "tier": 2
+    },
+    "KONF.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.1.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.1.1.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.1.1.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.1.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.1.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.1.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.1.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.4.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.4.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.5.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.6": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.7": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.8": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.2.9": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.3.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.3.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.3.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.3.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.3.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.3.6": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.3.6.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.3.7": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.3.8": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.4.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.4.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.4.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.4.2.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.4.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.4.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.4.5": {
+      "component": "rhel-audit",
+      "tier": 1,
+      "implementation_status": "partial",
+      "doc_keys": [
+        "monitoring",
+        "systemd"
+      ],
+      "rule_ids": [
+        "service_chronyd_enabled"
+      ],
+      "statement": "Zeitsynchronisation für die Korrelation von Protokollen erfolgt typischerweise über chrony; die Institution bindet vertrauenswürdige Zeitquellen gemäß Produktdokumentation an."
+    },
+    "KONF.5.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.5.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.5.1.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.5.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.1.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.1.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.4.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.6": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.6.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.7": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.8": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.9": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.10": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.11": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.12": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.13": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.14": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.15": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.6.16": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.6": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.7": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.8": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.9": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.10": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.11": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.12": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.13": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.14": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.15": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.16": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.7.16.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.8.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.8.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.8.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.9.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.9.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.9.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.10.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.10.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.10.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.10.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.10.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.10.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.10.5.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.1.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.6": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.7": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.7.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.7.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.7.2.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.11.8": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.6": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.7": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.8": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.9": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.10": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.1.11": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.6": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.7": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.8": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.9": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.10": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.11": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.12": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.13": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.12.14": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.1.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.2.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.2.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.5.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.6": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.7": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.8": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.9": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.10": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.13.11": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.14.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.14.1.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.14.1.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.14.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.14.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.14.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.14.5": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.15.1": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.15.2": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.15.3": {
+      "component": "rhel-hardening",
+      "tier": 2
+    },
+    "KONF.15.4": {
+      "component": "rhel-hardening",
+      "tier": 2
+    }
+  }
+}

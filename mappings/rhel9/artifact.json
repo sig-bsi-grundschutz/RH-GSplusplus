@@ -1,7 +1,7 @@
 {
   "artifact_metadata": {
-    "profile_last_modified": "2026-07-28T14:00:00.000Z",
-    "component_definition_last_modified": "2026-07-28T14:00:00.000Z"
+    "profile_last_modified": "2026-07-28T16:00:00.000Z",
+    "component_definition_last_modified": "2026-07-28T16:00:00.000Z"
   },
   "artifact_id": "rhel9-gsplusplus-host",
   "product_key": "rhel9",
@@ -18,18 +18,18 @@
     "catalog_last_modified": "2026-07-26T10:33:02.519739629Z"
   },
   "docs_relative_path": "mappings/rhel9/docs.json",
-  "slice_relative_path": "mappings/shared/slices/rhel-audit.json",
-  "components_relative_path": "mappings/shared/components/rhel-audit.json",
-  "controls_relative_path": "mappings/shared/controls/rhel-audit.json",
+  "slice_relative_path": "mappings/shared/slices/rhel-host.json",
+  "components_relative_path": "mappings/shared/components/rhel-host.json",
+  "controls_relative_path": "mappings/shared/controls/rhel-host.json",
   "profile_output_path": "profiles/rhel9-gsplusplus-host/profile.json",
   "component_definition_output_path": "component-definitions/rhel9-gsplusplus-host/component-definition.json",
   "profile_source_href": "trestle://profiles/rhel9-gsplusplus-host/profile.json",
   "profile": {
-    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, Audit-Slice)",
+    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang)",
     "metadata_version": "0.1.0"
   },
   "component_definition": {
-    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung (Audit-Slice)",
+    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
     "metadata_version": "0.1.0"
   },
   "product": {
@@ -38,7 +38,7 @@
     "rhel_major": 9
   },
   "texts": {
-    "profile_remarks": "Profil mit Host-Anwendbarkeitsfilter für Red Hat Enterprise Linux. Organisatorische Grundschutz++-Anforderungen verbleiben im BSI-Katalog; dieses Profil listet nur die Anforderungen, die durch die begleitende Komponentendefinition adressiert werden. Aktueller vertikaler Slice: {slice_id}.",
+    "profile_remarks": "Profil mit Host-Anwendbarkeitsfilter für Red Hat Enterprise Linux (Kernel-Anforderungen in KONF, BER, DET). Organisatorische Grundschutz++-Anforderungen verbleiben im BSI-Katalog; dieses Profil listet nur die Anforderungen, die durch die begleitende Komponentendefinition adressiert werden. Scope: {slice_id}.",
     "component_definition_remarks": "Produktspezifische Umsetzungsaussagen für auf Red Hat Enterprise Linux anwendbare Grundschutz++-Anforderungen. Tier-1-Einträge sind kuratiert; Tier-2-Einträge nutzen eine ehrliche Dokumentationsvorlage. ComplianceAsCode Rule_Id-Werte erscheinen nur, wo sie in mappings/shared/controls/ aufgeführt sind. Keine Zertifizierung oder Rechtsauslegung.",
     "control_implementation_description": "Grundschutz++-Anforderungen, umgesetzt durch {component_title} (Artefakt {artifact_id}).",
     "bsi_link_text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++",
