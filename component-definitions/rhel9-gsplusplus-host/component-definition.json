@@ -3,19 +3,50 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-07-28T17:00:00.000Z",
+      "last-modified": "2026-07-28T07:16:11.731359-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
-      "remarks": "Produktspezifische Umsetzungsaussagen für human freigegebene, auf Red Hat Enterprise Linux anwendbare Grundschutz++-Anforderungen. Jede enthaltene Anforderung hat kuratierten Text oder eine explizit markierte Dokumentationsvorlage. ComplianceAsCode Rule_Id-Werte erscheinen nur, wo sie in der Curation aufgeführt sind. Keine Zertifizierung oder Rechtsauslegung.",
       "links": [
         {
           "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek/blob/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
           "rel": "reference",
           "text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++ (Stand 2026-07-26, commit cea4589c2b83)"
         }
-      ]
+      ],
+      "remarks": "Produktspezifische Umsetzungsaussagen aus trestle agile authoring (authoring/component/). Jede enthaltene Anforderung hat kuratierten Implementierungstext in Markdown. ComplianceAsCode Rule_Id-Werte erscheinen nur, wo in den Component-Markdown-Dateien gesetzt. Keine Zertifizierung oder Rechtsauslegung."
     },
     "components": [
+      {
+        "uuid": "fba342c8-4066-5ed8-8d4f-c72c5e9dffea",
+        "type": "software",
+        "title": "RHEL-Identität, Berechtigungen und Kryptografie",
+        "description": "Lokale und zentrale Authentisierung, PAM, SSSD, rollenbasierte Zugriffssteuerung, Schlüssel- und Zertifikatsverwaltung sowie Berechtigungsmodelle auf Red Hat Enterprise Linux.",
+        "links": [
+          {
+            "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index",
+            "rel": "reference",
+            "text": "Authentifizierung und Autorisierung"
+          },
+          {
+            "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+            "rel": "reference",
+            "text": "Sicherheitshärtung"
+          },
+          {
+            "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek/blob/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+            "rel": "reference",
+            "text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++"
+          }
+        ],
+        "control-implementations": [
+          {
+            "uuid": "527b80c3-53ad-5c2d-9978-97642cd294a8",
+            "source": "trestle://profiles/rhel9-gsplusplus-host/profile.json",
+            "description": "Grundschutz++-Anforderungen, umgesetzt durch RHEL-Identität, Berechtigungen und Kryptografie (Artefakt rhel9-gsplusplus-host).",
+            "implemented-requirements": []
+          }
+        ]
+      },
       {
         "uuid": "f8b9dc59-d24d-5f20-9af6-9cde77183be1",
         "type": "software",
@@ -60,14 +91,14 @@
                 "description": "Änderungen an identitätsrelevanten Dateien können mit auditd-Regeln erfasst werden; Identitätslebenszyklus und IAM-Prozesse verbleiben in der Verantwortung der Institution (PAM, SSSD, Verzeichnisintegration).",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "partial"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "audit_rules_usergroup_modification_passwd"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ],
                 "links": [
@@ -89,14 +120,14 @@
                 "description": "RHEL auditd kann Erfolg und Fehlschlag von Authentisierungen protokollieren, wenn Audit-Regeln gemäß Produktdokumentation und scap-security-guide-Baselines konfiguriert sind.",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "partial"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "audit_rules_login_events_faillog"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ],
                 "links": [
@@ -114,8 +145,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "partial"
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ],
                 "links": [
@@ -137,14 +168,14 @@
                 "description": "RHEL erfasst Systemfehler über das systemd-Journal und das Audit-Subsystem; Aufbewahrung und zentrale Sammlung legt die Institution fest.",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "partial"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "audit_rules_var_log_journal"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ],
                 "links": [
@@ -167,8 +198,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "partial"
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ],
                 "links": [
@@ -185,14 +216,14 @@
                 "description": "auditd unterstützt Aktionen bei vollem Datenträger und Schwellwerte für freien Speicherplatz, wie in der RHEL-Dokumentation beschrieben; Partitionierung und Archivierung verbleiben bei der Institution.",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "partial"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "auditd_data_retention_space_left"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ],
                 "links": [
@@ -209,11 +240,6 @@
                 "description": "RHEL dokumentiert restriktive Berechtigungen auf Audit-Protokolldateien und optionale unveränderliche Audit-Regeln zum Schutz vor Manipulation; Weiterleitung an einen separaten Log-Host oder SIEM konfiguriert die Institution.",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "partial"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "file_permissions_var_log_audit"
@@ -222,6 +248,11 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "audit_rules_immutable"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ],
                 "links": [
@@ -238,14 +269,14 @@
                 "description": "Zeitsynchronisation für die Korrelation von Protokollen erfolgt typischerweise über chrony; die Institution bindet vertrauenswürdige Zeitquellen gemäß Produktdokumentation an.",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "partial"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "service_chronyd_enabled"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ],
                 "links": [
@@ -262,6 +293,42 @@
                 ]
               }
             ]
+          }
+        ]
+      },
+      {
+        "uuid": "ebbfaf00-3354-508e-9f30-011c6c955472",
+        "type": "software",
+        "title": "RHEL-Systemhärtung und Konfiguration",
+        "description": "Betriebssystem-Basiskonfiguration, Patch- und Update-Mechanismen, Malware-Schutz, Host-Firewall, Fernwartung und anwendungsnahe Betriebskonfigurationen auf Red Hat Enterprise Linux.",
+        "links": [
+          {
+            "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+            "rel": "reference",
+            "text": "Sicherheitshärtung"
+          },
+          {
+            "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/scanning-the-system-for-configuration-compliance-and-vulnerabilities_security-hardening",
+            "rel": "reference",
+            "text": "OpenSCAP-Compliance-Scan"
+          },
+          {
+            "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index",
+            "rel": "reference",
+            "text": "Grundlegende Systemeinstellungen"
+          },
+          {
+            "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek/blob/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+            "rel": "reference",
+            "text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++"
+          }
+        ],
+        "control-implementations": [
+          {
+            "uuid": "f91370c2-11d0-5ae8-8392-eb381ba37661",
+            "source": "trestle://profiles/rhel9-gsplusplus-host/profile.json",
+            "description": "Grundschutz++-Anforderungen, umgesetzt durch RHEL-Systemhärtung und Konfiguration (Artefakt rhel9-gsplusplus-host).",
+            "implemented-requirements": []
           }
         ]
       }

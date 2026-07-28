@@ -13,10 +13,12 @@ This repository does **not** recreate the broad multi-framework OSCAL library in
 
 - **BSI catalog** = full GS++ ISMS baseline (organizational + technical).
 - **`rhel9-gsplusplus-host`** = scoped profile + component definition for controls RHEL can support.
-- **ComplianceAsCode `Rule_Id`** props where OpenSCAP rules exist (see mappings in `mappings/shared/controls/`).
+- **ComplianceAsCode `Rule_Id`** props where OpenSCAP rules exist (see `authoring/component/` markdown).
 
 Customers import the BSI control layer **and** the Red Hat implementation artifacts into SSP or
 compliance tooling.
+
+Human review uses **trestle agile authoring** — see [docs/CURATION.md](docs/CURATION.md).
 
 ## Contents
 
@@ -25,11 +27,13 @@ compliance tooling.
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Architecture, phasing, multi-product roadmap |
 | [docs/CURATION.md](docs/CURATION.md) | Human curation workflow (host control review) |
 | [catalogs/bsi-grundschutz-plus-plus/catalog.json](catalogs/bsi-grundschutz-plus-plus/catalog.json) | Vendored BSI Control Layer resolved Grundschutz++ catalog snapshot |
-| [profiles/rhel9-gsplusplus-host/profile.json](profiles/rhel9-gsplusplus-host/profile.json) | Scoped host profile (generated) |
-| [component-definitions/rhel9-gsplusplus-host/](component-definitions/rhel9-gsplusplus-host/) | RHEL subsystem component definitions (generated) |
-| [mappings/](mappings/) | Mapping source (slices, components, controls, product config) |
-| [scripts/generate_component_definition.py](scripts/generate_component_definition.py) | Regenerate profile + component definition |
-| [scripts/build_host_mappings.py](scripts/build_host_mappings.py) | Build slice/controls from human curation registry |
+| [authoring/profile/rhel9-gsplusplus-host/](authoring/profile/rhel9-gsplusplus-host/) | trestle profile markdown — human scope selection |
+| [authoring/component/rhel9-gsplusplus-host/](authoring/component/rhel9-gsplusplus-host/) | trestle component markdown — implementation prose |
+| [profiles/rhel9-gsplusplus-host/profile.json](profiles/rhel9-gsplusplus-host/profile.json) | Scoped host profile (assembled from authoring) |
+| [component-definitions/rhel9-gsplusplus-host/](component-definitions/rhel9-gsplusplus-host/) | RHEL subsystem component definitions (assembled) |
+| [mappings/](mappings/) | Scope rules, component metadata, product config |
+| [scripts/assemble_oscal.py](scripts/assemble_oscal.py) | Assemble profile + component-definition from authoring |
+| [scripts/export_review_candidates.py](scripts/export_review_candidates.py) | Export candidate review queue markdown |
 | [scripts/fetch_bsi_catalog.sh](scripts/fetch_bsi_catalog.sh) | Refresh vendored BSI catalog |
 
 ## Prerequisites
@@ -44,16 +48,14 @@ pip install -r requirements.txt
 ## Validate locally
 
 ```bash
-python3 scripts/curation/init_registry.py --write
-python3 scripts/build_host_mappings.py --write
-python3 scripts/generate_component_definition.py --product rhel9
+python3 scripts/assemble_oscal.py --product rhel9
 python3 scripts/check_doc_links.py --product rhel9
 python3 -m trestle validate -a
 ```
 
 ## CI
 
-- **Validate OSCAL** — regenerate artifacts, fail on git drift, `trestle validate -a`
+- **Validate OSCAL** — assemble from `authoring/`, fail on git drift, `trestle validate -a`
 - **Check documentation links** — HTTP check of all URLs in `mappings/rhel9/docs.json`
 - **OpenSCAP smoke** — evaluate audit-related rules from `mappings/rhel9/artifact.json` against `ssg-rhel9-ds.xml`
 

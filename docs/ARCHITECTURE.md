@@ -58,22 +58,21 @@ docs/ARCHITECTURE.md                    # this document
 
 mappings/
   shared/
-    slices/                             # vertical / phased scope (e.g. rhel-audit)
-    components/                         # subsystem defs per product family
-    controls/                           # per-slice control mappings (tier, prose, rules)
-    scope/                              # hybrid filter rules (practice areas, denylists)
-  rhel9/                                # first product: OS host scope
-    artifact.json
-    docs.json
-  rhel10/
-  openshift/                            # planned: cluster / platform scope
-  ansible/                              # planned: automation controller scope
+    scope/                              # candidate pool rules (KONF, BER, DET kernel)
+    components/                         # subsystem defs (hardening, identity, audit)
+  rhel9/                                # product config (artifact.json, docs.json)
+
+authoring/
+  profile/{artifact}/                   # trestle profile markdown — controls in scope
+  component/{artifact}/                 # trestle component markdown — implementation prose
+  candidates/                           # review queue (generated, not assembled)
 
 profiles/{product}-gsplusplus-{scope}/
 component-definitions/{product}-gsplusplus-{scope}/
 
 scripts/
-  generate_component_definition.py      # one generator (--product rhel9|openshift|…)
+  assemble_oscal.py                     # trestle profile-assemble + component-assemble + enrich
+  export_review_candidates.py           # candidate review queue export
   fetch_bsi_catalog.sh
 ```
 
@@ -210,7 +209,7 @@ phases** once the generator, mapping layout, and CaC dual-output pipeline are pr
 | Phase | Scope | Deliverable |
 |-------|-------|-------------|
 | **PR 1** | RHEL vertical slice: `rhel-audit` | Refactored generator, host profile + component def, remove `*-full` |
-| **0.1** | RHEL host scope (human-curated from KONF/BER/DET candidates) | Curated statements; explicit Tier-2 template only when marked |
+| **0.1** | RHEL host scope (trestle authoring, KONF/BER/DET candidates) | Human profile/component markdown; no bulk synthetic answers |
 | **0.5+** | RHEL Tier-1 growth | BSI Beispiel snapshot candidate |
 | **1.x** | RHEL 10 host artifact | Same model as RHEL 9 with shared mappings + deltas |
 | **2.x** | OpenShift platform artifact | `openshift-gsplusplus-platform`; OCP scope filter + check backend |

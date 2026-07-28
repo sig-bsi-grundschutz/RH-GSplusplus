@@ -7,6 +7,5 @@
     "KONF": "rhel-hardening",
     "BER": "rhel-identity",
     "DET": "rhel-audit"
-  },
-  "seed_included_relative_path": "mappings/shared/controls/rhel-audit.json"
+  }
 }

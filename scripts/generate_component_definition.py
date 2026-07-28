@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Generate scoped OSCAL profile and component-definition for a Red Hat GS++ product artifact."""
+"""DEPRECATED: Use trestle agile authoring + scripts/assemble_oscal.py instead.
+
+Legacy generator retained for reference/bootstrap only. CI uses assemble_oscal.py.
+"""
 from __future__ import annotations
 
 import argparse
