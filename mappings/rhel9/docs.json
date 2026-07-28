@@ -1,0 +1,8 @@
+{
+  "security_hardening": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+  "audit": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_configuring-audit-records_security-hardening",
+  "monitoring": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index",
+  "systemd": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index",
+  "openscap": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_scanning-the-system-for-security-compliance-and-vulnerabilities_security-hardening",
+  "sssd": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index"
+}

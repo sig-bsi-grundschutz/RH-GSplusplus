@@ -1,0 +1,15 @@
+{
+  "id": "rhel-audit",
+  "description": "Vertical slice PR1: RHEL logging, auditd, journal, and time synchronization controls.",
+  "control_ids": [
+    "GC.7.1",
+    "STM.5.1",
+    "STM.5.2",
+    "DET.3.1.1",
+    "DET.3.1.2",
+    "DET.3.1.4",
+    "DET.3.3",
+    "DET.3.4",
+    "BER.2.4"
+  ]
+}

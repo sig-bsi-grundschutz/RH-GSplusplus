@@ -1,0 +1,38 @@
+{
+  "profile": {
+    "uuid": "1b010329-d203-53dc-a668-977177d6d157",
+    "metadata": {
+      "title": "Red Hat Enterprise Linux 9 — Grundschutz++ (host scope, audit slice)",
+      "last-modified": "2026-07-28T12:00:00.000Z",
+      "version": "0.1.0",
+      "oscal-version": "1.1.3",
+      "remarks": "Scoped host-applicability profile for Red Hat Enterprise Linux. Organizational Grundschutz++ controls remain in the BSI catalog; this profile lists only controls addressed by the companion component definition. Current vertical slice: rhel-audit."
+    },
+    "imports": [
+      {
+        "href": "trestle://catalogs/bsi-grundschutz-plus-plus/catalog.json",
+        "include-controls": [
+          {
+            "with-ids": [
+              "BER.2.4",
+              "DET.3.1.1",
+              "DET.3.1.2",
+              "DET.3.1.4",
+              "DET.3.3",
+              "DET.3.4",
+              "GC.7.1",
+              "STM.5.1",
+              "STM.5.2"
+            ]
+          }
+        ]
+      }
+    ],
+    "merge": {
+      "combine": {
+        "method": "merge"
+      },
+      "as-is": true
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "components": [
+    {
+      "id": "rhel-audit",
+      "type": "software",
+      "title": "RHEL logging and audit",
+      "description": "Audit subsystem (auditd), systemd journal, rsyslog forwarding, and time synchronization for log correlation on Red Hat Enterprise Linux.",
+      "doc_keys": ["audit", "monitoring", "systemd"]
+    }
+  ]
+}

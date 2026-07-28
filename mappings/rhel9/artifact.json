@@ -1,0 +1,46 @@
+{
+  "artifact_metadata": {
+    "profile_last_modified": "2026-07-28T12:00:00.000Z",
+    "component_definition_last_modified": "2026-07-28T12:00:00.000Z"
+  },
+  "artifact_id": "rhel9-gsplusplus-host",
+  "product_key": "rhel9",
+  "catalog_relative_path": "catalogs/bsi-grundschutz-plus-plus/catalog.json",
+  "docs_relative_path": "mappings/rhel9/docs.json",
+  "slice_relative_path": "mappings/shared/slices/rhel-audit.json",
+  "components_relative_path": "mappings/shared/components/rhel-audit.json",
+  "controls_relative_path": "mappings/shared/controls/rhel-audit.json",
+  "profile_output_path": "profiles/rhel9-gsplusplus-host/profile.json",
+  "component_definition_output_path": "component-definitions/rhel9-gsplusplus-host/component-definition.json",
+  "profile_source_href": "trestle://profiles/rhel9-gsplusplus-host/profile.json",
+  "profile": {
+    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ (host scope, audit slice)",
+    "metadata_version": "0.1.0"
+  },
+  "component_definition": {
+    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ host implementation (audit slice)",
+    "metadata_version": "0.1.0"
+  },
+  "product": {
+    "title": "Red Hat Enterprise Linux 9",
+    "type": "software",
+    "rhel_major": 9
+  },
+  "defaults": {
+    "implementation_status": "partial",
+    "doc_keys": ["security_hardening"],
+    "statement_template": "Grundschutz++ {control_id} — {title}: Red Hat Enterprise Linux 9 provides configurable capabilities relevant to this requirement when it applies to systems running the product. Organizational scope, policy, and operational process remain customer responsibilities. See linked Red Hat product documentation."
+  },
+  "ssg": {
+    "data_stream": "/usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml",
+    "suggested_profile_id": "xccdf_org.ssgproject.content_profile_ospp"
+  },
+  "oscap_smoke_rules": [
+    "service_auditd_enabled",
+    "package_audit_installed",
+    "service_chronyd_enabled",
+    "audit_rules_login_events_faillog",
+    "auditd_data_retention_space_left",
+    "file_permissions_var_log_audit"
+  ]
+}
