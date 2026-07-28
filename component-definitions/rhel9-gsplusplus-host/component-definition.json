@@ -1,0 +1,265 @@
+{
+  "component-definition": {
+    "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
+    "metadata": {
+      "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung (Audit-Slice)",
+      "last-modified": "2026-07-28T14:00:00.000Z",
+      "version": "0.1.0",
+      "oscal-version": "1.1.3",
+      "remarks": "Produktspezifische Umsetzungsaussagen für auf Red Hat Enterprise Linux anwendbare Grundschutz++-Anforderungen. Tier-1-Einträge sind kuratiert; Tier-2-Einträge nutzen eine ehrliche Dokumentationsvorlage. ComplianceAsCode Rule_Id-Werte erscheinen nur, wo sie in mappings/shared/controls/ aufgeführt sind. Keine Zertifizierung oder Rechtsauslegung.",
+      "links": [
+        {
+          "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek/blob/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+          "rel": "reference",
+          "text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++ (Stand 2026-07-26, commit cea4589c2b83)"
+        }
+      ]
+    },
+    "components": [
+      {
+        "uuid": "f8b9dc59-d24d-5f20-9af6-9cde77183be1",
+        "type": "software",
+        "title": "RHEL-Protokollierung und Audit",
+        "description": "Audit-Subsystem (auditd), systemd-Journal, rsyslog-Weiterleitung und Zeitsynchronisation zur Korrelation von Protokollen auf Red Hat Enterprise Linux.",
+        "links": [
+          {
+            "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+            "rel": "reference",
+            "text": "Audit-Aufzeichnungen konfigurieren"
+          },
+          {
+            "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index",
+            "rel": "reference",
+            "text": "Systemstatus und Leistung überwachen"
+          },
+          {
+            "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index",
+            "rel": "reference",
+            "text": "Grundlegende Systemeinstellungen"
+          },
+          {
+            "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek/blob/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+            "rel": "reference",
+            "text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++"
+          }
+        ],
+        "control-implementations": [
+          {
+            "uuid": "5327a9b7-5b78-5771-94d0-60056b9316ed",
+            "source": "trestle://profiles/rhel9-gsplusplus-host/profile.json",
+            "description": "Grundschutz++-Anforderungen, umgesetzt durch RHEL-Protokollierung und Audit (Artefakt rhel9-gsplusplus-host).",
+            "implemented-requirements": [
+              {
+                "uuid": "51b007b7-5895-514b-887d-e16bf177d106",
+                "control-id": "BER.2.4",
+                "description": "Änderungen an identitätsrelevanten Dateien können mit auditd-Regeln erfasst werden; Identitätslebenszyklus und IAM-Prozesse verbleiben in der Verantwortung der Institution (PAM, SSSD, Verzeichnisintegration).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_usergroup_modification_passwd"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "Audit-Aufzeichnungen konfigurieren"
+                  },
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index",
+                    "rel": "reference",
+                    "text": "Authentifizierung und Autorisierung"
+                  }
+                ]
+              },
+              {
+                "uuid": "68ea2ac9-d5a7-579b-ab6f-0bfc8f317d84",
+                "control-id": "DET.3.1.1",
+                "description": "RHEL auditd kann Erfolg und Fehlschlag von Authentisierungen protokollieren, wenn Audit-Regeln gemäß Produktdokumentation und scap-security-guide-Baselines konfiguriert sind.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_login_events_faillog"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "Audit-Aufzeichnungen konfigurieren"
+                  }
+                ]
+              },
+              {
+                "uuid": "ae108111-ad07-5a96-9f8e-c9bf4b2fdbb6",
+                "control-id": "DET.3.1.2",
+                "description": "RHEL stellt konfigurierbare Audit-Regeln (einschließlich privilegierter Befehle und Syscall-Auditing) über auditd bereit; Regelsätze wählt die Institution. Siehe Sicherheitshärtung und OpenSCAP-Inhalte für Beispiele.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "Audit-Aufzeichnungen konfigurieren"
+                  },
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/scanning-the-system-for-configuration-compliance-and-vulnerabilities_security-hardening",
+                    "rel": "reference",
+                    "text": "OpenSCAP-Compliance-Scan"
+                  }
+                ]
+              },
+              {
+                "uuid": "353c9a47-5ab2-58b5-8c81-4134b8fa9bbf",
+                "control-id": "DET.3.1.4",
+                "description": "RHEL erfasst Systemfehler über das systemd-Journal und das Audit-Subsystem; Aufbewahrung und zentrale Sammlung legt die Institution fest.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_var_log_journal"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "Audit-Aufzeichnungen konfigurieren"
+                  },
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index",
+                    "rel": "reference",
+                    "text": "Systemstatus und Leistung überwachen"
+                  }
+                ]
+              },
+              {
+                "uuid": "0d765567-d8b4-5198-b5fd-1fb75c2026f8",
+                "control-id": "DET.3.1.7",
+                "description": "RHEL unterstützt die Protokollierung von Zeitpunkt, Quelle und Zielobjekt sicherheitsrelevanter Ereignisse über auditd und Journal, sofern entsprechend konfiguriert.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "Audit-Aufzeichnungen konfigurieren"
+                  }
+                ]
+              },
+              {
+                "uuid": "20120253-2fdc-5177-90a3-a5053d676323",
+                "control-id": "DET.3.3",
+                "description": "auditd unterstützt Aktionen bei vollem Datenträger und Schwellwerte für freien Speicherplatz, wie in der RHEL-Dokumentation beschrieben; Partitionierung und Archivierung verbleiben bei der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "auditd_data_retention_space_left"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "Audit-Aufzeichnungen konfigurieren"
+                  }
+                ]
+              },
+              {
+                "uuid": "f92bfdb3-8528-52da-896f-387b23fadd64",
+                "control-id": "DET.3.4",
+                "description": "RHEL dokumentiert restriktive Berechtigungen auf Audit-Protokolldateien und optionale unveränderliche Audit-Regeln zum Schutz vor Manipulation; Weiterleitung an einen separaten Log-Host oder SIEM konfiguriert die Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "file_permissions_var_log_audit"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_immutable"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "Audit-Aufzeichnungen konfigurieren"
+                  }
+                ]
+              },
+              {
+                "uuid": "2f9b464e-8d7c-5315-a283-6a137fd77851",
+                "control-id": "KONF.4.5",
+                "description": "Zeitsynchronisation für die Korrelation von Protokollen erfolgt typischerweise über chrony; die Institution bindet vertrauenswürdige Zeitquellen gemäß Produktdokumentation an.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_chronyd_enabled"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index",
+                    "rel": "reference",
+                    "text": "Systemstatus und Leistung überwachen"
+                  },
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index",
+                    "rel": "reference",
+                    "text": "Grundlegende Systemeinstellungen"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

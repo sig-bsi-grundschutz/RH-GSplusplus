@@ -1,27 +1,30 @@
 # Control mappings
 
-## `rhel9_gsplusplus.json`
+Source-of-truth layout for GS++ → Red Hat product mappings. Generated OSCAL lives under
+`profiles/` and `component-definitions/`. See [docs/ARCHITECTURE.md](../docs/ARCHITECTURE.md).
 
-Main **generator configuration**: artifact UUIDs and timestamps, paths, default template (used only if an override omits fields — overrides now cover all controls), `docs` map (**docs.redhat.com** URLs), OpenSCAP smoke rules, and `gaps`.
+## Layout
 
-## `rhel9_gsplusplus_overrides.json`
+| Path | Purpose |
+|------|---------|
+| `shared/slices/` | Phased control ID lists (e.g. `rhel-audit.json` vertical slice) |
+| `shared/components/` | Subsystem component metadata (`rhel-audit`, …) |
+| `shared/controls/` | Per-slice control mappings: tier, statement, doc_keys, rule_ids |
+| `{product}/artifact.json` | Generator config: UUIDs, output paths, defaults, smoke rules |
+| `{product}/docs.json` | `doc_key` → `href` + German link `text` for OSCAL output |
 
-**Per-control data** for every Grundschutz++ catalog control (`647` entries):
-
-- **doc_keys** — Keys into `docs` in `rhel9_gsplusplus.json` so the component definition gets concrete **docs.redhat.com** links.
-- **statement** — English implementation narrative (curated for 18 controls; the rest generated from BSI practice area + German title keywords).
-- **implementation_status** — Mostly `partial`; curated exceptions (e.g. SELinux) may use `implemented`.
-- **rule_ids** — Optional ComplianceAsCode rule short names (currently only on the **curated** subset).
-
-### Regenerating generated overrides
-
-Hand-edits inside `controls` will be **overwritten** if you run the builder. To change bulk behavior, edit [`scripts/build_gsplusplus_overrides.py`](../scripts/build_gsplusplus_overrides.py) (`GROUP_META`, `KEYWORD_RULES`, or `CURATED`), then:
+## Regenerate OSCAL
 
 ```bash
-python3 scripts/build_gsplusplus_overrides.py
-python3 scripts/generate_component_definition.py
+python3 scripts/generate_component_definition.py --product rhel9
+python3 -m trestle validate -a
 ```
 
-Bump `artifact_metadata.component_definition_last_modified` in `rhel9_gsplusplus.json` when OSCAL output meaningfully changes.
+Edit **`mappings/shared/controls/`** for curated Tier-1 content and **`shared/slices/`** to change
+profile scope. Bump `artifact_metadata` timestamps in `{product}/artifact.json` when output
+semantics change.
 
-To **preserve** a one-off control: add or update it in the `CURATED` dict in `build_gsplusplus_overrides.py`, then rebuild.
+## Retired
+
+- `rhel9_gsplusplus.json` / `rhel9_gsplusplus_overrides.json` — replaced by layout above
+- `scripts/build_gsplusplus_overrides.py` — keyword heuristics retired per architecture doc

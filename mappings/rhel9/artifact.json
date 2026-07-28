@@ -1,0 +1,64 @@
+{
+  "artifact_metadata": {
+    "profile_last_modified": "2026-07-28T14:00:00.000Z",
+    "component_definition_last_modified": "2026-07-28T14:00:00.000Z"
+  },
+  "artifact_id": "rhel9-gsplusplus-host",
+  "product_key": "rhel9",
+  "catalog_relative_path": "catalogs/bsi-grundschutz-plus-plus/catalog.json",
+  "catalog_upstream": {
+    "repository": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek",
+    "layer": "control_layer",
+    "artifact_kind": "resolved_catalog",
+    "commit": "cea4589c2b8337207772a88dd82d808cba5e1d89",
+    "path": "control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+    "blob_url": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek/blob/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+    "raw_url": "https://raw.githubusercontent.com/BSI-Bund/Stand-der-Technik-Bibliothek/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+    "catalog_uuid": "9e77b55a-35a6-40d0-a9cd-e13c2bb74836",
+    "catalog_last_modified": "2026-07-26T10:33:02.519739629Z"
+  },
+  "docs_relative_path": "mappings/rhel9/docs.json",
+  "slice_relative_path": "mappings/shared/slices/rhel-audit.json",
+  "components_relative_path": "mappings/shared/components/rhel-audit.json",
+  "controls_relative_path": "mappings/shared/controls/rhel-audit.json",
+  "profile_output_path": "profiles/rhel9-gsplusplus-host/profile.json",
+  "component_definition_output_path": "component-definitions/rhel9-gsplusplus-host/component-definition.json",
+  "profile_source_href": "trestle://profiles/rhel9-gsplusplus-host/profile.json",
+  "profile": {
+    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, Audit-Slice)",
+    "metadata_version": "0.1.0"
+  },
+  "component_definition": {
+    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung (Audit-Slice)",
+    "metadata_version": "0.1.0"
+  },
+  "product": {
+    "title": "Red Hat Enterprise Linux 9",
+    "type": "software",
+    "rhel_major": 9
+  },
+  "texts": {
+    "profile_remarks": "Profil mit Host-Anwendbarkeitsfilter für Red Hat Enterprise Linux. Organisatorische Grundschutz++-Anforderungen verbleiben im BSI-Katalog; dieses Profil listet nur die Anforderungen, die durch die begleitende Komponentendefinition adressiert werden. Aktueller vertikaler Slice: {slice_id}.",
+    "component_definition_remarks": "Produktspezifische Umsetzungsaussagen für auf Red Hat Enterprise Linux anwendbare Grundschutz++-Anforderungen. Tier-1-Einträge sind kuratiert; Tier-2-Einträge nutzen eine ehrliche Dokumentationsvorlage. ComplianceAsCode Rule_Id-Werte erscheinen nur, wo sie in mappings/shared/controls/ aufgeführt sind. Keine Zertifizierung oder Rechtsauslegung.",
+    "control_implementation_description": "Grundschutz++-Anforderungen, umgesetzt durch {component_title} (Artefakt {artifact_id}).",
+    "bsi_link_text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++",
+    "catalog_upstream_link_text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++ (Stand {catalog_date}, commit {commit_short})"
+  },
+  "defaults": {
+    "implementation_status": "partial",
+    "doc_keys": ["security_hardening"],
+    "statement_template": "Grundschutz++ {control_id} — {title}: Red Hat Enterprise Linux 9 stellt konfigurierbare Fähigkeiten bereit, die für diese Anforderung relevant sind, wenn sie für betroffene Systeme gilt. Organisatorischer Geltungsbereich, Richtlinien und Betriebsprozesse verbleiben bei der Institution. Siehe verlinkte Produktdokumentation."
+  },
+  "ssg": {
+    "data_stream": "/usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml",
+    "suggested_profile_id": "xccdf_org.ssgproject.content_profile_ospp"
+  },
+  "oscap_smoke_rules": [
+    "service_auditd_enabled",
+    "service_chronyd_enabled",
+    "audit_rules_login_events_faillog",
+    "auditd_data_retention_space_left",
+    "file_permissions_var_log_audit",
+    "audit_rules_usergroup_modification_passwd"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "security_hardening": {
+    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index",
+    "text": "Sicherheitshärtung"
+  },
+  "audit": {
+    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+    "text": "Audit-Aufzeichnungen konfigurieren"
+  },
+  "monitoring": {
+    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index",
+    "text": "Systemstatus und Leistung überwachen"
+  },
+  "systemd": {
+    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index",
+    "text": "Grundlegende Systemeinstellungen"
+  },
+  "openscap": {
+    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/scanning-the-system-for-configuration-compliance-and-vulnerabilities_security-hardening",
+    "text": "OpenSCAP-Compliance-Scan"
+  },
+  "sssd": {
+    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index",
+    "text": "Authentifizierung und Autorisierung"
+  }
+}

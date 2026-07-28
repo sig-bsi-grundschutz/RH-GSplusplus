@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate OSCAL profile (full Grundschutz++ catalog) and RHEL 9 component-definition."""
+"""Generate scoped OSCAL profile and component-definition for a Red Hat GS++ product artifact."""
 from __future__ import annotations
 
 import argparse
@@ -9,19 +9,32 @@ from pathlib import Path
 
 NS_URL = uuid.UUID("6ba7b811-9dad-11d1-80b4-00c04fd430c8")
 TRESTLE_RULE_NS = "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+KERNEL_CLASS_PREFIX = "BSI-Stand-der-Technik-Kernel"
 
+
+def _is_kernel_control_class(control_class: str | None) -> bool:
+    if not control_class:
+        return False
+    return control_class == KERNEL_CLASS_PREFIX or control_class.startswith(f"{KERNEL_CLASS_PREFIX}-")
 
 def _repo_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
-def _req_uuid(control_id: str) -> str:
-    return str(uuid.uuid5(NS_URL, f"rhel9-gsplusplus:{control_id}"))
+def _uuid(artifact_id: str, suffix: str) -> str:
+    return str(uuid.uuid5(NS_URL, f"{artifact_id}:{suffix}"))
+
+
+def _walk_controls(controls: list[dict], out: list[dict]) -> None:
+    for ctrl in controls:
+        out.append(ctrl)
+        nested = ctrl.get("controls") or []
+        if nested:
+            _walk_controls(nested, out)
 
 
 def _walk_groups(group: dict, out: list[dict]) -> None:
-    for ctrl in group.get("controls") or []:
-        out.append(ctrl)
+    _walk_controls(group.get("controls") or [], out)
     for sub in group.get("groups") or []:
         _walk_groups(sub, out)
 
@@ -31,7 +44,6 @@ def load_catalog_controls(catalog: dict) -> list[dict]:
     controls: list[dict] = []
     for g in cat.get("groups") or []:
         _walk_groups(g, controls)
-    controls.sort(key=lambda c: c["id"])
     return controls
 
 
@@ -39,26 +51,108 @@ def _default_statement(template: str, control_id: str, title: str) -> str:
     return template.replace("{control_id}", control_id).replace("{title}", title or control_id)
 
 
+def load_json(root: Path, rel: str) -> dict:
+    return json.loads((root / rel).read_text(encoding="utf-8"))
+
+
+def normalize_docs(raw_docs: dict) -> dict[str, dict[str, str]]:
+    """Accept {key: href} or {key: {href, text}}."""
+    out: dict[str, dict[str, str]] = {}
+    for key, value in raw_docs.items():
+        if isinstance(value, str):
+            out[key] = {"href": value, "text": key.replace("_", " ")}
+        elif isinstance(value, dict):
+            href = value.get("href")
+            if not href:
+                raise ValueError(f"docs[{key}] missing href")
+            out[key] = {
+                "href": href,
+                "text": value.get("text") or key.replace("_", " "),
+            }
+        else:
+            raise ValueError(f"Invalid docs entry for {key!r}")
+    return out
+
+
+def _text(config: dict, key: str, **kwargs: str) -> str:
+    template = (config.get("texts") or {}).get(key, "")
+    return template.format(**kwargs) if template else ""
+
+
+def _catalog_upstream(config: dict) -> dict | None:
+    upstream = config.get("catalog_upstream")
+    return upstream if isinstance(upstream, dict) and upstream.get("blob_url") else None
+
+
+def _catalog_upstream_metadata_links(config: dict) -> list[dict]:
+    upstream = _catalog_upstream(config)
+    if not upstream:
+        return []
+    last_mod = (upstream.get("catalog_last_modified") or "")[:10]
+    commit = (upstream.get("commit") or "")[:12]
+    text_template = (config.get("texts") or {}).get("catalog_upstream_link_text")
+    if text_template:
+        text = text_template.format(catalog_date=last_mod, commit_short=commit)
+    else:
+        layer = upstream.get("layer")
+        layer_label = f"{layer} — " if layer else ""
+        text = (
+            f"BSI {layer_label}aufgelöster Anwenderkatalog Grundschutz++ (Stand {last_mod}, commit {commit})"
+            if last_mod and commit
+            else "BSI Grundschutz++ Anwenderkatalog (point-in-time upstream reference)"
+        )
+    return [{"href": upstream["blob_url"], "rel": "reference", "text": text}]
+
+
+def _catalog_upstream_component_link(config: dict) -> dict | None:
+    upstream = _catalog_upstream(config)
+    if not upstream:
+        return None
+    return {
+        "href": upstream["blob_url"],
+        "rel": "reference",
+        "text": _text(config, "bsi_link_text") or "BSI Stand der Technik Bibliothek (Grundschutz++)",
+    }
+
+
+def validate_kernel_controls(scope_ids: list[str], catalog_by_id: dict[str, dict]) -> None:
+    for cid in scope_ids:
+        ctrl = catalog_by_id[cid]
+        cls = ctrl.get("class")
+        if not _is_kernel_control_class(cls):
+            title = (ctrl.get("title") or "").strip()
+            raise SystemExit(
+                f"Control {cid} ({title!r}) has class {cls!r}, expected a Stand-der-Technik Kernel class "
+                f"({KERNEL_CLASS_PREFIX} or {KERNEL_CLASS_PREFIX}-*). "
+                "Host slices must reference Stand-der-Technik Kernel controls only."
+            )
+
+
 def build_profile_json(config: dict, control_ids: list[str]) -> dict:
     prof = config["profile"]
-    last_mod = (config.get("artifact_metadata") or {}).get("profile_last_modified", "2026-01-01T00:00:00.000Z")
+    artifact_id = config["artifact_id"]
+    last_mod = (config.get("artifact_metadata") or {}).get(
+        "profile_last_modified", "2026-01-01T00:00:00.000Z"
+    )
+    remarks = _text(config, "profile_remarks", slice_id=config.get("slice_id", ""))
+    metadata: dict = {
+        "title": prof["metadata_title"],
+        "last-modified": last_mod,
+        "version": prof["metadata_version"],
+        "oscal-version": "1.1.3",
+        "remarks": remarks,
+    }
+    catalog_links = _catalog_upstream_metadata_links(config)
+    if catalog_links:
+        metadata["links"] = catalog_links
     return {
         "profile": {
-            "uuid": prof["uuid"],
-            "metadata": {
-                "title": prof["metadata_title"],
-                "last-modified": last_mod,
-                "version": prof["metadata_version"],
-                "oscal-version": "1.1.3",
-                "remarks": (
-                    "Includes every control from the vendored BSI Anwenderkatalog Grundschutz++ "
-                    "(see catalogs/bsi-grundschutz-plus-plus/catalog.json)."
-                ),
-            },
+            "uuid": prof.get("uuid") or _uuid(artifact_id, "profile"),
+            "metadata": metadata,
             "imports": [
                 {
                     "href": "trestle://catalogs/bsi-grundschutz-plus-plus/catalog.json",
-                    "include-controls": [{"with-ids": control_ids}],
+                    "include-controls": [{"with-ids": sorted(control_ids)}],
                 }
             ],
             "merge": {"combine": {"method": "merge"}, "as-is": True},
@@ -66,151 +160,208 @@ def build_profile_json(config: dict, control_ids: list[str]) -> dict:
     }
 
 
-def build_implemented_requirements(
-    controls: list[dict],
+def build_implemented_requirement(
+    control_id: str,
+    title: str,
+    mapping: dict,
     config: dict,
-    overrides_by_id: dict[str, dict],
-) -> list[dict]:
-    docs = config["docs"]
+    docs: dict[str, dict[str, str]],
+) -> dict:
     defaults = config["defaults"]
-    default_status = defaults["implementation_status"]
-    default_doc_keys = defaults["doc_keys"]
-    template = defaults["statement_template"]
+    tier = mapping.get("tier", 2)
 
-    implemented: list[dict] = []
-    for ctrl in controls:
-        cid = ctrl["id"]
-        title = (ctrl.get("title") or "").strip()
-        ov = overrides_by_id.get(cid, {})
+    statement = mapping.get("statement")
+    if not statement:
+        statement = _default_statement(defaults["statement_template"], control_id, title)
 
-        statement = ov.get("statement") or _default_statement(template, cid, title)
-        impl_status = ov.get("implementation_status", default_status)
-        doc_keys = ov.get("doc_keys", default_doc_keys)
+    impl_status = mapping.get("implementation_status", defaults["implementation_status"])
+    doc_keys = mapping.get("doc_keys", defaults["doc_keys"])
 
-        doc_links = []
-        for k in doc_keys:
-            href = docs.get(k)
-            if href:
-                doc_links.append({"href": href, "rel": "reference", "text": k.replace("_", " ")})
+    doc_links = []
+    for key in doc_keys:
+        entry = docs.get(key)
+        if entry:
+            doc_links.append({"href": entry["href"], "rel": "reference", "text": entry["text"]})
 
-        props: list[dict] = [
-            {"name": "implementation-status", "ns": TRESTLE_RULE_NS, "value": impl_status},
-        ]
-        for rid in ov.get("rule_ids") or []:
-            props.append({"name": "Rule_Id", "ns": TRESTLE_RULE_NS, "value": rid})
+    props: list[dict] = [
+        {"name": "implementation-status", "ns": TRESTLE_RULE_NS, "value": impl_status},
+    ]
+    for rid in mapping.get("rule_ids") or []:
+        props.append({"name": "Rule_Id", "ns": TRESTLE_RULE_NS, "value": rid})
 
-        entry: dict = {
-            "uuid": _req_uuid(cid),
-            "control-id": cid,
-            "description": statement,
-            "props": props,
-        }
-        if doc_links:
-            entry["links"] = doc_links
-        implemented.append(entry)
-
-    return implemented
+    req: dict = {
+        "uuid": _uuid(config["artifact_id"], f"req:{control_id}"),
+        "control-id": control_id,
+        "description": statement,
+        "props": props,
+    }
+    if doc_links:
+        req["links"] = doc_links
+    return req
 
 
 def build_component_definition_json(
     config: dict,
-    implemented: list[dict],
+    components_cfg: dict,
+    controls_by_id: dict[str, dict],
+    catalog_by_id: dict[str, dict],
+    scope_ids: list[str],
+    docs: dict[str, dict[str, str]],
 ) -> dict:
     cd_cfg = config["component_definition"]
-    prod = config["product"]
-    docs = config["docs"]
+    artifact_id = config["artifact_id"]
+    product = config["product"]
     last_mod = (config.get("artifact_metadata") or {}).get(
         "component_definition_last_modified", "2026-01-01T00:00:00.000Z"
     )
-    source = config.get("profile_source_href") or "trestle://profiles/rhel9-gsplusplus-full/profile.json"
+    source = config.get("profile_source_href") or f"trestle://profiles/{artifact_id}/profile.json"
+    bsi_link = _catalog_upstream_component_link(config)
+    if not bsi_link:
+        bsi_link = {
+            "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek",
+            "rel": "reference",
+            "text": _text(config, "bsi_link_text") or "BSI Stand der Technik Bibliothek (Grundschutz++)",
+        }
+
+    by_component: dict[str, list[dict]] = {}
+    for cid in scope_ids:
+        mapping = controls_by_id.get(cid, {})
+        comp_id = mapping.get("component")
+        if not comp_id:
+            raise ValueError(f"Control {cid} has no component mapping")
+        ctrl = catalog_by_id.get(cid, {})
+        title = (ctrl.get("title") or "").strip()
+        by_component.setdefault(comp_id, []).append(
+            build_implemented_requirement(cid, title, mapping, config, docs)
+        )
+
+    component_defs = {c["id"]: c for c in components_cfg.get("components") or []}
+    components_out = []
+    for comp_id, implemented in sorted(by_component.items()):
+        comp = component_defs.get(comp_id)
+        if not comp:
+            raise ValueError(f"Unknown component id {comp_id!r}")
+        comp_links = []
+        for key in comp.get("doc_keys") or []:
+            entry = docs.get(key)
+            if entry:
+                comp_links.append(
+                    {"href": entry["href"], "rel": "reference", "text": entry["text"]}
+                )
+        comp_links.append(bsi_link)
+        implemented.sort(key=lambda r: r["control-id"])
+        components_out.append(
+            {
+                "uuid": _uuid(artifact_id, f"component:{comp_id}"),
+                "type": comp.get("type", product.get("type", "software")),
+                "title": comp["title"],
+                "description": comp.get("description", ""),
+                "links": comp_links,
+                "control-implementations": [
+                    {
+                        "uuid": _uuid(artifact_id, f"control-implementation:{comp_id}"),
+                        "source": source,
+                        "description": _text(
+                            config,
+                            "control_implementation_description",
+                            component_title=comp["title"],
+                            artifact_id=artifact_id,
+                        ),
+                        "implemented-requirements": implemented,
+                    }
+                ],
+            }
+        )
+
+    cd_metadata: dict = {
+        "title": cd_cfg["metadata_title"],
+        "last-modified": last_mod,
+        "version": cd_cfg["metadata_version"],
+        "oscal-version": "1.1.3",
+        "remarks": _text(config, "component_definition_remarks"),
+    }
+    catalog_links = _catalog_upstream_metadata_links(config)
+    if catalog_links:
+        cd_metadata["links"] = catalog_links
 
     return {
         "component-definition": {
-            "uuid": cd_cfg["uuid"],
-            "metadata": {
-                "title": cd_cfg["metadata_title"],
-                "last-modified": last_mod,
-                "version": cd_cfg["metadata_version"],
-                "oscal-version": "1.1.3",
-                "remarks": (
-                    "Implementation statements cover the full BSI Grundschutz++ Anwenderkatalog control set "
-                    "as imported by the companion profile. Defaults are English product-positioning text; "
-                    "curated ComplianceAsCode rule IDs appear only where listed in "
-                    "mappings/rhel9_gsplusplus_overrides.json. Not a certification or legal interpretation."
-                ),
-            },
-            "components": [
-                {
-                    "uuid": cd_cfg["component_uuid"],
-                    "type": prod["type"],
-                    "title": prod["title"],
-                    "description": (
-                        "Red Hat Enterprise Linux 9 is a general-purpose operating environment. "
-                        "Technical effectiveness depends on image selection, configuration, connected services, "
-                        "and organizational processes described in Red Hat product documentation."
-                    ),
-                    "links": [
-                        {
-                            "href": docs.get("security_hardening", "https://docs.redhat.com/"),
-                            "rel": "reference",
-                            "text": "RHEL 9 Security hardening (docs.redhat.com)",
-                        },
-                        {
-                            "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek",
-                            "rel": "reference",
-                            "text": "BSI Stand der Technik Bibliothek (Grundschutz++)",
-                        },
-                    ],
-                    "control-implementations": [
-                        {
-                            "uuid": cd_cfg["control_implementation_uuid"],
-                            "source": source,
-                            "description": (
-                                "Full-catalog control implementations generated from the BSI Grundschutz++ "
-                                "catalog plus mappings/rhel9_gsplusplus.json defaults and "
-                                "mappings/rhel9_gsplusplus_overrides.json."
-                            ),
-                            "implemented-requirements": implemented,
-                        }
-                    ],
-                }
-            ],
+            "uuid": cd_cfg.get("uuid") or _uuid(artifact_id, "component-definition"),
+            "metadata": cd_metadata,
+            "components": components_out,
         }
     }
+
+
+def resolve_product_config(root: Path, product_key: str) -> Path:
+    path = root / "mappings" / product_key / "artifact.json"
+    if not path.is_file():
+        raise SystemExit(f"Missing product config: {path}")
+    return path
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        "--product",
+        default="rhel9",
+        help="Product key under mappings/ (default: rhel9)",
+    )
+    parser.add_argument(
         "--config",
         type=Path,
-        default=_repo_root() / "mappings" / "rhel9_gsplusplus.json",
+        default=None,
+        help="Override path to artifact.json",
     )
     args = parser.parse_args()
     root = _repo_root()
-    config = json.loads((root / args.config).read_text(encoding="utf-8"))
+    config_path = args.config or resolve_product_config(root, args.product)
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    config["slice_id"] = load_json(root, config["slice_relative_path"]).get("id")
 
-    cat_path = root / config["catalog_relative_path"]
-    catalog = json.loads(cat_path.read_text(encoding="utf-8"))
-    controls = load_catalog_controls(catalog)
-    control_ids = [c["id"] for c in controls]
+    catalog = load_json(root, config["catalog_relative_path"])
+    catalog_by_id = {c["id"]: c for c in load_catalog_controls(catalog)}
 
-    ov_path = root / config["overrides_relative_path"]
-    overrides_blob = json.loads(ov_path.read_text(encoding="utf-8"))
-    overrides_by_id = overrides_blob.get("controls") or {}
+    slice_doc = load_json(root, config["slice_relative_path"])
+    scope_ids = slice_doc["control_ids"]
+    for cid in scope_ids:
+        if cid not in catalog_by_id:
+            raise SystemExit(f"Control {cid} not found in vendored catalog")
 
-    profile_doc = build_profile_json(config, control_ids)
+    validate_kernel_controls(scope_ids, catalog_by_id)
+
+    controls_doc = load_json(root, config["controls_relative_path"])
+    controls_by_id = controls_doc.get("controls") or {}
+    for cid in scope_ids:
+        if cid not in controls_by_id:
+            raise SystemExit(f"Control {cid} missing from {config['controls_relative_path']}")
+
+    components_cfg = load_json(root, config["components_relative_path"])
+    docs = normalize_docs(load_json(root, config["docs_relative_path"]))
+
     profile_out = root / config["profile_output_path"]
     profile_out.parent.mkdir(parents=True, exist_ok=True)
-    profile_out.write_text(json.dumps(profile_doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Wrote {profile_out} ({len(control_ids)} controls)")
+    profile_out.write_text(
+        json.dumps(build_profile_json(config, scope_ids), indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    print(f"Wrote {profile_out} ({len(scope_ids)} controls)")
 
-    implemented = build_implemented_requirements(controls, config, overrides_by_id)
-    cd_doc = build_component_definition_json(config, implemented)
-    cd_out = root / config["component_definition"]["output_path"]
+    cd_doc = build_component_definition_json(
+        config, components_cfg, controls_by_id, catalog_by_id, scope_ids, docs
+    )
+    cd_out = root / config["component_definition_output_path"]
     cd_out.parent.mkdir(parents=True, exist_ok=True)
     cd_out.write_text(json.dumps(cd_doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Wrote {cd_out} ({len(implemented)} implemented-requirements)")
+    total_reqs = sum(
+        len(ci["implemented-requirements"])
+        for comp in cd_doc["component-definition"]["components"]
+        for ci in comp["control-implementations"]
+    )
+    print(
+        f"Wrote {cd_out} ({total_reqs} implemented-requirements across "
+        f"{len(cd_doc['component-definition']['components'])} components)"
+    )
 
 
 if __name__ == "__main__":
