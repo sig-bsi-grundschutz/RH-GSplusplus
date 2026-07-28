@@ -1,0 +1,21 @@
+name: Check documentation links
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  doc-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify docs.redhat.com hrefs in mappings/rhel9/docs.json
+        run: python3 scripts/check_doc_links.py --product rhel9

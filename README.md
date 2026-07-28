@@ -43,12 +43,14 @@ pip install -r requirements.txt
 
 ```bash
 python3 scripts/generate_component_definition.py --product rhel9
+python3 scripts/check_doc_links.py --product rhel9
 python3 -m trestle validate -a
 ```
 
 ## CI
 
 - **Validate OSCAL** — regenerate artifacts, fail on git drift, `trestle validate -a`
+- **Check documentation links** — HTTP check of all URLs in `mappings/rhel9/docs.json`
 - **OpenSCAP smoke** — evaluate audit-related rules from `mappings/rhel9/artifact.json` against `ssg-rhel9-ds.xml`
 
 ## Updating the BSI catalog snapshot

@@ -11,7 +11,7 @@ Source-of-truth layout for GS++ → Red Hat product mappings. Generated OSCAL li
 | `shared/components/` | Subsystem component metadata (`rhel-audit`, …) |
 | `shared/controls/` | Per-slice control mappings: tier, statement, doc_keys, rule_ids |
 | `{product}/artifact.json` | Generator config: UUIDs, output paths, defaults, smoke rules |
-| `{product}/docs.json` | `doc_key` → docs.redhat.com URLs |
+| `{product}/docs.json` | `doc_key` → `href` + German link `text` for OSCAL output |
 
 ## Regenerate OSCAL
 

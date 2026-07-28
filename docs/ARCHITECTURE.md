@@ -137,6 +137,25 @@ use the check backend appropriate to the product.
 
 Keyword heuristics over German control titles (`KEYWORD_RULES`) are **retired**.
 
+## Language
+
+All **user-visible text** in generated OSCAL artifacts (profile and component definition) is **German**:
+
+- `metadata.title`, `metadata.remarks`
+- component `title`, `description`, `control-implementations[].description`
+- `implemented-requirement.description`
+- link `text` values (defined in `{product}/docs.json` alongside `href`)
+
+English is used only for technical identifiers (`Rule_Id`, file paths, repository metadata) and in
+this architecture document. Source mappings under `mappings/shared/controls/` are maintained in German.
+
+## Host slice control selection
+
+Vertical slices and host profiles must reference **Stand-der-Technik Kernel** controls
+(`class: BSI-Stand-der-Technik-Kernel`) only. Methodik controls (e.g. `GC.*`, `STM.*` with the same
+numeric IDs) share identifiers but address ISMS methodology — not product hardening — and must not
+appear in host implementation artifacts. The generator enforces this at build time.
+
 ## Technical check bridge
 
 A single mapping in `mappings/shared/controls/` generates OSCAL `Rule_Id` (or equivalent) props
@@ -153,9 +172,10 @@ For RHEL today:
 1. OSCAL `Rule_Id` on `implemented-requirement` entries.
 2. (Future) CaC control YAML under `products/rhel9/controls/gsplusplus_*.yml`.
 
-CI smoke tests validate RHEL `rule_ids` against `ssg-rhel{N}-ds.xml`. Other products add parallel
-validation when their backends land — the **mapping source stays one place**; only the emitter and
-CI target differ.
+CI smoke tests validate RHEL `rule_ids` against `ssg-rhel{N}-ds.xml`. A separate workflow checks
+that every `href` in `{product}/docs.json` responds successfully (`scripts/check_doc_links.py`).
+Other products add parallel validation when their backends land — the **mapping source stays one
+place**; only the emitter and CI target differ.
 
 ## Multi-product roadmap
 

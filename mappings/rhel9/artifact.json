@@ -1,7 +1,7 @@
 {
   "artifact_metadata": {
-    "profile_last_modified": "2026-07-28T12:00:00.000Z",
-    "component_definition_last_modified": "2026-07-28T12:00:00.000Z"
+    "profile_last_modified": "2026-07-28T14:00:00.000Z",
+    "component_definition_last_modified": "2026-07-28T14:00:00.000Z"
   },
   "artifact_id": "rhel9-gsplusplus-host",
   "product_key": "rhel9",
@@ -14,11 +14,11 @@
   "component_definition_output_path": "component-definitions/rhel9-gsplusplus-host/component-definition.json",
   "profile_source_href": "trestle://profiles/rhel9-gsplusplus-host/profile.json",
   "profile": {
-    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ (host scope, audit slice)",
+    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, Audit-Slice)",
     "metadata_version": "0.1.0"
   },
   "component_definition": {
-    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ host implementation (audit slice)",
+    "metadata_title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung (Audit-Slice)",
     "metadata_version": "0.1.0"
   },
   "product": {
@@ -26,10 +26,16 @@
     "type": "software",
     "rhel_major": 9
   },
+  "texts": {
+    "profile_remarks": "Profil mit Host-Anwendbarkeitsfilter für Red Hat Enterprise Linux. Organisatorische Grundschutz++-Anforderungen verbleiben im BSI-Katalog; dieses Profil listet nur die Anforderungen, die durch die begleitende Komponentendefinition adressiert werden. Aktueller vertikaler Slice: {slice_id}.",
+    "component_definition_remarks": "Produktspezifische Umsetzungsaussagen für auf Red Hat Enterprise Linux anwendbare Grundschutz++-Anforderungen. Tier-1-Einträge sind kuratiert; Tier-2-Einträge nutzen eine ehrliche Dokumentationsvorlage. ComplianceAsCode Rule_Id-Werte erscheinen nur, wo sie in mappings/shared/controls/ aufgeführt sind. Keine Zertifizierung oder Rechtsauslegung.",
+    "control_implementation_description": "Grundschutz++-Anforderungen, umgesetzt durch {component_title} (Artefakt {artifact_id}).",
+    "bsi_link_text": "BSI Stand der Technik Bibliothek (Grundschutz++)"
+  },
   "defaults": {
     "implementation_status": "partial",
     "doc_keys": ["security_hardening"],
-    "statement_template": "Grundschutz++ {control_id} — {title}: Red Hat Enterprise Linux 9 provides configurable capabilities relevant to this requirement when it applies to systems running the product. Organizational scope, policy, and operational process remain customer responsibilities. See linked Red Hat product documentation."
+    "statement_template": "Grundschutz++ {control_id} — {title}: Red Hat Enterprise Linux 9 stellt konfigurierbare Fähigkeiten bereit, die für diese Anforderung relevant sind, wenn sie für betroffene Systeme gilt. Organisatorischer Geltungsbereich, Richtlinien und Betriebsprozesse verbleiben bei der Institution. Siehe verlinkte Produktdokumentation."
   },
   "ssg": {
     "data_stream": "/usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml",
@@ -37,10 +43,10 @@
   },
   "oscap_smoke_rules": [
     "service_auditd_enabled",
-    "package_audit_installed",
     "service_chronyd_enabled",
     "audit_rules_login_events_faillog",
     "auditd_data_retention_space_left",
-    "file_permissions_var_log_audit"
+    "file_permissions_var_log_audit",
+    "audit_rules_usergroup_modification_passwd"
   ]
 }
