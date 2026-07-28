@@ -23,7 +23,7 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Änderungen an identitätsrelevanten Dateien können mit auditd-Regeln erfasst werden; Identitätslebenszyklus und IAM-Prozesse verbleiben in der Verantwortung der Institution (PAM, SSSD, Verzeichnisintegration).
+RHEL erfasst Änderungen an lokalen Identitäts-Stammdaten über den auditd-Dienst: Die CaC-Regel `audit_rules_usergroup_modification_passwd` verlangt eine Watch-Regel auf `/etc/passwd` (Schreib- und Attributzugriffe), die über augenrules in `/etc/audit/rules.d/` persistent gesetzt wird. Pro Ereignis schreibt auditd einen Datensatz mit Zeitstempel, Login-Benutzer (`auid`) und betroffener Datei; welche Felder geändert wurden, ergibt sich nicht strukturiert aus dem Log und erfordert ggf. Nachvergleich. Stammdatenänderungen in zentralen Verzeichnisdiensten (IdM, LDAP) sowie der vollständige IAM-Lebenszyklus bleiben organisatorisch zu sichern und werden durch die gelistete Regel nicht abgedeckt.
 
 ### Rules:
 
