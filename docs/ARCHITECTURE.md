@@ -210,7 +210,7 @@ phases** once the generator, mapping layout, and CaC dual-output pipeline are pr
 | Phase | Scope | Deliverable |
 |-------|-------|-------------|
 | **PR 1** | RHEL vertical slice: `rhel-audit` | Refactored generator, host profile + component def, remove `*-full` |
-| **0.1** | RHEL full host allowlist (KONF, BER, DET kernel controls) | Mostly Tier-2; Tier-1 where CaC rules exist (`rhel-host` scope) |
+| **0.1** | RHEL host scope (human-curated from KONF/BER/DET candidates) | Curated statements; explicit Tier-2 template only when marked |
 | **0.5+** | RHEL Tier-1 growth | BSI Beispiel snapshot candidate |
 | **1.x** | RHEL 10 host artifact | Same model as RHEL 9 with shared mappings + deltas |
 | **2.x** | OpenShift platform artifact | `openshift-gsplusplus-platform`; OCP scope filter + check backend |

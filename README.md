@@ -23,12 +23,13 @@ compliance tooling.
 | Path | Purpose |
 |------|---------|
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Architecture, phasing, multi-product roadmap |
+| [docs/CURATION.md](docs/CURATION.md) | Human curation workflow (host control review) |
 | [catalogs/bsi-grundschutz-plus-plus/catalog.json](catalogs/bsi-grundschutz-plus-plus/catalog.json) | Vendored BSI Control Layer resolved Grundschutz++ catalog snapshot |
 | [profiles/rhel9-gsplusplus-host/profile.json](profiles/rhel9-gsplusplus-host/profile.json) | Scoped host profile (generated) |
 | [component-definitions/rhel9-gsplusplus-host/](component-definitions/rhel9-gsplusplus-host/) | RHEL subsystem component definitions (generated) |
 | [mappings/](mappings/) | Mapping source (slices, components, controls, product config) |
 | [scripts/generate_component_definition.py](scripts/generate_component_definition.py) | Regenerate profile + component definition |
-| [scripts/build_host_allowlist.py](scripts/build_host_allowlist.py) | Build or verify full RHEL host allowlist from scope rules |
+| [scripts/build_host_mappings.py](scripts/build_host_mappings.py) | Build slice/controls from human curation registry |
 | [scripts/fetch_bsi_catalog.sh](scripts/fetch_bsi_catalog.sh) | Refresh vendored BSI catalog |
 
 ## Prerequisites
@@ -43,7 +44,8 @@ pip install -r requirements.txt
 ## Validate locally
 
 ```bash
-python3 scripts/build_host_allowlist.py --write
+python3 scripts/curation/init_registry.py --write
+python3 scripts/build_host_mappings.py --write
 python3 scripts/generate_component_definition.py --product rhel9
 python3 scripts/check_doc_links.py --product rhel9
 python3 -m trestle validate -a

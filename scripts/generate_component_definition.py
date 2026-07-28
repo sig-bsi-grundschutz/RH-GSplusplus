@@ -172,7 +172,13 @@ def build_implemented_requirement(
 
     statement = mapping.get("statement")
     if not statement:
-        statement = _default_statement(defaults["statement_template"], control_id, title)
+        if mapping.get("use_default_template"):
+            statement = _default_statement(defaults["statement_template"], control_id, title)
+        else:
+            raise ValueError(
+                f"Control {control_id} has no statement; add curated text in the curation "
+                "registry or set use_default_template: true"
+            )
 
     impl_status = mapping.get("implementation_status", defaults["implementation_status"])
     doc_keys = mapping.get("doc_keys", defaults["doc_keys"])

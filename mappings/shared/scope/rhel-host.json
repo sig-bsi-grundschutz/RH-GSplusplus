@@ -1,6 +1,6 @@
 {
   "id": "rhel-host",
-  "description": "RHEL 9/10 host applicability filter: Stand-der-Technik Kernel controls in Konfiguration, Berechtigungen and Detektion (KONF, BER, DET).",
+  "description": "Candidate pool for RHEL host review: Kernel controls in KONF, BER, DET. Final scope is defined in mappings/shared/curation/rhel-host.json.",
   "kernel_class_prefix": "BSI-Stand-der-Technik-Kernel",
   "practice_area_allowlist": ["KONF", "BER", "DET"],
   "component_by_practice_area": {
@@ -8,5 +8,5 @@
     "BER": "rhel-identity",
     "DET": "rhel-audit"
   },
-  "tier1_overrides_relative_path": "mappings/shared/controls/rhel-audit.json"
+  "seed_included_relative_path": "mappings/shared/controls/rhel-audit.json"
 }

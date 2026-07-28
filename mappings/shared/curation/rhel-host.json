@@ -1,0 +1,1735 @@
+{
+  "scope_id": "rhel-host",
+  "scope_relative_path": "mappings/shared/scope/rhel-host.json",
+  "description": "Human curation registry for RHEL host scope. Set status to included or excluded before generating OSCAL. Included controls require a curated statement or use_default_template: true.",
+  "controls": {
+    "BER.1.1": {
+      "title": "Verfahren und Regelungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.1.1.1": {
+      "title": "Dokumentation",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.1.1.2": {
+      "title": "Zuweisung der Aufgaben",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.1.1.3": {
+      "title": "Bekanntgabe",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.1.2": {
+      "title": "Regelmäßige Überprüfung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.1.3": {
+      "title": "Inventar Authentifizierungs- und Autorisierungssysteme",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.1.4": {
+      "title": "Inventar der Berechtigungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.2.1": {
+      "title": "Person-Identität",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.2.2": {
+      "title": "Einschränkung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.2.3": {
+      "title": "Stammdatenprüfung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.2.4": {
+      "title": "Protokollierung von Stammdatenänderungen",
+      "status": "included",
+      "component": "rhel-audit",
+      "tier": 1,
+      "statement": "Änderungen an identitätsrelevanten Dateien können mit auditd-Regeln erfasst werden; Identitätslebenszyklus und IAM-Prozesse verbleiben in der Verantwortung der Institution (PAM, SSSD, Verzeichnisintegration).",
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit",
+        "sssd"
+      ],
+      "rule_ids": [
+        "audit_rules_usergroup_modification_passwd"
+      ]
+    },
+    "BER.2.5": {
+      "title": "Deaktivierung bei Weggang",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.2.6": {
+      "title": "Löschen nach Fristablauf",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.1": {
+      "title": "Zentrales Management",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.2": {
+      "title": "Autorisierung neuer Zugangskonten",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.3": {
+      "title": "Einschränkung des Managements",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.4": {
+      "title": "Protokollierung von Änderungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.5": {
+      "title": "Identität-Zugangskonto",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.6": {
+      "title": "Privilegierte Zugangskonten",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.7": {
+      "title": "Single-Sign-On",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.8": {
+      "title": "Hinweise bei Anmeldefehlern",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.9": {
+      "title": "Ereignisgesteuerte Deaktivierung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.10": {
+      "title": "Anmeldeversuchsgrenze am System",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.11": {
+      "title": "Anmeldeversuchsgrenze an der Anwendung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.12": {
+      "title": "Systemsperre bei Inaktivität",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.13": {
+      "title": "Sperre der Anwendung bei Inaktivität",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.14": {
+      "title": "Kein Recycling von Zugängen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.15": {
+      "title": "Zugang löschen nach Fristablauf",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.16": {
+      "title": "Keine Gruppenkonten",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.17": {
+      "title": "Gruppenkonten - MFA",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.18": {
+      "title": "Gruppenkonten - Wechsel dokumentieren",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.19": {
+      "title": "Gruppenkonten - Passwortwechsel bei Weggang",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.20": {
+      "title": "Zwischenspeicherung von Zugangsdaten",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.21": {
+      "title": "Dienstekonten",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.22": {
+      "title": "Notfallzugang",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.23": {
+      "title": "Notfallzugang Verzeichnisdienst",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.24": {
+      "title": "Alternative Authentifizierung am IT-System",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.3.25": {
+      "title": "Alternative Authentifizierung an der Anwendung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.1": {
+      "title": "Prinzip der geringsten Berechtigungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.1.1": {
+      "title": "Rollenbasierte Berechtigung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.1.2": {
+      "title": "JIT‑/JEA‑Berechtigungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.2": {
+      "title": "Autorisierung von Berechtigungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.3": {
+      "title": "Begründung von Berechtigungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.4": {
+      "title": "Überprüfung von Berechtigungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.4.1": {
+      "title": "Überprüfung tatsächlicher Berechtigungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.5": {
+      "title": "Systemfunktionen ohne Authentifizierung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.6": {
+      "title": "Anwendungsfunktionen ohne Authentifizierung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.7": {
+      "title": "IT-System-Zugangskonto",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.4.8": {
+      "title": "Entzug von Berechtigungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.1": {
+      "title": "Vorgehensweise zur Ausgabe",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.1.1": {
+      "title": "Initiale Ausgabe",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.2": {
+      "title": "Vorgehensweise zur Zurücksetzung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.3": {
+      "title": "Vorgehensweise zum Widerruf",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.4": {
+      "title": "Nur etablierte Kryptographie",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.5": {
+      "title": "Deaktivierung einfacher Biometrie auf IT-Systemen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.6": {
+      "title": "Vorkonfigurierte Authentisierungsmittel von IT-Systemen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.7": {
+      "title": "Vorkonfigurierte Authentisierungsmittel von Anwendungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.8": {
+      "title": "Mehr-Faktor-Authentisierung am Perimeter",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.9": {
+      "title": "Mehr-Faktor-Authentisierung für weitreichende Berechtigungen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.10": {
+      "title": "Zugriffsbeschränkung pro IT-System",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.11": {
+      "title": "Zugriffsbeschränkung pro Anwendung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.12": {
+      "title": "Zugang nur durch zwei Personen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.13": {
+      "title": "Identitätsüberprüfung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.5.14": {
+      "title": "Kompromittierte Authentifizierungsmittel",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.6.1": {
+      "title": "Passwortmanager",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.6.2": {
+      "title": "Blockieren von Passwort Recycling",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.6.3": {
+      "title": "Trivialpasswörter",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.6.4": {
+      "title": "Kriterien für die Qualität von Passwörtern",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.6.5": {
+      "title": "Anlassbezogene Passwortwechsel",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.6.6": {
+      "title": "Monitoring von Zugangsdaten",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.1": {
+      "title": "Etablierte Algorithmen bei der Schlüsselerzeugung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.2": {
+      "title": "Schlüssellänge",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.3": {
+      "title": "Verzeichnis öffentlicher Schlüssel",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.4": {
+      "title": "Erzeugung auf sicheren IT-Systemen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.5": {
+      "title": "Kriterien für die Qualität von Zufallszahlen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.6": {
+      "title": "Etablierte Algorithmen beim Transport",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.7": {
+      "title": "Kein Transport privater Schlüssel",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.8": {
+      "title": "Etablierte Algorithmen bei der Schlüsselnutzung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.9": {
+      "title": "Zweckbindung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.10": {
+      "title": "Abgelaufene Schlüssel",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.11": {
+      "title": "Integrität",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.12": {
+      "title": "Authentizität",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.13": {
+      "title": "Gültigkeit",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.14": {
+      "title": "Schlüssel vor Ablauf prüfen",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.15": {
+      "title": "Vorgehensweise nach Nutzung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.16": {
+      "title": "Vorgaben für die Schlüsselbeglaubigung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.16.1": {
+      "title": "Zertifizierungsstelle",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.16.2": {
+      "title": "Beglaubigung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.16.3": {
+      "title": "Erneuerung",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.16.4": {
+      "title": "Revocation",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.16.5": {
+      "title": "Beglaubigungsstatus",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "BER.7.16.6": {
+      "title": "Revocationstatus",
+      "status": "pending",
+      "default_component": "rhel-identity"
+    },
+    "DET.1.1": {
+      "title": "Verfahren und Regelungen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.1.1.1": {
+      "title": "Dokumentation",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.1.1.2": {
+      "title": "Zuweisung der Aufgaben",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.1.1.3": {
+      "title": "Bekanntgabe",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.1.2": {
+      "title": "Regelmäßige Überprüfung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.2.1": {
+      "title": "Meldeverfahren",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.2.1.1": {
+      "title": "Sofortmaßnahmen Nutzender",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.2.1.2": {
+      "title": "Meldeformulare",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.2.1.3": {
+      "title": "Rückmeldungen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.2.2": {
+      "title": "Security Operations Center",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.2.3": {
+      "title": "Ständiger Bereitschaftsdienst",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.1": {
+      "title": "Protokollierung sicherheitsrelevanter Ereignisse",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.1.1": {
+      "title": "Authentifizierungen",
+      "status": "included",
+      "component": "rhel-audit",
+      "tier": 1,
+      "statement": "RHEL auditd kann Erfolg und Fehlschlag von Authentisierungen protokollieren, wenn Audit-Regeln gemäß Produktdokumentation und scap-security-guide-Baselines konfiguriert sind.",
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit"
+      ],
+      "rule_ids": [
+        "audit_rules_login_events_faillog"
+      ]
+    },
+    "DET.3.1.2": {
+      "title": "Ausgeführte Kommandozeilenbefehle",
+      "status": "included",
+      "component": "rhel-audit",
+      "tier": 2,
+      "statement": "RHEL stellt konfigurierbare Audit-Regeln (einschließlich privilegierter Befehle und Syscall-Auditing) über auditd bereit; Regelsätze wählt die Institution. Siehe Sicherheitshärtung und OpenSCAP-Inhalte für Beispiele.",
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit",
+        "openscap"
+      ],
+      "rule_ids": []
+    },
+    "DET.3.1.3": {
+      "title": "Anbindung von Peripheriegeräten",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.1.4": {
+      "title": "Systemfehler",
+      "status": "included",
+      "component": "rhel-audit",
+      "tier": 2,
+      "statement": "RHEL erfasst Systemfehler über das systemd-Journal und das Audit-Subsystem; Aufbewahrung und zentrale Sammlung legt die Institution fest.",
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit",
+        "monitoring"
+      ],
+      "rule_ids": [
+        "audit_rules_var_log_journal"
+      ]
+    },
+    "DET.3.1.5": {
+      "title": "Störungen der Netzerreichbarkeit",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.1.6": {
+      "title": "Systemspezifische Ereignisse",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.1.7": {
+      "title": "Was, Wann, Wo",
+      "status": "included",
+      "component": "rhel-audit",
+      "tier": 2,
+      "statement": "RHEL unterstützt die Protokollierung von Zeitpunkt, Quelle und Zielobjekt sicherheitsrelevanter Ereignisse über auditd und Journal, sofern entsprechend konfiguriert.",
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit"
+      ],
+      "rule_ids": []
+    },
+    "DET.3.1.8": {
+      "title": "Privilegierte Ereignisse",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.1.9": {
+      "title": "Fehler der Anwendung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.1.10": {
+      "title": "Nutzungsstatistik",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.1.11": {
+      "title": "Anwendungsspezifische Ereignisse",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.1.12": {
+      "title": "Datenverarbeitungen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.2": {
+      "title": "Integration von Cloud-Diensten",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.3": {
+      "title": "Filterung nicht benötigter Inhalte",
+      "status": "included",
+      "component": "rhel-audit",
+      "tier": 1,
+      "statement": "auditd unterstützt Aktionen bei vollem Datenträger und Schwellwerte für freien Speicherplatz, wie in der RHEL-Dokumentation beschrieben; Partitionierung und Archivierung verbleiben bei der Institution.",
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit"
+      ],
+      "rule_ids": [
+        "auditd_data_retention_space_left"
+      ]
+    },
+    "DET.3.4": {
+      "title": "Speicherkapazität",
+      "status": "included",
+      "component": "rhel-audit",
+      "tier": 1,
+      "statement": "RHEL dokumentiert restriktive Berechtigungen auf Audit-Protokolldateien und optionale unveränderliche Audit-Regeln zum Schutz vor Manipulation; Weiterleitung an einen separaten Log-Host oder SIEM konfiguriert die Institution.",
+      "implementation_status": "partial",
+      "doc_keys": [
+        "audit"
+      ],
+      "rule_ids": [
+        "file_permissions_var_log_audit",
+        "audit_rules_immutable"
+      ]
+    },
+    "DET.3.5": {
+      "title": "Revisionssicherheit",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.3.6": {
+      "title": "Unbestreitbarkeit",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.1": {
+      "title": "Überwachung der Protokollierung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.2": {
+      "title": "Automatische Angriffserkennung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.3": {
+      "title": "Überwachung der Angriffserkennung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.4": {
+      "title": "Änderungen an Sicherheitsrichtlinien",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.5": {
+      "title": "Unerwünschte Datenabflüsse",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.6": {
+      "title": "Anomale Nutzung der Anwendung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.6.1": {
+      "title": "Verhaltensanalyse von Zugangskonten",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.7": {
+      "title": "Auslaufen von Domains",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.8": {
+      "title": "Ausstellung neuer HTTPS-Zertifikate",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.9": {
+      "title": "Manipulations-Checkup",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.10": {
+      "title": "Host-basierte Köder",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.11": {
+      "title": "Anomalien in Netzen und am Perimeter",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.11.1": {
+      "title": "Authentifizierungsversuche an externen Schnittstellen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.11.2": {
+      "title": "Netzwerk-Honeypots",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.11.3": {
+      "title": "Netzverkehrsfluss",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.12": {
+      "title": "Monitoring der Netzverfügbarkeit",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.12.1": {
+      "title": "Auslastung des Netzes",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.13": {
+      "title": "Verfügbarkeit des Hostsystems",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.14": {
+      "title": "Verfügbarkeit der Anwendung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.15": {
+      "title": "Ressourcenauslastung von Hostsystemen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.16": {
+      "title": "Ressourcenauslastung der Server-Dienste",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.17": {
+      "title": "Anwendungsbasiertes Kapazitätsmanagement",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.18": {
+      "title": "Öffentliche Blocklisten",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.4.19": {
+      "title": "Unautorisierte Sendeanlagen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.1": {
+      "title": "Zeitnahes Schwachstellenmanagement",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.1.1": {
+      "title": "Risikobasierte Priorisierung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.2": {
+      "title": "Schwachstellenregister",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.3": {
+      "title": "Schwachstellenscans",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.3.1": {
+      "title": "Autorisierung kritischer Scans",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.3.2": {
+      "title": "Korrelation komplexer Angriffswege",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.3.3": {
+      "title": "Historische Analyse",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.4": {
+      "title": "Regelmäßige Penetrationstests",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.5": {
+      "title": "Red Teaming",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.6": {
+      "title": "Threat Hunting",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.7": {
+      "title": "Analyse verdeckter Kanäle",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.8": {
+      "title": "Bedrohungsanalyse",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.8.1": {
+      "title": "Auswertung öffentlicher Quellen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.8.1.1": {
+      "title": "Unautorisierte Publikation",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.9": {
+      "title": "Externe Schwachstellenmeldungen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.9.1": {
+      "title": "Bonusprogramm",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.10": {
+      "title": "Zeitnahes Patchmanagement",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.10.1": {
+      "title": "Autorisierte Bezugsquellen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.10.2": {
+      "title": "Automatisierte Überwachung von Systemupdates",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.10.3": {
+      "title": "Automatisierte Überwachung von Anwendungsupdates",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.10.4": {
+      "title": "Integritätsprüfung von Patches",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.5.10.5": {
+      "title": "Test gemäß Änderungsmanagement",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.6.1": {
+      "title": "Beurteilung von Ereignissen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.6.1.1": {
+      "title": "Automatisierte Feststellung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.6.1.2": {
+      "title": "Automatische Alarmierung",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.6.1.3": {
+      "title": "Dokumentation von Ergebnissen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.6.2": {
+      "title": "Beurteilung von Eingängen",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.6.2.1": {
+      "title": "Dynamische Sandbox-Analyse",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "DET.6.2.2": {
+      "title": "Datenträgerschleuse",
+      "status": "pending",
+      "default_component": "rhel-audit"
+    },
+    "KONF.1.1": {
+      "title": "Verfahren und Regelungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.1.1.1": {
+      "title": "Dokumentation",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.1.1.2": {
+      "title": "Zuweisung der Aufgaben",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.1.1.3": {
+      "title": "Bekanntgabe",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.1.2": {
+      "title": "Regelmäßige Überprüfung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.1.3": {
+      "title": "Management von Werkzeugen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.1.4": {
+      "title": "Einschränkung des Zugriffs auf Dokumentation",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.1.5": {
+      "title": "Verschlüsselung von Konfigurationsgeheimnissen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.1": {
+      "title": "Grundkonfiguration für Systeme",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.1.1": {
+      "title": "Versionierung der Systemkonfiguration",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.2": {
+      "title": "Kryptographische Verfahren in IT-Systemen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.3": {
+      "title": "Änderung von Default-Zugangsdaten",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.4": {
+      "title": "Deaktivierung nicht benötigter Systemfunktionen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.4.1": {
+      "title": "Nicht benötigte Zertifikate",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.4.2": {
+      "title": "Externe Cloud-Anbindungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.5": {
+      "title": "Überprüfung der Konfiguration",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.5.1": {
+      "title": "Automatische Konfigurationsverwaltung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.6": {
+      "title": "Automatische Konfigurationsverwaltung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.7": {
+      "title": "Souveräne Werkzeuge",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.8": {
+      "title": "Alternative Administrationszugänge",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.2.9": {
+      "title": "Abgesicherter und authentisierter Bootprozess",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.3.1": {
+      "title": "Kryptographischer Hardwarespeicher",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.3.2": {
+      "title": "Speicherverschlüsselung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.3.3": {
+      "title": "SIM-PIN",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.3.4": {
+      "title": "Physischer Diebstahlschutz",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.3.5": {
+      "title": "Standortbestimmung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.3.6": {
+      "title": "Fernlöschung oder -sperre",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.3.6.1": {
+      "title": "Automatische Fernlöschung oder -sperre",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.3.7": {
+      "title": "Einschränkung angeschlossener Peripherie",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.3.8": {
+      "title": "Einschränkung von Wechselmedien",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.4.1": {
+      "title": "Anbindung an Verzeichnisdienst",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.4.1.1": {
+      "title": "Weiterleitung von Anmeldeinformationen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.4.2": {
+      "title": "DNS-Anbindung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.4.2.1": {
+      "title": "DNS-Verschlüsselung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.4.3": {
+      "title": "Authentifizierung von Fernwartungsfunktionen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.4.4": {
+      "title": "Einschränkung von Fernwartungsfunktionen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.4.5": {
+      "title": "Zeitquellen",
+      "status": "included",
+      "component": "rhel-audit",
+      "tier": 1,
+      "statement": "Zeitsynchronisation für die Korrelation von Protokollen erfolgt typischerweise über chrony; die Institution bindet vertrauenswürdige Zeitquellen gemäß Produktdokumentation an.",
+      "implementation_status": "partial",
+      "doc_keys": [
+        "monitoring",
+        "systemd"
+      ],
+      "rule_ids": [
+        "service_chronyd_enabled"
+      ]
+    },
+    "KONF.5.1": {
+      "title": "Authentifizierung am System",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.5.1.1": {
+      "title": "Authentifizierung an der Firmware",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.5.1.2": {
+      "title": "Pre-Boot-Authentifizierung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.5.2": {
+      "title": "Keine Mehrfachanmeldung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.1": {
+      "title": "Minimal erforderliche Berechtigungen für Anwendungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.1.1": {
+      "title": "Datenkapselung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.1.2": {
+      "title": "Isolierung von Anwendungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.1.3": {
+      "title": "Isolierte Arbeitsumgebungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.2": {
+      "title": "Gemeinsam genutzte Verzeichnisse",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.3": {
+      "title": "Kiosk-Modus",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.4": {
+      "title": "Privilegierte Systemfunktionen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.4.1": {
+      "title": "Rollenbasierte Privilegierung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.5": {
+      "title": "Dynamische Zugriffskontrolle im System",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.6": {
+      "title": "Getrennte Datenhaltung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.6.1": {
+      "title": "Mandantenfähigkeit",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.7": {
+      "title": "Privilegierte Funktionen der Anwendung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.8": {
+      "title": "Berechtigungen des Webserver-Prozesses",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.9": {
+      "title": "Zugriff auf Code",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.10": {
+      "title": "Auflistung von Verzeichnisinhalten",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.11": {
+      "title": "Einschränkung von Uploads",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.12": {
+      "title": "Konferenzmoderation",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.13": {
+      "title": "Dynamische Zugriffskontrolle in der Anwendung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.14": {
+      "title": "Browser Sandboxing",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.15": {
+      "title": "Virtualisierte Browser-Umgebung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.6.16": {
+      "title": "Datenaustausch in der Virtualisierung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.1": {
+      "title": "Echtzeitscanner",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.2": {
+      "title": "Regelmäßige Scans",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.3": {
+      "title": "Host-basierte Angriffserkennung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.4": {
+      "title": "Angriffserkennung anhand von Netzverkehr",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.5": {
+      "title": "Alarmierung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.6": {
+      "title": "Automatische Updates",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.7": {
+      "title": "Regelmäßiger Funktionstest",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.8": {
+      "title": "Dual-Engine-Strategie",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.9": {
+      "title": "Einschränkung der Installation",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.10": {
+      "title": "Einschränkung der Ausführung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.11": {
+      "title": "Einschränkung von Softwarebibliotheken",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.12": {
+      "title": "Einschränkung von Skripten",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.13": {
+      "title": "Einschränkung von Systemaufrufen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.14": {
+      "title": "Code-Signierung im Betriebssystemkern",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.15": {
+      "title": "Lokale Firewall",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.16": {
+      "title": "Anti-Exploit",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.7.16.1": {
+      "title": "Anti-Exploit für den Arbeitsspeicher",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.8.1": {
+      "title": "Automatische Überprüfung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.8.1.1": {
+      "title": "Automatische Sicherheitsupdates",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.8.2": {
+      "title": "Automatische Updates der Anwendung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.9.1": {
+      "title": "Speicherplatzbegrenzung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.9.2": {
+      "title": "Begrenzung der Rechenleistung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.9.3": {
+      "title": "Alternative Komponenten für kritische Funktionen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.10.1": {
+      "title": "Grundkonfiguration für Anwendungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.10.1.1": {
+      "title": "Versionierung der Anwendungskonfiguration",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.10.2": {
+      "title": "Kryptographische Verfahren in Anwendungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.10.3": {
+      "title": "Änderung von Default-Zugangsdaten",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.10.4": {
+      "title": "Deaktivierung nicht benötigter Anwendungsfunktionen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.10.5": {
+      "title": "Überprüfung der Konfiguration",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.10.5.1": {
+      "title": "Automatisierte Überprüfung der Konfiguration",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.1": {
+      "title": "Authentifizierung vor dem Zugriff",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.1.1": {
+      "title": "Authentifizierung von geplanten Konversationen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.1.2": {
+      "title": "Authentifizierung von Netzverbindungen - clientseitig",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.2": {
+      "title": "Warteraum",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.3": {
+      "title": "Veröffentlichung von Domain-Infomationen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.4": {
+      "title": "Erraten von Zugriffslinks",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.5": {
+      "title": "Einschränkung unauthentifizierter Anschlüsse",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.6": {
+      "title": "Übersicht angemeldeter Verbindungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.7": {
+      "title": "Einschränkung von Schnittstellen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.7.1": {
+      "title": "Einschränkung von Zonentransfers",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.7.2": {
+      "title": "Einschränkung von TK-Verbindungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.7.2.1": {
+      "title": "Einschränkung der TK-Gegenstellen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.11.8": {
+      "title": "Verschlüsselung schützenswerter Daten (at-rest)",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1": {
+      "title": "Eingabevalidierung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.1": {
+      "title": "Zertifikatsprüfung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.2": {
+      "title": "Content Security Policy (CSP)",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.3": {
+      "title": "Same-Origin-Policy",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.4": {
+      "title": "Subresource Integrity-Prüfung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.5": {
+      "title": "HTTP Strict Transport Security (HSTS)",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.6": {
+      "title": "JavaScript",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.7": {
+      "title": "Filtern schädlicher Webinhalte",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.8": {
+      "title": "Duplikate im Verzeichnisbaum",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.9": {
+      "title": "Journaling",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.10": {
+      "title": "HTTP-Response-Header",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.1.11": {
+      "title": "Aktive Dateiinhalte",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.2": {
+      "title": "Verschlüsselungsstatus der aktuellen Verbindung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.3": {
+      "title": "Cookies",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.4": {
+      "title": "Speicherung von Zugangsdaten",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.5": {
+      "title": "Auto-Vervollständigung von Daten",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.6": {
+      "title": "Browser-Historie",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.7": {
+      "title": "Erweiterte Attribute",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.8": {
+      "title": "Teilnahme per Default ohne Bild und Ton",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.9": {
+      "title": "Keine heimliche Aufzeichnung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.10": {
+      "title": "Cookie-Attribute",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.11": {
+      "title": "Anonyme oder Pseudonyme Kommunikation",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.12": {
+      "title": "Verbindungsprotokoll",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.13": {
+      "title": "Sendebericht",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.12.14": {
+      "title": "DNS-Falschinformationen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.1": {
+      "title": "Filtern schädlicher Nachrichten",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.1.1": {
+      "title": "SPAM-Filter",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.1.2": {
+      "title": "Interpretation aktiver Inhalte",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.2": {
+      "title": "Authentizität von Nachrichten",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.2.1": {
+      "title": "Verifikation der Sendeberechtigung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.2.2": {
+      "title": "Verifikation der Serversignatur",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.3": {
+      "title": "Kryptographische Signatur des Mailservers",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.4": {
+      "title": "Kryptographische Signatur durch Nutzende",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.5": {
+      "title": "Publikation der Sendeberechtigung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.5.1": {
+      "title": "Strenge Senderpolicy",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.6": {
+      "title": "Publikation der Serversignatur",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.7": {
+      "title": "TLS-Reports",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.8": {
+      "title": "DMARC-Reports",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.9": {
+      "title": "Publikation der DMARC-Richtlinie",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.10": {
+      "title": "Authentifizierung der Server-Zertifikate über DNS",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.13.11": {
+      "title": "MTA-STS",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.14.1": {
+      "title": "Verschlüsselung beim Transport",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.14.1.1": {
+      "title": "Obligatorische Verschlüsselung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.14.1.2": {
+      "title": "Ende-zu-Ende-Verschlüsselung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.14.2": {
+      "title": "Source Port Randomisierung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.14.3": {
+      "title": "Iterative Beantwortung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.14.4": {
+      "title": "Caching",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.14.5": {
+      "title": "Zeitüberschreitung von Netzverbindungen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.15.1": {
+      "title": "Begrenzung des Speicherplatzes",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.15.2": {
+      "title": "Begrenzung der Rechenleistung",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.15.3": {
+      "title": "Denial of Service",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    },
+    "KONF.15.4": {
+      "title": "Überbuchung von virtualisierten Ressourcen",
+      "status": "pending",
+      "default_component": "rhel-hardening"
+    }
+  }
+}
