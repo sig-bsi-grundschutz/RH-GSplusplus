@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-07-28T07:16:11.731359-04:00",
+      "last-modified": "2026-07-28T07:32:12.243318-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -328,7 +328,152 @@
             "uuid": "f91370c2-11d0-5ae8-8392-eb381ba37661",
             "source": "trestle://profiles/rhel9-gsplusplus-host/profile.json",
             "description": "Grundschutz++-Anforderungen, umgesetzt durch RHEL-Systemhärtung und Konfiguration (Artefakt rhel9-gsplusplus-host).",
-            "implemented-requirements": []
+            "implemented-requirements": [
+              {
+                "uuid": "74907933-c4ea-5a08-82fd-4d902ea4934a",
+                "control-id": "KONF.2.1",
+                "description": "RHEL hält Systemkonfiguration in /etc, Kickstart/Image Builder und Konfigurationsberichten (Insights) fest. Dokumentation und Freigabe einer Referenz-Grundkonfiguration verbleiben bei der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "f2ecb0da-fd50-5baa-9d9b-1bbfe078225a",
+                "control-id": "KONF.2.1.1",
+                "description": "Konfigurationsartefakte auf RHEL (Pakete, /etc, Kickstart, Ansible-Inventar) lassen sich in Versionsverwaltung und Change-Prozesse einbinden. Der organisationsweite Versionsprozess obliegt der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "ef97fa55-1c53-5feb-87b7-8a54c03a72bd",
+                "control-id": "KONF.2.2",
+                "description": "RHEL System-wide Crypto Policies (/etc/crypto-policies) steuern zulässige kryptographische Verfahren für Dienste; die Institution wählt das passende Profil (z. B. DEFAULT, FIPS:OSPP).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "218e7ed0-cc13-50d5-845d-88ee02004042",
+                "control-id": "KONF.2.3",
+                "description": "Bei Installation und Erstinbetriebnahme unterstützt RHEL die Ersetzung von Standardpasswörtern (root, Dienstkonten) über Anaconda/Kickstart und PAM; Passwortrichtlinien und Identity-Lifecycle verbleiben bei der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "92299648-aa69-5f3e-adfe-e91c5d6c27fa",
+                "control-id": "KONF.2.4",
+                "description": "Nicht benötigte Dienste, Kernel-Module und Schnittstellen können über systemd, modprobe-Konfiguration und scap-security-guide-Baselines reduziert werden; die Auswahl obliegt der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "05afa7b5-9a8e-555c-9d5f-91d83b34f834",
+                "control-id": "KONF.2.4.1",
+                "description": "RHEL stellt update-ca-trust und p11-kit zur Verwaltung von CA-/Zertifikatsvertrauen bereit. Entfernen oder Deaktivieren nicht benötigter Zertifikate obliegt der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "2e6ec30c-0710-538f-903c-4ec3344c6303",
+                "control-id": "KONF.2.4.2",
+                "description": "Cloud-Init, Guest Agents und ähnliche Anbindungen können deaktiviert oder nicht installiert werden, wenn kein Cloud-/Hypervisor-Management benötigt wird; die Entscheidung über Cloud-Nutzung verbleibt bei der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "24da74bc-ae45-5572-8d67-d68f98bd008d",
+                "control-id": "KONF.2.5",
+                "description": "Abgleich der Ist-Konfiguration mit Referenzvorgaben ist über OpenSCAP (scap-security-guide), AIDE und RHEL Insights möglich; Referenzdefinition, Intervalle und Remediation-Prozesse legt die Institution fest.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "b2ec080e-0f14-570f-afeb-c0a59017d812",
+                "control-id": "KONF.2.5.1",
+                "description": "Automatisierte Konfigurationsprüfung und -anpassung kann über Ansible, OpenSCAP-Remediation, Image Builder oder Satellite erfolgen; Freigabe und Betrieb automatisierter Werkzeuge obliegen der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "27cd4030-478b-53ac-a283-1644228ac69e",
+                "control-id": "KONF.2.7",
+                "description": "Als Open-Source-Basisplattform kann RHEL souveräne Werkzeugketten tragen (Build, Patch, Monitoring). Auswahl, Zulassung und Betrieb solcher Werkzeuge obliegen der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "07cd7593-9557-5c35-a62d-340b70ba7058",
+                "control-id": "KONF.2.8",
+                "description": "Alternative Administrationswege (serielle Konsole, out-of-band-Management) sind auf RHEL konfigurierbar; physische Absicherung, Freigabe und Nutzungsrichtlinien verbleiben bei der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "c63440bd-f608-5532-844f-a22cf99fcc2b",
+                "control-id": "KONF.2.9",
+                "description": "UEFI Secure Boot und MOK (Machine Owner Key) werden auf unterstützter Hardware unterstützt; Aktivierung, Schlüsselverwaltung und Firmware-Policy obliegen der Institution.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }

@@ -26,12 +26,13 @@ Writes `authoring/candidates/rhel-host/{KONF,BER,DET}/…` with catalog statemen
 
 ### 2. Include a control in scope
 
-Add or edit markdown under `authoring/profile/rhel9-gsplusplus-host/{area}/{control}.md`.
-Use trestle profile conventions (see [trestle authoring tutorial](https://oscal-compass.github.io/compliance-trestle/tutorials/ssp_profile_catalog_authoring/ssp_profile_catalog_authoring)).
+Add a markdown file under `authoring/profile/rhel9-gsplusplus-host/{area}/{control}.md`.
+The assemble step derives `include-controls.with-ids` from these filenames automatically.
 
-To bootstrap from the candidate queue, copy a candidate file into the profile tree and adjust.
+Use catalog text as a starting point (`export_review_candidates.py --write` or
+`trestle author catalog-generate`).
 
-Regenerate profile markdown from the current OSCAL profile (optional):
+Regenerate profile markdown from the current assembled profile (optional):
 
 ```bash
 python3 -m trestle author profile-generate -n rhel9-gsplusplus-host \
@@ -40,16 +41,10 @@ python3 -m trestle author profile-generate -n rhel9-gsplusplus-host \
 
 ### 3. Write the implementation answer
 
-Edit the matching file under `authoring/component/rhel9-gsplusplus-host/` — section
-**“What is the solution and how is it implemented?”**, `Implementation Status`, and
-`### Rules:` (OpenSCAP rule short names).
-
-Regenerate component markdown after adding subsystem skeletons:
-
-```bash
-python3 -m trestle author component-generate -n rhel9-gsplusplus-host \
-  -o authoring/component/rhel9-gsplusplus-host
-```
+Add a matching file under `authoring/component/rhel9-gsplusplus-host/{component}/{artifact}/…` —
+section **“What is the solution and how is it implemented?”**, `Implementation Status`, and
+`### Rules:` (OpenSCAP rule short names). New controls need a component markdown stub before
+`component-assemble` can populate them; `assemble_oscal.py` creates those stubs automatically.
 
 ### 4. Assemble and validate
 
@@ -70,7 +65,7 @@ CI runs the same assemble step and fails on drift in `profiles/` and `component-
 ## Suggested review order
 
 1. Mark obvious non-host controls as excluded in candidate front matter (or skip).
-2. Include OS-core areas: `KONF.2.*`, `KONF.4–7.*`, `BER.3–7.*`, `DET.3.*`.
+2. Include OS-core areas: `KONF.2.*`, `KONF.4–7.*`, `BER.3–7.*`, `DET.3.*` (exclude e.g. `KONF.2.6` MDM/Endgeräte).
 3. Defer application-layer KONF (`KONF.10–15`) unless the host runs that stack.
 4. Add OpenSCAP `Rule_Id` entries only where CaC rules genuinely map.
 

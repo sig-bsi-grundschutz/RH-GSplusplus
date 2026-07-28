@@ -10,8 +10,10 @@ from pathlib import Path
 
 from oscal_scope import (
     catalog_by_id,
+    control_sort_key,
     is_kernel_control,
     load_json,
+    profile_control_ids,
     repo_root,
     write_json,
 )
@@ -113,6 +115,88 @@ def ensure_component_skeleton(cd_doc: dict, config: dict, components_cfg: dict) 
     return cd_doc
 
 
+def authoring_profile_control_ids(root: Path, config: dict) -> list[str]:
+    """Control IDs are defined by markdown files under authoring/profile/."""
+    profile_md = root / config["authoring_profile_dir"]
+    ids: list[str] = []
+    for path in sorted(profile_md.rglob("*.md")):
+        cid = path.stem
+        if path.stem and path.stem[0].isupper() and "." in path.stem:
+            ids.append(cid)
+    return sorted(set(ids), key=control_sort_key)
+
+
+def sync_profile_imports(profile_doc: dict, control_ids: list[str]) -> None:
+    prof = profile_doc["profile"]
+    imports = prof.get("imports") or []
+    if not imports:
+        raise SystemExit("Profile has no catalog import block")
+    imports[0]["include-controls"] = [{"with-ids": control_ids}]
+    prof["imports"] = imports
+
+
+def sync_component_requirement_stubs(
+    cd_doc: dict,
+    config: dict,
+    root: Path,
+) -> dict:
+    """Ensure implemented-requirement stubs exist for each component markdown file."""
+    artifact_id = config["artifact_id"]
+    component_md = root / config["authoring_component_dir"]
+    profile_href = config.get("profile_source_href") or f"trestle://profiles/{artifact_id}/profile.json"
+
+    by_title = {c["title"]: c for c in cd_doc["component-definition"]["components"]}
+    comp_cfg_by_title = {c["title"]: c for c in load_json(root / config["components_relative_path"]).get("components") or []}
+    for comp_dir in sorted(component_md.iterdir()):
+        if not comp_dir.is_dir():
+            continue
+        comp = by_title.get(comp_dir.name)
+        if not comp:
+            continue
+        profile_sub = comp_dir / artifact_id
+        if not profile_sub.is_dir():
+            continue
+        control_ids = sorted(
+            {p.stem for p in profile_sub.rglob("*.md") if "." in p.stem and p.stem[0].isupper()},
+            key=control_sort_key,
+        )
+        if not comp.get("control-implementations"):
+            comp_id = comp_cfg_by_title.get(comp_dir.name, {}).get("id") or comp_dir.name
+            comp["control-implementations"] = [
+                {
+                    "uuid": _uuid(artifact_id, f"control-implementation:{comp_id}"),
+                    "source": profile_href,
+                    "description": "",
+                    "implemented-requirements": [],
+                }
+            ]
+        ci = comp["control-implementations"][0]
+        ci["source"] = profile_href
+        existing = {r["control-id"] for r in ci.get("implemented-requirements") or []}
+        for cid in control_ids:
+            if cid in existing:
+                continue
+            ci.setdefault("implemented-requirements", []).append(
+                {
+                    "uuid": _uuid(artifact_id, f"req:{cid}"),
+                    "control-id": cid,
+                    "description": "",
+                    "props": [
+                        {
+                            "name": "implementation-status",
+                            "ns": TRESTLE_RULE_NS,
+                            "value": "partial",
+                        }
+                    ],
+                }
+            )
+        ci["implemented-requirements"] = sorted(
+            ci.get("implemented-requirements") or [],
+            key=lambda r: control_sort_key(r["control-id"]),
+        )
+    return cd_doc
+
+
 def enrich_artifacts(root: Path, config: dict) -> None:
     artifact_id = config["artifact_id"]
     profile_path = root / config["profile_output_path"]
@@ -132,7 +216,7 @@ def enrich_artifacts(root: Path, config: dict) -> None:
     if links:
         prof["metadata"]["links"] = links
 
-    for cid in profile_control_ids_from_doc(profile_doc):
+    for cid in profile_control_ids(profile_doc):
         if cid not in cat:
             raise SystemExit(f"Profile control {cid} not found in vendored catalog")
         if not is_kernel_control(cat[cid].get("class")):
@@ -186,8 +270,6 @@ def enrich_artifacts(root: Path, config: dict) -> None:
 
 
 def profile_control_ids_from_doc(profile_doc: dict) -> list[str]:
-    from oscal_scope import profile_control_ids
-
     return profile_control_ids(profile_doc)
 
 
@@ -214,6 +296,12 @@ def main() -> None:
     component_md = root / config["authoring_component_dir"]
 
     if not args.skip_assemble:
+        profile_path = root / config["profile_output_path"]
+        profile_doc = load_json(profile_path)
+        scope_ids = authoring_profile_control_ids(root, config)
+        sync_profile_imports(profile_doc, scope_ids)
+        write_json(profile_path, profile_doc)
+
         _run_trestle(
             [
                 "author",
@@ -230,6 +318,7 @@ def main() -> None:
         cd_doc = load_json(root / config["component_definition_output_path"])
         components_cfg = load_json(root / config["components_relative_path"])
         cd_doc = ensure_component_skeleton(cd_doc, config, components_cfg)
+        cd_doc = sync_component_requirement_stubs(cd_doc, config, root)
         write_json(root / config["component_definition_output_path"], cd_doc)
         _run_trestle(
             [
