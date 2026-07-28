@@ -38,7 +38,7 @@ one monolithic “Red Hat implements GS++” bundle.
 ### Customer workflow
 
 ```text
-BSI Grundschutz++ catalog (or resolved Anwenderkatalog)
+BSI Grundschutz++ Control Layer resolved catalog (`Grundschutz++-resolved_catalog.json`)
         +
 RH profile  {product}-gsplusplus-{scope}   ← auditable applicability filter per product
         +
@@ -53,7 +53,7 @@ Example today: `rhel9-gsplusplus-host`. Planned later: `openshift-gsplusplus-pla
 ## Repository layout
 
 ```text
-catalogs/bsi-grundschutz-plus-plus/     # vendored BSI snapshot (shared)
+catalogs/bsi-grundschutz-plus-plus/     # vendored BSI Control Layer resolved catalog snapshot (shared)
 docs/ARCHITECTURE.md                    # this document
 
 mappings/
@@ -152,9 +152,10 @@ this architecture document. Source mappings under `mappings/shared/controls/` ar
 ## Host slice control selection
 
 Vertical slices and host profiles must reference **Stand-der-Technik Kernel** controls
-(`class: BSI-Stand-der-Technik-Kernel`) only. Methodik controls (e.g. `GC.*`, `STM.*` with the same
-numeric IDs) share identifiers but address ISMS methodology — not product hardening — and must not
-appear in host implementation artifacts. The generator enforces this at build time.
+(`class: BSI-Stand-der-Technik-Kernel` or resolved variants such as `BSI-Stand-der-Technik-Kernel-G0`)
+only. Methodik controls (e.g. `GC.*`, `STM.*` with the same numeric IDs) share identifiers but
+address ISMS methodology — not product hardening — and must not appear in host implementation
+artifacts. The generator enforces this at build time.
 
 ## Technical check bridge
 

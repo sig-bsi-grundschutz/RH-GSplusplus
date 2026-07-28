@@ -6,6 +6,17 @@
   "artifact_id": "rhel9-gsplusplus-host",
   "product_key": "rhel9",
   "catalog_relative_path": "catalogs/bsi-grundschutz-plus-plus/catalog.json",
+  "catalog_upstream": {
+    "repository": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek",
+    "layer": "control_layer",
+    "artifact_kind": "resolved_catalog",
+    "commit": "cea4589c2b8337207772a88dd82d808cba5e1d89",
+    "path": "control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+    "blob_url": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek/blob/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+    "raw_url": "https://raw.githubusercontent.com/BSI-Bund/Stand-der-Technik-Bibliothek/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
+    "catalog_uuid": "9e77b55a-35a6-40d0-a9cd-e13c2bb74836",
+    "catalog_last_modified": "2026-07-26T10:33:02.519739629Z"
+  },
   "docs_relative_path": "mappings/rhel9/docs.json",
   "slice_relative_path": "mappings/shared/slices/rhel-audit.json",
   "components_relative_path": "mappings/shared/components/rhel-audit.json",
@@ -30,7 +41,8 @@
     "profile_remarks": "Profil mit Host-Anwendbarkeitsfilter für Red Hat Enterprise Linux. Organisatorische Grundschutz++-Anforderungen verbleiben im BSI-Katalog; dieses Profil listet nur die Anforderungen, die durch die begleitende Komponentendefinition adressiert werden. Aktueller vertikaler Slice: {slice_id}.",
     "component_definition_remarks": "Produktspezifische Umsetzungsaussagen für auf Red Hat Enterprise Linux anwendbare Grundschutz++-Anforderungen. Tier-1-Einträge sind kuratiert; Tier-2-Einträge nutzen eine ehrliche Dokumentationsvorlage. ComplianceAsCode Rule_Id-Werte erscheinen nur, wo sie in mappings/shared/controls/ aufgeführt sind. Keine Zertifizierung oder Rechtsauslegung.",
     "control_implementation_description": "Grundschutz++-Anforderungen, umgesetzt durch {component_title} (Artefakt {artifact_id}).",
-    "bsi_link_text": "BSI Stand der Technik Bibliothek (Grundschutz++)"
+    "bsi_link_text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++",
+    "catalog_upstream_link_text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++ (Stand {catalog_date}, commit {commit_short})"
   },
   "defaults": {
     "implementation_status": "partial",

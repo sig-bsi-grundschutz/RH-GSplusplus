@@ -9,8 +9,13 @@ from pathlib import Path
 
 NS_URL = uuid.UUID("6ba7b811-9dad-11d1-80b4-00c04fd430c8")
 TRESTLE_RULE_NS = "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
-KERNEL_CLASS = "BSI-Stand-der-Technik-Kernel"
+KERNEL_CLASS_PREFIX = "BSI-Stand-der-Technik-Kernel"
 
+
+def _is_kernel_control_class(control_class: str | None) -> bool:
+    if not control_class:
+        return False
+    return control_class == KERNEL_CLASS_PREFIX or control_class.startswith(f"{KERNEL_CLASS_PREFIX}-")
 
 def _repo_root() -> Path:
     return Path(__file__).resolve().parent.parent
@@ -74,14 +79,51 @@ def _text(config: dict, key: str, **kwargs: str) -> str:
     return template.format(**kwargs) if template else ""
 
 
+def _catalog_upstream(config: dict) -> dict | None:
+    upstream = config.get("catalog_upstream")
+    return upstream if isinstance(upstream, dict) and upstream.get("blob_url") else None
+
+
+def _catalog_upstream_metadata_links(config: dict) -> list[dict]:
+    upstream = _catalog_upstream(config)
+    if not upstream:
+        return []
+    last_mod = (upstream.get("catalog_last_modified") or "")[:10]
+    commit = (upstream.get("commit") or "")[:12]
+    text_template = (config.get("texts") or {}).get("catalog_upstream_link_text")
+    if text_template:
+        text = text_template.format(catalog_date=last_mod, commit_short=commit)
+    else:
+        layer = upstream.get("layer")
+        layer_label = f"{layer} — " if layer else ""
+        text = (
+            f"BSI {layer_label}aufgelöster Anwenderkatalog Grundschutz++ (Stand {last_mod}, commit {commit})"
+            if last_mod and commit
+            else "BSI Grundschutz++ Anwenderkatalog (point-in-time upstream reference)"
+        )
+    return [{"href": upstream["blob_url"], "rel": "reference", "text": text}]
+
+
+def _catalog_upstream_component_link(config: dict) -> dict | None:
+    upstream = _catalog_upstream(config)
+    if not upstream:
+        return None
+    return {
+        "href": upstream["blob_url"],
+        "rel": "reference",
+        "text": _text(config, "bsi_link_text") or "BSI Stand der Technik Bibliothek (Grundschutz++)",
+    }
+
+
 def validate_kernel_controls(scope_ids: list[str], catalog_by_id: dict[str, dict]) -> None:
     for cid in scope_ids:
         ctrl = catalog_by_id[cid]
         cls = ctrl.get("class")
-        if cls != KERNEL_CLASS:
+        if not _is_kernel_control_class(cls):
             title = (ctrl.get("title") or "").strip()
             raise SystemExit(
-                f"Control {cid} ({title!r}) has class {cls!r}, expected {KERNEL_CLASS!r}. "
+                f"Control {cid} ({title!r}) has class {cls!r}, expected a Stand-der-Technik Kernel class "
+                f"({KERNEL_CLASS_PREFIX} or {KERNEL_CLASS_PREFIX}-*). "
                 "Host slices must reference Stand-der-Technik Kernel controls only."
             )
 
@@ -93,16 +135,20 @@ def build_profile_json(config: dict, control_ids: list[str]) -> dict:
         "profile_last_modified", "2026-01-01T00:00:00.000Z"
     )
     remarks = _text(config, "profile_remarks", slice_id=config.get("slice_id", ""))
+    metadata: dict = {
+        "title": prof["metadata_title"],
+        "last-modified": last_mod,
+        "version": prof["metadata_version"],
+        "oscal-version": "1.1.3",
+        "remarks": remarks,
+    }
+    catalog_links = _catalog_upstream_metadata_links(config)
+    if catalog_links:
+        metadata["links"] = catalog_links
     return {
         "profile": {
             "uuid": prof.get("uuid") or _uuid(artifact_id, "profile"),
-            "metadata": {
-                "title": prof["metadata_title"],
-                "last-modified": last_mod,
-                "version": prof["metadata_version"],
-                "oscal-version": "1.1.3",
-                "remarks": remarks,
-            },
+            "metadata": metadata,
             "imports": [
                 {
                     "href": "trestle://catalogs/bsi-grundschutz-plus-plus/catalog.json",
@@ -169,7 +215,13 @@ def build_component_definition_json(
         "component_definition_last_modified", "2026-01-01T00:00:00.000Z"
     )
     source = config.get("profile_source_href") or f"trestle://profiles/{artifact_id}/profile.json"
-    bsi_link_text = _text(config, "bsi_link_text") or "BSI Stand der Technik Bibliothek (Grundschutz++)"
+    bsi_link = _catalog_upstream_component_link(config)
+    if not bsi_link:
+        bsi_link = {
+            "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek",
+            "rel": "reference",
+            "text": _text(config, "bsi_link_text") or "BSI Stand der Technik Bibliothek (Grundschutz++)",
+        }
 
     by_component: dict[str, list[dict]] = {}
     for cid in scope_ids:
@@ -196,13 +248,7 @@ def build_component_definition_json(
                 comp_links.append(
                     {"href": entry["href"], "rel": "reference", "text": entry["text"]}
                 )
-        comp_links.append(
-            {
-                "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek",
-                "rel": "reference",
-                "text": bsi_link_text,
-            }
-        )
+        comp_links.append(bsi_link)
         implemented.sort(key=lambda r: r["control-id"])
         components_out.append(
             {
@@ -227,16 +273,21 @@ def build_component_definition_json(
             }
         )
 
+    cd_metadata: dict = {
+        "title": cd_cfg["metadata_title"],
+        "last-modified": last_mod,
+        "version": cd_cfg["metadata_version"],
+        "oscal-version": "1.1.3",
+        "remarks": _text(config, "component_definition_remarks"),
+    }
+    catalog_links = _catalog_upstream_metadata_links(config)
+    if catalog_links:
+        cd_metadata["links"] = catalog_links
+
     return {
         "component-definition": {
             "uuid": cd_cfg.get("uuid") or _uuid(artifact_id, "component-definition"),
-            "metadata": {
-                "title": cd_cfg["metadata_title"],
-                "last-modified": last_mod,
-                "version": cd_cfg["metadata_version"],
-                "oscal-version": "1.1.3",
-                "remarks": _text(config, "component_definition_remarks"),
-            },
+            "metadata": cd_metadata,
             "components": components_out,
         }
     }

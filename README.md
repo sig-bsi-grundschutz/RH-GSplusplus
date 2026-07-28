@@ -23,7 +23,7 @@ compliance tooling.
 | Path | Purpose |
 |------|---------|
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Architecture, phasing, multi-product roadmap |
-| [catalogs/bsi-grundschutz-plus-plus/catalog.json](catalogs/bsi-grundschutz-plus-plus/catalog.json) | Vendored BSI Grundschutz++ catalog snapshot |
+| [catalogs/bsi-grundschutz-plus-plus/catalog.json](catalogs/bsi-grundschutz-plus-plus/catalog.json) | Vendored BSI Control Layer resolved Grundschutz++ catalog snapshot |
 | [profiles/rhel9-gsplusplus-host/profile.json](profiles/rhel9-gsplusplus-host/profile.json) | Scoped host profile (generated) |
 | [component-definitions/rhel9-gsplusplus-host/](component-definitions/rhel9-gsplusplus-host/) | RHEL subsystem component definitions (generated) |
 | [mappings/](mappings/) | Mapping source (slices, components, controls, product config) |
@@ -59,7 +59,9 @@ python3 -m trestle validate -a
 ./scripts/fetch_bsi_catalog.sh
 ```
 
-Then regenerate and bump `artifact_metadata` in `mappings/rhel9/artifact.json` if needed.
+Then regenerate and bump `artifact_metadata` in `mappings/rhel9/artifact.json` if needed. Update
+`third_party/bsi/VERSION` (`upstream_commit`, `catalog_uuid`, `catalog_last_modified`) and the
+`catalog_upstream` block in `mappings/rhel9/artifact.json` to match the fetched snapshot.
 
 ## License and attribution
 
