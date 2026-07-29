@@ -19,7 +19,7 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-Als Open-Source-Basisplattform kann RHEL souveräne Werkzeugketten tragen (Build, Patch, Monitoring). Auswahl, Zulassung und Betrieb solcher Werkzeuge obliegen der Institution.
+RHEL selbst ist quelloffen (Upstream in Fedora/CentOS Stream) und bringt bereits eine Reihe lokal betreibbarer, herstellerunabhängiger Werkzeuge mit, die keine externe Cloud-Anbindung benötigen: Ansible für Konfigurationsmanagement, OpenSCAP/scap-security-guide für Compliance-Scans, `dnf`/Reposync und Satellite/Pulp für selbstgehostete Paket-Repositories, sowie Podman für containerisierten Betrieb einzelner Werkzeuge ohne zentralen Daemon. Dadurch lässt sich eine Werkzeugkette für Build, Patch-Management und Monitoring vollständig innerhalb der eigenen Infrastruktur betreiben, ohne dass ein Ausfall oder eine Lizenzänderung eines externen Cloud-Anbieters die Handlungsfähigkeit einschränkt. Welche konkreten Werkzeuge als "souverän" im Sinne der Anforderung eingestuft, freigegeben und in einem internen, geprüften Repository bereitgestellt werden, entscheidet die Institution.
 
 ### Implementation Status: partial
 
