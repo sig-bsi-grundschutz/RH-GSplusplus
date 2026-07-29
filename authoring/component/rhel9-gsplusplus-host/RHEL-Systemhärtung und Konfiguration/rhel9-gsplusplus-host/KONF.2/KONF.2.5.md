@@ -25,7 +25,7 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-Abgleich der Ist-Konfiguration mit Referenzvorgaben ist über OpenSCAP (scap-security-guide), AIDE und RHEL Insights möglich; Referenzdefinition, Intervalle und Remediation-Prozesse legt die Institution fest.
+RHEL bietet mit AIDE ein Werkzeug zur signaturbasierten Erkennung von Abweichungen zentraler Dateien: Nach dem Anlegen einer initialen Datenbank (`aide --init`) aus Hash-Werten, Berechtigungen und weiteren Attributen der in `/etc/aide.conf` definierten Pfade vergleicht `aide --check` den aktuellen Dateizustand fortlaufend gegen diese Referenz und meldet Änderungen, neue oder gelöschte Dateien. Die mitgelieferten CaC-Regeln stellen sicher, dass das Paket installiert ist und die Prüfung mindestens wöchentlich per Cronjob automatisiert läuft, statt nur manuell ausgeführt zu werden. Ergänzend lässt sich mit OpenSCAP (`oscap xccdf eval`, scap-security-guide-Profile) die gesamte Systemkonfiguration – nicht nur Dateiintegrität – periodisch gegen ein Referenzprofil evaluieren, und Red Hat Insights kann laufende Systeme kontinuierlich gegen bekannte Best-Practice-Regelsätze abgleichen und Abweichungen zentral melden. Was konkret als Referenzzustand gilt, wie eng die Prüfintervalle sind und wie auf gemeldete Abweichungen reagiert wird (Remediation-Prozess, Eskalation), muss die Institution jedoch selbst festlegen und betreiben.
 
 ### Rules:
 
