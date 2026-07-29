@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-07-29T09:17:14.786901-04:00",
+      "last-modified": "2026-07-29T09:29:18.542541-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -662,7 +662,7 @@
               {
                 "uuid": "07cd7593-9557-5c35-a62d-340b70ba7058",
                 "control-id": "KONF.2.8",
-                "description": "Alternative Administrationswege (serielle Konsole, out-of-band-Management) sind auf RHEL konfigurierbar; physische Absicherung, Freigabe und Nutzungsrichtlinien verbleiben bei der Institution.",
+                "description": "Im Normalfall wird RHEL über eine SSH-Verbindung und den CLI-Tools verwaltet. RHEL unterstützt mehrere von der primären Fernverwaltung unabhängige Administrationswege: Eine serielle Konsole (`ttyS0`, per Kernel-Parameter und `getty`-Unit aktiviert) sowie die Konsole von Virtualisierungs-Hosts (z. B. `virsh console`) bleiben auch dann erreichbar, wenn Netzwerk-Management-Dienste oder die grafische Oberfläche ausgefallen sind; auf physischer Hardware ergänzen herstellerseitige Out-of-Band-Schnittstellen (IPMI/Redfish, iDRAC/iLO) den Zugriff unabhängig vom Betriebssystemzustand. Zusätzlich besteht die Möglichkeit mit `Cockpit` eine webbasierte, grafische Oberfläche bereitzustellen. Für den Notfall lässt sich zusätzlich ein separates, lokal authentifiziertes Break-Glass-Konto mit eigenem PAM-Pfad einrichten, dessen Zugangsdaten getrennt verwahrt werden. Welche dieser Mechanismen aktiviert, physisch abgesichert und in eine Notfall-Zugriffsrichtlinie überführt werden, entscheidet die Institution.",
                 "props": [
                   {
                     "name": "implementation-status",
