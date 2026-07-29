@@ -19,7 +19,7 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-Bei Installation und Erstinbetriebnahme unterstützt RHEL die Ersetzung von Standardpasswörtern (root, Dienstkonten) über Anaconda/Kickstart und PAM; Passwortrichtlinien und Identity-Lifecycle verbleiben bei der Institution.
+RHEL liefert selbst keine vorab gesetzten Standard-Zugangsdaten aus: Bei der Installation über Anaconda/Kickstart muss für das root-Konto entweder ein Passwort oder ein SSH-Schlüssel explizit gesetzt werden, es existiert kein werkseitig bekanntes "root/root"-Login. Ergänzend erzwingt die PAM-Konfiguration in `/etc/pam.d/system-auth` und `/etc/pam.d/password-auth` standardmäßig, dass keine Konten mit leerem Passwort angemeldet werden können (kein `nullok`); die Rolle des im Component-Markdown gelisteten Rule-Namens deckt sich dabei inhaltlich mit der aktuellen ComplianceAsCode-Regel für dieses Verhalten. Für Dienstkonten und Abbild-/Cloud-Images bleibt es Aufgabe der Institution, mitgelieferte oder aus Vorlagen übernommene Zugangsdaten (z. B. in vorkonfigurierten VM-Images) unmittelbar nach Inbetriebnahme zu ersetzen oder das Konto zu deaktivieren.
 
 ### Rules:
 
