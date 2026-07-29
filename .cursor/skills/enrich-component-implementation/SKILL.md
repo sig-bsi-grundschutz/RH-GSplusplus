@@ -10,12 +10,18 @@ description: >-
 
 # Enrich Component Implementation
 
-Turn a single trestle **component markdown** file into a reviewed PR with honest
+Turn one or more trestle **component markdown** files into reviewed PRs with honest
 implementation prose, coverage assessment, and optional CaC rule suggestions.
 
-**Input:** path to one file under `authoring/component/{artifact}/`.
+**Input:** one of:
+- path to an existing file under `authoring/component/{artifact}/`, or
+- one or more **control IDs** (e.g. `BER.2.4` or `KONF.2.1, DET.3.1.4`) for a given artifact
+  (default `rhel9-gsplusplus-host`). If the control has no component markdown yet, Step 0 creates
+  the stub (profile + component markdown) before enrichment.
 
-**Output:** branch + commit + PR. Human reviews before merge.
+**Output:** one branch + commit + PR **per control** (see batching note in Git safety). Human
+reviews before merge; attaching/changing CaC rules on the assembled OSCAL is a separate manual
+step the reviewer does — see [docs/CURATION.md](../../../docs/CURATION.md#3-attaching-a-cac-rule).
 
 ## Prerequisites
 
@@ -25,6 +31,9 @@ implementation prose, coverage assessment, and optional CaC rule suggestions.
 | CaC-content clone | `../CaC-content` | env `CAC_CONTENT_ROOT` |
 | Product config | `mappings/rhel9/artifact.json` | read `rhel_major` for doc URLs |
 | Doc link registry | `mappings/rhel9/docs.json` | — |
+| Scope config (practice-area → component id) | `mappings/shared/scope/rhel-host.json` | — |
+| Component titles (component id → directory title) | `mappings/shared/components/rhel-host.json` | — |
+| Vendored BSI catalog (statement/guidance text) | `catalogs/bsi-grundschutz-plus-plus/catalog.json` | — |
 
 Requires `git`, `gh`, network for push/PR.
 
@@ -33,13 +42,16 @@ Requires `git`, `gh`, network for push/PR.
 1. Run `git branch --show-current`. **Never commit on that branch.**
 2. Create branch from current HEAD: `cursor/implement-{control-id}`  
    (`control-id` = filename stem, e.g. `BER.2.4`).
-3. One file changed per PR unless user explicitly asks otherwise.
+3. One control changed per PR unless the user explicitly asks for a single batch PR. For a
+   requested set of controls, repeat Steps 0–8 per control, each on its own branch from the
+   original HEAD (not stacked on the previous control's branch).
 
 ## Workflow
 
-Copy and track:
+Copy and track (repeat per control when given a set):
 
 ```
+- [ ] 0. Resolve target; create profile + component markdown stub if missing
 - [ ] 1. Read and parse component markdown
 - [ ] 2. Load listed CaC rules
 - [ ] 3. Gather Red Hat documentation
@@ -49,6 +61,36 @@ Copy and track:
 - [ ] 7. Write markdown (preserve protected sections)
 - [ ] 8. Branch, commit, push, open PR
 ```
+
+### Step 0 — Resolve target; create stub if missing
+
+Given a control ID, search
+`authoring/component/{artifact}/**/{artifact}/**/{control-id}.md`.
+
+**If found:** use it as the target file for Step 1.
+
+**If not found** (new control), create both files before continuing:
+
+1. Look up the control in the vendored catalog (`catalogs/bsi-grundschutz-plus-plus/catalog.json`)
+   for its title, statement, and guidance prose. `python3 scripts/export_review_candidates.py`
+   (no `--write`) or `--write` can produce this text pre-formatted under
+   `authoring/candidates/{scope}/{area}/{control-id}.md` if you want a shortcut.
+2. Create `authoring/profile/{artifact}/{area}/{control-id}.md` — copy the frontmatter and
+   `# Editable Content` footer structure from a sibling file in the same directory; fill in the
+   heading, Control Statement, and Control guidance from the catalog.
+3. Determine the component: `area` = control ID prefix before the first `.` (e.g. `BER`). Look up
+   `component_by_practice_area[area]` in `mappings/shared/scope/rhel-host.json` to get the
+   component id, then that id's `title` in `mappings/shared/components/rhel-host.json` to get the
+   component directory name.
+4. Create `authoring/component/{artifact}/{component-title}/{artifact}/{area}/{control-id}.md` —
+   copy frontmatter, heading, Control Statement, and Control guidance verbatim from the new profile
+   file; leave the two HTML comments, an empty prose line, and
+   `### Implementation Status: planned`. Do not add a `### Rules:` heading (added later only if a
+   rule is confirmed — see docs/CURATION.md).
+5. Run `python3 scripts/assemble_oscal.py --product rhel9` once so the new control's markdown is
+   picked up (`include-controls.with-ids` and the component-definition stub) before drafting prose.
+
+Continue to Step 1 with the (now existing) component markdown file.
 
 ### Step 1 — Read and parse
 
@@ -167,7 +209,7 @@ Edit **only**:
 
 ```bash
 git checkout -b cursor/implement-{control-id}
-git add "{path/to/component.md}"
+git add "{path/to/component.md}" "{path/to/profile.md if newly created}"
 git commit -m "$(cat <<'EOF'
 Enrich {control-id} implementation prose and status.
 
@@ -192,8 +234,15 @@ gh pr create --title "Enrich {control-id} component implementation" --body "$(ca
 - `rule_id` — one-line summary
 
 ## Suggested additional CaC rules
-(not in `### Rules:` — for maintainer consideration)
+(not attached in OSCAL — reviewer decides; see "Attaching a rule" below)
 - `rule_id` — rationale
+
+## Attaching a rule (reviewer, manual, optional)
+Editing `### Rules:` in this markdown has **no effect** on the assembled OSCAL — trestle treats
+that heading as read-only display. To actually attach a suggested rule, a reviewer edits
+`component-definitions/{artifact}/component-definition.json` directly and adds a `Rule_Id` prop
+to this control's `implemented-requirement` entry. Step-by-step:
+[docs/CURATION.md](../../../docs/CURATION.md#3-attaching-a-cac-rule).
 
 ## Gaps / manual verification
 - ...
@@ -212,6 +261,14 @@ Return the PR URL to the user.
 
 ```
 Enrich authoring/component/rhel9-gsplusplus-host/RHEL-Protokollierung und Detektion/rhel9-gsplusplus-host/BER.2/BER.2.4.md
+```
+
+```
+Enrich BER.2.4 for rhel9-gsplusplus-host
+```
+
+```
+Enrich KONF.2.1, KONF.2.2 and DET.3.1.4 for rhel9-gsplusplus-host
 ```
 
 ## Additional resources

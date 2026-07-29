@@ -89,9 +89,11 @@ RHEL 10 follows the same pattern as RHEL 9. Additional products add directories 
 | Control → component map (where products align) | `rule_ids` and check-backend references |
 | Practice-area allowlists / org-control denylists | Artifact UUIDs, titles, CI smoke targets |
 
-When RHEL and OpenShift both address the same control (e.g. logging), **shared curated text** lives
-in `mappings/shared/controls/`; product files add deltas (different doc links, different rules,
-different `implementation-status`).
+When RHEL and OpenShift both address the same control (e.g. logging), **shared curated text**
+should live under `mappings/shared/`; product files add deltas (different doc links, different
+rules, different `implementation-status`). No such shared-prose mechanism exists yet — today all
+curated text lives in per-product `authoring/component/` markdown. Design it when a second product
+(OpenShift/AAP) actually needs to reuse RHEL prose, rather than pre-building an unused registry.
 
 ## Scope selection (hybrid filter)
 
@@ -146,7 +148,8 @@ All **user-visible text** in generated OSCAL artifacts (profile and component de
 - link `text` values (defined in `{product}/docs.json` alongside `href`)
 
 English is used only for technical identifiers (`Rule_Id`, file paths, repository metadata) and in
-this architecture document. Source mappings under `mappings/shared/controls/` are maintained in German.
+this architecture document. Curated implementation prose (today: `authoring/component/` markdown)
+is maintained in German.
 
 ## Host slice control selection
 
@@ -158,19 +161,20 @@ artifacts. The generator enforces this at build time.
 
 ## Technical check bridge
 
-A single mapping in `mappings/shared/controls/` generates OSCAL `Rule_Id` (or equivalent) props
-and, where applicable, product-specific check artifacts:
-
 | Product | Check backend (current / planned) | OSCAL prop |
 |---------|-----------------------------------|------------|
 | RHEL 9 / 10 | ComplianceAsCode / OpenSCAP (`ssg-rhel{N}-ds.xml`) | `Rule_Id` (Trestle NS) |
-| OpenShift | Cluster compliance operator, CaC OCP content (planned) | TBD — same mapping source |
-| Ansible Automation Platform | AAP hardening guides, policy-as-code (planned) | TBD — same mapping source |
+| OpenShift | Cluster compliance operator, CaC OCP content (planned) | TBD |
+| Ansible Automation Platform | AAP hardening guides, policy-as-code (planned) | TBD |
 
-For RHEL today:
+For RHEL today, `Rule_Id` props are set directly on `implemented-requirement` entries in the
+assembled `component-definitions/{artifact}/component-definition.json`. This is a **manual edit**,
+not generated from markdown: trestle's `component-assemble` treats the `### Rules:` heading in
+component markdown as read-only display (it never writes rule changes back into the JSON — see
+[docs/CURATION.md](CURATION.md#3-attaching-a-cac-rule)). Editing the markdown
+bullet list alone has no effect on the OSCAL output.
 
-1. OSCAL `Rule_Id` on `implemented-requirement` entries.
-2. (Future) CaC control YAML under `products/rhel9/controls/gsplusplus_*.yml`.
+(Future) CaC control YAML under `products/rhel9/controls/gsplusplus_*.yml`.
 
 CI smoke tests validate RHEL `rule_ids` against `ssg-rhel{N}-ds.xml`. A separate workflow checks
 that every `href` in `{product}/docs.json` responds successfully (`scripts/check_doc_links.py`).

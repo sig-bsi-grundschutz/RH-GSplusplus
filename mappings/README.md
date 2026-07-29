@@ -26,4 +26,5 @@ python3 -m trestle validate -a
 
 - `mappings/shared/curation/` — replaced by trestle authoring
 - `scripts/build_host_mappings.py`, `scripts/build_host_allowlist.py`
-- Bulk-generated `mappings/shared/controls/rhel-host.json`
+- `scripts/generate_component_definition.py` — bulk registry generator, replaced by `scripts/assemble_oscal.py` + trestle agile authoring
+- Bulk-generated `mappings/shared/controls/rhel-host.json`, `mappings/shared/controls/rhel-audit.json`, `mappings/shared/slices/rhel-audit.json`, `mappings/shared/components/rhel-audit.json` — the PR1 vertical-slice registry; superseded by `authoring/component/` markdown, which covers the same controls

@@ -1,6 +1,6 @@
 {
   "id": "rhel-host",
-  "description": "Candidate pool for RHEL host review: Kernel controls in KONF, BER, DET. Final scope is defined in mappings/shared/curation/rhel-host.json.",
+  "description": "Candidate pool for RHEL host review: Kernel controls in KONF, BER, DET. Final scope is defined by markdown files under authoring/profile/rhel9-gsplusplus-host/.",
   "kernel_class_prefix": "BSI-Stand-der-Technik-Kernel",
   "practice_area_allowlist": ["KONF", "BER", "DET"],
   "component_by_practice_area": {

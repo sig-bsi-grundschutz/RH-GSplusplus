@@ -95,6 +95,16 @@ When MCP is configured, prefer structured search over raw WebFetch.
 2. Query for product + topic (e.g. "RHEL 9 auditd watch rules identity files")
 3. Fall back to `docs.json` → WebFetch on empty or error
 
+## Rule_Id is not markdown-driven
+
+`### Rules:` in component markdown is populated by trestle at generation time and is **read-only
+display** (`trestle.common.const.RULES_WARNING`). `component-assemble` does not read edits to this
+list back into the OSCAL component definition — verified empirically: adding a bullet here and
+re-running `scripts/assemble_oscal.py` produces no `Rule_Id` prop change. Never tell a reviewer
+that editing this list attaches a rule. The only way to attach/change a `Rule_Id` is a manual edit
+to `component-definitions/{artifact}/component-definition.json` —
+[docs/CURATION.md](../../../docs/CURATION.md#3-attaching-a-cac-rule).
+
 ## Protected markdown regions
 
 ```markdown
