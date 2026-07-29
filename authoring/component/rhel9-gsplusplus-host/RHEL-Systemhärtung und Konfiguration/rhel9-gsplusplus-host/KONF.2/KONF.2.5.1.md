@@ -25,7 +25,7 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-Automatisierte Konfigurationsprüfung und -anpassung kann über Ansible, OpenSCAP-Remediation, Image Builder oder Satellite erfolgen; Freigabe und Betrieb automatisierter Werkzeuge obliegen der Institution.
+Für automatisierte Konfigurationsverwaltung stellt RHEL mehrere zusammenspielende Werkzeuge bereit: Ansible führt deklarativ beschriebene Playbooks/Rollen aus und kann bei Abweichungen selbstständig den Soll-Zustand wiederherstellen; OpenSCAP kann mit `oscap xccdf eval --remediate` erkannte Abweichungen von einem scap-security-guide-Profil automatisiert korrigieren, statt sie nur zu melden; Red Hat Ansible Automation Platform, Red Hat Satellite bzw. Red Hat Lightspeed-Remediation-Pläne erlauben eine zentrale, flottenweite Anwendung solcher Korrekturen über viele Hosts hinweg, und Image Builder sorgt dafür, dass neu ausgerollte Systeme bereits im Soll-Zustand starten. Diese Werkzeuge automatisieren die technische Durchsetzung, ersetzen aber nicht die Entscheidung der Institution, welches Werkzeug in welchem Umfang zum Einsatz kommt, wie automatische Korrekturen freigegeben werden und wie mit Abweichungen umgegangen wird, die keine automatische Behebung erlauben.
 
 ### Implementation Status: partial
 
