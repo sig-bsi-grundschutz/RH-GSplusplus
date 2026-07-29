@@ -1,0 +1,25 @@
+{
+  "components": [
+    {
+      "id": "rhel-hardening",
+      "type": "software",
+      "title": "RHEL-Systemhärtung und Konfiguration",
+      "description": "Betriebssystem-Basiskonfiguration, Patch- und Update-Mechanismen, Malware-Schutz, Host-Firewall, Fernwartung und anwendungsnahe Betriebskonfigurationen auf Red Hat Enterprise Linux.",
+      "doc_keys": ["security_hardening", "openscap", "systemd"]
+    },
+    {
+      "id": "rhel-identity",
+      "type": "software",
+      "title": "RHEL-Identität, Berechtigungen und Kryptografie",
+      "description": "Lokale und zentrale Authentisierung, PAM, SSSD, rollenbasierte Zugriffssteuerung, Schlüssel- und Zertifikatsverwaltung sowie Berechtigungsmodelle auf Red Hat Enterprise Linux.",
+      "doc_keys": ["sssd", "security_hardening"]
+    },
+    {
+      "id": "rhel-audit",
+      "type": "software",
+      "title": "RHEL-Protokollierung und Detektion",
+      "description": "Audit-Subsystem (auditd), systemd-Journal, Protokollfilterung, Speicherung, Zeitsynchronisation und betriebliche Detektionsfähigkeiten auf Red Hat Enterprise Linux.",
+      "doc_keys": ["audit", "monitoring", "systemd", "openscap"]
+    }
+  ]
+}

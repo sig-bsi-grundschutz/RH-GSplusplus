@@ -2,18 +2,18 @@
   "profile": {
     "uuid": "1b010329-d203-53dc-a668-977177d6d157",
     "metadata": {
-      "title": "Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, Audit-Slice)",
-      "last-modified": "2026-07-28T14:00:00.000Z",
+      "title": "Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)",
+      "last-modified": "2026-07-28T07:14:55.550299-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
-      "remarks": "Profil mit Host-Anwendbarkeitsfilter für Red Hat Enterprise Linux. Organisatorische Grundschutz++-Anforderungen verbleiben im BSI-Katalog; dieses Profil listet nur die Anforderungen, die durch die begleitende Komponentendefinition adressiert werden. Aktueller vertikaler Slice: rhel-audit.",
       "links": [
         {
           "href": "https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek/blob/cea4589c2b8337207772a88dd82d808cba5e1d89/control_layer/Grundschutz++/Grundschutz++-resolved_catalog.json",
           "rel": "reference",
           "text": "BSI Control Layer — aufgelöster Anwenderkatalog Grundschutz++ (Stand 2026-07-26, commit cea4589c2b83)"
         }
-      ]
+      ],
+      "remarks": "Profil mit human kuratiertem Host-Anwendbarkeitsfilter für Red Hat Enterprise Linux. Nur Controls mit Markdown in authoring/profile/ sind enthalten; organisatorische Grundschutz++-Anforderungen verbleiben im BSI-Katalog. Kandidatenpool: rhel-host."
     },
     "imports": [
       {
@@ -28,6 +28,18 @@
               "DET.3.1.7",
               "DET.3.3",
               "DET.3.4",
+              "KONF.2.1",
+              "KONF.2.1.1",
+              "KONF.2.2",
+              "KONF.2.3",
+              "KONF.2.4",
+              "KONF.2.4.1",
+              "KONF.2.4.2",
+              "KONF.2.5",
+              "KONF.2.5.1",
+              "KONF.2.7",
+              "KONF.2.8",
+              "KONF.2.9",
               "KONF.4.5"
             ]
           }
@@ -39,6 +51,9 @@
         "method": "merge"
       },
       "as-is": true
+    },
+    "modify": {
+      "alters": []
     }
   }
 }

@@ -58,22 +58,21 @@ docs/ARCHITECTURE.md                    # this document
 
 mappings/
   shared/
-    slices/                             # vertical / phased scope (e.g. rhel-audit)
-    components/                         # subsystem defs per product family
-    controls/                           # per-slice control mappings (tier, prose, rules)
-    scope/                              # hybrid filter rules (practice areas, denylists)
-  rhel9/                                # first product: OS host scope
-    artifact.json
-    docs.json
-  rhel10/
-  openshift/                            # planned: cluster / platform scope
-  ansible/                              # planned: automation controller scope
+    scope/                              # candidate pool rules (KONF, BER, DET kernel)
+    components/                         # subsystem defs (hardening, identity, audit)
+  rhel9/                                # product config (artifact.json, docs.json)
+
+authoring/
+  profile/{artifact}/                   # trestle profile markdown — controls in scope
+  component/{artifact}/                 # trestle component markdown — implementation prose
+  candidates/                           # review queue (generated, not assembled)
 
 profiles/{product}-gsplusplus-{scope}/
 component-definitions/{product}-gsplusplus-{scope}/
 
 scripts/
-  generate_component_definition.py      # one generator (--product rhel9|openshift|…)
+  assemble_oscal.py                     # trestle profile-assemble + component-assemble + enrich
+  export_review_candidates.py           # candidate review queue export
   fetch_bsi_catalog.sh
 ```
 
@@ -90,9 +89,11 @@ RHEL 10 follows the same pattern as RHEL 9. Additional products add directories 
 | Control → component map (where products align) | `rule_ids` and check-backend references |
 | Practice-area allowlists / org-control denylists | Artifact UUIDs, titles, CI smoke targets |
 
-When RHEL and OpenShift both address the same control (e.g. logging), **shared curated text** lives
-in `mappings/shared/controls/`; product files add deltas (different doc links, different rules,
-different `implementation-status`).
+When RHEL and OpenShift both address the same control (e.g. logging), **shared curated text**
+should live under `mappings/shared/`; product files add deltas (different doc links, different
+rules, different `implementation-status`). No such shared-prose mechanism exists yet — today all
+curated text lives in per-product `authoring/component/` markdown. Design it when a second product
+(OpenShift/AAP) actually needs to reuse RHEL prose, rather than pre-building an unused registry.
 
 ## Scope selection (hybrid filter)
 
@@ -147,7 +148,8 @@ All **user-visible text** in generated OSCAL artifacts (profile and component de
 - link `text` values (defined in `{product}/docs.json` alongside `href`)
 
 English is used only for technical identifiers (`Rule_Id`, file paths, repository metadata) and in
-this architecture document. Source mappings under `mappings/shared/controls/` are maintained in German.
+this architecture document. Curated implementation prose (today: `authoring/component/` markdown)
+is maintained in German.
 
 ## Host slice control selection
 
@@ -159,19 +161,20 @@ artifacts. The generator enforces this at build time.
 
 ## Technical check bridge
 
-A single mapping in `mappings/shared/controls/` generates OSCAL `Rule_Id` (or equivalent) props
-and, where applicable, product-specific check artifacts:
-
 | Product | Check backend (current / planned) | OSCAL prop |
 |---------|-----------------------------------|------------|
 | RHEL 9 / 10 | ComplianceAsCode / OpenSCAP (`ssg-rhel{N}-ds.xml`) | `Rule_Id` (Trestle NS) |
-| OpenShift | Cluster compliance operator, CaC OCP content (planned) | TBD — same mapping source |
-| Ansible Automation Platform | AAP hardening guides, policy-as-code (planned) | TBD — same mapping source |
+| OpenShift | Cluster compliance operator, CaC OCP content (planned) | TBD |
+| Ansible Automation Platform | AAP hardening guides, policy-as-code (planned) | TBD |
 
-For RHEL today:
+For RHEL today, `Rule_Id` props are set directly on `implemented-requirement` entries in the
+assembled `component-definitions/{artifact}/component-definition.json`. This is a **manual edit**,
+not generated from markdown: trestle's `component-assemble` treats the `### Rules:` heading in
+component markdown as read-only display (it never writes rule changes back into the JSON — see
+[docs/CURATION.md](CURATION.md#3-attaching-a-cac-rule)). Editing the markdown
+bullet list alone has no effect on the OSCAL output.
 
-1. OSCAL `Rule_Id` on `implemented-requirement` entries.
-2. (Future) CaC control YAML under `products/rhel9/controls/gsplusplus_*.yml`.
+(Future) CaC control YAML under `products/rhel9/controls/gsplusplus_*.yml`.
 
 CI smoke tests validate RHEL `rule_ids` against `ssg-rhel{N}-ds.xml`. A separate workflow checks
 that every `href` in `{product}/docs.json` responds successfully (`scripts/check_doc_links.py`).
@@ -210,7 +213,7 @@ phases** once the generator, mapping layout, and CaC dual-output pipeline are pr
 | Phase | Scope | Deliverable |
 |-------|-------|-------------|
 | **PR 1** | RHEL vertical slice: `rhel-audit` | Refactored generator, host profile + component def, remove `*-full` |
-| **0.1** | RHEL full host allowlist | Mostly Tier-2; Tier-1 where CaC rules exist |
+| **0.1** | RHEL host scope (trestle authoring, KONF/BER/DET candidates) | Human profile/component markdown; no bulk synthetic answers |
 | **0.5+** | RHEL Tier-1 growth | BSI Beispiel snapshot candidate |
 | **1.x** | RHEL 10 host artifact | Same model as RHEL 9 with shared mappings + deltas |
 | **2.x** | OpenShift platform artifact | `openshift-gsplusplus-platform`; OCP scope filter + check backend |

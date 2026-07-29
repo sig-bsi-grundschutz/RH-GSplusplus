@@ -1,30 +1,30 @@
 # Control mappings
 
-Source-of-truth layout for GS++ → Red Hat product mappings. Generated OSCAL lives under
-`profiles/` and `component-definitions/`. See [docs/ARCHITECTURE.md](../docs/ARCHITECTURE.md).
+Source-of-truth for **human authoring** is under `authoring/` (trestle markdown). Generated OSCAL
+lives under `profiles/` and `component-definitions/`. See [docs/CURATION.md](../docs/CURATION.md).
 
 ## Layout
 
 | Path | Purpose |
 |------|---------|
-| `shared/slices/` | Phased control ID lists (e.g. `rhel-audit.json` vertical slice) |
-| `shared/components/` | Subsystem component metadata (`rhel-audit`, …) |
-| `shared/controls/` | Per-slice control mappings: tier, statement, doc_keys, rule_ids |
-| `{product}/artifact.json` | Generator config: UUIDs, output paths, defaults, smoke rules |
-| `{product}/docs.json` | `doc_key` → `href` + German link `text` for OSCAL output |
+| `shared/scope/` | Candidate pool rules (KONF/BER/DET kernel controls) |
+| `shared/components/` | Subsystem metadata for component-definition skeleton |
+| `authoring/profile/` | trestle profile markdown — **controls in scope** |
+| `authoring/component/` | trestle component markdown — **implementation prose** |
+| `authoring/candidates/` | Review queue (generated, not assembled) |
+| `{product}/artifact.json` | Assemble config, BSI upstream refs, CI smoke rules |
+| `{product}/docs.json` | Documentation link keys injected at assemble time |
 
 ## Regenerate OSCAL
 
 ```bash
-python3 scripts/generate_component_definition.py --product rhel9
+python3 scripts/assemble_oscal.py --product rhel9
 python3 -m trestle validate -a
 ```
 
-Edit **`mappings/shared/controls/`** for curated Tier-1 content and **`shared/slices/`** to change
-profile scope. Bump `artifact_metadata` timestamps in `{product}/artifact.json` when output
-semantics change.
-
 ## Retired
 
-- `rhel9_gsplusplus.json` / `rhel9_gsplusplus_overrides.json` — replaced by layout above
-- `scripts/build_gsplusplus_overrides.py` — keyword heuristics retired per architecture doc
+- `mappings/shared/curation/` — replaced by trestle authoring
+- `scripts/build_host_mappings.py`, `scripts/build_host_allowlist.py`
+- `scripts/generate_component_definition.py` — bulk registry generator, replaced by `scripts/assemble_oscal.py` + trestle agile authoring
+- Bulk-generated `mappings/shared/controls/rhel-host.json`, `mappings/shared/controls/rhel-audit.json`, `mappings/shared/slices/rhel-audit.json`, `mappings/shared/components/rhel-audit.json` — the PR1 vertical-slice registry; superseded by `authoring/component/` markdown, which covers the same controls
