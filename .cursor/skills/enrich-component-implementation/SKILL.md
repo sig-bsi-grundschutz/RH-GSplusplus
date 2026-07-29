@@ -40,7 +40,7 @@ Requires `git`, `gh`, network for push/PR.
 ## Git safety
 
 1. Run `git branch --show-current`. **Never commit on that branch.**
-2. Create branch from current HEAD: `cursor/implement-{control-id}`  
+2. Create branch from current HEAD: `cursor/implement-{control-id}`
    (`control-id` = filename stem, e.g. `BER.2.4`).
 3. One control changed per PR unless the user explicitly asks for a single batch PR. For a
    requested set of controls, repeat Steps 0–8 per control, each on its own branch from the
@@ -151,15 +151,17 @@ Record **doc source used** (MCP query, doc key, URL) for the PR body.
 
 ### Step 4 — Discover additional rules (PR suggestions only)
 
-Using control statement + guidance as requirement text, search CaC using the
-same approach as `CaC-content/.claude/skills/find-rule` (keyword + reference search):
+Delegate to the `find-rule` skill in the CaC-content clone instead of reimplementing its search:
 
-- Keywords from German guidance (translate concepts: audit → auditd, identity → passwd/group)
-- Same audit/identity/network domains under `linux_os/guide/`
-- Rules with `cce@rhel{N}` for the artifact product
+1. Read `{CAC_CONTENT_ROOT}/.claude/skills/find-rule/SKILL.md` (default `../CaC-content`).
+2. Follow it with `$ARGUMENTS` set to the control statement + guidance text,
+   scoped to `linux_os/guide/` for RHEL (skip `applications/openshift/`).
+3. Take its strong/partial match output and cross-check `identifiers` for `cce@rhel{N}` (artifact's
+   `rhel_major`) to confirm applicability.
 
 **Do not edit `### Rules:` in markdown.** List discoveries in PR body under
-"Suggested additional CaC rules" with one-line rationale each.
+"Suggested additional CaC rules" with one-line rationale each (reuse the rationale the find-rule
+skill produced).
 
 ### Step 5 — Draft implementation prose
 
