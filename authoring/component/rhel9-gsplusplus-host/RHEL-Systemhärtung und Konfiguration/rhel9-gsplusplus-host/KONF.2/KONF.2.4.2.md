@@ -19,7 +19,7 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-Cloud-Init, Guest Agents und ähnliche Anbindungen können deaktiviert oder nicht installiert werden, wenn kein Cloud-/Hypervisor-Management benötigt wird; die Entscheidung über Cloud-Nutzung verbleibt bei der Institution.
+Cloud-spezifische Anbindungen wie cloud-init (Instanz-Provisionierung/Metadaten-Abruf) und Hypervisor-/Cloud-Guest-Agenten (z. B. qemu-guest-agent, WALinuxAgent, google-guest-agent) sind auf RHEL als optionale Pakete bzw. systemd-Dienste realisiert und lassen sich über `dnf remove` bzw. `systemctl mask --now` vollständig entfernen oder deaktivieren, wenn ein System nicht in einer entsprechenden Cloud-/Virtualisierungsumgebung betrieben wird oder kein automatisiertes Remote-Management über diesen Kanal benötigt wird. Auf physischen oder eigenständig verwalteten Systemen ist keine dieser Komponenten Teil einer Standardinstallation. Die Entscheidung, welche Cloud-Anbindungen für Betrieb, Wartung oder Support tatsächlich erforderlich sind, trifft die Institution auf Basis ihrer Bereitstellungsarchitektur.
 
 ### Implementation Status: partial
 
