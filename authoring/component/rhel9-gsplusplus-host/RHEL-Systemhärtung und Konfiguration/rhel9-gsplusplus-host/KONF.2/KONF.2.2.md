@@ -25,7 +25,7 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-RHEL System-wide Crypto Policies (/etc/crypto-policies) steuern zulässige kryptographische Verfahren für Dienste; die Institution wählt das passende Profil (z. B. DEFAULT, FIPS:OSPP).
+RHEL setzt kryptographische Verfahren zentral über die System-wide Crypto Policies durch (`update-crypto-policies --set <Policy>`): Alle policy-fähigen Bibliotheken und Dienste (OpenSSL, GnuTLS, NSS, OpenSSH, libkrb5 u. a.) übernehmen automatisch dasselbe Regelwerk für TLS-Versionen, Schlüssellängen und Hash-Algorithmen, statt individuell konfiguriert zu werden. Im DEFAULT-Profil sind in RHEL 9 bereits TLS < 1.2, DH/RSA-Schlüssel < 2048 Bit, SHA-1 für Signaturen sowie veraltete Chiffren wie 3DES und RC4 deaktiviert; für Umgebungen mit erhöhten Anforderungen stehen FIPS- und FIPS:OSPP-Subpolicies zur Verfügung, die insbesondere im Zusammenspiel mit Identitäts- und Berechtigungsmanagement (SSH, Kerberos, TLS-Client-Auth) verwendet werden. Die Regel `crypto_policy_not_overridden` stellt zusätzlich sicher, dass keine Anwendung die zentrale Policy durch eigene Konfigurationsdateien in `/etc/crypto-policies/back-ends` unterläuft. Welches konkrete Profil (DEFAULT, FIPS, FIPS:OSPP, LEGACY) angemessen ist, hängt von den Anforderungen aus Berechtigung (BER) ab und ist eine Entscheidung der Institution.
 
 ### Rules:
 
