@@ -25,12 +25,17 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-Abgleich der Ist-Konfiguration mit Referenzvorgaben ist über OpenSCAP (scap-security-guide), AIDE und RHEL Insights möglich; Referenzdefinition, Intervalle und Remediation-Prozesse legt die Institution fest.
+RHEL deckt den Abgleich zwischen Referenz- und Ist-Konfiguration auf den in der Control Guidance beschriebenen Ebenen ab: (1) Als Konfigurationsmanagement-Werkzeug beschreibt Ansible (bspw. auch über die mitgelieferten RHEL System Roles) den Referenzzustand deklarativ in Playbooks und Rollen; ein Lauf im Check-Modus (`--check --diff`) gleicht die tatsächliche Systemkonfiguration automatisch gegen diese Definition ab und meldet Abweichungen. Alternativ können diese aber auch direkt überschrieben werden. (2) Als Referenz-Baseline-Kontrolle liest OpenSCAP (`oscap xccdf eval`) anhand eines scap-security-guide-Profils periodisch die im Profil definierte Baseline - Dienste, Paketstände, Kernel- und Anwendungseinstellungen – und prüft das System gegen diese. Abweichungen werden in einem Report (ARF/HTML) protokolliert und kann an zentraler Stelle (Red Hat Lightspeed oder Red Hat Satellite) gesammelt werden. Dies stellt eine wiederholbare, versionierte Baseline-Prüfung bereit; Red Hat Lightspeed ergänzt dies um eine kontinuierliche Überwachung laufender Systeme gegen bekannte Best-Practice-Regelsätze mit zentraler Meldung. (3) Für die dateibezogene Integritätsebene setzt AIDE Hash- und Signaturverfahren ein: Nach dem Anlegen einer initialen Datenbank (`aide --init`) aus Hash-Werten, Berechtigungen und weiteren Attributen der in `/etc/aide.conf` definierten Pfade vergleicht `aide --check` den aktuellen Dateizustand fortlaufend gegen diese Referenz und meldet Änderungen, neue oder gelöschte Dateien; die mitgelieferten CaC-Regeln stellen zusätzlich sicher, dass das Paket installiert ist und die Prüfung mindestens wöchentlich per Cronjob automatisiert läuft, statt nur manuell ausgeführt zu werden. Was konkret als Referenzzustand gilt, wie eng die Prüfintervalle sind und wie auf gemeldete Abweichungen reagiert wird (Remediation-Prozess, Eskalation), muss die Institution jedoch selbst festlegen und betreiben.
 
 ### Rules:
 
   - package_aide_installed
+  - aide_build_database
   - aide_periodic_cron_checking
+  - aide_scan_notification
+  - rpm_verify_hashes
+  - rpm_verify_ownership
+  - rpm_verify_permissions
 
 ### Implementation Status: partial
 
