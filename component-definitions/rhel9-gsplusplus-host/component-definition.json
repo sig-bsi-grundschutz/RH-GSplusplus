@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-07-29T05:55:52.314990-04:00",
+      "last-modified": "2026-07-29T08:28:00.334320-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -390,7 +390,7 @@
               {
                 "uuid": "92299648-aa69-5f3e-adfe-e91c5d6c27fa",
                 "control-id": "KONF.2.4",
-                "description": "RHEL erlaubt das gezielte Deaktivieren nicht benötigter Systemfunktionen auf mehreren Ebenen: Netzwerkdienste werden über systemd dauerhaft gestoppt und maskiert (`systemctl mask --now <dienst>.service`, ggf. inklusive zugehöriger `.socket`-Unit), sodass sie weder manuell noch als Abhängigkeit eines anderen Dienstes erneut starten können. Nicht benötigte Kernel-Module (Dateisysteme, veraltete Netzprotokolle) werden über modprobe-Blacklist-/`install /bin/false`-Konfiguration in `/etc/modprobe.d/` am Laden gehindert. Für eine systematische, wiederholbare Reduzierung stellt scap-security-guide gebündelte Profile (z. B. OSPP, ANSSI) bereit, die eine Vielzahl solcher Dienst- und Modul-Deaktivierungen sowie Firmware-/BIOS-nahe Einstellungen zusammenfassen und per OpenSCAP-Remediation ausrollen lassen. Welche konkreten Dienste, Schnittstellen (z. B. Bluetooth) und Protokolle als \"nicht benötigt\" gelten, hängt vom Einsatzzweck des Systems ab und ist eine Entscheidung der Institution.",
+                "description": "RHEL erlaubt das gezielte Deaktivieren nicht benötigter Systemfunktionen auf mehreren Ebenen: Netzwerkdienste werden über systemd dauerhaft gestoppt und maskiert (`systemctl mask --now <dienst>.service`, ggf. inklusive zugehöriger `.socket`-Unit), sodass sie weder manuell noch als Abhängigkeit eines anderen Dienstes erneut starten können. Nicht benötigte Kernel-Module (Dateisysteme, veraltete Netzprotokolle) werden über modprobe-Blacklist-/`install /bin/false`-Konfiguration in `/etc/modprobe.d/` am Laden gehindert. Welche konkreten Dienste, Schnittstellen (z. B. Bluetooth) und Protokolle als \"nicht benötigt\" gelten, hängt vom Einsatzzweck des Systems ab und ist eine Entscheidung der Institution.",
                 "props": [
                   {
                     "name": "Rule_Id",
@@ -562,11 +562,16 @@
               {
                 "uuid": "05afa7b5-9a8e-555c-9d5f-91d83b34f834",
                 "control-id": "KONF.2.4.1",
-                "description": "RHEL stellt update-ca-trust und p11-kit zur Verwaltung von CA-/Zertifikatsvertrauen bereit. Entfernen oder Deaktivieren nicht benötigter Zertifikate obliegt der Institution.",
+                "description": "RHEL verwaltet als vertrauenswürdig eingestufte Zertifizierungsstellen zentral über `update-ca-trust`/p11-kit: Der systemweite Vertrauensspeicher wird aus `/etc/pki/ca-trust/source/anchors/` (institutseigene CAs) sowie den mitgelieferten Systemankern zusammengeführt (`update-ca-trust extract`), und einzelne CAs lassen sich gezielt als \"nicht vertrauenswürdig\" markieren (`trust anchor --store` bzw. Ablage in `/etc/pki/ca-trust/source/blacklist/`), ohne das gesamte Zertifikatsbündel zu ersetzen. Dadurch kann eine Institution nicht mehr benötigte CA-Zertifikate aus dem aktiven Vertrauenspfad entfernen, statt sie unverändert im System-Trust-Store zu belassen. Welche Zertifizierungsstellen tatsächlich benötigt werden und wann eine Deaktivierung angemessen ist, muss die Institution anhand ihrer Anwendungslandschaft festlegen; RHEL erzwingt keine automatische Bereinigung.",
                 "props": [
                   {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "only_allow_specific_certs"
+                  },
+                  {
                     "name": "implementation-status",
-                    "value": "partial",
+                    "value": "operational",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ]
