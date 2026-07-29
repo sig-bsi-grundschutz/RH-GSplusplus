@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-07-29T05:02:52.613307-04:00",
+      "last-modified": "2026-07-29T05:27:00.413034-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -368,8 +368,18 @@
               {
                 "uuid": "218e7ed0-cc13-50d5-845d-88ee02004042",
                 "control-id": "KONF.2.3",
-                "description": "Bei Installation und Erstinbetriebnahme unterstützt RHEL die Ersetzung von Standardpasswörtern (root, Dienstkonten) über Anaconda/Kickstart und PAM; Passwortrichtlinien und Identity-Lifecycle verbleiben bei der Institution.",
+                "description": "RHEL liefert selbst keine vorab gesetzten Standard-Zugangsdaten aus: Bei der Installation über Anaconda/Kickstart muss für das root-Konto entweder ein Passwort oder ein SSH-Schlüssel explizit gesetzt werden, es existiert kein werkseitig bekanntes \"root/root\"-Login. Ergänzend erzwingt die PAM-Konfiguration in `/etc/pam.d/system-auth` und `/etc/pam.d/password-auth` standardmäßig, dass keine Konten mit leerem Passwort angemeldet werden können (kein `nullok`); Für Dienstkonten und Abbild-/Cloud-Images bleibt es Aufgabe der Institution, mitgelieferte oder aus Vorlagen übernommene Zugangsdaten (z. B. in vorkonfigurierten VM-Images) unmittelbar nach Inbetriebnahme zu ersetzen oder das Konto zu deaktivieren. Zusätzlich gibt es die Möglichkeit den Login des root-Users in der SSHD Konfiguration zu unterbinden.",
                 "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_disable_root_password_login"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "ensure_root_password_configured"
+                  },
                   {
                     "name": "implementation-status",
                     "value": "partial",
