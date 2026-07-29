@@ -19,7 +19,9 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-Konfigurationsartefakte auf RHEL (Pakete, /etc, Kickstart, Ansible-Inventar) lassen sich in Versionsverwaltung und Change-Prozesse einbinden. Der organisationsweite Versionsprozess obliegt der Institution.
+RHEL selbst führt keine automatische Versionierung von /etc, doch die dortigen Konfigurationsartefakte sind textbasiert und lassen sich in ein Versionsverwaltungssystem wie Git integrieren, etwa über etckeeper-artige Ansätze oder als Teil eines Ansible-Konfiguration-Ansatzes, dessen Rollen und Inventar den Systemzustand deklarativ beschreiben.
+
+Kickstart-Dateien und Image Builder-Blueprints selbst sind versionierbare Artefakte, aus denen reproduzierbare Installationen abgeleitet werden können; RPM-Paketverwaltung (dnf history, RPM-Transaktionshistorie) protokolliert zusätzlich Paketänderungen mit Rollback-Möglichkeit. Für Geheimnisse, die nicht im Klartext versioniert werden sollen, kann Ansible Vault oder eine externe Geheimnisverwaltung (z. B. HashiCorp Vault) eingesetzt werden. Die Einrichtung eines fortlaufenden, mit Rücksetzpunkten versehenen Versionsprozesses samt Änderungsfreigabe ist jedoch ein organisatorischer Schritt, den die Institution etablieren und betreiben muss.
 
 ### Implementation Status: partial
 
