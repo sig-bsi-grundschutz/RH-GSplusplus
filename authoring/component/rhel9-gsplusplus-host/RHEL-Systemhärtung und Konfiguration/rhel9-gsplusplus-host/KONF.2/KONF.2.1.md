@@ -19,7 +19,7 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-RHEL hält Systemkonfiguration in /etc, Kickstart/Image Builder und Konfigurationsberichten (Insights) fest. Dokumentation und Freigabe einer Referenz-Grundkonfiguration verbleiben bei der Institution.
+RHEL liefert die technischen Bausteine, aus denen eine Institution eine Grundkonfiguration ableiten und reproduzierbar ausrollen kann: Anaconda/Kickstart und Image Builder-Blueprints erzeugen definierte Installationszustände, chronyd steuert Zeitsynchronisation, NetworkManager/SSSD/realmd binden DNS- und Verzeichnisdienste ein, und scap-security-guide stellt vorgefertigte Härtungsprofile (z. B. BSI, CIS) bereit, die per OpenSCAP oder Ansible auf ein System angewendet werden. Red Hat Insights (im verbundenen Umgebungen) oder Red Hat Satellite (in disconnected / air-gapped Umgebungen) vergleicht mittels OpenSCAP laufende Systeme gegen bekannte Best-Practice- und Compliance-Regelsätze und aggregiert Abweichungen. Welche Einstellungen konkret als verbindliche Referenz gelten, welches Benchmark (BSI, CIS) zugrunde gelegt wird und wie die Freigabe der Grundkonfiguration organisatorisch erfolgt, legt die Institution jedoch selbst fest; RHEL erzwingt keine bestimmte Baseline.
 
 ### Implementation Status: partial
 
