@@ -19,12 +19,12 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-UEFI Secure Boot und MOK (Machine Owner Key) werden auf unterstützter Hardware unterstützt; Aktivierung, Schlüsselverwaltung und Firmware-Policy obliegen der Institution.
+Auf UEFI-Systemen unterstützt RHEL einen mehrstufig authentisierten Bootprozess: Der Bootloader `shim` sowie GRUB2 und der Kernel sind mit Red-Hat-Schlüsseln signiert und werden von der UEFI-Firmware anhand der Microsoft-UEFI-CA- bzw. Red-Hat-Schlüssel in der `db`-Zertifikatsdatenbank verifiziert, bevor sie ausgeführt werden. Für zusätzliche, selbst signierte Kernel oder Fremd-Kernelmodule (z. B. DKMS-Treiber) steht die Machine-Owner-Key-Infrastruktur (`mokutil`) bereit, mit der ein eigenes Schlüsselpaar in die Firmware-Vertrauensliste eingebracht wird, ohne die UEFI-`db` direkt zu verändern. Der aktuelle Status lässt sich mit `mokutil --sb-state` prüfen.
 
 ### Rules:
 
-  - grub2_uefi_secure_boot_enabled
+  - secure_boot_enabled
 
-### Implementation Status: partial
+### Implementation Status: planned
 
 ______________________________________________________________________
