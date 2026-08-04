@@ -21,6 +21,7 @@
         "include-controls": [
           {
             "with-ids": [
+              "BER.2.1",
               "BER.2.2",
               "BER.2.4",
               "BER.2.5",
