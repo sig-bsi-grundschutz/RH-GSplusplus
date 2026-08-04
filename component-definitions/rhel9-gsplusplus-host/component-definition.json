@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-04T05:04:59.204572-04:00",
+      "last-modified": "2026-08-04T05:20:25.614110-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -130,6 +130,23 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "account_disable_post_pw_expiration"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "2ba73785-4596-5eca-a7e9-603cd5db26f4",
+                "control-id": "BER.2.6",
+                "description": "Auf einzelnen RHEL-Hosts entfernt `userdel` (bei Bedarf mit `-r` für das Heimatverzeichnis) eine nicht mehr benötigte Identität vollständig aus `/etc/passwd`, `/etc/shadow`, `/etc/group` und `/etc/gshadow`; Für zentral verwaltete Umgebungen empfiehlt sich, die Identität einmalig in Red Hat IdM oder einem anderen Verzeichnisdienst (Active Directory, LDAP) zu deprovisionieren und die Löschung über die Red Hat Ansible Automation Platform (AAP) mit einer entsprechenden Rolle/Playbook automatisiert und auditierbar auf alle angebundenen RHEL-Hosts der Flotte auszurollen, statt jeden Host manuell per `userdel` zu bearbeiten. Die Bestimmung der gesetzlichen Löschfrist selbst sowie ein forensisch belastbares Löschen der zugehörigen Daten (verifizierbares Überschreiben, kryptografisches Löschen von Datenträgern, Bereinigung von Datensicherungen) sind organisatorische bzw. Storage-/Backup-Ebene und liegen außerhalb der Kontenverwaltung des Hosts.",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_authorized_local_users"
                   },
                   {
                     "name": "implementation-status",
