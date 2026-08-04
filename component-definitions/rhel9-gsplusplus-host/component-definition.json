@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-03T12:09:04.883804-04:00",
+      "last-modified": "2026-08-04T05:04:59.204572-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -112,6 +112,28 @@
                   {
                     "name": "implementation-status",
                     "value": "implemented",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "00f4255c-c166-5e17-b8c5-05996b0342a4",
+                "control-id": "BER.2.5",
+                "description": "RHEL stellt die technischen Mittel bereit, um eine Identität sofort zu deaktivieren, ohne sie zu löschen: Mit `chage -E <Datum> <Konto>` wird ein Ablaufdatum gesetzt (z.B. das Tagesdatum beim Weggang), wonach das Konto keine Anmeldung mehr zulässt; alternativ sperrt `usermod -L`/`passwd -l` das Passwort sofort. Für befristete Konten erzwingt `account_temp_expire_date` ein Ablaufdatum bereits bei Einrichtung. Zusätzlich deaktiviert `account_disable_post_pw_expiration` Konten automatisch, wenn das Passwort abgelaufen ist und über einen konfigurierten Zeitraum nicht erneuert wurde. Über mehrere Hosts hinweg, können lokale personalisierte Konten mittels Ansible deaktiviert werden. In zentral über Red Hat IdM oder Active Directory verwalteten Umgebungen wirkt eine Deaktivierung im Verzeichnis über SSSD auf alle angebundenen RHEL-Hosts. Die eigentliche Auslösung — das Erkennen des Weggangs und das Anstoßen der Deaktivierung — bleibt ein organisatorischer HR-/Offboarding-Prozess außerhalb des Hosts.",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_temp_expire_date"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_disable_post_pw_expiration"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ]
