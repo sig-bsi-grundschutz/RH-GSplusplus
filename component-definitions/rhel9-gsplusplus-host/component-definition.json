@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-04T06:11:52.586136-04:00",
+      "last-modified": "2026-08-05T07:25:54.783407-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -50,14 +50,14 @@
                 "description": "RHEL erzwingt beim Anlegen eines Kontos keine technische Eindeutigkeit von Benutzer-IDs (UIDs); zwei Konten können versehentlich dieselbe UID erhalten. Es ist möglich über openSCAP mit der Regel `account_unique_id` im Rahmen eines Compliance-Scans zu prüfen, ob mehrere interaktive Konten dieselbe UID verwenden, und Duplikate als Fund zur manuellen Behebung zu melden. Für IT-Systeme empfiehlt sich, als Identität den vollqualifizierten Hostnamen (FQDN, z.B. `pc02348.our.domain`) zu setzen (`hostnamectl set-hostname`), damit das System eindeutig benannt und im DNS auflösbar ist. Hash-Fingerprints beim Verbindungsaufbau mittels SSH bieten eine zusätzliche eindeutige Identifikationsmöglichkeit. Diese können beispielsweise zusätzlich in Red Hat IdM oder einem DNS gespeichert werden, um eine Identifikationsmerkmal in einem Drittsystem zu speichern. In zentral verwalteten Umgebungen bindet SSSD den Host zusätzlich an Red Hat IdM, Active Directory oder LDAP an; die Identität stammt dann direkt aus dem Verzeichnisdatensatz der Person bzw. des IT-Systems, statt lokal frei vergeben zu werden. Die eigentliche Zuordnung eines Kontonamens zu einer bestimmten natürlichen Person (Namenskonvention, Personalprozess) bleibt jedoch ein organisatorischer Vorgang außerhalb der technischen Prüfmöglichkeiten des Hosts.",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "account_unique_id"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ]
               },
@@ -168,6 +168,18 @@
                   {
                     "name": "implementation-status",
                     "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "3e87ed13-3569-59de-a1e3-ff54df8083f1",
+                "control-id": "BER.3.5",
+                "description": "RHEL stellt technisch sicher, dass jedes Zugangskonto einen eindeutigen Eintrag mit eigener UID in `/etc/passwd` besitzt; openSCAP-Prüfungen können zusätzlich per Compliance-Scan erkennen, wenn zwei Konten versehentlich dieselbe UID teilen. Ob hinter einem einzelnen Kontonamen jedoch tatsächlich nur eine einzige natürliche Person steht – also ob ein Konto von mehreren Personen gemeinsam genutzt wird (\"Shared Account\") – lässt sich rein auf Betriebssystemebene nicht erzwingen, da RHEL Anmeldevorgänge nur anhand des präsentierten Credentials (Passwort, SSH-Schlüssel, Zertifikat) autorisiert und keine Kenntnis über die dahinterstehende reale Person hat. In zentral verwalteten Umgebungen unterstützt die Anbindung an Red Hat IdM oder Active Directory über SSSD dieses Ziel, indem Konten direkt aus individuellen Verzeichniseinträgen stammen statt lokal frei angelegt zu werden; dies reduziert das Risiko generischer, gemeinsam genutzter lokaler Konten, verhindert eine Passwortweitergabe technisch aber ebenfalls nicht. Die verbindliche Durchsetzung von \"ein Konto, eine Identität\" bleibt daher eine organisatorische Vorgabe (Namenskonvention, Verbot der Zugangsdatenweitergabe, Sensibilisierung), die durch keine der genannten Mechanismen technisch erzwungen wird.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "planned",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ]
