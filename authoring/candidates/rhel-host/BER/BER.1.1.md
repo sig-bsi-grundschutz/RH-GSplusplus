@@ -2,7 +2,7 @@
 x-trestle-global:
   catalog:
     title: Verfahren und Regelungen
-x-review-status: pending
+x-review-status: excluded
 x-default-component: rhel-identity
 ---
 
