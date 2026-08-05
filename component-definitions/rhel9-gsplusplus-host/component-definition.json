@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-04T06:11:52.586136-04:00",
+      "last-modified": "2026-08-05T06:45:22.054094-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -50,14 +50,14 @@
                 "description": "RHEL erzwingt beim Anlegen eines Kontos keine technische Eindeutigkeit von Benutzer-IDs (UIDs); zwei Konten können versehentlich dieselbe UID erhalten. Es ist möglich über openSCAP mit der Regel `account_unique_id` im Rahmen eines Compliance-Scans zu prüfen, ob mehrere interaktive Konten dieselbe UID verwenden, und Duplikate als Fund zur manuellen Behebung zu melden. Für IT-Systeme empfiehlt sich, als Identität den vollqualifizierten Hostnamen (FQDN, z.B. `pc02348.our.domain`) zu setzen (`hostnamectl set-hostname`), damit das System eindeutig benannt und im DNS auflösbar ist. Hash-Fingerprints beim Verbindungsaufbau mittels SSH bieten eine zusätzliche eindeutige Identifikationsmöglichkeit. Diese können beispielsweise zusätzlich in Red Hat IdM oder einem DNS gespeichert werden, um eine Identifikationsmerkmal in einem Drittsystem zu speichern. In zentral verwalteten Umgebungen bindet SSSD den Host zusätzlich an Red Hat IdM, Active Directory oder LDAP an; die Identität stammt dann direkt aus dem Verzeichnisdatensatz der Person bzw. des IT-Systems, statt lokal frei vergeben zu werden. Die eigentliche Zuordnung eines Kontonamens zu einer bestimmten natürlichen Person (Namenskonvention, Personalprozess) bleibt jedoch ein organisatorischer Vorgang außerhalb der technischen Prüfmöglichkeiten des Hosts.",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "account_unique_id"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ]
               },
@@ -168,6 +168,18 @@
                   {
                     "name": "implementation-status",
                     "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "47ebae8e-5a79-5ee5-8392-ae01979a7c84",
+                "control-id": "BER.3.1",
+                "description": "RHEL verwaltet Zugangskonten standardmäßig lokal über `/etc/passwd`, `/etc/shadow` und `/etc/group`; für ein zentrales Managementsystem bindet der System Security Services Daemon (SSSD) den Host stattdessen an Red Hat Identity Management (IdM), Active Directory oder einen LDAP-Verzeichnisdienst an. Die Werkzeuge `realm join` bzw. `ipa-client-install` übernehmen die Domänenanbindung, wonach Identitäten, Gruppenmitgliedschaften und – über IdM zusätzlich HBAC- und sudo-Regeln – zentral im Verzeichnis gepflegt und über `authselect` in PAM/NSS eingebunden werden. Damit entfällt die inkonsistente Pflege einzelner lokaler Konten je Host, und Änderungen im Verzeichnis wirken sich sofort auf alle angebundenen Systeme aus. Der Aufbau und Betrieb des zentralen IdM-/AD-Verzeichnisses selbst (Hochverfügbarkeit, Rollenmodell, Genehmigungsworkflows) bleibt eine organisatorische bzw. infrastrukturelle Aufgabe außerhalb des einzelnen RHEL-Hosts.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "alternative",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ]
