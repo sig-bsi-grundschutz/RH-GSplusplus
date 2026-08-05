@@ -50,14 +50,14 @@
                 "description": "RHEL erzwingt beim Anlegen eines Kontos keine technische Eindeutigkeit von Benutzer-IDs (UIDs); zwei Konten können versehentlich dieselbe UID erhalten. Es ist möglich über openSCAP mit der Regel `account_unique_id` im Rahmen eines Compliance-Scans zu prüfen, ob mehrere interaktive Konten dieselbe UID verwenden, und Duplikate als Fund zur manuellen Behebung zu melden. Für IT-Systeme empfiehlt sich, als Identität den vollqualifizierten Hostnamen (FQDN, z.B. `pc02348.our.domain`) zu setzen (`hostnamectl set-hostname`), damit das System eindeutig benannt und im DNS auflösbar ist. Hash-Fingerprints beim Verbindungsaufbau mittels SSH bieten eine zusätzliche eindeutige Identifikationsmöglichkeit. Diese können beispielsweise zusätzlich in Red Hat IdM oder einem DNS gespeichert werden, um eine Identifikationsmerkmal in einem Drittsystem zu speichern. In zentral verwalteten Umgebungen bindet SSSD den Host zusätzlich an Red Hat IdM, Active Directory oder LDAP an; die Identität stammt dann direkt aus dem Verzeichnisdatensatz der Person bzw. des IT-Systems, statt lokal frei vergeben zu werden. Die eigentliche Zuordnung eines Kontonamens zu einer bestimmten natürlichen Person (Namenskonvention, Personalprozess) bleibt jedoch ein organisatorischer Vorgang außerhalb der technischen Prüfmöglichkeiten des Hosts.",
                 "props": [
                   {
-                    "name": "Rule_Id",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "account_unique_id"
-                  },
-                  {
                     "name": "implementation-status",
                     "value": "partial",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_unique_id"
                   }
                 ]
               },
@@ -243,6 +243,18 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "sudo_restrict_privilege_elevation_to_authorized"
+                  },
+                  {
+                    "uuid": "1d871abb-30d4-5ce3-aebc-f168c0e5234f",
+                    "control-id": "BER.3.4",
+                    "description": "",
+                    "props": [
+                      {
+                        "name": "implementation-status",
+                        "value": "planned",
+                        "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                      }
+                    ]
                   }
                 ]
               }
