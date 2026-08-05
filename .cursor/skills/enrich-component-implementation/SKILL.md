@@ -113,6 +113,9 @@ Preserve YAML frontmatter (`x-trestle-global`) unchanged.
 
 ### Step 2 — Load listed CaC rules
 
+Every brand-new stub from Step 0 has no `### Rules:` heading at all, so this step trivially finds
+nothing for those — that's expected, continue to Step 3/4 regardless.
+
 For each rule ID under `### Rules:`:
 
 ```
@@ -177,7 +180,6 @@ comments and `### Rules:`.
 Requirements:
 
 - Describe **how RHEL implements** the control (mechanism, not restating the requirement)
-- Tie prose to **listed** CaC rules (what they check/configure)
 - Cite Red Hat docs conceptually (e.g. auditd watch rules, augenrules) — no English paste blocks
 - State **honest limits** (org/IAM/process gaps, directory-only changes vs central IdM)
 - 2–5 sentences; match tone of existing files in `authoring/component/`
@@ -192,13 +194,15 @@ Summary:
 
 | Status | When |
 |--------|------|
-| `implemented` | Listed rules + Red Hat docs fully cover technical aspects of statement **and** guidance |
-| `partial` | Some guidance aspects covered; gaps remain (typical: IAM lifecycle, account identity in log, extra files) |
-| `alternative` | Valid product path documented but not matched by listed CaC rules |
-| `planned` | No listed rules or no doc-backed mechanism yet |
+| `implemented` | CaC rules (listed and/or strong Step 4 discoveries, cited by ID) + Red Hat docs fully cover technical aspects of statement **and** guidance — regardless of whether those rules are attached in `### Rules:` yet |
+| `partial` | CaC rules (listed and/or Step 4 discoveries) cover some guidance aspects; gaps remain (typical: IAM lifecycle, account identity in log, extra files) — independent of current `### Rules:` attachment state |
+| `alternative` | A genuinely different technical approach satisfies the same intent as the literal statement/guidance (e.g. TLS-secured gRPC instead of a requested HTTPS channel) — not merely "no rule attached yet" |
+| `planned` | No listed or discovered rule and no doc-backed mechanism address the requirement at all |
 | `not-applicable` | Guidance is organizational-only; RHEL has no technical hook |
 
-When unsure between `implemented` and `partial`, choose **`partial`**.
+When unsure between `implemented` and `partial`, choose **`partial`**. Evaluate against the
+anticipated end state (as if Step 4's strong, CCE-backed discoveries are attached by a reviewer
+per docs/CURATION.md Step 3), not against the stub's current (often-empty) `### Rules:` list.
 
 Build a coverage matrix (guidance aspect → rule/doc → covered Y/N) for the PR body.
 See [reference.md](reference.md#coverage-matrix).
