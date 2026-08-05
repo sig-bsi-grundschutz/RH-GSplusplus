@@ -77,16 +77,22 @@ Given a control ID, search
    `authoring/candidates/{scope}/{area}/{control-id}.md` if you want a shortcut.
 2. Create `authoring/profile/{artifact}/{area}/{control-id}.md` — copy the frontmatter and
    `# Editable Content` footer structure from a sibling file in the same directory; fill in the
-   heading, Control Statement, and Control guidance from the catalog.
+   heading, Control Statement, and Control guidance from the catalog. Heading format:
+   `# {control-id} - \[{Group Title}\] {Control Title}` — trestle requires the bracketed group
+   title or `assemble_oscal.py` fails with "unable to read group title". Look up `{Group Title}`
+   as the sibling `"title"` of the catalog group object whose `"id"` matches the control's parent
+   group (e.g. group `{"id": "BER.3", "title": "Zugangskonten", ...}` in
+   `catalogs/bsi-grundschutz-plus-plus/catalog.json` → `\[Zugangskonten\]` for any `BER.3.*`
+   control).
 3. Determine the component: `area` = control ID prefix before the first `.` (e.g. `BER`). Look up
    `component_by_practice_area[area]` in `mappings/shared/scope/rhel-host.json` to get the
    component id, then that id's `title` in `mappings/shared/components/rhel-host.json` to get the
    component directory name.
 4. Create `authoring/component/{artifact}/{component-title}/{artifact}/{area}/{control-id}.md` —
-   copy frontmatter, heading, Control Statement, and Control guidance verbatim from the new profile
-   file; leave the two HTML comments, an empty prose line, and
-   `### Implementation Status: planned`. Do not add a `### Rules:` heading (added later only if a
-   rule is confirmed — see docs/CURATION.md).
+   copy frontmatter, heading (including the `\[{Group Title}\]` bracket, same as Step 0.2 above),
+   Control Statement, and Control guidance verbatim from the new profile file; leave the two HTML
+   comments, an empty prose line, and `### Implementation Status: planned`. Do not add a
+   `### Rules:` heading (added later only if a rule is confirmed — see docs/CURATION.md).
 5. Run `python3 scripts/assemble_oscal.py --product rhel9` once so the new control's markdown is
    picked up (`include-controls.with-ids` and the component-definition stub) before drafting prose.
 
@@ -276,5 +282,6 @@ Enrich KONF.2.1, KONF.2.2 and DET.3.1.4 for rhel9-gsplusplus-host
 ## Additional resources
 
 - [Status criteria and coverage matrix](reference.md)
+- [review-candidate-controls skill](../review-candidate-controls/SKILL.md) — triage step that decides which controls reach this skill
 - [docs/CURATION.md](../../../docs/CURATION.md) — trestle authoring workflow
 - [docs/ARCHITECTURE.md](../../../docs/ARCHITECTURE.md) — tiers, language, Rule_Id bridge
