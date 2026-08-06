@@ -27,6 +27,12 @@ RHEL bindet Zugangskonten über den System Security Services Daemon (SSSD) an ei
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
 
+### Rules:
+
+  - package_sssd_installed
+  - service_sssd_enabled
+  - account_use_centralized_automated_auth
+
 ### Implementation Status: partial
 
 ______________________________________________________________________
