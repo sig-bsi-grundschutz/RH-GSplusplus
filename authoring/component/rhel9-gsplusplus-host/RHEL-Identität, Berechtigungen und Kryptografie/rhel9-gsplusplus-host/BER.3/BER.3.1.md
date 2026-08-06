@@ -25,6 +25,8 @@ ______________________________________________________________________
 
 RHEL bindet Zugangskonten über den System Security Services Daemon (SSSD) an ein zentrales Verzeichnis wie Red Hat IdM, Active Directory oder LDAP an; `authselect` und `sssctl` konfigurieren dabei PAM und NSS entsprechend. Mit installiertem und aktiviertem `sssd`-Dienst entsteht die technische Voraussetzung für ein zentrales Managementsystem auf Hostebene, sodass Identitäten und Zugriffsrechte nicht mehr lokal je Gerät gepflegt werden müssen. Rollenbasierte Zugriffsmodelle (RBAC), Self-Service-Portale, automatisierte Genehmigungsworkflows und regelmäßige Rechteüberprüfungen sind hingegen Funktionen des zentralen Verzeichnisdienstes bzw. IAM-Systems selbst und liegen außerhalb dessen, was der RHEL-Host bereitstellen oder erzwingen kann.
 
+Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
+
 ### Implementation Status: partial
 
 ______________________________________________________________________
