@@ -25,6 +25,8 @@ ______________________________________________________________________
 
 Die Kontodatendateien `/etc/passwd`, `/etc/shadow`, `/etc/group` und `/etc/gshadow` sind unter RHEL standardmäßig ausschließlich `root` als Eigentümer zugeordnet und nur für `root` beschreibbar; jede administrative Aktion an einem Zugangskonto — Anlegen, Ändern von Metadaten oder Berechtigungen, Löschen — erfordert damit root- bzw. sudo-Rechte. Zusätzlich verhindert eine restriktive `sudoers`-Konfiguration, dass pauschale `ALL ALL=(ALL) ALL`-Einträge Nicht-Administrierenden ebenfalls uneingeschränkten Zugriff verschaffen. In zentral verwalteten Umgebungen (SSSD-Anbindung an IdM/AD/LDAP) verschiebt sich die eigentliche Rechteprüfung für Kontenverwaltung auf den Verzeichnisdienst; dessen ACIs/Rollenkonzept liegen außerhalb der Kontrolle dieses Hosts.
 
+Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+
 ### Implementation Status: implemented
 
 ______________________________________________________________________
