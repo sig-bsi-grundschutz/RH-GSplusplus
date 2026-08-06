@@ -27,6 +27,12 @@ RHEL unterbindet über das PAM-Modul `pam_faillock` mit der Option `silent` in `
 
 Weitere Informationen: [Benutzerauthentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/configuring-user-authentication-using-authselect_configuring-authentication-and-authorization-in-rhel)
 
-### Implementation Status: partial
+### Rules:
+
+  - accounts_passwords_pam_faillock_silent
+  - account_password_pam_faillock_system_auth
+  - account_password_pam_faillock_password_auth
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
