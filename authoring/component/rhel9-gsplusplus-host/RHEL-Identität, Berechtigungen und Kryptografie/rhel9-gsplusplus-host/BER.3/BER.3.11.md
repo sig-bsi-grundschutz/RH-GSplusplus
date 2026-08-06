@@ -27,6 +27,15 @@ Red Hat Enterprise Linux implementiert eine anwendungsübergreifende Anmeldevers
 
 Weitere Informationen: [Benutzerauthentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/configuring-user-authentication-using-authselect_configuring-authentication-and-authorization-in-rhel)
 
+### Rules:
+
+  - accounts_passwords_pam_faillock_enabled
+  - accounts_passwords_pam_faillock_deny
+  - accounts_passwords_pam_faillock_interval
+  - accounts_passwords_pam_faillock_unlock_time
+  - account_password_pam_faillock_system_auth
+  - account_password_pam_faillock_password_auth
+
 ### Implementation Status: partial
 
 ______________________________________________________________________
