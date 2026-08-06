@@ -110,6 +110,37 @@ Expand `mappings/rhel9/docs.json` as new areas are curated. Control ID prefixes:
 
 Replace `rhel9` in URLs with `rhel10` when `artifact.json` → `product.rhel_major` is 10.
 
+## Linking the source of truth
+
+Every control's prose should end with a line the reader can click through to verify — not just a
+conceptual mention. Format (German label, public URL, one link per distinct source, max ~3):
+
+```markdown
+Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening/), [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
+```
+
+**Always link the public `docs.redhat.com`/`access.redhat.com` URL, never a `localhost` one** — the
+markdown is read by humans without RHOKP access. Derive it per source:
+
+- **`docs.json` hit** — use its `href`/`text` verbatim (already public).
+- **RHOKP scraped markdown** — take the frontmatter `source_url` (e.g.
+  `http://localhost:8080/documentation/en-us/red_hat_enterprise_linux/9/html-single/{book}/index/`)
+  and rewrite the RHOKP base to the public one:
+  `{RHOKP_BASE_URL}documentation/en-us/` → `https://docs.redhat.com/en/documentation/`. The path
+  segment after that (product/version/html(-single)/book/index) is identical between the offline
+  mirror and the public site — verified against the existing `docs.json` `sssd` entry, which is the
+  same URL shape. Use the frontmatter `title` (translate to a short German label) as link text if
+  no closer `docs.json`-style label exists.
+- **RHOKP knowledgebase hit (`search.py`/`fetch_page.py`)** — these are solutions/articles; use the
+  public `access.redhat.com` URL, not the local RHOKP path.
+- **MCP result** — use whatever public URL/citation the tool call returns directly.
+- **CaC rule text only (no doc reachable)** — no link; state the gap in the PR body instead of
+  guessing a URL.
+
+This is separate from `mappings/rhel9/docs.json`, which drives **component-level** OSCAL `links`
+injected at assemble time (see below) — the inline prose link is for a human reading this specific
+control's markdown, and is not itself read by `assemble_oscal.py`.
+
 ## Red Hat documentation MCP
 
 Preference order (see SKILL.md Step 3 for the full fallback chain):
