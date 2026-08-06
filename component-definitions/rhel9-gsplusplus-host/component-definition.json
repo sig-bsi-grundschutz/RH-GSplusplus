@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-06T09:00:15.838316-04:00",
+      "last-modified": "2026-08-06T09:23:13.219965-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -338,11 +338,6 @@
                 "description": "RHEL unterbindet über das PAM-Modul `pam_faillock` mit der Option `silent` in `/etc/security/faillock.conf`, dass bei fehlgeschlagenen Anmeldeversuchen unterschiedliche oder informative Meldungen angezeigt werden, aus denen sich die Existenz oder der Sperrstatus eines Zugangskontos ableiten ließe; alle Anmeldeversuche über den PAM-Stack (Login, SSH, su) erhalten dadurch dieselbe generische Rückmeldung. Aktiviert wird das Modul über `authselect enable-feature with-faillock`, wodurch es in `/etc/pam.d/system-auth` und `password-auth` eingebunden wird. Der Schutz gilt jedoch nur für Anwendungen, die tatsächlich über PAM authentifizieren; Anwendungen mit eigener, PAM-unabhängiger Anmeldelogik (z. B. individuelle Webanwendungen) müssen die Vereinheitlichung ihrer Fehlermeldungen selbst umsetzen, was außerhalb des technischen Wirkungsbereichs des RHEL-Hosts liegt.\n\nWeitere Informationen: [Benutzerauthentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/configuring-user-authentication-using-authselect_configuring-authentication-and-authorization-in-rhel)",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "implemented"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "accounts_passwords_pam_faillock_silent"
@@ -356,6 +351,28 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "account_password_pam_faillock_password_auth"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "164b188a-a2d4-522d-aa7e-cece84200984",
+                "control-id": "BER.3.9",
+                "description": "Sofern zentrale Verzeichnisdienste, wie in anderen BER Anforderungen gefordert, eingesetzt werden, muss auf den RHEL-Host keine zusätzliche Maßnahme ergriffen werden.\n\nRHEL kann lokale Zugangskonten anhand mehrerer Ereignisse automatisiert deaktivieren, ohne dass ein Administrator jeden Fall einzeln bearbeiten muss. Bei längerer Inaktivität sorgt der `INACTIVE`-Wert in `/etc/default/useradd` (bzw. je Konto über `chage -I`) dafür, dass ein Konto eine festgelegte Anzahl Tage nach Ablauf des Passworts automatisch gesperrt wird. Der dritte im Grundschutz++-Katalog genannte Auslöser, der Personalweggang, hat auf dem Host selbst keinen technischen Anknüpfungspunkt: Ohne Anbindung an eine zentrale Identitätsverwaltung (z. B. Red Hat IdM/SSSD) oder einen HR-Prozess bleibt die Deaktivierung bei Personalweggang eine organisatorische Aufgabe der Institution. Lokale Accounts über mehrere Systeme hinweg können mittels eines Konfigurations-Management-Tools (z.B. Ansible) automatisiert entfernt werden.\n\nWeitere Informationen: [Authentifizierung und Autorisierung – Konfiguration mit authselect](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/configuring-user-authentication-using-authselect_configuring-authentication-and-authorization-in-rhel), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index)",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_disable_post_pw_expiration"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
