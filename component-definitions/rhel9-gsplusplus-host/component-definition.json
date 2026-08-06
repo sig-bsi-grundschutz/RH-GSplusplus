@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-06T07:47:43.650383-04:00",
+      "last-modified": "2026-08-06T08:46:06.880891-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -56,8 +56,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -128,8 +128,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "implemented",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               },
@@ -150,8 +150,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -167,8 +167,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -194,8 +194,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -241,8 +241,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "implemented",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               },
@@ -273,8 +273,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "implemented",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               },
@@ -300,8 +300,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -327,8 +327,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -339,8 +339,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "implemented",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   },
                   {
                     "name": "Rule_Id",
@@ -376,6 +376,18 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "logind_session_timeout"
+                  }
+                ]
+              },
+              {
+                "uuid": "737e9fdb-982b-5992-a495-56d0fc1b06bf",
+                "control-id": "BER.3.24",
+                "description": "RHEL kann über SSSD und `authselect` ein alternatives, PKI-gestütztes Authentifizierungsverfahren mittels Smartcard oder Zertifikat bereitstellen, das eine mit dem primären Anmeldeverfahren vergleichbare Vertrauenswürdigkeit erreicht: `authselect select sssd with-smartcard` aktiviert die Zertifikatsauthentifizierung zusätzlich zum Passwort, während `pam_cert_auth = True` in `/etc/sssd/sssd.conf` PAM anweist, die Karte zu prüfen. Über eine hinterlegte Vertrauensanker-CA, Sperrlisten-/OCSP-Prüfung (`certificate_verification`) sowie Zertifikatszuordnungsregeln (`sssd_certmap.conf`) wird sichergestellt, dass nur gültige, eindeutig einem Konto zugeordnete Zertifikate zur Anmeldung akzeptiert werden. Damit deckt RHEL die technische Kernanforderung eines gleichwertigen Alternativverfahrens ab; die in der Anleitung beispielhaft genannten Wiederherstellungswege bei Verlust des Primärzugangs — persönliche Vorstellung mit Ausweis, Verifikation über eine bestehende Sitzung oder PUK-Rücksetzung der Smartcard selbst — bleiben organisatorische bzw. kartenverwaltungsseitige Prozesse außerhalb der SSSD/PAM-Konfiguration des Hosts.\n\nWeitere Informationen: [Smartcard-Authentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_smart_card_authentication/configuring-smart-cards-using-authselect_managing-smart-card-authentication)",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               }
@@ -433,8 +445,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ],
                 "links": [
@@ -462,8 +474,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ],
                 "links": [
@@ -481,8 +493,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ],
                 "links": [
@@ -510,8 +522,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ],
                 "links": [
@@ -534,8 +546,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ],
                 "links": [
@@ -558,8 +570,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ],
                 "links": [
@@ -587,8 +599,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ],
                 "links": [
@@ -611,8 +623,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ],
                 "links": [
@@ -672,8 +684,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -684,8 +696,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -696,8 +708,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -718,8 +730,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "implemented",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               },
@@ -890,8 +902,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -907,8 +919,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "operational",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "operational"
                   }
                 ]
               },
@@ -919,8 +931,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -966,8 +978,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -978,8 +990,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -990,8 +1002,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "implemented",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               },
@@ -1002,8 +1014,8 @@
                 "props": [
                   {
                     "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
@@ -1019,8 +1031,8 @@
                   },
                   {
                     "name": "implementation-status",
-                    "value": "planned",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "planned"
                   }
                 ]
               }

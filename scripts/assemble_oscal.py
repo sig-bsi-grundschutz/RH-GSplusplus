@@ -197,6 +197,17 @@ def sync_component_requirement_stubs(
     return cd_doc
 
 
+PROP_KEY_ORDER = ("name", "uuid", "class", "ns", "value", "remarks")
+
+
+def _canonical_prop(prop: dict) -> dict:
+    """Fix key order so unchanged props don't diff — trestle's own serialization
+    order drifts from ours (and itself) across runs otherwise."""
+    ordered = {k: prop[k] for k in PROP_KEY_ORDER if k in prop}
+    ordered.update({k: v for k, v in prop.items() if k not in ordered})
+    return ordered
+
+
 def enrich_artifacts(root: Path, config: dict) -> None:
     artifact_id = config["artifact_id"]
     profile_path = root / config["profile_output_path"]
@@ -265,6 +276,7 @@ def enrich_artifacts(root: Path, config: dict) -> None:
                 for prop in req.get("props") or []:
                     if prop.get("name") == "implementation-status" and not prop.get("ns"):
                         prop["ns"] = TRESTLE_RULE_NS
+                req["props"] = [_canonical_prop(p) for p in req.get("props") or []]
 
     write_json(cd_path, cd_doc)
 
