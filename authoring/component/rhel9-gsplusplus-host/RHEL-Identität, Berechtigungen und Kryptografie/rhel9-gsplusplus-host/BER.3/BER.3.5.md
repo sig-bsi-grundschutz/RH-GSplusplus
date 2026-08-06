@@ -25,6 +25,8 @@ ______________________________________________________________________
 
 RHEL erzwingt technisch keine 1:1-Zuordnung von Zugangskonto zu Identität; ob ein Konto tatsächlich nur einer Person zugewiesen wird, ist ein Provisionierungs- und Namensprozess der Institution (personalisierte Benutzernamen statt geteilter/generischer Konten). Mit aktiviertem `auditd`-Dienst protokolliert das System jedoch UID/`auid` zu jeder erfassten Aktion, sodass sich im Nachhinein nachvollziehen lässt, welches Konto welche Befehle ausgeführt hat — die von der Leitlinie genannte Rückverfolgbarkeit im Vorfall ist damit technisch unterstützt. Zusätzlich stellt die Beschränkung auf autorisierte, dokumentierte lokale Konten sicher, dass keine verwaisten oder unklar zugeordneten Konten bestehen bleiben. Ob mehrere Personen sich ein Konto teilen (z.B. bei generischen Servicekonten), entscheidet die Institution bei der Kontovergabe — dies liegt außerhalb der technischen Kontrolle des Hosts.
 
+Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).
+
 ### Implementation Status: partial
 
 ______________________________________________________________________
