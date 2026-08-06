@@ -23,10 +23,21 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Red Hat Enterprise Linux implementiert die Anmeldeversuchsgrenze über das PAM-Modul `pam_faillock`, das nach `authselect enable-feature with-faillock` in die PAM-Stacks `system-auth` und `password-auth` eingebunden wird und damit lokale Anmeldungen, `su`/`sudo` sowie SSH-Zugänge gleichermaßen erfasst. Die Parameter `deny` und `fail_interval` in `/etc/security/faillock.conf` legen den maximalen Schwellwert fehlgeschlagener Versuche und das Zeitfenster für deren Zählung fest, während `unlock_time` die vorübergehende Sperrdauer definiert; für das root-Konto lässt sich dies über `deny_root`/`root_unlock_time` gesondert steuern. Fernwartungsprotokolle außerhalb der PAM-Anbindung (z. B. RDP, SNMP) sowie eine Bildschirmsperre nach Inaktivität deckt dieser Mechanismus nicht ab — diese Aspekte der Anforderung müssten institutionell separat abgesichert werden.
+Red Hat Enterprise Linux implementiert die lokalen und via "Fernwartung" (=SSH)" Anmeldeversuchsgrenze über das PAM-Modul `pam_faillock`, das nach `authselect enable-feature with-faillock` in die PAM-Stacks `system-auth` und `password-auth` eingebunden wird und damit lokale Anmeldungen, `su`/`sudo` sowie SSH-Zugänge gleichermaßen erfasst. Die Parameter `deny` und `fail_interval` in `/etc/security/faillock.conf` legen den maximalen Schwellwert fehlgeschlagener Versuche und das Zeitfenster für deren Zählung fest, während `unlock_time` die vorübergehende Sperrdauer definiert; für das root-Konto lässt sich dies über `deny_root`/`root_unlock_time` gesondert steuern.
 
 Weitere Informationen: [Benutzerauthentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/configuring-user-authentication-using-authselect_configuring-authentication-and-authorization-in-rhel)
 
-### Implementation Status: partial
+### Rules:
+
+  - accounts_passwords_pam_faillock_enabled
+  - accounts_passwords_pam_faillock_deny
+  - accounts_passwords_pam_faillock_unlock_time
+  - accounts_passwords_pam_faillock_interval
+  - account_password_pam_faillock_system_auth
+  - account_password_pam_faillock_password_auth
+  - accounts_passwords_pam_faillock_deny_root
+  - accounts_passwords_pam_faillock_even_deny_root_or_root_unlock_time
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
