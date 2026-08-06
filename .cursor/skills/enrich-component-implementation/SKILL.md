@@ -193,6 +193,11 @@ Requirements:
 - Cite Red Hat docs conceptually (e.g. auditd watch rules, augenrules) — no English paste blocks
 - State **honest limits** (org/IAM/process gaps, directory-only changes vs central IdM)
 - 2–5 sentences; match tone of existing files in `authoring/component/`
+- End with a **"Weitere Informationen:"** line linking the actual doc source(s) used in Step 3, so
+  the reader has a source of truth — not just a conceptual mention. See
+  [reference.md](reference.md#linking-the-source-of-truth) for the link format and how to derive a
+  public URL per source type (RHOKP, MCP, `docs.json`). Skip this line only if no doc source was
+  reachable at all (Step 3 fell back to CaC rule text) — never fabricate a URL.
 
 Leave both HTML comments intact.
 
