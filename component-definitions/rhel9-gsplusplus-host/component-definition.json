@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-06T05:56:43.926918-04:00",
+      "last-modified": "2026-08-06T06:17:39.473788-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -252,11 +252,6 @@
                 "description": "Das Audit-Subsystem (`auditd`) kann über `augenrules`-Regeln unter `/etc/audit/rules.d/` mit Watch-Flag `-p wa` (write, attribute change) jeden Schreibzugriff auf `/etc/passwd`, `/etc/shadow`, `/etc/group` und `/etc/gshadow` protokollieren. Da das Erstellen, Ändern von Metadaten oder Berechtigungen, Aktivieren/Deaktivieren (z.B. via `usermod -L`/`-U`, was `/etc/shadow` schreibt) sowie das Löschen eines Zugangskontos stets einen Schreibzugriff auf mindestens eine dieser Dateien auslöst, deckt die Kombination der vier Watch-Regeln alle in der Leitlinie genannten Aktionen ab; jeder Audit-Datensatz enthält dabei Zeitstempel und die ausführende Benutzer-ID (`auid`). Schutz und Aufbewahrung des Audit-Protokolls selbst (Manipulationssicherheit, Remote-Weiterleitung) sind Gegenstand der Praktik Detektion und werden dort behandelt.\n\nWeitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "value": "implemented",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "audit_rules_etc_group_open"
@@ -275,6 +270,38 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "audit_rules_etc_gshadow_open"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "implemented",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "3e87ed13-3569-59de-a1e3-ff54df8083f1",
+                "control-id": "BER.3.5",
+                "description": "RHEL erzwingt technisch keine 1:1-Zuordnung von Zugangskonto zu Identität; ob ein Konto tatsächlich nur einer Person zugewiesen wird, ist ein Provisionierungs- und Namensprozess der Institution (personalisierte Benutzernamen statt geteilter/generischer Konten). Mit aktiviertem `auditd`-Dienst protokolliert das System jedoch UID/`auid` zu jeder erfassten Aktion, sodass sich im Nachhinein nachvollziehen lässt, welches Konto welche Befehle ausgeführt hat — die von der Leitlinie genannte Rückverfolgbarkeit im Vorfall ist damit technisch unterstützt. Zusätzlich stellt die Beschränkung auf autorisierte, dokumentierte lokale Konten sicher, dass keine verwaisten oder unklar zugeordneten Konten bestehen bleiben.\n\nWeitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_auditd_enabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_authorized_local_users"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_unique_id"
                   }
                 ]
               }
