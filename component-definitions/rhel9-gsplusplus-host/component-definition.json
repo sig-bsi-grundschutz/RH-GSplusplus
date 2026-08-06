@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-06T07:41:37.967282-04:00",
+      "last-modified": "2026-08-06T07:47:43.650383-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -329,6 +329,53 @@
                     "name": "implementation-status",
                     "value": "partial",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "99528b93-1eaf-50cc-9582-1c15e9bbe892",
+                "control-id": "BER.3.12",
+                "description": "RHEL setzt eine automatische Sperre oder Abmeldung nach Inaktivität über mehrere, per OpenSCAP prüfbare Mechanismen um. Für grafische GNOME-Sitzungen aktivieren `idle-activation-enabled`, `idle-delay`, `lock-enabled` und `lock-delay` in `/etc/dconf/db/distro.d/00-security-settings` den Bildschirmschoner mit Sperre nach einer konfigurierbaren Frist (üblich 5–15 Minuten), gegen Nutzeränderung abgesichert durch entsprechende dconf-Locks. Für textbasierte Sitzungen (Konsole, SSH) erzwingt die schreibgeschützte Variable `TMOUT` in `/etc/profile.d/tmout.sh` eine automatische Abmeldung nach Inaktivität. Unabhängig von Desktop oder Shell beendet zusätzlich `systemd-logind` über `StopIdleSessionSec` in `/etc/systemd/logind.conf` jede als inaktiv erkannte Sitzung auf Betriebssystemebene.\n\nWeitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index)",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "implemented",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "dconf_gnome_screensaver_idle_activation_enabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "dconf_gnome_screensaver_idle_delay"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "dconf_gnome_screensaver_lock_enabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "dconf_gnome_screensaver_lock_delay"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "dconf_gnome_session_idle_user_locks"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_tmout"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "logind_session_timeout"
                   }
                 ]
               }
