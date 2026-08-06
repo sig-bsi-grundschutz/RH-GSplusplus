@@ -112,11 +112,17 @@ Replace `rhel9` in URLs with `rhel10` when `artifact.json` → `product.rhel_maj
 
 ## Red Hat documentation MCP
 
-When MCP is configured, prefer structured search over raw WebFetch.
+Preference order (see SKILL.md Step 3 for the full fallback chain):
 
-1. `GetMcpTools` with pattern `red.?hat|documentation` or server id from user config
-2. Query for product + topic (e.g. "RHEL 9 auditd watch rules identity files")
-3. Fall back to `docs.json` → WebFetch on empty or error
+1. **`rhokp-docs` skill** (local RHOKP, `../rhokp-scraper` repo) — fastest, no network egress.
+   Read already-scraped markdown under `output/red_hat_enterprise_linux/{rhel_major}/` directly
+   when present; use `scripts/search.py` / `scrape` only if that RHEL major isn't scraped yet and
+   the local portal is reachable.
+2. **Red Hat documentation MCP** — has repeatedly been slow or silently unreachable in this
+   environment. `GetMcpTools` with pattern `red.?hat|documentation` or server id from user config;
+   query for product + topic (e.g. "RHEL 9 auditd watch rules identity files"); don't retry more
+   than once if it doesn't respond promptly.
+3. **`docs.json` → WebFetch** on empty or error from both of the above.
 
 ## Rule_Id is not markdown-driven
 

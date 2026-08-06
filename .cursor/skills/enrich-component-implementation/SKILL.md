@@ -135,11 +135,21 @@ If a listed rule is missing, note in PR body; treat as coverage gap.
 
 ### Step 3 — Red Hat documentation
 
-**Primary:** MCP server `user-Red-Hat-documentation` (or `redhat-documentation-mcp`).
+**Primary:** the `rhokp-docs` skill (local Red Hat Offline Knowledge Portal), if the
+`rhokp-scraper` repo is present in the workspace — read
+`../rhokp-scraper/.cursor/skills/rhokp-docs/SKILL.md` and follow it. It's local and much faster
+than the MCP server. Check `../rhokp-scraper/output/red_hat_enterprise_linux/{rhel_major}/` for
+already-scraped markdown first (`rg` it directly, no server needed); only invoke `scrape`/`search.py`
+if that RHEL major isn't scraped yet, and only after confirming the local RHOKP instance is
+reachable (`curl -fsS "$RHOKP_BASE_URL"`) — if it's down and nothing relevant is already scraped,
+skip to the next source rather than blocking.
 
-Before calling, run `GetMcpTools` for that server. If unavailable, continue with fallbacks — do not abort.
+**Secondary:** MCP server `user-Red-Hat-documentation` (or `redhat-documentation-mcp`). This has
+been unreliable (slow, silently unreachable, or hangs) — before calling, run `GetMcpTools` for
+that server; if unavailable or a call doesn't return quickly, don't retry more than once, continue
+with the remaining fallbacks instead of blocking.
 
-**Fallback chain:**
+**Further fallback chain:**
 
 1. **`mappings/rhel9/docs.json`** — pick keys by control area:
 
@@ -156,7 +166,7 @@ Before calling, run `GetMcpTools` for that server. If unavailable, continue with
 
 3. **CaC rule text** — use `description` + `rationale` only if docs unreachable.
 
-Record **doc source used** (MCP query, doc key, URL) for the PR body.
+Record **doc source used** (RHOKP path, MCP query, doc key, or URL) for the PR body.
 
 ### Step 4 — Discover additional rules (PR suggestions only)
 
