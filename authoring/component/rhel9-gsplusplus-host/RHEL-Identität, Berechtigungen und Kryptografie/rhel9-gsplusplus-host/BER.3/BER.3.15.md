@@ -23,10 +23,16 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-RHEL stellt mit `userdel --remove --selinux-user` einen Befehl bereit, der ein nicht mehr benötigtes lokales Zugangskonto inklusive Heimatverzeichnis, Mail-Spool und SELinux-Zuordnung entfernt; zusätzliche Metadaten unter `/var/lib/AccountsService/` müssen manuell nachbereinigt werden. Als automatisiertes Sicherheitsnetz kann die `INACTIVE`-Einstellung in `/etc/default/useradd` bzw. `chage -I` inaktive Konten nach Ablauf einer Frist selbstständig sperren, was jedoch eine Deaktivierung und keine Löschung darstellt. Ein terminiertes, an gesetzliche Aufbewahrungsfristen gekoppeltes Löschen (z. B. per Ansible-Playbook oder Scheduler) sowie das Löschen zentral verwalteter Konten in RH IdM/AD über SSSD bleiben organisatorische Aufgaben, da RHEL selbst keine Löschfristen aus dem Compliance-Management kennt. Sicheres Löschen der zugehörigen Daten (Überschreiben, kryptografisches Löschen, physische Zerstörung von Datenträgern und Sicherungen) liegt außerhalb der Kontenverwaltung und ist Teil der Datenträger- und Backup-Sanierung.
+Es sollten wann immer möglich zentral verwaltete Zugangskonten verwendet werden.
+
+RHEL stellt mit `userdel --remove --selinux-user` einen Befehl bereit, der ein nicht mehr benötigtes lokales Zugangskonto inklusive Heimatverzeichnis, Mail-Spool und SELinux-Zuordnung entfernt; Ein terminiertes, an gesetzliche Aufbewahrungsfristen gekoppeltes Löschen (z. B. per Ansible-Playbook oder Scheduler) sowie das Löschen zentral verwalteter Konten in RH IdM/AD über SSSD bleiben organisatorische Aufgaben, da RHEL selbst keine Löschfristen aus dem Compliance-Management kennt. Sicheres Löschen der zugehörigen Daten (Überschreiben, kryptografisches Löschen, physische Zerstörung von Datenträgern und Sicherungen) liegt außerhalb der Kontenverwaltung und ist Teil der Datenträger- und Backup-Entsorgung.
 
 Weitere Informationen: [Entfernen eines Benutzers über die Befehlszeile](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/managing-users-and-groups_configuring-basic-system-settings)
 
-### Implementation Status: partial
+### Rules:
+
+  - account_use_centralized_automated_auth
+
+### Implementation Status: alternative
 
 ______________________________________________________________________
