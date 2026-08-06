@@ -27,6 +27,16 @@ Die Kontodatendateien `/etc/passwd`, `/etc/shadow`, `/etc/group` und `/etc/gshad
 
 Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
+### Rules
+
+  - file_owner_etc_passwd
+  - file_permissions_etc_passwd
+  - file_owner_etc_shadow
+  - file_permissions_etc_shadow
+  - file_owner_etc_gshadow
+  - file_permissions_etc_gshadow
+  - sudo_restrict_privilege_elevation_to_authorized
+
 ### Implementation Status: implemented
 
 ______________________________________________________________________
