@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-04T06:11:52.586136-04:00",
+      "last-modified": "2026-08-06T04:44:36.737015-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -50,14 +50,14 @@
                 "description": "RHEL erzwingt beim Anlegen eines Kontos keine technische Eindeutigkeit von Benutzer-IDs (UIDs); zwei Konten können versehentlich dieselbe UID erhalten. Es ist möglich über openSCAP mit der Regel `account_unique_id` im Rahmen eines Compliance-Scans zu prüfen, ob mehrere interaktive Konten dieselbe UID verwenden, und Duplikate als Fund zur manuellen Behebung zu melden. Für IT-Systeme empfiehlt sich, als Identität den vollqualifizierten Hostnamen (FQDN, z.B. `pc02348.our.domain`) zu setzen (`hostnamectl set-hostname`), damit das System eindeutig benannt und im DNS auflösbar ist. Hash-Fingerprints beim Verbindungsaufbau mittels SSH bieten eine zusätzliche eindeutige Identifikationsmöglichkeit. Diese können beispielsweise zusätzlich in Red Hat IdM oder einem DNS gespeichert werden, um eine Identifikationsmerkmal in einem Drittsystem zu speichern. In zentral verwalteten Umgebungen bindet SSSD den Host zusätzlich an Red Hat IdM, Active Directory oder LDAP an; die Identität stammt dann direkt aus dem Verzeichnisdatensatz der Person bzw. des IT-Systems, statt lokal frei vergeben zu werden. Die eigentliche Zuordnung eines Kontonamens zu einer bestimmten natürlichen Person (Namenskonvention, Personalprozess) bleibt jedoch ein organisatorischer Vorgang außerhalb der technischen Prüfmöglichkeiten des Hosts.",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "account_unique_id"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ]
               },
@@ -164,6 +164,33 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "accounts_authorized_local_users"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "47ebae8e-5a79-5ee5-8392-ae01979a7c84",
+                "control-id": "BER.3.1",
+                "description": "RHEL bindet Zugangskonten über den System Security Services Daemon (SSSD) an ein zentrales Verzeichnis wie Red Hat IdM, Active Directory oder LDAP an; `authselect` und `sssctl` konfigurieren dabei PAM und NSS entsprechend. Mit installiertem und aktiviertem `sssd`-Dienst entsteht die technische Voraussetzung für ein zentrales Managementsystem auf Hostebene, sodass Identitäten und Zugriffsrechte nicht mehr lokal je Gerät gepflegt werden müssen. Rollenbasierte Zugriffsmodelle (RBAC), Self-Service-Portale, automatisierte Genehmigungsworkflows und regelmäßige Rechteüberprüfungen sind hingegen Funktionen des zentralen Verzeichnisdienstes bzw. IAM-Systems selbst und liegen außerhalb dessen, was der RHEL-Host bereitstellen oder erzwingen kann.\n\nWeitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_sssd_installed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_sssd_enabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_use_centralized_automated_auth"
                   },
                   {
                     "name": "implementation-status",
