@@ -304,6 +304,18 @@
                     "value": "account_unique_id"
                   }
                 ]
+              },
+              {
+                "uuid": "fcf6d599-1449-5fff-b5ea-893d97dcc5bb",
+                "control-id": "BER.3.7",
+                "description": "RHEL bindet Anwendungen über den Security System Services Daemon (SSSD) an einen zentralen Identitätsprovider wie Red Hat Identity Management, Active Directory oder einen LDAP-Verzeichnisdienst an; SSSD stellt die dort verwalteten Identitäten und Berechtigungen über NSS und PAM lokal bereit und cached Anmeldeinformationen für Offline-Zugriff. Nach erfolgreicher Kerberos-Authentifizierung erhält die Sitzung ein Ticket-Granting-Ticket, das für nachfolgende PAM- oder GSSAPI-fähige Dienste (z. B. SSH, sudo, per Kerberos abgesicherte Webanwendungen) automatisch wiederverwendet wird, sodass keine erneute Passworteingabe nötig ist. Das Werkzeug `authselect` konfiguriert den PAM-/NSS-Stack konsistent für das gewählte Profil statt die Authentifizierungskette manuell zusammenzusetzen, und `realmd` kann den Host automatisiert einer IdM-Domäne beitreten lassen. Diese Anbindung deckt lokale sowie PAM- oder Kerberos-fähige Anwendungen ab; eigenständige webbasierte SSO-Protokolle einzelner Anwendungen (z. B. SAML, OIDC) sowie Aufbau und Betrieb des zentralen Identitätsproviders selbst — etwa eines Windows Server Domain Controllers oder eines Samba-AD mit Heimdal-KDC — liegen außerhalb der Hostkonfiguration und bleiben organisatorische bzw. anwendungsseitige Aufgaben.\n\nWeitere Informationen: [Einführung in die Systemauthentifizierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/introduction-to-system-authentication_configuring-authentication-and-authorization-in-rhel)",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
               }
             ]
           }
