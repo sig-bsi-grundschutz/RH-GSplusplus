@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-06T06:17:39.473788-04:00",
+      "last-modified": "2026-08-06T07:41:37.967282-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -281,13 +281,8 @@
               {
                 "uuid": "3e87ed13-3569-59de-a1e3-ff54df8083f1",
                 "control-id": "BER.3.5",
-                "description": "RHEL erzwingt technisch keine 1:1-Zuordnung von Zugangskonto zu Identität; ob ein Konto tatsächlich nur einer Person zugewiesen wird, ist ein Provisionierungs- und Namensprozess der Institution (personalisierte Benutzernamen statt geteilter/generischer Konten). Mit aktiviertem `auditd`-Dienst protokolliert das System jedoch UID/`auid` zu jeder erfassten Aktion, sodass sich im Nachhinein nachvollziehen lässt, welches Konto welche Befehle ausgeführt hat — die von der Leitlinie genannte Rückverfolgbarkeit im Vorfall ist damit technisch unterstützt. Zusätzlich stellt die Beschränkung auf autorisierte, dokumentierte lokale Konten sicher, dass keine verwaisten oder unklar zugeordneten Konten bestehen bleiben.\n\nWeitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).",
+                "description": "RHEL erzwingt technisch keine 1:1-Zuordnung von Zugangskonto zu Identität; ob ein Konto tatsächlich nur einer Person zugewiesen wird, ist ein Provisionierungs- und Namensprozess der Institution (personalisierte Benutzernamen statt geteilter/generischer Konten). Mit aktiviertem `auditd`-Dienst protokolliert das System jedoch UID/`auid` zu jeder erfassten Aktion, sodass sich im Nachhinein nachvollziehen lässt, welches Konto welche Befehle ausgeführt hat — die von der Leitlinie genannte Rückverfolgbarkeit im Vorfall ist damit technisch unterstützt. Zusätzlich kann automatisiert geprüft werden, ob ein account mehr als eine UID auf dem System hat. Zusätzlich stellt die Beschränkung auf autorisierte, dokumentierte lokale Konten sicher, dass keine verwaisten oder unklar zugeordneten Konten bestehen bleiben.\n\nWeitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).",
                 "props": [
-                  {
-                    "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
-                  },
                   {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
@@ -302,6 +297,11 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "account_unique_id"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ]
               },
@@ -310,6 +310,21 @@
                 "control-id": "BER.3.7",
                 "description": "RHEL bindet Anwendungen über den Security System Services Daemon (SSSD) an einen zentralen Identitätsprovider wie Red Hat Identity Management, Active Directory oder einen LDAP-Verzeichnisdienst an; SSSD stellt die dort verwalteten Identitäten und Berechtigungen über NSS und PAM lokal bereit und cached Anmeldeinformationen für Offline-Zugriff. Nach erfolgreicher Kerberos-Authentifizierung erhält die Sitzung ein Ticket-Granting-Ticket, das für nachfolgende PAM- oder GSSAPI-fähige Dienste (z. B. SSH, sudo, per Kerberos abgesicherte Webanwendungen) automatisch wiederverwendet wird, sodass keine erneute Passworteingabe nötig ist. Das Werkzeug `authselect` konfiguriert den PAM-/NSS-Stack konsistent für das gewählte Profil statt die Authentifizierungskette manuell zusammenzusetzen, und `realmd` kann den Host automatisiert einer IdM-Domäne beitreten lassen. Diese Anbindung deckt lokale sowie PAM- oder Kerberos-fähige Anwendungen ab; eigenständige webbasierte SSO-Protokolle einzelner Anwendungen (z. B. SAML, OIDC) sowie Aufbau und Betrieb des zentralen Identitätsproviders selbst — etwa eines Windows Server Domain Controllers oder eines Samba-AD mit Heimdal-KDC — liegen außerhalb der Hostkonfiguration und bleiben organisatorische bzw. anwendungsseitige Aufgaben.\n\nWeitere Informationen: [Einführung in die Systemauthentifizierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/introduction-to-system-authentication_configuring-authentication-and-authorization-in-rhel)",
                 "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_sssd_installed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_sssd_enabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_use_centralized_automated_auth"
+                  },
                   {
                     "name": "implementation-status",
                     "value": "partial",

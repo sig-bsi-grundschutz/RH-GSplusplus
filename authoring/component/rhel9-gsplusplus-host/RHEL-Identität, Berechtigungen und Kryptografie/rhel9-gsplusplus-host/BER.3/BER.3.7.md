@@ -27,6 +27,12 @@ RHEL bindet Anwendungen über den Security System Services Daemon (SSSD) an eine
 
 Weitere Informationen: [Einführung in die Systemauthentifizierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/introduction-to-system-authentication_configuring-authentication-and-authorization-in-rhel)
 
+### Rules:
+
+  - package_sssd_installed
+  - service_sssd_enabled
+  - account_use_centralized_automated_auth
+
 ### Implementation Status: partial
 
 ______________________________________________________________________
