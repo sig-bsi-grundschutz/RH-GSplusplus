@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-06T11:11:28.357917-04:00",
+      "last-modified": "2026-08-06T11:25:17.535422-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -425,6 +425,48 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "20150ddc-e819-5421-8506-b0178c78bf89",
+                "control-id": "BER.3.11",
+                "description": "Red Hat Enterprise Linux implementiert eine anwendungsübergreifende Anmeldeversuchsgrenze über das PAM-Modul `pam_faillock`, das mittels `authselect` (`authselect enable-feature with-faillock`) systemweit in die PAM-Stacks `/etc/pam.d/system-auth` und `/etc/pam.d/password-auth` eingebunden wird und damit für alle PAM-integrierten Anwendungen gilt — sowohl für die lokale Anmeldung an Konsole/GUI als auch für Netzwerkzugänge wie SSH, `su` oder `sudo`. Die Parameter `deny`, `fail_interval` und `unlock_time` in `/etc/security/faillock.conf` legen fest, nach wie vielen Fehlversuchen innerhalb welchen Zeitfensters ein Konto für welche Dauer gesperrt wird; bei `unlock_time = 0` ist eine manuelle Entsperrung durch den Administrator (`faillock --reset`) erforderlich. Die Sperre erfolgt pro Benutzerkonto und nicht pro Client oder IP-Adresse, wie es die Anforderung alternativ vorschlägt. Für Individualanwendungen, die nicht über PAM authentifizieren (z. B. eigenständige Webanwendungen), sowie für sekundäre Zugangswege wie Sicherheitsfragen oder Self-Service-Passwort-Reset bietet RHEL keinen technischen Hebel; hier bleibt die Umsetzung Aufgabe der jeweiligen Anwendung.\n\nWeitere Informationen: [Benutzerauthentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/configuring-user-authentication-using-authselect_configuring-authentication-and-authorization-in-rhel)",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_enabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_deny"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_interval"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_unlock_time"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_password_pam_faillock_system_auth"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_password_pam_faillock_password_auth"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
