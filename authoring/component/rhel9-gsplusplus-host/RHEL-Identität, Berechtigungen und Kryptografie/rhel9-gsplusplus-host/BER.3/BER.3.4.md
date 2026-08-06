@@ -25,6 +25,8 @@ ______________________________________________________________________
 
 Das Audit-Subsystem (`auditd`) kann über `augenrules`-Regeln unter `/etc/audit/rules.d/` mit Watch-Flag `-p wa` (write, attribute change) jeden Schreibzugriff auf `/etc/passwd`, `/etc/shadow`, `/etc/group` und `/etc/gshadow` protokollieren. Da das Erstellen, Ändern von Metadaten oder Berechtigungen, Aktivieren/Deaktivieren (z.B. via `usermod -L`/`-U`, was `/etc/shadow` schreibt) sowie das Löschen eines Zugangskontos stets einen Schreibzugriff auf mindestens eine dieser Dateien auslöst, deckt die Kombination der vier Watch-Regeln alle in der Leitlinie genannten Aktionen ab; jeder Audit-Datensatz enthält dabei Zeitstempel und die ausführende Benutzer-ID (`auid`). Schutz und Aufbewahrung des Audit-Protokolls selbst (Manipulationssicherheit, Remote-Weiterleitung) sind Gegenstand der Praktik Detektion und werden dort behandelt.
 
+Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).
+
 ### Implementation Status: implemented
 
 ______________________________________________________________________
