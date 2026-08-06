@@ -1,0 +1,32 @@
+---
+x-trestle-global:
+  profile:
+    title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
+---
+
+# BER.3.10 - \[Zugangskonten\] Anmeldeversuchsgrenze am System
+
+## Control Statement
+
+Berechtigung für IT-Systeme SOLLTE weitere Anmeldeversuche nach Erreichen von {{ insert: param, ber.3.10-prm1 }} fehlgeschlagenen Versuchen vorübergehend blockieren.
+
+## Control guidance
+
+Betrifft sowohl die lokale Anmeldung über eine Benutzeroberfläche als auch den Zugriff über Fernwartungsprotokolle oder -anwendungen wie RDP, SNMP, wenn diese vorhanden sind. Die Umsetzung erfolgt im einfachsten Fall durch ein Login, bzw. eine Bildschirmsperre für das IT-System. Biometrische Daten wie Fingerabdrücke können gefälscht werden und sind nicht so leicht zu ändern wie Passwörter. Setzen Sie Biometrie daher nicht als einzigen Authentifizierungsfaktor ein, sondern wenn, dann nur zur Ergänzung (Mehr-Faktor-Authentifizierung). Die Anforderung ist entbehrlich, wenn das System keinen Zugriff auf schützenswerte Daten erlaubt, z.B. bei Nutzung als Kiosk.
+
+# Editable Content
+
+<!-- Make additions and edits below -->
+<!-- The above represents the contents of the control as received by the profile, prior to additions. -->
+<!-- If the profile makes additions to the control, they will appear below. -->
+<!-- The above markdown may not be edited but you may edit the content below, and/or introduce new additions to be made by the profile. -->
+<!-- If there is a yaml header at the top, parameter values may be edited. Use --set-parameters to incorporate the changes during assembly. -->
+<!-- The content here will then replace what is in the profile for this control, after running profile-assemble. -->
+<!-- The current profile has no added parts for this control, but you may add new ones here. -->
+<!-- Each addition must have a heading either of the form ## Control my_addition_name -->
+<!-- or ## Part a. (where the a. refers to one of the control statement labels.) -->
+<!-- "## Control" parts are new parts added after the statement part. -->
+<!-- "## Part" parts are new parts added into the top-level statement part with that label. -->
+<!-- Subparts may be added with nested hash levels of the form ### My Subpart Name -->
+<!-- underneath the parent ## Control or ## Part being added -->
+<!-- See https://oscal-compass.github.io/compliance-trestle/tutorials/ssp_profile_catalog_authoring/ssp_profile_catalog_authoring for guidance. -->
