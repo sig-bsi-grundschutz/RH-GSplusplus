@@ -20,6 +20,16 @@ The primary way to add or update an implementation answer is the
 skill, not hand-editing markdown. It drafts honest German prose, evaluates coverage, sets
 implementation status, and opens a PR — a human never edits the file directly for a first draft.
 
+### 0. Triage the review queue
+
+Before enriching a control, it must be decided `included` in
+`authoring/candidates/rhel-host/{area}/{control-id}.md`. Use the
+[`review-candidate-controls`](../.cursor/skills/review-candidate-controls/SKILL.md) skill to work
+through an area (e.g. `Review BER.5.* candidates`): it classifies each control as
+`included`/`excluded`/`pending` and writes a one-line German rationale in `## Review`. This step
+only edits candidate markdown — nothing is committed automatically, matching the existing
+`Control Selection {AREA}.*` commit history.
+
 ### 1. Run the skill for one control or a set of controls
 
 ```
@@ -104,7 +114,8 @@ already contain the fully assembled result.
 
 ## Suggested review order
 
-1. Mark obvious non-host controls as excluded in candidate front matter (or skip).
+1. Mark obvious non-host controls as excluded in candidate front matter (or skip) — use the
+   `review-candidate-controls` skill for this pass.
 2. Include OS-core areas: `KONF.2.*`, `KONF.4–7.*`, `BER.3–7.*`, `DET.3.*` (exclude e.g. `KONF.2.6` MDM/Endgeräte).
 3. Defer application-layer KONF (`KONF.10–15`) unless the host runs that stack.
 4. Run the `enrich-component-implementation` skill on the selected controls; attach `Rule_Id` props by hand (Step 3) only where CaC rules genuinely map.
@@ -112,5 +123,6 @@ already contain the fully assembled result.
 ## Reference
 
 - [compliance-trestle-agile-authoring](https://github.com/oscal-compass/compliance-trestle-agile-authoring)
+- [review-candidate-controls skill](../.cursor/skills/review-candidate-controls/SKILL.md)
 - [enrich-component-implementation skill](../.cursor/skills/enrich-component-implementation/SKILL.md)
 - [docs/ARCHITECTURE.md](ARCHITECTURE.md)
