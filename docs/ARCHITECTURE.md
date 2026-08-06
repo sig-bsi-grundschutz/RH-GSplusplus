@@ -171,8 +171,11 @@ For RHEL today, `Rule_Id` props are set directly on `implemented-requirement` en
 assembled `component-definitions/{artifact}/component-definition.json`. This is a **manual edit**,
 not generated from markdown: trestle's `component-assemble` treats the `### Rules:` heading in
 component markdown as read-only display (it never writes rule changes back into the JSON — see
-[docs/CURATION.md](CURATION.md#3-attaching-a-cac-rule)). Editing the markdown
-bullet list alone has no effect on the OSCAL output.
+[docs/CURATION.md](CURATION.md#3-assemble-attach-rules-and-merge-one-pr-at-a-time)). Editing the
+markdown bullet list alone has no effect on the OSCAL output. This edit, and assembling the OSCAL
+output, happens on each control's PR branch right before merge; PRs are merged **one at a time**
+(never in parallel) so the assembled diff stays small, with `git rerere` absorbing the repeat
+conflict shape across PRs.
 
 (Future) CaC control YAML under `products/rhel9/controls/gsplusplus_*.yml`.
 

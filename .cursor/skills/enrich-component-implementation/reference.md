@@ -162,8 +162,9 @@ display** (`trestle.common.const.RULES_WARNING`). `component-assemble` does not 
 list back into the OSCAL component definition — verified empirically: adding a bullet here and
 re-running `scripts/assemble_oscal.py` produces no `Rule_Id` prop change. Never tell a reviewer
 that editing this list attaches a rule. The only way to attach/change a `Rule_Id` is a manual edit
-to `component-definitions/{artifact}/component-definition.json` —
-[docs/CURATION.md](../../../docs/CURATION.md#3-attaching-a-cac-rule).
+to `component-definitions/{artifact}/component-definition.json`, on the PR branch right before
+merge —
+[docs/CURATION.md](../../../docs/CURATION.md#3-assemble-attach-rules-and-merge-one-pr-at-a-time).
 
 ## Protected markdown regions
 

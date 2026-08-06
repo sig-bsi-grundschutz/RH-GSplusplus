@@ -19,9 +19,10 @@ implementation prose, coverage assessment, and optional CaC rule suggestions.
   (default `rhel9-gsplusplus-host`). If the control has no component markdown yet, Step 0 creates
   the stub (profile + component markdown) before enrichment.
 
-**Output:** one branch + commit + PR **per control** (see batching note in Git safety). Human
-reviews before merge; attaching/changing CaC rules on the assembled OSCAL is a separate manual
-step the reviewer does — see [docs/CURATION.md](../../../docs/CURATION.md#3-attaching-a-cac-rule).
+**Output:** one branch + commit + PR **per control** (see batching note in Git safety). The skill's
+own commit contains only markdown; human reviews before merge, then assembles, attaches CaC rules,
+and merges — a separate manual step on the same branch, one PR at a time — see
+[docs/CURATION.md](../../../docs/CURATION.md#3-assemble-attach-rules-and-merge-one-pr-at-a-time).
 
 ## Prerequisites
 
@@ -95,6 +96,11 @@ Given a control ID, search
    `### Rules:` heading (added later only if a rule is confirmed — see docs/CURATION.md).
 5. Run `python3 scripts/assemble_oscal.py --product rhel9` once so the new control's markdown is
    picked up (`include-controls.with-ids` and the component-definition stub) before drafting prose.
+   This modifies `profiles/…/profile.json` and `component-definitions/…/component-definition.json`
+   locally — **do not stage or commit them** (Step 8 only adds the two markdown files). Discard
+   these local changes once you've confirmed the stub exists, e.g.
+   `git checkout -- profiles/ component-definitions/`, so the working tree stays clean for Step 8
+   and any subsequent control's branch.
 
 Continue to Step 1 with the (now existing) component markdown file.
 
@@ -237,6 +243,7 @@ Edit **only**:
 ```bash
 git checkout -b cursor/implement-{control-id}
 git add "{path/to/component.md}" "{path/to/profile.md if newly created}"
+git status --short  # confirm only the markdown files above are staged — never profile.json/component-definition.json
 git commit -m "$(cat <<'EOF'
 Enrich {control-id} implementation prose and status.
 
@@ -266,10 +273,12 @@ gh pr create --title "Enrich {control-id} component implementation" --body "$(ca
 
 ## Attaching a rule (reviewer, manual, optional)
 Editing `### Rules:` in this markdown has **no effect** on the assembled OSCAL — trestle treats
-that heading as read-only display. To actually attach a suggested rule, a reviewer edits
-`component-definitions/{artifact}/component-definition.json` directly and adds a `Rule_Id` prop
-to this control's `implemented-requirement` entry. Step-by-step:
-[docs/CURATION.md](../../../docs/CURATION.md#3-attaching-a-cac-rule).
+that heading as read-only display. To actually attach a suggested rule, a reviewer rebases this
+branch onto current `main`, runs `assemble_oscal.py`, and adds a `Rule_Id` prop to this control's
+`implemented-requirement` entry in `component-definitions/{artifact}/component-definition.json`
+directly, then commits it on this branch right before merging. Step-by-step, and why this must
+happen one PR at a time:
+[docs/CURATION.md](../../../docs/CURATION.md#3-assemble-attach-rules-and-merge-one-pr-at-a-time).
 
 ## Gaps / manual verification
 - ...
