@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-06T10:10:12.736120-04:00",
+      "last-modified": "2026-08-06T11:11:28.357917-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -373,6 +373,58 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "partial"
+                  }
+                ]
+              },
+              {
+                "uuid": "7e6923dc-8d57-5ff7-ac48-b74edb35e97b",
+                "control-id": "BER.3.10",
+                "description": "Red Hat Enterprise Linux implementiert die lokalen und via \"Fernwartung\" (=SSH)\" Anmeldeversuchsgrenze über das PAM-Modul `pam_faillock`, das nach `authselect enable-feature with-faillock` in die PAM-Stacks `system-auth` und `password-auth` eingebunden wird und damit lokale Anmeldungen, `su`/`sudo` sowie SSH-Zugänge gleichermaßen erfasst. Die Parameter `deny` und `fail_interval` in `/etc/security/faillock.conf` legen den maximalen Schwellwert fehlgeschlagener Versuche und das Zeitfenster für deren Zählung fest, während `unlock_time` die vorübergehende Sperrdauer definiert; für das root-Konto lässt sich dies über `deny_root`/`root_unlock_time` gesondert steuern.\n\nWeitere Informationen: [Benutzerauthentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/configuring-user-authentication-using-authselect_configuring-authentication-and-authorization-in-rhel)",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_enabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_deny"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_unlock_time"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_interval"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_password_pam_faillock_system_auth"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "account_password_pam_faillock_password_auth"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_deny_root"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_passwords_pam_faillock_even_deny_root_or_root_unlock_time"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               },
