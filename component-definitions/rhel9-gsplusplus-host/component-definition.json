@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-05T11:03:02.098544-04:00",
+      "last-modified": "2026-08-06T05:56:43.926918-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -50,14 +50,14 @@
                 "description": "RHEL erzwingt beim Anlegen eines Kontos keine technische Eindeutigkeit von Benutzer-IDs (UIDs); zwei Konten können versehentlich dieselbe UID erhalten. Es ist möglich über openSCAP mit der Regel `account_unique_id` im Rahmen eines Compliance-Scans zu prüfen, ob mehrere interaktive Konten dieselbe UID verwenden, und Duplikate als Fund zur manuellen Behebung zu melden. Für IT-Systeme empfiehlt sich, als Identität den vollqualifizierten Hostnamen (FQDN, z.B. `pc02348.our.domain`) zu setzen (`hostnamectl set-hostname`), damit das System eindeutig benannt und im DNS auflösbar ist. Hash-Fingerprints beim Verbindungsaufbau mittels SSH bieten eine zusätzliche eindeutige Identifikationsmöglichkeit. Diese können beispielsweise zusätzlich in Red Hat IdM oder einem DNS gespeichert werden, um eine Identifikationsmerkmal in einem Drittsystem zu speichern. In zentral verwalteten Umgebungen bindet SSSD den Host zusätzlich an Red Hat IdM, Active Directory oder LDAP an; die Identität stammt dann direkt aus dem Verzeichnisdatensatz der Person bzw. des IT-Systems, statt lokal frei vergeben zu werden. Die eigentliche Zuordnung eines Kontonamens zu einer bestimmten natürlichen Person (Namenskonvention, Personalprozess) bleibt jedoch ein organisatorischer Vorgang außerhalb der technischen Prüfmöglichkeiten des Hosts.",
                 "props": [
                   {
-                    "name": "implementation-status",
-                    "value": "partial",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
-                  },
-                  {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "account_unique_id"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "value": "partial",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
                   }
                 ]
               },
@@ -202,13 +202,8 @@
               {
                 "uuid": "58b0d95b-744b-534f-bc10-eb5c962a349f",
                 "control-id": "BER.3.3",
-                "description": "",
+                "description": "Die Kontodatendateien `/etc/passwd`, `/etc/shadow`, `/etc/group` und `/etc/gshadow` sind unter RHEL standardmäßig ausschließlich `root` als Eigentümer zugeordnet und nur für `root` beschreibbar; jede administrative Aktion an einem Zugangskonto — Anlegen, Ändern von Metadaten oder Berechtigungen, Löschen — erfordert damit root- bzw. sudo-Rechte. Zusätzlich verhindert eine restriktive `sudoers`-Konfiguration, dass pauschale `ALL ALL=(ALL) ALL`-Einträge Nicht-Administrierenden ebenfalls uneingeschränkten Zugriff verschaffen. In zentral verwalteten Umgebungen (SSSD-Anbindung an IdM/AD/LDAP) verschiebt sich die eigentliche Rechteprüfung für Kontenverwaltung auf den Verzeichnisdienst; dessen ACIs/Rollenkonzept liegen außerhalb der Kontrolle dieses Hosts.\n\nWeitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).",
                 "props": [
-                  {
-                    "name": "implementation-status",
-                    "value": "implemented",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
-                  },
                   {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
@@ -245,16 +240,41 @@
                     "value": "sudo_restrict_privilege_elevation_to_authorized"
                   },
                   {
-                    "uuid": "1d871abb-30d4-5ce3-aebc-f168c0e5234f",
-                    "control-id": "BER.3.4",
-                    "description": "",
-                    "props": [
-                      {
-                        "name": "implementation-status",
-                        "value": "planned",
-                        "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
-                      }
-                    ]
+                    "name": "implementation-status",
+                    "value": "implemented",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  }
+                ]
+              },
+              {
+                "uuid": "1d871abb-30d4-5ce3-aebc-f168c0e5234f",
+                "control-id": "BER.3.4",
+                "description": "Das Audit-Subsystem (`auditd`) kann über `augenrules`-Regeln unter `/etc/audit/rules.d/` mit Watch-Flag `-p wa` (write, attribute change) jeden Schreibzugriff auf `/etc/passwd`, `/etc/shadow`, `/etc/group` und `/etc/gshadow` protokollieren. Da das Erstellen, Ändern von Metadaten oder Berechtigungen, Aktivieren/Deaktivieren (z.B. via `usermod -L`/`-U`, was `/etc/shadow` schreibt) sowie das Löschen eines Zugangskontos stets einen Schreibzugriff auf mindestens eine dieser Dateien auslöst, deckt die Kombination der vier Watch-Regeln alle in der Leitlinie genannten Aktionen ab; jeder Audit-Datensatz enthält dabei Zeitstempel und die ausführende Benutzer-ID (`auid`). Schutz und Aufbewahrung des Audit-Protokolls selbst (Manipulationssicherheit, Remote-Weiterleitung) sind Gegenstand der Praktik Detektion und werden dort behandelt.\n\nWeitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "value": "implemented",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_etc_group_open"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_etc_passwd_open"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_etc_shadow_open"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_etc_gshadow_open"
                   }
                 ]
               }

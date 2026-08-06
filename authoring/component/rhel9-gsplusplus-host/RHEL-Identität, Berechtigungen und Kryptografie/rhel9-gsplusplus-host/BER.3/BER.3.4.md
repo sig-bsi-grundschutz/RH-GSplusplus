@@ -27,6 +27,13 @@ Das Audit-Subsystem (`auditd`) kann über `augenrules`-Regeln unter `/etc/audit/
 
 Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).
 
+### Rules:
+
+  - audit_rules_etc_group_open
+  - audit_rules_etc_passwd_open
+  - audit_rules_etc_shadow_open
+  - audit_rules_etc_gshadow_open
+
 ### Implementation Status: implemented
 
 ______________________________________________________________________
