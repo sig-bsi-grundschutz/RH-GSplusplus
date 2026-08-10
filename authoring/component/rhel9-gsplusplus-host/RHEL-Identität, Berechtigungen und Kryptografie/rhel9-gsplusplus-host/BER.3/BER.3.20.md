@@ -23,10 +23,15 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Per Voreinstellung speichert SSSD keine Zugangsdaten (Passwörter, ersten Authentisierungsfaktor) zwischen; erst durch explizites Setzen von `cache_credentials = true` in der jeweiligen Domain-Sektion von `/etc/sssd/sssd.conf` wird eine Offline-Zwischenspeicherung überhaupt aktiviert. Ist diese aus betrieblichen Gründen (Anmeldung ohne Verbindung zum Identity-Provider) erforderlich, begrenzt `offline_credentials_expiration = 1` im Abschnitt `[pam]` die Gültigkeitsdauer der zwischengespeicherten Zugangsdaten auf einen Tag, sodass veraltete Anmeldeinformationen nicht unbegrenzt nutzbar bleiben. Für die temporäre Zwischenspeicherung von Zugangsdaten bei Rechteerhöhung erzwingt `Defaults timestamp_timeout=0` in `/etc/sudoers`, dass `sudo` bei jedem Aufruf erneut nach dem Passwort fragt, wodurch dieser Cache faktisch deaktiviert wird. Eine vollständige, technisch erzwungene Deaktivierung der SSSD-Zwischenspeicherung selbst (statt nur ihrer zeitlichen Begrenzung, falls aktiviert) existiert nicht, und andere Zwischenspeicher wie der Kernel-Keyring, `ssh-agent` oder grafische Schlüsselbunde bleiben von diesen Kontrollen unberührt; die Windows-spezifische Umsetzung über die Gruppe „Geschützte Benutzer“ aus der Control-Guidance hat unter RHEL kein direktes Gegenstück.
+Per Voreinstellung speichert SSSD keine Zugangsdaten (Passwörter, ersten Authentisierungsfaktor) zwischen; erst durch explizites Setzen von `cache_credentials = true` in der jeweiligen Domain-Sektion von `/etc/sssd/sssd.conf` wird eine Offline-Zwischenspeicherung überhaupt aktiviert. Ist diese aus betrieblichen Gründen (Anmeldung ohne Verbindung zum Identity-Provider) erforderlich, begrenzt `offline_credentials_expiration = 1` im Abschnitt `[pam]` die Gültigkeitsdauer der zwischengespeicherten Zugangsdaten auf einen Tag, sodass veraltete Anmeldeinformationen nicht unbegrenzt nutzbar bleiben. Für die temporäre Zwischenspeicherung von Zugangsdaten bei Rechteerhöhung erzwingt `Defaults timestamp_timeout=0` in `/etc/sudoers`, dass `sudo` bei jedem Aufruf erneut nach dem Passwort fragt, wodurch dieser Cache faktisch deaktiviert wird. Andere Zwischenspeicher wie der Kernel-Keyring, `ssh-agent` oder grafische Schlüsselbunde bleiben von diesen Kontrollen unberührt.
 
 Weitere Informationen: [Offline-Authentifizierung aktivieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/assembly_additional-configuration-for-identity-and-authentication-providers_configuring-authentication-and-authorization-in-rhel), [sudo erfordert keine erneute Passwortauthentifizierung](https://access.redhat.com/solutions/6978911)
 
-### Implementation Status: partial
+### Rules:
+
+  - sssd_offline_cred_expiration
+  - sudo_require_reauthentication
+
+### Implementation Status: implemented
 
 ______________________________________________________________________

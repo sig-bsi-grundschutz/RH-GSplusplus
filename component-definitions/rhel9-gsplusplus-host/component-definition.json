@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-06T11:25:17.535422-04:00",
+      "last-modified": "2026-08-10T04:39:41.466608-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -543,6 +543,28 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "alternative"
+                  }
+                ]
+              },
+              {
+                "uuid": "bfcffd38-7b4a-591d-a182-d52823c2e31e",
+                "control-id": "BER.3.20",
+                "description": "Per Voreinstellung speichert SSSD keine Zugangsdaten (Passwörter, ersten Authentisierungsfaktor) zwischen; erst durch explizites Setzen von `cache_credentials = true` in der jeweiligen Domain-Sektion von `/etc/sssd/sssd.conf` wird eine Offline-Zwischenspeicherung überhaupt aktiviert. Ist diese aus betrieblichen Gründen (Anmeldung ohne Verbindung zum Identity-Provider) erforderlich, begrenzt `offline_credentials_expiration = 1` im Abschnitt `[pam]` die Gültigkeitsdauer der zwischengespeicherten Zugangsdaten auf einen Tag, sodass veraltete Anmeldeinformationen nicht unbegrenzt nutzbar bleiben. Für die temporäre Zwischenspeicherung von Zugangsdaten bei Rechteerhöhung erzwingt `Defaults timestamp_timeout=0` in `/etc/sudoers`, dass `sudo` bei jedem Aufruf erneut nach dem Passwort fragt, wodurch dieser Cache faktisch deaktiviert wird. Andere Zwischenspeicher wie der Kernel-Keyring, `ssh-agent` oder grafische Schlüsselbunde bleiben von diesen Kontrollen unberührt.\n\nWeitere Informationen: [Offline-Authentifizierung aktivieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/assembly_additional-configuration-for-identity-and-authentication-providers_configuring-authentication-and-authorization-in-rhel), [sudo erfordert keine erneute Passwortauthentifizierung](https://access.redhat.com/solutions/6978911)",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sssd_offline_cred_expiration"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sudo_require_reauthentication"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               },
