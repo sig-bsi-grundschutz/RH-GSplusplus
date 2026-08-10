@@ -24,9 +24,18 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Das Prinzip der geringsten Berechtigungen setzt RHEL auf Host-Ebene über getrennte Administrationspfade und enge lokale Rechte um: privilegierte Eingriffe laufen über `sudo` mit gezielten Regeln in `/etc/sudoers` bzw. `/etc/sudoers.d/` statt dauerhafter Root-Shells; `su` lässt sich mit `pam_wheel` auf eine leere oder eng geführte Gruppe beschränken, und nur UID 0 bleibt dem Systemkonto `root` vorbehalten. Ergänzend verhindert `PermitRootLogin no` in OpenSSH direkte Root-Anmeldungen über das Netz. Gruppenmitgliedschaften, IdM-Rollen/HBAC sowie SELinux-Zwänge schränken weiter ein, welche Identitäten welche Ressourcen erreichen. Die fachliche Rollenmodellierung (Need-to-know, Audit-Only-Einführung, Abgleich mit Geschäftsprozessen) bleibt institutionell und liegt außerhalb der reinen Host-Konfiguration.
+Das Prinzip der geringsten Berechtigungen setzt RHEL auf Host-Ebene über getrennte Administrationspfade und enge lokale Rechte um: privilegierte Eingriffe laufen über `sudo` mit gezielten Regeln in `/etc/sudoers` bzw. `/etc/sudoers.d/` statt dauerhafter Root-Shells; `su` lässt sich mit `pam_wheel` auf eine leere oder eng geführte Gruppe beschränken, und nur UID 0 bleibt dem Systemkonto `root` vorbehalten. Ergänzend verhindert `PermitRootLogin no` in OpenSSH direkte Root-Anmeldungen über das Netz. Gruppenmitgliedschaften, IdM-Rollen/HBAC sowie SELinux (Mandatory Access Control) schränken weiter ein, welche Identitäten welche Ressourcen erreichen. Die fachliche Rollenmodellierung (Need-to-know, Audit-Only-Einführung, Abgleich mit Geschäftsprozessen) bleibt institutionell und liegt außerhalb der reinen Host-Konfiguration.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+
+### Rules:
+
+  - sudo_remove_nopasswd
+  - sudo_require_authentication
+  - sudo_require_reauthentication
+  - use_pam_wheel_for_su
+  - ensure_pam_wheel_group_empty
+  - accounts_no_uid_except_zero
 
 ### Implementation Status: partial
 

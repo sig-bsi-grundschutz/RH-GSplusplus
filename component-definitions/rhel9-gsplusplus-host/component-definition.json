@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-10T06:27:55.139302-04:00",
+      "last-modified": "2026-08-10T10:50:32.340232-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -609,6 +609,48 @@
                 "control-id": "BER.3.24",
                 "description": "RHEL kann über SSSD und `authselect` ein alternatives, PKI-gestütztes Authentifizierungsverfahren mittels Smartcard oder Zertifikat bereitstellen, das eine mit dem primären Anmeldeverfahren vergleichbare Vertrauenswürdigkeit erreicht: `authselect select sssd with-smartcard` aktiviert die Zertifikatsauthentifizierung zusätzlich zum Passwort, während `pam_cert_auth = True` in `/etc/sssd/sssd.conf` PAM anweist, die Karte zu prüfen. Über eine hinterlegte Vertrauensanker-CA, Sperrlisten-/OCSP-Prüfung (`certificate_verification`) sowie Zertifikatszuordnungsregeln (`sssd_certmap.conf`) wird sichergestellt, dass nur gültige, eindeutig einem Konto zugeordnete Zertifikate zur Anmeldung akzeptiert werden. Damit deckt RHEL die technische Kernanforderung eines gleichwertigen Alternativverfahrens ab; die in der Anleitung beispielhaft genannten Wiederherstellungswege bei Verlust des Primärzugangs — persönliche Vorstellung mit Ausweis, Verifikation über eine bestehende Sitzung oder PUK-Rücksetzung der Smartcard selbst — bleiben organisatorische bzw. kartenverwaltungsseitige Prozesse außerhalb der SSSD/PAM-Konfiguration des Hosts.\n\nWeitere Informationen: [Smartcard-Authentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_smart_card_authentication/configuring-smart-cards-using-authselect_managing-smart-card-authentication)",
                 "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ]
+              },
+              {
+                "uuid": "906bb26e-476b-54a1-9e21-3b16f9521de7",
+                "control-id": "BER.4.1",
+                "description": "Das Prinzip der geringsten Berechtigungen setzt RHEL auf Host-Ebene über getrennte Administrationspfade und enge lokale Rechte um: privilegierte Eingriffe laufen über `sudo` mit gezielten Regeln in `/etc/sudoers` bzw. `/etc/sudoers.d/` statt dauerhafter Root-Shells; `su` lässt sich mit `pam_wheel` auf eine leere oder eng geführte Gruppe beschränken, und nur UID 0 bleibt dem Systemkonto `root` vorbehalten. Ergänzend verhindert `PermitRootLogin no` in OpenSSH direkte Root-Anmeldungen über das Netz. Gruppenmitgliedschaften, IdM-Rollen/HBAC sowie SELinux (Mandatory Access Control) schränken weiter ein, welche Identitäten welche Ressourcen erreichen. Die fachliche Rollenmodellierung (Need-to-know, Audit-Only-Einführung, Abgleich mit Geschäftsprozessen) bleibt institutionell und liegt außerhalb der reinen Host-Konfiguration.\n\nWeitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sudo_remove_nopasswd"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sudo_require_authentication"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sudo_require_reauthentication"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "use_pam_wheel_for_su"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "ensure_pam_wheel_group_empty"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "accounts_no_uid_except_zero"
+                  },
                   {
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
