@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-10T06:21:27.292280-04:00",
+      "last-modified": "2026-08-10T06:27:55.139302-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -589,6 +589,18 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "alternative"
+                  }
+                ]
+              },
+              {
+                "uuid": "66929b00-7907-55ef-980f-8e8fd6b25450",
+                "control-id": "BER.3.22",
+                "description": "RHEL trennt die Authentifizierung technisch in lokale Konten (`/etc/passwd`/`/etc/shadow`) und zentral über SSSD angebundene Verzeichnisdienste (IdM, Active Directory, LDAP); über `authselect` konfiguriertes PAM/NSS greift bei Ausfall von SSSD automatisch auf die lokale `files`-Quelle zurück, sodass ein lokal angelegtes Notfallkonto (z. B. `root` oder ein dediziertes Break-Glass-Konto, angelegt mit `useradd`/`passwd`) auch dann nutzbar bleibt, wenn die zentrale Authentifizierung nicht erreichbar ist. Mit `chage -E never` bzw. `chage -l` lässt sich sicherstellen, dass ein solches Konto — anders als reguläre temporäre Zugänge — nicht automatisch abläuft. Die sichere Aufbewahrung des Passworts (z. B. Safe, Aufteilung auf mehrere Administrierende) sowie die organisatorische Festlegung, welche Konten als Notfallzugang gelten, bleiben Prozessaufgaben der Organisation. Alternativ kann ein SSH-Key zur Authentifizierung via SSH verwendet werden. Für den Fall, dass der Host netzwerkseitig nicht mehr erreichbar ist und über die Konsole administriert werden muss, ist zwingend ein Passwort erforderlich (technisch ist es möglich, im SingleUser-Mode kein Passwort abzufragen, dies ist jedoch eine unsichere Konfiguration).\n\nWeitere Informationen: [Authentifizierung und Autorisierung konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index)",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               },
