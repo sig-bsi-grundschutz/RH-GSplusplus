@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-10T10:55:26.991089-04:00",
+      "last-modified": "2026-08-10T11:01:13.342853-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -667,6 +667,28 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "partial"
+                  }
+                ]
+              },
+              {
+                "uuid": "cb753827-917c-535d-bebd-cdb3a5d9b467",
+                "control-id": "BER.4.1.2",
+                "description": "Klassisches Just-in-Time-/Just-Enough-Access steuert RHEL auf dem Host nicht allein. Stattdessen aktiviert die Institution erhöhte Rechte zum Bedarfszeitpunkt über Automation — typischerweise Red Hat Ansible Automation Platform (AAP) in Verbindung mit Freigabe-Workflows: kurzlebige Gruppenmitgliedschaften, befristete sudoers- oder IdM-Rollenänderungen werden nach Freigabe ausgerollt und danach wieder entzogen. Ergänzend begrenzt `sudo` mit kurzem Timestamp-Timeout die Wirkdauer bereits gewährter Escalation auf der Session-Ebene.\n\nWeitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index)",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sudo_require_reauthentication"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sudo_remove_nopasswd"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "alternative"
                   }
                 ]
               }
