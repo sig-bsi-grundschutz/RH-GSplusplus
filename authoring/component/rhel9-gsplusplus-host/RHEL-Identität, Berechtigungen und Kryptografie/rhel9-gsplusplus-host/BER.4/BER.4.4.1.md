@@ -24,10 +24,10 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Der Abgleich dokumentierter und tatsächlich vergebener Rechte ist ein Wiederholungsprozess: Auf dem Host liefern `getent passwd/group`, `sudo -l` bzw. Auswertung von `/etc/sudoers*` den Ist-Zustand; bei IdM-Anbindung ist das Verzeichnis oft zugleich Dokumentation und Wirkbetrieb — dann entfällt ein separater Abgleich laut Guidance. Abweichungen (Orphan-Konten, lokale Extra-Gruppen, abweichende sudoers) erkennt man durch regelmäßigen Export und Vergleich mit Personal-/Rollenstammdaten, etwa per Ansible Automation Platform oder IdM-Reports. RHEL erzwingt diesen Abgleich nicht selbst; Cadence und Freigabe bleiben organisatorisch.
+Im Kontext von RHEL-Hosts sollte die Berechtigung primär zentral im Verzeichnisdienst vorgenommen werden, der über sssd angebunden wird. Bei IdM-Anbindung ist das Verzeichnis oft zugleich Dokumentation und Wirkbetrieb — dann entfällt ein separater Abgleich laut Guidance.
 
-Weitere Informationen: [IdM-Benutzer, Gruppen, Hosts und Zugriffskontrollregeln](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_idm_users_groups_hosts_and_access_control_rules/index), [Systemadministration mit RHEL System Roles automatisieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/automating_system_administration_by_using_rhel_system_roles/index).
+Weitere Informationen: [IdM-Benutzer, Gruppen, Hosts und Zugriffskontrollregeln](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_idm_users_groups_hosts_and_access_control_rules/index)
 
-### Implementation Status: partial
+### Implementation Status: alternative
 
 ______________________________________________________________________
