@@ -24,9 +24,26 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Lesenden und schreibenden Zugriff auf Authentisierungsmittel begrenzt RHEL über Dateirechte und Besitz: `/etc/shadow` und `/etc/gshadow` gehören root und sind für andere Benutzer nicht lesbar; Passwort-Hashes liegen nicht in `/etc/passwd`. Private OpenSSH-Host-Schlüssel unter `/etc/ssh/*_key` sind ebenfalls nur für root lesbar. SELinux ergänzt die Discretionary-Rechte. Vergleichbare Vorgaben gelten für weitere Keytabs, TLS-Private-Keys und Token-Dateien, die der Betrieb entsprechend härtet. ComplianceAsCode-Regeln prüfen die kritischen Standardpfade zuverlässig ab.
+Lesenden und schreibenden Zugriff auf Authentisierungsmittel begrenzt RHEL über Dateirechte und Besitz: `/etc/shadow` und `/etc/gshadow` gehören root und sind für andere Benutzer nicht lesbar; Passwort-Hashes liegen nicht in `/etc/passwd`. Private OpenSSH-Host-Schlüssel unter `/etc/ssh/*_key` sind ebenfalls nur für root lesbar. SELinux ergänzt die Discretionary-Rechte. Vergleichbare Vorgaben gelten für weitere Keytabs, TLS-Private-Keys und Token-Dateien, die der Betrieb entsprechend härtet. ComplianceAsCode-Regeln prüfen die kritischen Standardpfade zuverlässig ab. Persönliche Ablagen (Home-Verzeichnis) gehören dem jeweiligen Benutzer und ist für andere Nutzer (außer Server-Administratoren) nicht zugänglich. Hier werden ebenfalls möglicherweise private Schlüssel, Passwörter, Token oder Keytabs abgelegt. Die korrekte Ablage der Daten erfordert auch eine entsprechende Schulung des Personals.
 
 Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
+
+### Rules:
+
+  - file_permissions_etc_passwd
+  - file_permissions_etc_shadow
+  - file_permissions_etc_group
+  - file_permissions_etc_gshadow
+  - file_owner_etc_passwd
+  - file_owner_etc_shadow
+  - file_owner_etc_group
+  - file_owner_etc_gshadow
+  - file_groupowner_etc_passwd
+  - file_groupowner_etc_shadow
+  - file_groupowner_etc_group
+  - file_groupowner_etc_gshadow
+  - accounts_password_all_shadowed
+  - file_permissions_sshd_private_key
 
 ### Implementation Status: implemented
 
