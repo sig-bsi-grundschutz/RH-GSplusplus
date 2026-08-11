@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-11T04:37:58.419466-04:00",
+      "last-modified": "2026-08-11T05:42:44.198509-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -708,6 +708,18 @@
                 "uuid": "43921e73-3bf9-5846-91e0-faa6c468f13e",
                 "control-id": "BER.4.3",
                 "description": "Begründungen für Berechtigungsvergaben werden nicht lokal in RHEL gespeichert: `useradd`/`usermod`/`visudo` erfordern keinen Begründungstext. Die Berechtigungsänderung sollte daher durch einen automatisierten Prozess mit Genehmigungsaufgabe außerhalb von RHEL erfolgen, beispielsweise mittels Red Hat Ansible Automation Platform. Weiterhin sollte die Berechtigung primär in einem zentralen, an den RHEL-Host angebundenen, IAM erfolgen.\n\nWeitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index)",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "alternative"
+                  }
+                ]
+              },
+              {
+                "uuid": "9eadebe7-f772-516f-8655-5e2fe3437d15",
+                "control-id": "BER.4.4.1",
+                "description": "Im Kontext von RHEL-Hosts sollte die Berechtigung primär zentral im Verzeichnisdienst vorgenommen werden, der über sssd angebunden wird. Bei IdM-Anbindung ist das Verzeichnis oft zugleich Dokumentation und Wirkbetrieb — dann entfällt ein separater Abgleich laut Guidance.\n\nWeitere Informationen: [IdM-Benutzer, Gruppen, Hosts und Zugriffskontrollregeln](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_idm_users_groups_hosts_and_access_control_rules/index)",
                 "props": [
                   {
                     "name": "implementation-status",
