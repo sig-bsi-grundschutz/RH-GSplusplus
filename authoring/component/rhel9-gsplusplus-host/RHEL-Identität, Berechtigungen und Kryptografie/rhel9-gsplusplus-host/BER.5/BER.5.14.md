@@ -24,7 +24,7 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Kompromittierte Authentisierungsmittel lassen sich auf RHEL technisch sperren oder ersetzen: lokale Konten mit `usermod -L`, Passwortreset, Entfernen von Einträgen in `authorized_keys`, Widerruf von Zertifikaten/Smartcards in IdM bzw. CRL/OCSP, sowie Deaktivieren des IdM-/AD-Kontos über SSSD. Automation (AAP) kann diese Schritte standardisieren. Erkennung (Leak-Meldung, Phishing, Anomalie) und die Entscheidung zur Sperrung sind Prozessaufgaben; das OS liefert die Durchsetzungsmittel, kein eingebautes Leak-Monitoring.
+Kompromittierte Authentisierungsmittel lassen sich auf RHEL technisch sperren oder ersetzen: lokale Konten mit `usermod -L`, Passwortreset, Entfernen von Einträgen in `authorized_keys`, Widerruf von Zertifikaten/Smartcards in IdM bzw. CRL/OCSP, sowie Deaktivieren des IdM-/AD-Kontos über SSSD. Automation (Red Hat Ansible Automation Platform) kann diese Schritte standardisieren. Erkennung (Leak-Meldung, Phishing, Anomalie) und die Entscheidung zur Sperrung sind Prozessaufgaben; das OS liefert die Durchsetzungsmittel, kein eingebautes Leak-Monitoring.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Smart-Card-Authentifizierung verwalten](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_smart_card_authentication/index).
 
