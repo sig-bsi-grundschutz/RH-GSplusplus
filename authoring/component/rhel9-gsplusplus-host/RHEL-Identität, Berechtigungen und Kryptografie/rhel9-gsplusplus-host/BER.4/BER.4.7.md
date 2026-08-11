@@ -24,9 +24,13 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Ein 1:1-Mapping „besonders schützenswertes IT-System ↔ genau ein Zugangskonto“ ist eine Betriebsvorgabe, kein Kernel-Zwang. RHEL unterstützt das Muster, indem für Administrationskonsolen oder dedizierte Hosts ein einziges funktionales Konto (lokal oder in IdM) berechtigt wird, direkte Root-Netzlogins unterbleiben (`PermitRootLogin no`) und weitere interaktive Konten fehlen bzw. gesperrt sind. Technische Hilfen wie „nur UID 0 = root“ verhindern zusätzliche Superuser-IDs, ersetzen aber nicht die organisatorische Entscheidung, welche Identität das Systemkonto führen darf. Virtualisierte Systeme folgen demselben Muster über getrennte Konten pro Instanz.
+RHEL unterstützt das Muster, indem für Administrationskonsolen oder dedizierte Hosts ein einziges funktionales Konto (lokal oder in IdM) berechtigt wird, direkte Root-Netzlogins unterbleiben (`PermitRootLogin no`) und weitere interaktive Konten fehlen bzw. gesperrt sind.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+
+### Rules:
+
+  - sshd_disable_root_login
 
 ### Implementation Status: partial
 
