@@ -24,10 +24,10 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Begründungen für Berechtigungsvergaben speichert RHEL lokal nicht als Pflichtfeld: `useradd`/`usermod`/`visudo` verlangen keinen Begründungstext. Nachvollziehbarkeit entsteht, wenn die Institution Zuweisungen über IdM, ein IAM- oder Personalmanagement-System mit Ticket-/Begründungsfeld führt und der Host nur den technisch wirksamen Zustand übernimmt. Ergänzend dokumentieren auditd-Ereignisse Zeitpunkt und Akteur von Änderungen an Konten, Gruppen und sudoers — jedoch ohne fachliche Begründung. Die Anforderung ist damit hostseitig nur teilweise, prozessual über IAM erfüllbar.
+Begründungen für Berechtigungsvergaben werden nicht lokal in RHEL gespeichert: `useradd`/`usermod`/`visudo` erfordern keinen Begründungstext. Die Berechtigungsänderung sollte daher durch einen automatisierten Prozess mit Genehmigungsaufgabe außerhalb von RHEL erfolgen, beispielsweise mittels Red Hat Ansible Automation Platform. Weiterhin sollte die Berechtigung primär in einem zentralen, an den RHEL-Host angebundenen, IAM erfolgen.
 
-Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).
+Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index)
 
-### Implementation Status: partial
+### Implementation Status: alternative
 
 ______________________________________________________________________
