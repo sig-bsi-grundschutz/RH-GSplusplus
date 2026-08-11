@@ -24,10 +24,8 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Die Autorisierung von Berechtigungszuweisungen ist primär ein IAM-/Organisationsprozess (Führungskraft, Data Owner, Application Owner). Auf dem RHEL-Host stützen technische Kontrollen die Nachvollziehbarkeit: Änderungen an lokalen Konten, Gruppen und `sudoers` lassen sich mit auditd-Watch-Regeln protokollieren; zentral über IdM laufen Zuweisungen über Rollen und HBAC, deren Änderungen im Verzeichnis auditierbar sind. Der Host erzwingt jedoch nicht, dass vor einer technischen Zuweisung eine bestimmte Person oder Rolle zugestimmt hat — Freigabe-Workflows gehören in IdM, ITSM oder AAP.
+Die Autorisierung von Berechtigungszuweisungen ist primär ein IAM-/Organisationsprozess (Führungskraft, Data Owner, Application Owner).
 
-Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening).
-
-### Implementation Status: partial
+### Implementation Status: not-applicable
 
 ______________________________________________________________________
