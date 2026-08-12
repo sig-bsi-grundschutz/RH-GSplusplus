@@ -24,9 +24,15 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Vorkonfigurierte bzw. leere Authentisierungsmittel stellt RHEL ab, indem Anmeldungen mit leerem Passwort untersagt werden (`nullok` entfernen / PAM- und SSH-Härting), keine Blank-Hashes in `/etc/shadow` verbleiben und Hersteller-Default-Konten in Härtingsprofilen fehlen bzw. gesperrt werden. OpenSSH lehnt leere Passwörter ab; Passwort-Hashes liegen ausschließlich gehasht in shadow. Weitere Default-Geheimnisse (z. B. SNMP-Communitys) sind gesondert zu entfernen. CaC-Regeln prüfen die zentralen Leer-/Default-Passwortpfade.
+Vorkonfigurierte bzw. leere Authentisierungsmittel existieren in RHEL im Auslieferungszustand nicht. Der einzige Account, der immer vorhanden ist ist `root`. Die Authentisierungsmittel für diesen müssen durch die Organisation definiert werden. Zur weiteren Absicherung entsprechender organisatorischen Maßnahmen zur Verhinderung leerer Passwörter, können entsprechende Optionen für sshd und Prüfungen der `/etc/shadow` auf leere Passwörter eingesetzt werden.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+
+### Rules:
+
+  - no_empty_passwords
+  - no_empty_passwords_etc_shadow
+  - sshd_disable_empty_passwords
 
 ### Implementation Status: implemented
 
