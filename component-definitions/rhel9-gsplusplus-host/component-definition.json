@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-12T12:02:30.582882-04:00",
+      "last-modified": "2026-08-12T12:25:12.590334-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -800,6 +800,26 @@
                 "description": "Rein biometrische Anmeldung ist auf typischen RHEL-Servern selten; falls `fprintd`/Fingerprint-PAM genutzt wird, steuert `authselect` die Faktoren: Fingerprint kann weggelassen oder nur kombiniert mit Passwort/PIN betrieben werden, statt als alleiniger Faktor. Ohne installierte Biometrie-Stack greift die Anforderung faktisch nicht. Für Host-Umfang „RHEL Server“ ist Biometrie meist irrelevant; wo Client-Images Biometrie erlauben, muss MFA (z. B. Smartcard oder Passwort+Biometrie) erzwungen werden.\n\nWeitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index) (authselect-Profile und Faktoren).",
                 "props": [
                   {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_login_events_tallylog"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_login_events_faillock"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_login_events_lastlog"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_usergroup_modification_shadow"
+                  },
+                  {
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "not-applicable"
@@ -1089,6 +1109,18 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "not-applicable"
+                  }
+                ]
+              },
+              {
+                "uuid": "a334011a-b2e4-50d0-97e6-d93f66c2b5c9",
+                "control-id": "BER.6.6",
+                "description": "Automatisiertes Credential-Leak-Monitoring (Darknet/Breach-Checker) ist kein Bestandteil von RHEL. Der Host liefert stattdessen die Voraussetzung für Missbrauchs- und Anmeldeüberwachung: auditd und Journal protokollieren Authentisierungsereignisse, sudo-Nutzung und Änderungen an Kontodaten; Logs können an ein zentrales SIEM weitergeleitet werden. Kompromittierungsindikatoren aus externen Leak-Diensten müssen IAM/SOC anbinden und dann Sperrung oder Reset (vgl. BER.5.14) auslösen. Damit wird die Anforderung auf dem Host entsprechend unterstützt.\n\nWeitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening), [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               }

@@ -24,9 +24,16 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Automatisiertes Credential-Leak-Monitoring (Darknet/Breach-Checker) ist kein Bestandteil von RHEL. Der Host liefert stattdessen die Voraussetzung für Missbrauchs- und Anmeldeüberwachung: auditd und Journal protokollieren Authentisierungsereignisse, sudo-Nutzung und Änderungen an Kontodaten; Logs können an ein zentrales SIEM weitergeleitet werden. Kompromittierungsindikatoren aus externen Leak-Diensten müssen IAM/SOC anbinden und dann Sperrung oder Reset (vgl. BER.5.14) auslösen. Damit ist die Anforderung auf dem Host nur teilweise — über Detektion der Nutzung, nicht über Breach-Datenbankabgleich — erfüllt.
+Automatisiertes Credential-Leak-Monitoring (Darknet/Breach-Checker) ist kein Bestandteil von RHEL. Der Host liefert stattdessen die Voraussetzung für Missbrauchs- und Anmeldeüberwachung: auditd und Journal protokollieren Authentisierungsereignisse, sudo-Nutzung und Änderungen an Kontodaten; Logs können an ein zentrales SIEM weitergeleitet werden. Kompromittierungsindikatoren aus externen Leak-Diensten müssen IAM/SOC anbinden und dann Sperrung oder Reset (vgl. BER.5.14) auslösen. Damit wird die Anforderung auf dem Host entsprechend unterstützt.
 
 Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening), [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
+
+### Rules:
+
+  - audit_rules_login_events_tallylog
+  - audit_rules_login_events_faillock
+  - audit_rules_login_events_lastlog
+  - audit_rules_usergroup_modification_shadow
 
 ### Implementation Status: partial
 
