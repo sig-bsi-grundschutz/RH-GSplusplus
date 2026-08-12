@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-12T09:56:10.356106-04:00",
+      "last-modified": "2026-08-12T10:32:13.354257-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -936,6 +936,18 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "partial"
+                  }
+                ]
+              },
+              {
+                "uuid": "1b6df747-ac37-5fd4-9b4d-a2d33dbf8ae9",
+                "control-id": "BER.6.2",
+                "description": "Grundsätzlich sollte ein RHEL-Host an zentrale Identity-Provider/Verzeichnisdienste angebunden sein und an dieser Stelle die Passwort-History enforced sein. Für lokale Kontaen blockert RHEL Passwort-Wiederverwendung über PAM: `pam_pwhistory` speichert eine konfigurierbare Historie und lehnt neue Passwörter ab, die jüngst verwendet wurden; `authselect` integriert die Module in `system-auth`/`password-auth`. Die Historientiefe wird per Policy gesetzt und kann auch für root erzwungen werden. Systemübergreifende Wiederverwendung lokaler Passwörter verhindert PAM allein nicht — dazu dienen unterschiedliche Secrets pro Host (z. B. aus Secret-Management) und zentrale IdM-Konten.\n\nWeitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               }

@@ -24,9 +24,15 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Passwort-Wiederverwendung blockiert RHEL über PAM: `pam_pwhistory` (bzw. historisch `remember` in `pam_unix`) speichert eine konfigurierbare Historie und lehnt neue Passwörter ab, die jüngst verwendet wurden; `authselect` integriert die Module in `system-auth`/`password-auth`. Die Historientiefe wird per Policy gesetzt und kann auch für root erzwungen werden. Systemübergreifende Wiederverwendung lokaler Admin-Passwörter verhindert PAM allein nicht — dazu dienen unterschiedliche Secrets pro Host (z. B. aus Secret-Management) und zentrale IdM-Konten.
+Grundsätzlich sollte ein RHEL-Host an zentrale Identity-Provider/Verzeichnisdienste angebunden sein und an dieser Stelle die Passwort-History enforced sein. Für lokale Kontaen blockert RHEL Passwort-Wiederverwendung über PAM: `pam_pwhistory` speichert eine konfigurierbare Historie und lehnt neue Passwörter ab, die jüngst verwendet wurden; `authselect` integriert die Module in `system-auth`/`password-auth`. Die Historientiefe wird per Policy gesetzt und kann auch für root erzwungen werden. Systemübergreifende Wiederverwendung lokaler Passwörter verhindert PAM allein nicht — dazu dienen unterschiedliche Secrets pro Host (z. B. aus Secret-Management) und zentrale IdM-Konten.
 
-Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index) (PAM/`pam_pwquality`/`password`-Stack).
+Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
+
+### Rules:
+
+  - accounts_password_pam_pwhistory_remember_system_auth
+  - accounts_password_pam_pwhistory_remember_password_auth
+  - accounts_password_pam_pwhistory_enforce_for_root
 
 ### Implementation Status: implemented
 
