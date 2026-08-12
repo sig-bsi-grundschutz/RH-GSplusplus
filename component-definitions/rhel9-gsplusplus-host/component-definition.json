@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-12T09:43:14.950490-04:00",
+      "last-modified": "2026-08-12T09:56:10.356106-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -830,6 +830,18 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "8c696383-adad-5f36-9d67-1d72faf4fc3c",
+                "control-id": "BER.5.9",
+                "description": "Ab RHEL 9.1 kann `sssd-idp` MFA an einen externen OIDC-/OAuth-IdP delegieren. Dies sollte die präferierte Konfiguration sein. Ein generisches OTP-PAM ohne IdP liefert RHEL nicht mit. Mehr-Faktor-Authentisierung für weitreichende Rechte (root/sudo, kritische Hosts) lässt sich unter RHEL analog zu anderen MFA-Kontrollen umsetzen: SSSD mit `authselect select sssd with-smartcard` (optional `with-smartcard-required`) verlangt Zertifikat/Smartcard zusätzlich zum oder statt des Passworts;\n\nWeitere Informationen: [Smartcard-Authentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_smart_card_authentication/configuring-smart-cards-using-authselect_managing-smart-card-authentication), [Externe Identity Provider zur Authentisierung an IdM nutzen](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/using_external_red_hat_utilities_with_identity_management/assembly_using-external-identity-providers-to-authenticate-to-idm_using-external-red-hat-utilities-with-idm).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "alternative"
                   }
                 ]
               },
