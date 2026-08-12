@@ -28,6 +28,6 @@ Rein biometrische Anmeldung ist auf typischen RHEL-Servern selten; falls `fprint
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index) (authselect-Profile und Faktoren).
 
-### Implementation Status: partial
+### Implementation Status: not-applicable
 
 ______________________________________________________________________
