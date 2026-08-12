@@ -24,10 +24,10 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Ausschließlich anlassbezogene Wechsel bedeutet: keine periodische Zwangsrotation. Unter RHEL setzt man dazu `PASS_MAX_DAYS` in `/etc/login.defs` bzw. `chage -M` auf einen Wert, der praktisch keine periodische Ablauf erzwingt (z. B. 99999), und ändert Passwörter nur bei Verdacht, Leak oder Phishing — ausgelöst durch Betrieb/IAM. Viele Hardening-/CaC-Profile fordern hingegen kurze Maximalalter; für diese GS++-Anforderung sind solche Regeln bewusst nicht zu übernehmen bzw. zu tailoren. Technisch ist der Host also fähig; die Policy muss periodische Rotation abschalten und Anlassprozesse definieren.
+Grundsätzlich sollte ein RHEL-Host an zentrale Identity-Provider/Verzeichnisdienste angebunden sein und an dieser Stelle die Einstellungen zum Passwort-Alter durchgesetzt sein. Für lokale Konten auf RHEL-Hosts bedeutet dies, dass `PASS_MAX_DAYS` in `/etc/login.defs` nicht oder auf einen unrealistisch hohen Wert gesetzt sind.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
 
-### Implementation Status: partial
+### Implementation Status: not-applicable
 
 ______________________________________________________________________
