@@ -24,9 +24,23 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Passwortqualität und Lebensdauer konfiguriert RHEL kombiniert: `pam_pwquality` setzt Länge, Komplexität und Wiederholungsversuche; `LOGIN_DEFS`/`chage` (`PASS_MAX_DAYS`, `PASS_MIN_DAYS`, Warnfristen) steuern die maximale und minimale Nutzungsdauer neuer und bestehender Konten. Die konkreten Schwellen (z. B. ≥14 Zeichen ohne MFA laut Guidance) sind per Policy/Variablen zu wählen und an Angriffsfläche sowie begleitende MFA anzupassen. CaC liefert prüfbare Regeln für beide Dimensionen.
+Grundsätzlich sollte ein RHEL-Host an zentrale Identity-Provider/Verzeichnisdienste angebunden sein und an dieser Stelle die Passwort-Qualität durchgesetz sein. Für lokale Accounts blockiert RHEL mit `pam_pwquality` die Trivial- und Wörterbuchpasswörter: über authselect-gesteuerte PAM-Zeilen oder alternativ  über `/etc/security/pwquality.conf` greifen `dictcheck`, Mindestlänge und Zeichenklassen; Passwortänderungen scheitern, wenn das neue Geheimnis Wörterbuchworten oder zu einfachen Mustern entspricht.
 
-Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
+
+### Rules:
+
+  - accounts_password_pam_dictcheck
+  - accounts_password_pam_minlen
+  - accounts_password_pam_minclass
+  - accounts_password_pam_dcredit
+  - accounts_password_pam_ucredit
+  - accounts_password_pam_lcredit
+  - accounts_password_pam_ocredit
+  - accounts_password_pam_pwquality_password_auth
+  - accounts_password_pam_pwquality_system_auth
+  - accounts_maximum_age_login_defs
+  - accounts_password_set_max_life_existing
 
 ### Implementation Status: implemented
 
