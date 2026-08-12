@@ -24,10 +24,13 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Mehr-Faktor-Authentisierung für weitreichende Rechte (root/sudo, kritische Hosts) lässt sich unter RHEL analog zu anderen MFA-Kontrollen umsetzen: SSSD mit `authselect select sssd with-smartcard` (optional `with-smartcard-required`) verlangt Zertifikat/Smartcard zusätzlich zum oder statt des Passworts; ab RHEL 9.1 kann `sssd-idp` MFA an einen externen OIDC-/OAuth-IdP delegieren. Privilegien bleiben über sudoers/IdM-Rollen eng geführt. Welche Faktoren für Admin-Rollen Pflicht sind, bestimmt IdP/IAM; ein generisches OTP-PAM ohne IdP liefert RHEL nicht mit.
+ Ab RHEL 9.1 kann `sssd-idp` MFA an einen externen OIDC-/OAuth-IdP delegieren. Dies sollte die präferierte Konfiguration sein. Ein generisches OTP-PAM ohne IdP liefert RHEL nicht mit. Mehr-Faktor-Authentisierung für weitreichende Rechte (root/sudo, kritische Hosts) lässt sich unter RHEL analog zu anderen MFA-Kontrollen umsetzen: SSSD mit `authselect select sssd with-smartcard` (optional `with-smartcard-required`) verlangt Zertifikat/Smartcard zusätzlich zum oder statt des Passworts;
 
 Weitere Informationen: [Smartcard-Authentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_smart_card_authentication/configuring-smart-cards-using-authselect_managing-smart-card-authentication), [Externe Identity Provider zur Authentisierung an IdM nutzen](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/using_external_red_hat_utilities_with_identity_management/assembly_using-external-identity-providers-to-authenticate-to-idm_using-external-red-hat-utilities-with-idm).
 
-### Implementation Status: partial
+<!-- even though we could implement some smartcard related technical controls, we chose to not do this, as this would lead people in implementing this over IdP delegation -->
+
+
+### Implementation Status: alternative
 
 ______________________________________________________________________
