@@ -24,7 +24,7 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Die Gültigkeitsprüfung (Nutzungszeit und Widerrufsstatus) erfolgt bei X.509-Zertifikaten automatisch durch TLS-Stacks und kann in SSSD über OCSP konfiguriert werden (`certificate_verification = ocsp_dgst=…`). Abgelaufene oder widerrufene Zertifikate werden vor Nutzung abgewiesen; CRL-Caches können lokal hinterlegt werden. SSH-Rohschlüssel ohne eingebettete Gültigkeits- oder Widerrufsinformation erfordern organisatorisches Lifecycle-Management; RHEL bietet hier keinen generischen Widerrufsmechanismus.
+Die Gültigkeitsprüfung (Nutzungszeit und Widerrufsstatus) erfolgt bei X.509-Zertifikaten automatisch durch den TLS-Stack. Abgelaufene oder widerrufene Zertifikate werden vor Nutzung abgewiesen; CRL-Caches können lokal hinterlegt werden. SSH-Rohschlüssel ohne eingebettete Gültigkeits- oder Widerrufsinformation erfordern organisatorisches Lifecycle-Management; RHEL bietet hier keinen generischen Widerrufsmechanismus.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
 
