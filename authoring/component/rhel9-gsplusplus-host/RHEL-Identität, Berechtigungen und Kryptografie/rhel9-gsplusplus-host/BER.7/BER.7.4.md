@@ -24,10 +24,10 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-RHEL stellt als Schlüsselerzeugungsplattform die gleiche technische Schutzbasis wie für den späteren Schlüsselbetrieb bereit: Systemhärtung (SELinux, Dateirechte, Crypto Policies, Audit), optional FIPS-Modus und Hardware-RNG bilden das Schutzniveau des Hosts. Schlüssel sollten auf dem Zielsystem oder einem gleich gehärteten System erzeugt werden; dedizierte Offline-Erzeugung auf HSM/TPM oder isolierten Administrationshosts ist organisatorisch festzulegen und technisch über PKCS#11/TPM-Anbindung umsetzbar. RHEL erzwingt die Gleichwertigkeit des Erzeugungssystems nicht automatisch — die Institution wählt Erzeugungsort und Schutzniveau.
+Schlüssel sollten auf dem Zielsystem (RHEL-Host) erzeugt werden, sofern die lokale verwendbaren Entropie-Quellen ausreichend sind; dedizierte Offline-Erzeugung auf Hardware Security Modules/TPM oder isolierten Administrationshosts ist organisatorisch festzulegen. RHEL erzwingt die Gleichwertigkeit des Erzeugungssystems nicht automatisch — die Institution wählt Erzeugungsort und Schutzniveau.
 
 Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
-### Implementation Status: partial
+### Implementation Status: alternative
 
 ______________________________________________________________________
