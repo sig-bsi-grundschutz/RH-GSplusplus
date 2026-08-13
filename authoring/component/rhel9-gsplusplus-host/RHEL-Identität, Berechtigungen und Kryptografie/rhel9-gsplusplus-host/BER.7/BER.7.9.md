@@ -24,9 +24,9 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Für X.509-Zertifikate erzwingen OpenSSL, NSS und GnuTLS bei der Nutzung die im Zertifikat hinterlegte Zweckbindung (Key Usage, Extended Key Usage): Ein nur für Signatur ausgestelltes Zertifikat wird für TLS-Verschlüsselung abgelehnt. SSH-Host- und Benutzerschlüssel kennen keine vergleichbare X.509-Erweiterung — Zweckbindung wird hier über Organisationsprozess (getrennte Schlüsselpaare, `authorized_keys`-Einschränkungen) abgebildet. Ein zentrales „Verzeichnis öffentlicher Schlüssel" (BER.7.3) ist auf RHEL-Host-Ebene nicht vorgegeben.
+Für X.509-Zertifikate erzwingen OpenSSL, NSS und GnuTLS bei der Nutzung die im Zertifikat hinterlegte Zweckbindung (Key Usage, Extended Key Usage): Ein nur für Signatur ausgestelltes Zertifikat wird für TLS-Verschlüsselung abgelehnt. SSH-Host- und Benutzerschlüssel kennen keine vergleichbare X.509-Erweiterung — Zweckbindung wird hier über Organisationsprozess (getrennte Schlüsselpaare, `authorized_keys`-Einschränkungen) abgebildet. Ein zentrales „Verzeichnis öffentlicher Schlüssel" (BER.7.3) ist auf RHEL-Host-Ebene nicht existent.
 
-Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
 ### Implementation Status: partial
 
