@@ -1213,6 +1213,21 @@
                 "description": "Beim Transport geheimer Schlüssel über das Netz (TLS, SSH, IPsec) erzwingt RHEL etablierte Algorithmen über die systemweite Crypto Policy: TLS-Versionen, Cipher Suites, KEX- und MAC-Algorithmen für OpenSSL/GnuTLS/NSS sowie OpenSSH werden zentral gesteuert und schwache Verfahren deaktiviert. PKCS#12-Exporte und verschlüsselte Übertragungen profitieren von denselben OpenSSL-Policy-Backends.\n\nWeitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).",
                 "props": [
                   {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_ssh_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_openssl_tls_crypto_policy"
+                  },
+                  {
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "implemented"
