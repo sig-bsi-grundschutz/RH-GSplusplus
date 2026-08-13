@@ -24,10 +24,15 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Mindestschlüssellängen bei der Erzeugung asymmetrischer Schlüssel erzwingt RHEL über die systemweite Crypto Policy: Im Profil `DEFAULT` sind RSA- und Diffie-Hellman-Parameter unter 2048 Bit sowie ECC unter 256 Bit unzulässig; `FUTURE` erhöht die Grenzen weiter. OpenSSH, OpenSSL, GnuTLS und weitere Backends übernehmen diese Grenzen bei `ssh-keygen`, Zertifikatserstellung und TLS-Handshake automatisch. Passwort- und PIN-Längen für menschliche Geheimnisse regelt hingegen PAM/`pwquality` (BER.6) — nicht die Crypto Policy; hier bleibt die konkrete Längenvorgabe institutionelle Aufgabe.
+Mindestschlüssellängen bei der Erzeugung asymmetrischer Schlüssel erzwingt RHEL über die systemweite Crypto Policy: Im Profil `DEFAULT` sind RSA- und Diffie-Hellman-Parameter unter 2048 Bit sowie ECC unter 256 Bit unzulässig; `FUTURE` erhöht die Grenzen weiter. OpenSSH, OpenSSL, GnuTLS und weitere Backends übernehmen diese Grenzen bei `ssh-keygen`, Zertifikatserstellung und TLS-Handshake automatisch. Passwort- und PIN-Längen für menschliche Geheimnisse regelt hingegen PAM/`pwquality` (BER.6) — nicht die Crypto Policy.
 
 Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
-### Implementation Status: partial
+### Rules:
+
+  - configure_crypto_policy
+  - crypto_policy_not_legacy
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
