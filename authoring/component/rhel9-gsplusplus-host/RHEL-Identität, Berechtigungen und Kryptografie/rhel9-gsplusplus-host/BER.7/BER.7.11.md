@@ -24,10 +24,20 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Schlüssel in Hardware (TPM 2.0, PKCS#11-HSM, Smartcards) bleiben nicht exportierbar; Integrität und Manipulationsschutz werden vom Secure Element geprüft, bevor kryptografische Operationen ausgeführt werden. Dateibasierte geheime Schlüssel (z. B. `/etc/ssh/*_key`) schützt RHEL über restriktive Dateirechte und Gruppenzugehörigkeit (`file_groupownership_sshd_private_key`); eine explizite Checksummen-Verifikation vor jeder Nutzung erfolgt nicht automatisch — optional unterstützt AIDE Dateiintegritätsüberwachung. Institutionelle Festlegung von Integritätsprüfverfahren für abgelegte Schlüssel bleibt erforderlich.
+Schlüssel in Hardware (TPM 2.0, PKCS#11-HSM, Smartcards) bleiben nicht exportierbar; Integrität und Manipulationsschutz werden vom Secure Element geprüft, bevor kryptografische Operationen ausgeführt werden. Dateibasierte geheime Schlüssel des Hosts (z. B. `/etc/ssh/*_key`) schützt RHEL über restriktive Dateirechte und Gruppenzugehörigkeit. Weiterhin wird beim erstmaligen Verbindungsaufbau eines Hosts der Fingerabdruck des Schlüssels angezeigt und kann von Hand oder via DNS-Speicherung verifiziert werden (`known_hosts`). Bei subsequenten Verbindungen wird der präsentierte Fingerabdruck des Servers gegen den gespeicherten Fingerabdruck auf dem initiierenden Client geprüft. Für persönliche, private Schlüssel ist keine Integritätsprüfung vorgesehen. Indirekt kann eine Integritätsprüfung von Dateien über AIDE (Advanced Intrusion Detection Environment) durchgeführt werden, wodurch regelmäßig Hash-Summen der Schlüsselmaterialien gebildet werden und entsprechende Alarme erzeugt werden.
 
-Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
-### Implementation Status: partial
+### Rules:
+
+  - file_groupownership_sshd_private_key
+  - file_ownership_sshd_private_key
+  - file_permissions_sshd_private_key
+  - aide_build_database
+  - package_aide_installed
+  - aide_periodic_cron_checking
+  - aide_scan_notification
+
+### Implementation Status: alternative
 
 ______________________________________________________________________
