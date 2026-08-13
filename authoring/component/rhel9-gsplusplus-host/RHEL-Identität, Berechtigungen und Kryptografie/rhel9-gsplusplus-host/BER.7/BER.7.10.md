@@ -24,9 +24,9 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-X.509-basierte Schlüssel und Zertifikate lehnt der TLS-/PKI-Stack nach Ablauf der Gültigkeitszeit automatisch ab: OpenSSL, NSS und GnuTLS prüfen `notAfter` bei jedem Handshake; abgelaufene Server- oder Clientzertifikate können weder signieren noch verschlüsseln. Für dateibasierte Schlüssel (SSH, GPG) ohne eingebaute Ablaufzeit ist die Deaktivierung nach Nutzungsende organisatorisch und durch Entfernen aus `authorized_keys`, Neugenerierung oder Widerruf umzusetzen — RHEL erzwingt keinen universellen Ablaufmechanismus für Rohschlüsseldateien.
+X.509-basierte Schlüssel und Zertifikate lehnt der TLS-/PKI-Stack nach Ablauf der Gültigkeitszeit automatisch ab: OpenSSL, NSS und GnuTLS prüfen `notAfter` bei jedem Handshake; abgelaufene Server- oder Clientzertifikate können weder signieren noch verschlüsseln. Für dateibasierte Schlüssel (SSH, GPG) ohne eingebaute Ablaufzeit ist die Deaktivierung nach Nutzungsende organisatorisch und durch Entfernen aus `authorized_keys` beispielsweise automatisiert via Ansible oder einer Secret-Management Lösung, Neugenerierung oder Widerruf umzusetzen — RHEL erzwingt keinen universellen Ablaufmechanismus für Rohschlüsseldateien.
 
-Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
 ### Implementation Status: partial
 
