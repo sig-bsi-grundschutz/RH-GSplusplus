@@ -31,10 +31,15 @@ Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.re
 ### Rules:
 
   - configure_crypto_policy
-  - configure_ssh_crypto_policy
-  - sshd_include_crypto_policy
-  - configure_openssl_crypto_policy
+  - configure_gnutls_tls_crypto_policy
   - configure_kerberos_crypto_policy
+  - configure_libreswan_crypto_policy
+  - configure_openssl_crypto_policy
+  - configure_openssl_tls_crypto_policy
+  - configure_ssh_crypto_policy
+  - crypto_policy_not_legacy
+  - crypto_policy_not_overridden
+  - package_crypto_policies_installed
 
 ### Implementation Status: implemented
 

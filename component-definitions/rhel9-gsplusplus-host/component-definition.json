@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-13T07:00:11.792209-04:00",
+      "last-modified": "2026-08-13T07:28:33.200418-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -1137,12 +1137,17 @@
                   {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "configure_ssh_crypto_policy"
+                    "value": "configure_gnutls_tls_crypto_policy"
                   },
                   {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "sshd_include_crypto_policy"
+                    "value": "configure_kerberos_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_libreswan_crypto_policy"
                   },
                   {
                     "name": "Rule_Id",
@@ -1152,7 +1157,27 @@
                   {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "configure_kerberos_crypto_policy"
+                    "value": "configure_openssl_tls_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_ssh_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "crypto_policy_not_legacy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "crypto_policy_not_overridden"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_crypto_policies_installed"
                   },
                   {
                     "name": "implementation-status",
@@ -1220,12 +1245,109 @@
                   {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "configure_ssh_crypto_policy"
+                    "value": "configure_gnutls_tls_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_kerberos_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_libreswan_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_openssl_crypto_policy"
                   },
                   {
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "configure_openssl_tls_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_ssh_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "crypto_policy_not_legacy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "crypto_policy_not_overridden"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_crypto_policies_installed"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "e99d664d-bfde-54bd-85d4-b443d27d4566",
+                "control-id": "BER.7.8",
+                "description": "Bei der operativen Schlüsselnutzung (TLS-Handshakes, SSH-Sitzungen, Kerberos, IPsec) wendet RHEL die systemweite Crypto Policy an: Alle policy-fähigen Bibliotheken und Dienste verwenden dieselben erlaubten Algorithmen und Schlüssellängen, sodass bei Verschlüsselung, Signatur und Authentisierung nur etablierte Verfahren zum Einsatz kommen. OpenSSH bindet die Policy über Crypto-Policy-Drop-ins ein; TLS-Dienste nutzen OpenSSL/GnuTLS-Backends.\n\nWeitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).\n\nRules:\n\n- configure_crypto_policy\n- configure_gnutls_tls_crypto_policy\n- configure_kerberos_crypto_policy\n- configure_libreswan_crypto_policy\n- configure_openssl_crypto_policy\n- configure_openssl_tls_crypto_policy\n- configure_ssh_crypto_policy\n- crypto_policy_not_legacy\n- crypto_policy_not_overridden\n- package_crypto_policies_installed",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_gnutls_tls_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_kerberos_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_libreswan_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_openssl_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_openssl_tls_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "configure_ssh_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "crypto_policy_not_legacy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "crypto_policy_not_overridden"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_crypto_policies_installed"
                   },
                   {
                     "name": "implementation-status",
