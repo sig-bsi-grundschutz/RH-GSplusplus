@@ -26,7 +26,7 @@ ______________________________________________________________________
 
 Für kryptografische Schlüsselerzeugung nutzt RHEL den Kernel-CSPRNG über `/dev/urandom`. Optional ergänzt `rngd` (Hardware-RNG) die Entropiequelle auf Systemen mit True Random Number Generators (physischen Entropie-Quellen). OpenSSH kann über `SSH_USE_STRONG_RNG` zusätzliche Entropiebytes von Hardware-RNGs anfordern. Die Aktivierung von Hardware-Entropie-Quellen auf Systemen, die diese nicht zur Verfügung haben, kann zu einem Stalling/Hängen von abhängigen Prozessen führen, da die entsprechende Entropie nicht geliefert wird. Die Auswahl und Dokumentation der Qualitätskriterien (z. B. nach BSI TR-02102-1) sowie die Bewertung virtualisierter Entropiequellen obliegen der Institution; RHEL liefert die technische Basis, nicht die policy-seitige Kriterienfestlegung.
 
-Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
 ### Implementation Status: partial
 

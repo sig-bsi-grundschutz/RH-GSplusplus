@@ -26,7 +26,7 @@ ______________________________________________________________________
 
 Mindestschlüssellängen bei der Erzeugung asymmetrischer Schlüssel erzwingt RHEL über die systemweite Crypto Policy: Im Profil `DEFAULT` sind RSA- und Diffie-Hellman-Parameter unter 2048 Bit sowie ECC unter 256 Bit unzulässig; `FUTURE` erhöht die Grenzen weiter. OpenSSH, OpenSSL, GnuTLS und weitere Backends übernehmen diese Grenzen bei `ssh-keygen`, Zertifikatserstellung und TLS-Handshake automatisch. Passwort- und PIN-Längen für menschliche Geheimnisse regelt hingegen PAM/`pwquality` (BER.6) — nicht die Crypto Policy.
 
-Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
 ### Rules:
 
