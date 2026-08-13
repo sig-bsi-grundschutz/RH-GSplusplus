@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-13T09:24:48.394422-04:00",
+      "last-modified": "2026-08-13T09:28:21.640056-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -1443,6 +1443,18 @@
                 "uuid": "0bad52da-44f2-537b-9d14-e51e9d371841",
                 "control-id": "BER.7.13",
                 "description": "Die Gültigkeitsprüfung (Nutzungszeit und Widerrufsstatus) erfolgt bei X.509-Zertifikaten automatisch durch den TLS-Stack. Abgelaufene oder widerrufene Zertifikate werden vor Nutzung abgewiesen; CRL-Caches können lokal hinterlegt werden. SSH-Rohschlüssel ohne eingebettete Gültigkeits- oder Widerrufsinformation erfordern organisatorisches Lifecycle-Management; RHEL bietet hier keinen generischen Widerrufsmechanismus.\n\nWeitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ]
+              },
+              {
+                "uuid": "efd55c02-3a5e-5a74-b036-feb0b0d84849",
+                "control-id": "BER.7.14",
+                "description": "RHEL stellt Werkzeuge zur proaktiven Ablaufüberwachung bereit: `certmonger` kann im Zusammenspiel mit Red Hat IdM Zertifikate überwachen und vor Ablauf erneuern; `openssl x509 -checkend` oder Skripte in `cron`/`systemd`-Timern eignen sich für regelmäßige Prüfungen. Schwellwert, Intervall und Eskalation sind institutionell festzulegen und operativ umzusetzen (z. B. Monitoring-Alert bei Restlaufzeit < 30 Tage). Generell empfiehlt sich die implementierung von automatisierten Protokollen wie ACME, die in Kombination mit entsprechenden Scripten eine automatisierte Erneuerung von Schlüsseln/Zertifikaten erlauben.\n\nWeitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).",
                 "props": [
                   {
                     "name": "implementation-status",
