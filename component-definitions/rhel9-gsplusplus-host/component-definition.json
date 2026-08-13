@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-13T07:42:01.498577-04:00",
+      "last-modified": "2026-08-13T09:07:35.629590-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -1377,6 +1377,53 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "partial"
+                  }
+                ]
+              },
+              {
+                "uuid": "af53e0cc-81ce-56ef-aa56-158be1a4c7a7",
+                "control-id": "BER.7.11",
+                "description": "Schlüssel in Hardware (TPM 2.0, PKCS#11-HSM, Smartcards) bleiben nicht exportierbar; Integrität und Manipulationsschutz werden vom Secure Element geprüft, bevor kryptografische Operationen ausgeführt werden. Dateibasierte geheime Schlüssel des Hosts (z. B. `/etc/ssh/*_key`) schützt RHEL über restriktive Dateirechte und Gruppenzugehörigkeit. Weiterhin wird beim erstmaligen Verbindungsaufbau eines Hosts der Fingerabdruck des Schlüssels angezeigt und kann von Hand oder via DNS-Speicherung verifiziert werden (`known_hosts`). Bei subsequenten Verbindungen wird der präsentierte Fingerabdruck des Servers gegen den gespeicherten Fingerabdruck auf dem initiierenden Client geprüft. Für persönliche, private Schlüssel ist keine Integritätsprüfung vorgesehen. Indirekt kann eine Integritätsprüfung von Dateien über AIDE (Advanced Intrusion Detection Environment) durchgeführt werden, wodurch regelmäßig Hash-Summen der Schlüsselmaterialien gebildet werden und entsprechende Alarme erzeugt werden.\n\nWeitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "file_groupownership_sshd_private_key"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "file_ownership_sshd_private_key"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "file_permissions_sshd_private_key"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "aide_build_database"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_aide_installed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "aide_periodic_cron_checking"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "aide_scan_notification"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "alternative"
                   }
                 ]
               }
