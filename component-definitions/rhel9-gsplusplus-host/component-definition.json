@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-13T09:28:21.640056-04:00",
+      "last-modified": "2026-08-13T09:41:01.645019-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -1460,6 +1460,18 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "partial"
+                  }
+                ]
+              },
+              {
+                "uuid": "ae42f1b9-3bab-5282-b79d-3a41a870f64c",
+                "control-id": "BER.7.15",
+                "description": "Die Außerbetriebnahme geheimer Schlüssel ist primär organisatorischer Prozess; technisch unterstützt RHEL sichere Löschung und Rotation: Schlüsseldateien können entfernt, `authorized_keys`-Einträge widerrufen und Dienste neu gestartet werden; flüchtige Schlüssel in Prozessspeicher enden mit der Sitzung. Skalierbare Umsetzung ist per Ansible/AAP automatisierbar (Entfernen von Dateien, Neukonfiguration von Diensten). Verfahren und Nachweis obliegen der Institution.\n\nWeitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "not-applicable"
                   }
                 ]
               }
