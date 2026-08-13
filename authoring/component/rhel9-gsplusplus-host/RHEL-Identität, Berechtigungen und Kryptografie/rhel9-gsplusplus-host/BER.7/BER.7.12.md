@@ -24,10 +24,10 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Vor jeder TLS-Nutzung validiert RHEL die Authentizität öffentlicher Schlüssel über Zertifikatskettenprüfung gegen den System-Trust-Store (`/etc/pki/ca-trust/`); unbekannte oder nicht signierte Zertifikate werden abgelehnt, sofern nicht explizit konfiguriert. SSH prüft Hostschlüssel über `known_hosts` bzw. erstmalige Fingerprint-Bestätigung; SSSD kann SSH-Known-Hosts zentral verwalten. Für Anwendungen außerhalb TLS/SSH (z. B. GPG-WoT) liegt die Authentizitätsprüfung beim Anwender oder der Institution.
+Vor jeder TLS-Nutzung validiert RHEL die Authentizität öffentlicher Schlüssel über Zertifikatskettenprüfung gegen den System-Trust-Store (`/etc/pki/ca-trust/`); unbekannte oder nicht signierte Zertifikate werden abgelehnt, sofern nicht explizit konfiguriert. SSH prüft Hostschlüssel über `known_hosts` bzw. erstmalige Fingerprint-Bestätigung. Für Anwendungen außerhalb TLS/SSH liegt die Authentizitätsprüfung beim Anwender oder der Institution.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
 
-### Implementation Status: partial
+### Implementation Status: implemented
 
 ______________________________________________________________________
