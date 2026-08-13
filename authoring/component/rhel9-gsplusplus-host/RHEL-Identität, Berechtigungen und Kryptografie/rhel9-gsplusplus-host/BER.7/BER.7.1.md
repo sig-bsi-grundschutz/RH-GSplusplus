@@ -24,9 +24,17 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Bei der Schlüsselerzeugung binden RHEL-Anwendungen und -Werkzeuge (OpenSSL, OpenSSH `ssh-keygen`, GnuPG) an die systemweite Crypto Policy (`update-crypto-policies`): Profile wie `DEFAULT`, `FUTURE` oder `FIPS` schließen schwache oder veraltete Algorithmen aus und erlauben nur etablierte Verfahren mit ausreichenden Schlüssellängen. Die Policy wirkt über Backend-Konfigurationen in `/etc/crypto-policies/back-ends/` auf alle angebundenen Bibliotheken; lokale Abweichungen in Dienstkonfigurationen werden durch CaC-Regeln wie `crypto_policy_not_overridden` verhindert. Institutionelle Festlegung des anerkannten Standards (z. B. BSI TR-02102) erfolgt über die Policy-Wahl bzw. angepasste Policy-Module — nicht durch Einzelkonfiguration jedes Tools.
+Etablierte kryptografische Algorithmen für Authentisierungspfad und Protokolle erzwingt RHEL über systemweite Crypto Policies (`update-crypto-policies`): Stufen wie `DEFAULT`, `FUTURE` oder `FIPS` vereinheitlichen TLS, SSH, Kerberos, OpenSSL und weitere Backends und entfernen schwache Verfahren. Dienste, die die Policy einbinden (u. a. OpenSSH über Crypto-Policy-Drop-ins), erben dieselbe Algorithmuswahl. Es ist möglich eine eigene Konfiguration zu erstellen, die die BSI TR-02102 implementiert. Änderungen sind jedoch strikt zu testen. Es sollte das entsprechende Fachwissen für diese Anpassungen vorhanden sein, um fehlerhafte und schwächende Konfigurationen zu vermeiden.
 
 Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+
+### Rules:
+
+  - configure_crypto_policy
+  - configure_ssh_crypto_policy
+  - sshd_include_crypto_policy
+  - configure_openssl_crypto_policy
+  - configure_kerberos_crypto_policy
 
 ### Implementation Status: implemented
 
