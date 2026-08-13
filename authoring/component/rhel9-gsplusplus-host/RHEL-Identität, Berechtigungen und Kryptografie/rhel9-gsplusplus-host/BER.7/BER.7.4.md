@@ -26,7 +26,7 @@ ______________________________________________________________________
 
 Schlüssel sollten auf dem Zielsystem (RHEL-Host) erzeugt werden, sofern die lokale verwendbaren Entropie-Quellen ausreichend sind; dedizierte Offline-Erzeugung auf Hardware Security Modules/TPM oder isolierten Administrationshosts ist organisatorisch festzulegen. RHEL erzwingt die Gleichwertigkeit des Erzeugungssystems nicht automatisch — die Institution wählt Erzeugungsort und Schutzniveau.
 
-Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
 ### Implementation Status: alternative
 

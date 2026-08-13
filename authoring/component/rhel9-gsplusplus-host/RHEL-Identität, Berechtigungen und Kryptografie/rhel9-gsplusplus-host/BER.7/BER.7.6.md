@@ -5,16 +5,16 @@ x-trestle-global:
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
 ---
 
-# BER.7.2 - \[Schlüsselmanagement\] Schlüssellänge
+# BER.7.6 - \[Schlüsselmanagement\] Etablierte Algorithmen beim Transport
 
 ## Control Statement
 
-Berechtigung SOLLTE die Schlüssellängen nach {{ insert: param, ber.7.2-prm1 }} bei der Schlüsselerzeugung zuweisen.
+Berechtigung SOLLTE die ausschließliche Verwendung etablierter kryptografischer Algorithmen beim Transport geheimer Schlüssel verankern.
 
 
 ## Control guidance
 
-Für die Sicherheit von Schlüsseln wie Passwörter oder PINs ist die Länge von Bedeutung. Für Details siehe BSI TR-02102.
+Aktuelle etablierte Algorithmen sind in BSI TR-02102 zu finden. Der Transport kann mit Public Key Cryptography Standards (PKCS), z.B. PKCS#12 Dateiformat erfolgen. Für weitere Details zur Implementierung siehe Detailspezifikation kryptografischer Abläufe und Mechanismen des BSI.
 
 ______________________________________________________________________
 
@@ -24,14 +24,15 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Mindestschlüssellängen bei der Erzeugung asymmetrischer Schlüssel erzwingt RHEL über die systemweite Crypto Policy: Im Profil `DEFAULT` sind RSA- und Diffie-Hellman-Parameter unter 2048 Bit sowie ECC unter 256 Bit unzulässig; `FUTURE` erhöht die Grenzen weiter. OpenSSH, OpenSSL, GnuTLS und weitere Backends übernehmen diese Grenzen bei `ssh-keygen`, Zertifikatserstellung und TLS-Handshake automatisch. Passwort- und PIN-Längen für menschliche Geheimnisse regelt hingegen PAM/`pwquality` (BER.6) — nicht die Crypto Policy.
+Beim Transport geheimer Schlüssel über das Netz (TLS, SSH, IPsec) erzwingt RHEL etablierte Algorithmen über die systemweite Crypto Policy: TLS-Versionen, Cipher Suites, KEX- und MAC-Algorithmen für OpenSSL/GnuTLS/NSS sowie OpenSSH werden zentral gesteuert und schwache Verfahren deaktiviert. PKCS#12-Exporte und verschlüsselte Übertragungen profitieren von denselben OpenSSL-Policy-Backends.
 
 Weitere Informationen: [Systemweite kryptografische Richtlinien](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
 ### Rules:
 
   - configure_crypto_policy
-  - crypto_policy_not_legacy
+  - configure_ssh_crypto_policy
+  - configure_openssl_tls_crypto_policy
 
 ### Implementation Status: implemented
 
