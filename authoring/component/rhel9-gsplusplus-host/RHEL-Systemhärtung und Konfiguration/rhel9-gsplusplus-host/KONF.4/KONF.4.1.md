@@ -23,7 +23,7 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-RHEL bindet Verzeichnisdienste (Red Hat IdM, Active Directory oder generisches LDAP) über SSSD, `authselect` und optional `realmd` bzw. `ipa-client-install` an: NSS/PAM liefern zentrale Identitäten und Autorisierung statt ausschließlich lokaler `/etc/passwd`-Konten. ComplianceAsCode-Regeln prüfen Installation und Aktivierung von SSSD sowie die PAM-Integration; die konkrete Domain-Anbindung, SSO-Föderation und automatisiertes Provisioning (z. B. Kickstart oder Ansible während der Systeminstallation) legt die Institution fest. Zentrale Berechtigungsverwaltung, Least-Privilege-Umsetzung und der in der Anleitung genannte Windows-GPO-Ansatz liegen außerhalb des einzelnen Hosts.
+RHEL bindet Verzeichnisdienste (Red Hat IdM, Active Directory oder generisches LDAP) über SSSD, `authselect` und optional `realmd` bzw. `ipa-client-install` an: NSS/PAM liefern zentrale Identitäten und Autorisierung statt ausschließlich lokaler `/etc/passwd`-Konten. Über `authselect select sssd` wird SSSD installiert, aktiviert und in den PAM-Stack integriert; die konkrete Domain-Anbindung, SSO-Föderation und automatisiertes Provisioning (z. B. Kickstart oder Ansible während der Systeminstallation) legt die Institution fest. Zentrale Berechtigungsverwaltung, Least-Privilege-Umsetzung und der in der Anleitung genannte Windows-GPO-Ansatz liegen außerhalb des einzelnen Hosts.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index)
 
