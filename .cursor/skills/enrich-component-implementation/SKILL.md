@@ -191,11 +191,19 @@ skill produced).
 ### Step 5 — Draft implementation prose
 
 Write **German** prose replacing only the paragraph(s) between the HTML
-comments and `### Rules:`.
+comments and `### Rules:` (section **What is the solution and how is it implemented?**).
 
 Requirements:
 
-- Describe **how RHEL implements** the control (mechanism, not restating the requirement)
+- Describe **how RHEL technically implements** the control — on-host mechanism and configuration
+  (PAM, `sshd_config`, LUKS, auditd, SSSD, systemd, …), not restating the requirement
+- **Do not mention the compliance-check layer in this prose.** Forbidden: CaC/ComplianceAsCode rule
+  IDs or names, OpenSCAP/oscap/check references, phrasing like „wird durch Regel X geprüft“ or
+  „die Regel `sshd_enable_pam` stellt sicher …“. CaC rules inform research (Steps 2 and 4) and
+  status (Step 6) only. List and cite them in `### Rules:` (read-only display), the PR body's
+  "Listed CaC rules reviewed" / "Suggested additional CaC rules", and the coverage matrix — not
+  here. See [reference.md — Implementation prose](reference.md#implementation-prose) for DO/DON'T
+  examples.
 - Cite Red Hat docs conceptually (e.g. auditd watch rules, augenrules) — no English paste blocks
 - State **honest limits** (org/IAM/process gaps, directory-only changes vs central IdM)
 - 2–5 sentences; match tone of existing files in `authoring/component/`
@@ -209,7 +217,8 @@ Leave both HTML comments intact.
 
 ### Step 6 — Implementation status
 
-Set `### Implementation Status:` using [status criteria](reference.md#implementation-status).
+Set `### Implementation Status:` using [status criteria](reference.md#implementation-status). CaC
+rules may drive this assessment and the PR coverage matrix; do not cite them in the Step 5 prose.
 
 Summary:
 

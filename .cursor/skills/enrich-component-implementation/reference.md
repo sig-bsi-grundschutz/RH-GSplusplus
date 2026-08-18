@@ -20,7 +20,8 @@ All must be true:
 3. Those rules have `cce@rhel{N}` for the artifact product.
 4. The covering rule(s) are cited by ID in the PR body (listed rules reviewed and/or suggested
    additional CaC rules) — a doc-only mechanism claim with no concrete rule ID does not qualify.
-5. Prose describes the actual mechanism (not a copy of the requirement).
+5. Prose describes the actual on-host mechanism (not a copy of the requirement, and not CaC rule
+   citations — see [Implementation prose](#implementation-prose)).
 
 ### `partial`
 
@@ -69,6 +70,25 @@ Use when:
 - No defensible RHEL host technical hook exists
 
 Do not use to avoid writing prose for hard partial cases.
+
+## Implementation prose
+
+Prose under **What is the solution and how is it implemented?** explains how RHEL implements the
+control technically. It is **not** where ComplianceAsCode rules, OpenSCAP scans, or other
+audit/check mechanisms are introduced — those belong only in `### Rules:`, the PR body's "Listed
+CaC rules reviewed" / "Suggested additional CaC rules", and the coverage matrix.
+
+**DO** — describe the on-host mechanism:
+
+> OpenSSH authentifiziert Fernwartung über PAM angebunden an SSSD/IdM.
+
+**DON'T** — cite or paraphrase a CaC rule as the implementation:
+
+> Die Regel `sshd_enable_pam` stellt sicher, dass SSH PAM nutzt.
+
+Also avoid: rule IDs inline, „wird durch Regel … geprüft“, OpenSCAP/oscap as the subject of the
+sentence. Use CaC `description`/`rationale` in Steps 2–3 as research input only; distill the
+underlying RHEL behavior into plain German.
 
 ## Coverage matrix
 
@@ -185,7 +205,7 @@ ______________________________________________________________________
 
 <!-- comments — UNCHANGED -->
 
-{EDIT: German prose here}
+{EDIT: German prose here — technical mechanism only; no CaC rule citations}
 
 ### Rules: — UNCHANGED (list items)
 
