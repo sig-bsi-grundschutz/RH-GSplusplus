@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 from pathlib import Path
 
 from oscal_scope import (
@@ -59,6 +60,38 @@ def _candidate_markdown(
     return "\n".join(lines)
 
 
+def _existing_review_status(text: str) -> str | None:
+    if not text.startswith("---"):
+        return None
+    end = text.find("\n---", 3)
+    if end == -1:
+        return None
+    for line in text[3:end].splitlines():
+        if line.startswith("x-review-status:"):
+            return line.split(":", 1)[1].strip() or None
+    return None
+
+
+def _has_review_body(text: str) -> bool:
+    match = re.search(r"^## Review\s*\n(.*)", text, re.MULTILINE | re.DOTALL)
+    if not match:
+        return False
+    body = re.sub(r"<!--.*?-->", "", match.group(1), flags=re.DOTALL).strip()
+    return bool(body)
+
+
+def _should_skip_existing(path: Path) -> tuple[bool, str | None]:
+    if not path.is_file():
+        return False, None
+    text = path.read_text(encoding="utf-8")
+    status = _existing_review_status(text)
+    if status in ("included", "excluded"):
+        return True, status
+    if (status == "pending" or status is None) and _has_review_body(text):
+        return True, status or "pending"
+    return False, None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--product", default="rhel9")
@@ -75,17 +108,28 @@ def main() -> None:
 
     pending = [cid for cid in candidates if cid not in included]
     if args.write:
+        written = 0
+        skipped = 0
         for cid in candidates:
             ctrl = candidates[cid]
             area = practice_area(cid)
             path = out_dir / area / f"{cid}.md"
             path.parent.mkdir(parents=True, exist_ok=True)
+            skip, status = _should_skip_existing(path)
+            if skip:
+                print(f"Skipping {cid} (x-review-status: {status})")
+                skipped += 1
+                continue
             default_comp = scope["component_by_practice_area"].get(area, "")
             path.write_text(
                 _candidate_markdown(cid, ctrl, default_comp, cid in included),
                 encoding="utf-8",
             )
-        print(f"Wrote {len(candidates)} candidate files to {out_dir} ({len(pending)} pending)")
+            written += 1
+        print(
+            f"Wrote {written} candidate files to {out_dir} "
+            f"({len(pending)} pending, skipped {skipped} triaged)"
+        )
     else:
         print(f"Candidates: {len(candidates)}  in profile: {len(included)}  pending: {len(pending)}")
 
