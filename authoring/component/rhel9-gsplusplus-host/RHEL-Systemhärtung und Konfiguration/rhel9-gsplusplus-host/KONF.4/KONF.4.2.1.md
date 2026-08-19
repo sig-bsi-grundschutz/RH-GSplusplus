@@ -23,10 +23,10 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Ab RHEL 9.6 ist verschlüsseltes DNS (eDNS) als Technology Preview verfügbar: NetworkManager kann über das DNS-Plugin `dnsconfd` einen lokalen Unbound-Resolver betreiben, der Upstream-Anfragen per DNS-over-TLS (DoT) mit TLS kryptographisch schützt; alternativ kann in IdM-Umgebungen DoT zwischen Clients und integriertem DNS per `ipa-client-encrypted-dns` und `--dns-over-tls` aktiviert werden. Standardinstallationen nutzen jedoch unverschlüsselte Resolver-Konfiguration über NetworkManager; DoT muss explizit konfiguriert werden (z. B. `dns=dnsconfd`, globale `dns+tls://`-Server, optional Kernel-Argumente für frühen Boot). DNS-over-HTTPS wird in der RHEL-9-Dokumentation nicht als gleichwertige Systemoption beschrieben. Ob DNS genutzt wird und welche DoT-Server vertrauenswürdig sind, legt die Institution fest.
+Ab RHEL 9.6 ist verschlüsseltes DNS (eDNS) als Technology Preview (nicht für die Produktionsumgebung geeignet!) verfügbar: NetworkManager kann über das DNS-Plugin `dnsconfd` einen lokalen Unbound-Resolver betreiben, der Upstream-Anfragen per DNS-over-TLS (DoT) mit TLS kryptographisch schützt; alternativ (ebenfalls als Technology Preview) kann in IdM-Umgebungen DoT zwischen Clients und integriertem DNS per `ipa-client-encrypted-dns` und `--dns-over-tls` aktiviert werden. Standardinstallationen nutzen jedoch unverschlüsselte Resolver-Konfiguration über NetworkManager. Ob DNS genutzt wird und welche DoT-Server vertrauenswürdig sind, legt die Institution fest.
 
-Weitere Informationen: [Technology Previews in RHEL 9.6](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/9.6_release_notes/technology-previews)
+Weitere Informationen: [Technology Previews in RHEL 9.6](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/9.6_release_notes/technology-previews), [Encrypted DNS Setup](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/securing_networks/securing-system-dns-traffic-with-encrypted-dns_securing-networks)
 
-### Implementation Status: partial
+### Implementation Status: planned
 
 ______________________________________________________________________
