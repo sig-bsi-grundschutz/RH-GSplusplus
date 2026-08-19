@@ -23,9 +23,16 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Echtzeit-Prüfung beim Öffnen oder Installieren wie klassische AV-Scanner liefert RHEL nicht als supported Product. Stattdessen verifiziert `dnf`/`rpm` bei Paketinstallation GPG-Signaturen aus konfigurierten Repositories (`gpgcheck=1`, Red-Hat-GPG-Schlüssel). Build-Pipelines (Image Builder, Kickstart) können nur signierte oder vorab geprüfte Artefakte einbringen. Real-time-Malware-Scan erfordert unsupported Drittanbieter (z. B. EPEL ClamAV) — die institutionelle Alternative ist Paketsignatur und gehärtete Softwarequellen.
+Echtzeit-Prüfung beim Öffnen oder Installieren wie klassische AV-Scanner liefert RHEL nicht als unterstützten Teil des Produkts. Stattdessen sind mehrere mitigierende Maßnahmen im Einsatz, die darauf abzielen einer Schadcode-Infizierung entgegenzuwirken. Der Image-Mode in Red Hat verhindert das klassische Installieren von Software und erfordert einen Build-Prozess des Betriebssystems vorab. Hierdurch ist das aktive Betriebssystem immutable und zu großen Teilen Read-Only. Hierdurch würde die Anforderung erfüllt (keine Software installierbar). Für klassische RHEL Installationen stellt Red Hat installierbare Software als RPM bereit. `dnf` verifiziert bei Paketinstallation die GPG-Signaturen aus den konfigurierten Repositories (`gpgcheck=1`, Red-Hat-GPG-Schlüssel). Red Hat selbst baut entsprechende Softwarepakete gemäß [SLSA](https://slsa.dev/) Level 3 (Supply-Chain Levels for Software Artifacts) um eine entsprechende Kompromitierung zu verhindern. Real-time-Malware-Scans werden von durch Red Hat nicht supportete Drittanbieter (z. B. [ClamAV](https://access.redhat.com/solutions/22007) via EPEL [Extra Packages for Enterprise Linux](https://access.redhat.com/solutions/3358)) bereitgestellt und können entsprechend der [Third Party Support Guidelines](https://access.redhat.com/articles/third-party-software-support) genutzt werden.
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [SLSA](https://slsa.dev/), [ClamAV](https://access.redhat.com/solutions/22007), [Extra Packages for Enterprise Linux](https://access.redhat.com/solutions/3358), [Image Mode](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/using_image_mode_for_rhel_to_build_deploy_and_manage_operating_systems/index)
+
+### Rules:
+
+  - install_endpoint_security_software,
+  - ensure_gpgcheck_globally_activated
+  - ensure_gpgcheck_never_disabled
+  - ensure_gpgcheck_local_packages
 
 ### Implementation Status: alternative
 

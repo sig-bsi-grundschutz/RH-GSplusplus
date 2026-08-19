@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-19T09:27:37.431615-04:00",
+      "last-modified": "2026-08-19T09:58:31.296975-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2694,6 +2694,38 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "not-applicable"
+                  }
+                ]
+              },
+              {
+                "uuid": "227a775b-cfa4-5cc4-b58c-eb42004c91ab",
+                "control-id": "KONF.7.1",
+                "description": "Echtzeit-Prüfung beim Öffnen oder Installieren wie klassische AV-Scanner liefert RHEL nicht als unterstützten Teil des Produkts. Stattdessen sind mehrere mitigierende Maßnahmen im Einsatz, die darauf abzielen einer Schadcode-Infizierung entgegenzuwirken. Der Image-Mode in Red Hat verhindert das klassische Installieren von Software und erfordert einen Build-Prozess des Betriebssystems vorab. Hierdurch ist das aktive Betriebssystem immutable und zu großen Teilen Read-Only. Hierdurch würde die Anforderung erfüllt (keine Software installierbar). Für klassische RHEL Installationen stellt Red Hat installierbare Software als RPM bereit. `dnf` verifiziert bei Paketinstallation die GPG-Signaturen aus den konfigurierten Repositories (`gpgcheck=1`, Red-Hat-GPG-Schlüssel). Red Hat selbst baut entsprechende Softwarepakete gemäß [SLSA](https://slsa.dev/) Level 3 (Supply-Chain Levels for Software Artifacts) um eine entsprechende Kompromitierung zu verhindern. Real-time-Malware-Scans werden von durch Red Hat nicht supportete Drittanbieter (z. B. [ClamAV](https://access.redhat.com/solutions/22007) via EPEL [Extra Packages for Enterprise Linux](https://access.redhat.com/solutions/3358)) bereitgestellt und können entsprechend der [Third Party Support Guidelines](https://access.redhat.com/articles/third-party-software-support) genutzt werden.\n\nWeitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [SLSA](https://slsa.dev/), [ClamAV](https://access.redhat.com/solutions/22007), [Extra Packages for Enterprise Linux](https://access.redhat.com/solutions/3358), [Image Mode](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/using_image_mode_for_rhel_to_build_deploy_and_manage_operating_systems/index)",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "install_endpoint_security_software"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "ensure_gpgcheck_globally_activated"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "ensure_gpgcheck_never_disabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "ensure_gpgcheck_local_packages"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "alternative"
                   }
                 ]
               }
