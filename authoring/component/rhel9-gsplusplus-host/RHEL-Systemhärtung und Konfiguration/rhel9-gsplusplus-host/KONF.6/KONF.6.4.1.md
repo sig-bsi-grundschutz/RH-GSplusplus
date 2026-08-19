@@ -23,10 +23,14 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Rollenbasierte Verwaltung auf RHEL bindet SSSD an sudo-Regeln und Host-Based Access Control (HBAC) in Red Hat IdM oder LDAP-Schema; sudoers kann aus zentralen Maps bezogen werden. Polkit-Rollen steuern lokale privilegierte GUI-Aktionen. Active-Directory-Umgebungen nutzen oft sudo-Gruppen oder den SSSD-sudo-Provider. RBAC-Modell und Rollendefinitionen sind institutionelle IAM-Vorgaben.
+
+Auf RHEL können Rollen als Berechtigungsgruppe abgebildet werden. Für die jeweiligen Gruppen (`/etc/groups`) können sowohl SELinux Profile als auch entsprechende Berechtigungen auf Dateien, Verzeichnisse oder in `sudo` vergeben werden. Eine zentralisierte Verwaltung auch über mehrere Hosts hinweg bietet hierbei Red Hat IdM. Die Lokalen Gruppen können auch via `sssd` auf Berechtigungsgruppen im zentralen Verzeichnisdienst (IdM, Active Directory, LDAP) verweisen.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
 
-### Implementation Status: partial
+<!-- automatisierte Prüfregeln ergeben hier keinen Sinn. Großteil der Mechanismen in anderen Controls abgedeckt. -->
+<!-- Inhalt hier wichtiger, als die Mechanismen -->
+
+### Implementation Status: not-applicable
 
 ______________________________________________________________________
