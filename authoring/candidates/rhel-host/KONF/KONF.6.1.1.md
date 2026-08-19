@@ -2,7 +2,7 @@
 x-trestle-global:
   catalog:
     title: Datenkapselung
-x-review-status: included
+x-review-status: excluded
 x-default-component: rhel-hardening
 ---
 
@@ -14,7 +14,7 @@ Konfiguration für IT-Systeme KANN Datenkapselung aktivieren.
 
 ## Review
 
-Datenkapselung via Container/Sandboxing
+Für traditionelle Dienste ergänzt SELinux-Domain-Isolation den Datenumfang und Zugriff einzelner Prozesse. Eine vom Betriebssystem unabhängige Daten- & Transportverschlüsselung wird nicht erreicht.
 
 <!-- Human review queue — not assembled into OSCAL until promoted. -->
 <!-- x-review-status: pending | included | excluded -->
