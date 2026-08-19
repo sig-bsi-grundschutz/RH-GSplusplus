@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-19T04:31:55.637866-04:00",
+      "last-modified": "2026-08-19T05:29:56.331929-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2169,6 +2169,85 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "mount_option_nodev_removable_partitions"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "96e1d5b1-c494-5a2b-be7f-57e72a497cbe",
+                "control-id": "KONF.4.1.1",
+                "description": "Auf RHEL wird die Weiterleitung wiederverwendbarer Anmeldeinformationen über OpenSSH primär serverseitig in `/etc/ssh/sshd_config` bzw. Drop-in-Dateien unter `/etc/ssh/sshd_config.d/` unterbunden: `DisableForwarding yes` deaktiviert alle Forwarding-Funktionen einschließlich SSH-Agent-Forwarding, TCP- und X11-Weiterleitung; alternativ lassen sich `AllowAgentForwarding no` und `AllowTcpForwarding no` gezielt setzen. Für Kerberos/GSSAPI-Delegation kann ergänzend `GSSAPIDelegateCredentials no` gesetzt werden. GSSAPI-Ticket-Weiterleitung außerhalb von SSH, Pass-the-Hash aus dem Speicher kompromittierter Dienste oder clientseitig erzwungenes Agent-Forwarding auf Servern mit lockerer sshd-Policy bleiben organisatorisch bzw. im Gesamtdesign zu adressieren.\n\nWeitere Informationen: [Netzwerke absichern](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/htmlsingle/securing_networks/index), [Sichere Kommunikation mit OpenSSH](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/assembly_using-secure-communications-between-two-systems-with-openssh_configuring-basic-system-settings).",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_disable_forwarding"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_disable_x11_forwarding"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_disable_tcp_forwarding"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "423f64dd-b4a6-5078-ad35-15a5603d2d05",
+                "control-id": "KONF.4.4",
+                "description": "Auf RHEL ist SSH der zentrale Fernwartungsweg, für authentifizierte Nutzer. Red Hat selbst kann diesen Weg nicht für unauthorisierte Fernwartungs-Zugriffe verwenden. Die Institution schränkt ihn über `/etc/ssh/sshd_config` und Drop-ins in `sshd_config.d/` weiter ein: Nur autorisierte Konten oder Gruppen (`AllowUsers`/`AllowGroups`/`DenyUsers`/`DenyGroups`), kein direkter Root-Login und PAM-gestützte Authentifizierung (inkl. zentraler Verzeichnisdienste über SSSD) binden den Zugang an die IAM-Vorgaben aus BER. Zusätzlich lassen sich Weiterleitungsfunktionen (X11, TCP, ssh-agent) per `DisableForwarding`, `X11Forwarding` und `AllowTcpForwarding` deaktivieren, um Tunnel- und Clipboard-Risiken zu reduzieren; die systemweite Crypto Policy bindet OpenSSH an aktuelle Verschlüsselungsalgorithmen. Welche Konten, Schlüssel und Ausnahmen gelten, definiert die Institution; RHEL erzwingt keine konkrete AllowList ohne explizite Konfiguration.\n\nWeitere Informationen: [Sichere Kommunikation mit OpenSSH](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/securing_networks/assembly_using-secure-communications-between-two-systems-with-openssh_securing-networks), [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Systemweite kryptographische Policies](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening).",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_limit_user_access"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_disable_root_login"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_enable_pam"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_disable_forwarding"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_disable_x11_forwarding"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_disable_tcp_forwarding"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "sshd_include_crypto_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_snmpd_disabled"
                   },
                   {
                     "name": "implementation-status",

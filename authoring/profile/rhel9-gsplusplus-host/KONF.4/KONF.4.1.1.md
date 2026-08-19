@@ -16,6 +16,8 @@ Konfiguration für IT-Systeme SOLLTE die Weiterleitung mehrfach verwendbarer Anm
 
 # Editable Content
 
+Sowohl GSSAPI Delegation (die Weiterleitung des Kerberos TGT) als auch SSH-Agent Forwarding werden als Komfort-Funktionen gesehen, die ein Sicherheits-Risiko mit sich tragen.
+
 <!-- Make additions and edits below -->
 <!-- The above represents the contents of the control as received by the profile, prior to additions. -->
 <!-- If the profile makes additions to the control, they will appear below. -->

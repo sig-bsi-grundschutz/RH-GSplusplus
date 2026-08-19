@@ -23,10 +23,21 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Auf RHEL ist SSH der zentrale Fernwartungsweg; die Institution schränkt ihn über `/etc/ssh/sshd_config` und Drop-ins in `sshd_config.d/` ein: Nur autorisierte Konten oder Gruppen (`AllowUsers`/`AllowGroups`/`DenyUsers`/`DenyGroups`), kein direkter Root-Login, keine leeren Passwörter und PAM-gestützte Authentifizierung (inkl. zentraler Verzeichnisdienste über SSSD) binden den Zugang an die IAM-Vorgaben aus BER. Zusätzlich lassen sich Weiterleitungsfunktionen (X11, TCP, ssh-agent) per `DisableForwarding`, `X11Forwarding` und `AllowTcpForwarding` deaktivieren, um Tunnel- und Clipboard-Risiken zu reduzieren; die systemweite Crypto Policy bindet OpenSSH über `50-redhat.conf` an aktuelle Verschlüsselungsalgorithmen. Nicht benötigte Fernwartungsdienste wie SNMP können wie andere Netzwerkdienste per systemd deaktiviert werden. Welche Konten, Schlüssel und Ausnahmen gelten, definiert die Institution; RHEL erzwingt keine konkrete AllowList ohne explizite Konfiguration.
+Auf RHEL ist SSH der zentrale Fernwartungsweg, für authentifizierte Nutzer. Red Hat selbst kann diesen Weg nicht für unauthorisierte Fernwartungs-Zugriffe verwenden. Die Institution schränkt ihn über `/etc/ssh/sshd_config` und Drop-ins in `sshd_config.d/` weiter ein: Nur autorisierte Konten oder Gruppen (`AllowUsers`/`AllowGroups`/`DenyUsers`/`DenyGroups`), kein direkter Root-Login und PAM-gestützte Authentifizierung (inkl. zentraler Verzeichnisdienste über SSSD) binden den Zugang an die IAM-Vorgaben aus BER. Zusätzlich lassen sich Weiterleitungsfunktionen (X11, TCP, ssh-agent) per `DisableForwarding`, `X11Forwarding` und `AllowTcpForwarding` deaktivieren, um Tunnel- und Clipboard-Risiken zu reduzieren; die systemweite Crypto Policy bindet OpenSSH an aktuelle Verschlüsselungsalgorithmen. Welche Konten, Schlüssel und Ausnahmen gelten, definiert die Institution; RHEL erzwingt keine konkrete AllowList ohne explizite Konfiguration.
 
 Weitere Informationen: [Sichere Kommunikation mit OpenSSH](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/securing_networks/assembly_using-secure-communications-between-two-systems-with-openssh_securing-networks), [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Systemweite kryptographische Policies](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening).
 
-### Implementation Status: partial
+### Rules:
+
+  - sshd_limit_user_access
+  - sshd_disable_root_login
+  - sshd_enable_pam
+  - sshd_disable_forwarding
+  - sshd_disable_x11_forwarding
+  - sshd_disable_tcp_forwarding
+  - sshd_include_crypto_policy
+  - service_snmpd_disabled
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
