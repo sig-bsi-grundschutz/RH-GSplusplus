@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-13T09:41:01.645019-04:00",
+      "last-modified": "2026-08-19T03:39:41.985071-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -130,6 +130,35 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "51b007b7-5895-514b-887d-e16bf177d106",
+                "control-id": "BER.2.4",
+                "description": "Änderungen an identitätsrelevanten Dateien können mit auditd-Regeln erfasst werden; Identitätslebenszyklus und IAM-Prozesse verbleiben in der Verantwortung der Institution (PAM, SSSD, Verzeichnisintegration).",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "audit_rules_usergroup_modification_passwd"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ],
+                "links": [
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
+                    "rel": "reference",
+                    "text": "Audit-Aufzeichnungen konfigurieren"
+                  },
+                  {
+                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index",
+                    "rel": "reference",
+                    "text": "Authentifizierung und Autorisierung"
                   }
                 ]
               },
@@ -1518,35 +1547,6 @@
             "description": "Grundschutz++-Anforderungen, umgesetzt durch RHEL-Protokollierung und Detektion (Artefakt rhel9-gsplusplus-host).",
             "implemented-requirements": [
               {
-                "uuid": "51b007b7-5895-514b-887d-e16bf177d106",
-                "control-id": "BER.2.4",
-                "description": "Änderungen an identitätsrelevanten Dateien können mit auditd-Regeln erfasst werden; Identitätslebenszyklus und IAM-Prozesse verbleiben in der Verantwortung der Institution (PAM, SSSD, Verzeichnisintegration).",
-                "props": [
-                  {
-                    "name": "Rule_Id",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "audit_rules_usergroup_modification_passwd"
-                  },
-                  {
-                    "name": "implementation-status",
-                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
-                    "value": "partial"
-                  }
-                ],
-                "links": [
-                  {
-                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening",
-                    "rel": "reference",
-                    "text": "Audit-Aufzeichnungen konfigurieren"
-                  },
-                  {
-                    "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index",
-                    "rel": "reference",
-                    "text": "Authentifizierung und Autorisierung"
-                  }
-                ]
-              },
-              {
                 "uuid": "68ea2ac9-d5a7-579b-ab6f-0bfc8f317d84",
                 "control-id": "DET.3.1.1",
                 "description": "RHEL auditd kann Erfolg und Fehlschlag von Authentisierungen protokollieren, wenn Audit-Regeln gemäß Produktdokumentation und scap-security-guide-Baselines konfiguriert sind.",
@@ -2117,6 +2117,63 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "planned"
+                  }
+                ]
+              },
+              {
+                "uuid": "047f2832-a1f8-53f6-9359-d22c742739e4",
+                "control-id": "KONF.3.8",
+                "description": "Das automatische Einbinden von Wechselmedien unterbindet RHEL auf mehreren Ebenen: In GNOME-Arbeitsplätzen deaktiviert dconf (`automount` und `automount-open` auf `false`) das automatische Mounten und Öffnen eingesteckter Medien. Server ohne GUI nutzen keine Desktop-Automount-Funktion; Das automatisierte Mounten mittels `autofs` von NFS oder Wechselmedien kann ebenfalls unterbunden werden, indem `autofs` als Service deaktiviert oder das Paket nicht installiert wird. Ebenfalls ist es möglich den USB-Storage komplett über das entfernen des usb-storage Kernel Moduls zu deaktivieren. Für eingebundene Wechsel-Partitionen empfehlen sich Mount-Optionen wie `noexec`, `nosuid` und `nodev`, damit Inhalte nicht ausgeführt werden und in ihren Rechten möglichst beschränkt bleiben. Institutionelle Freigabe einzelner Medientypen und Ausnahmen für Backup-Geräte bleiben organisatorisch.\n\nWeitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_autofs_disabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_autofs_removed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "kernel_module_usb-storage_disabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "dconf_gnome_disable_automount"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "dconf_gnome_disable_automount_open"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "dconf_gnome_disable_autorun"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "mount_option_noexec_removable_partitions"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "mount_option_nosuid_removable_partitions"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "mount_option_nodev_removable_partitions"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               }
