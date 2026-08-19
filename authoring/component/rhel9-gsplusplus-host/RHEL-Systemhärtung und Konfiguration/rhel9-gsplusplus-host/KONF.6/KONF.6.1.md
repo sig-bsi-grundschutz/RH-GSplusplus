@@ -23,10 +23,18 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Anwendungsberechtigungen beschränkt RHEL primär über SELinux im enforcing-Modus: Prozesse laufen in getrennten Domains mit minimalen Rechten auf Dateien, Capabilities und Netzwerk. Datei-POSIX-Rechte, Capability-Binding und systemd-Unit-Hardening (`ProtectSystem`, `PrivateTmp`) reduzieren zusätzlich unnötige Privilegien. Die Institution definiert, welche Anwendungen welche Profile nutzen und ob Drittanwendungen in isolierten Containern betrieben werden; RHEL setzt keine automatische Least-Privilege-Analyse pro App durch.
+Anwendungsberechtigungen beschränkt RHEL primär über SELinux im enforcing-Modus, der im Standard aktiviert ist und bereits ab Boot aktiv ist: Prozesse laufen in getrennten Domains mit minimalen Rechten auf Dateien, Capabilities und Netzwerk-Ports. Datei-POSIX-Rechte, Capability-Binding und systemd-Unit-Hardening (`ProtectSystem`, `PrivateTmp`) reduzieren zusätzlich unnötige Privilegien. Die notwendigen Berechtigungen/Anwendungsprofile werden bei Software, die aus Red Hat Repositories stammt typischerweise mitgeliefert und installiert. Zusätzlich ist es möglich Anwendungen auf RHEL containerisiert mittels `podman` auszuführen und sie so zusätzlich zu kapseln.
 
 Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
-### Implementation Status: partial
+### Rules:
+
+  - selinux_state
+  - selinux_policytype
+  - selinux_not_disabled
+  - grub2_enable_selinux
+  - selinux_confinement_of_daemons
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
