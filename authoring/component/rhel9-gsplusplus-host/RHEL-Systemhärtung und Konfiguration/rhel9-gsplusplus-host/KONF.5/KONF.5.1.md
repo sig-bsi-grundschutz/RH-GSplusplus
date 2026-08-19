@@ -23,10 +23,28 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-RHEL erzwingt Systemzugang über den PAM-Stack, den `authselect` mit getesteten Profilen (z. B. `sssd` oder `local`) konsistent in `/etc/pam.d/system-auth` und `password-auth` konfiguriert; Anmeldungen an Konsole, GDM, `su`/`sudo` und — mit `UsePAM yes` in `sshd_config` — SSH laufen damit durch dieselbe Authentifizierungskette. PAM-Module ohne `nullok` verhindern Logins ohne gesetztes Passwort; der Notfall-Rescue-Modus erfordert zusätzliche Authentifizierung. Für grafische Arbeitsplätze kann GNOME per dconf Bildschirmsperre nach Leerlauf und automatische Sperre bei Aktivierung aktivieren. An zentrale Identitätsquellen (IdM, Active Directory) bindet SSSD Identitäten und Berechtigungen per NSS/PAM an — die konkrete IAM-Richtlinie (Passwortqualität, MFA, Kryptografie gemäß BER) legt die Institution fest; Biometrie allein als Faktor oder Kiosk-Ausnahmen sind organisatorisch zu steuern. Nicht-PAM-Dienste (z. B. SNMP, RDP falls installiert) sowie reine Server ohne GUI deckt RHEL nicht flächendeckend ab.
+RHEL erzwingt den Systemzugang über den PAM-Stack, den `authselect` mit getesteten Profilen (z. B. `sssd` oder `local`) konsistent konfiguriert. Bei Anbindung von PAM an die entsprechenden Tools (z.B. `sshd`) durchlaufen Anmeldungen damit durch dieselbe Authentifizierungskette. Zentrale Identitätsquellen (IdM, Active Directory) bindet SSSD Identitäten und Berechtigungen per NSS/PAM an. `sshd` berücksichtigt ebenfalls die crypto-policy des systems. Bei RHEL-Systemen mit GUI ist der automatische Login zu de- und Bildschirmschoner zu aktivieren.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Benutzerauthentifizierung mit authselect konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/configuring-user-authentication-using-authselect_configuring-authentication-and-authorization-in-rhel)
 
-### Implementation Status: partial
+### Rules:
+
+  - enable_authselect
+  - sshd_enable_pam
+  - sssd_enable_pam_services
+  - accounts_password_pam_modules_in_authselect_profile
+  - accounts_password_pam_unix_enabled
+<!-- GUI only-->
+  - gnome_gdm_disable_automatic_login
+  - gnome_gdm_disable_unattended_automatic_login
+  - dconf_gnome_screensaver_idle_delay
+  - dconf_gnome_screensaver_lock_enabled
+  - dconf_gnome_screensaver_lock_delay
+  - dconf_gnome_screensaver_user_locks
+<!-- Crypto Stuff only-->
+  - configure_crypto_policy
+  - sshd_include_crypto_policy
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
