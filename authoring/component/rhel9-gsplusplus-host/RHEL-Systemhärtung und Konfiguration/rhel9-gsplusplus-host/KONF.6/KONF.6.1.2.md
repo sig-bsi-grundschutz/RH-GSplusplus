@@ -23,10 +23,18 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-RHEL trennt Anwendungen technisch über Linux-Namespaces (PID, Mount, UTS, Netzwerk, User) und cgroups, die systemd-Slices und die Container-Runtime Podman nutzen. SELinux weist Prozessen unterschiedliche Security Domains zu und unterbindet querschnittliche Zugriffe. Systemd-Unit-Optionen (`PrivateDevices`, `RestrictNamespaces`) können weitere Grenzen setzen. Welche Isolationsstufe (Prozess, Container, VM) pro Workload gilt, definiert die Institution.
+Die Isolation von Anwendungen ermöglicht RHEL primär über SELinux im enforcing-Modus, der im Standard aktiviert ist und bereits ab Boot aktiv ist: Prozesse laufen in getrennten Domains mit minimalen Rechten auf Dateien, Capabilities und Netzwerk-Ports. Datei-POSIX-Rechte, Capability-Binding und systemd-Unit-Hardening (`ProtectSystem`, `PrivateTmp`) reduzieren zusätzlich unnötige Privilegien. Die notwendigen Berechtigungen/Anwendungsprofile werden bei Software, die aus Red Hat Repositories stammt typischerweise mitgeliefert und installiert. Zusätzlich ist es möglich Anwendungen auf RHEL containerisiert mittels `podman` auszuführen und sie so zusätzlich zu kapseln. Es ist ebenfalls möglich auf einem RHEL Host mittels `kvm` und `qemu` entsprechende virtuelle Maschinen zu erzeugen und Workloads so zu kapseln. Dies ist jedoch gerade für größere Umgebungen keine Lösung, die auch Hochverfügbarkeitsaspekte berücksichtigt. In solchen Fällen sollte auf Red Hat OpenShift-Virtualization oder 3rd Party Virtualisierungslösungen zurückgegriffen werden. Die feste Zuordnung von Containern sollte maximal zu einer Container-Host-Gruppe erfolgen um Verfügbarkeitsziele zu erreichen.
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [Grundlegende Systemeinstellungen](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index).
+Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
-### Implementation Status: partial
+### Rules:
+
+  - selinux_state
+  - selinux_policytype
+  - selinux_not_disabled
+  - grub2_enable_selinux
+  - selinux_confinement_of_daemons
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
