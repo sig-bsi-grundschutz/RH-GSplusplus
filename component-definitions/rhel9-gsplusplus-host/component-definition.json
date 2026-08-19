@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-19T09:07:34.363734-04:00",
+      "last-modified": "2026-08-19T09:27:37.431615-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2682,6 +2682,18 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "4ef127ac-67a3-5c0a-aa7a-7bfe8883039a",
+                "control-id": "KONF.6.4.1",
+                "description": "Auf RHEL können Rollen als Berechtigungsgruppe abgebildet werden. Für die jeweiligen Gruppen (`/etc/groups`) können sowohl SELinux Profile als auch entsprechende Berechtigungen auf Dateien, Verzeichnisse oder in `sudo` vergeben werden. Eine zentralisierte Verwaltung auch über mehrere Hosts hinweg bietet hierbei Red Hat IdM. Die Lokalen Gruppen können auch via `sssd` auf Berechtigungsgruppen im zentralen Verzeichnisdienst (IdM, Active Directory, LDAP) verweisen.\n\nWeitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "not-applicable"
                   }
                 ]
               }
