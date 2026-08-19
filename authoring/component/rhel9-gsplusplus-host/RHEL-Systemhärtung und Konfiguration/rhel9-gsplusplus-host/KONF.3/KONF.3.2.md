@@ -23,10 +23,15 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-RHEL verschlüsselt integrierte Festspeichermedien über LUKS/dm-crypt (`cryptsetup`): Bei der Installation kann Anaconda oder Kickstart (`--encrypted`) Partitionen als `crypto_LUKS` anlegen; bestehende Blockgeräte lassen sich nachträglich mit LUKS2 verschlüsseln (`cryptsetup reencrypt`). Standardalgorithmus ist `aes-xts-plain64` mit 512-Bit-Schlüssel. ComplianceAsCode-Regeln prüfen den LUKS-Typ persistenter Partitionen (`encrypt_partitions`) und die Installation von `cryptsetup` (`package_cryptsetup-luks_installed`). RHEL erzwingt keine Vollverschlüsselung — die Entscheidung, Schlüsselverwaltung (Passphrase, optional NBDE/Clevis) und ggf. Hardware-Self-Encrypting-Drives liegen bei der Institution; ein reiner Software-Ansatz über LUKS deckt die in der Anleitung genannte dm-crypt-Variante ab.
+RHEL kann integrierte Festspeichermedien über LUKS (`cryptsetup`) verschlüsseln: Bei der Installation kann Anaconda oder Kickstart (`--encrypted`) Partitionen als `crypto_LUKS` anlegen. Bestehende Blockgeräte lassen sich nachträglich mit LUKS2 verschlüsseln (`cryptsetup`). RHEL erzwingt keine Vollverschlüsselung — die Entscheidung, Schlüsselverwaltung (Passphrase, optional Network Bound Device Encryption/Clevis) und ggf. Hardware-Self-Encrypting-Drives liegen bei der Institution.
 
 Weitere Informationen: [Blockgeräte mit LUKS verschlüsseln](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/encrypting-block-devices-using-luks_security-hardening)
 
-### Implementation Status: partial
+### Rules:
+
+  - encrypt_partitions
+  - package_cryptsetup-luks_installed
+
+### Implementation Status: implemented
 
 ______________________________________________________________________

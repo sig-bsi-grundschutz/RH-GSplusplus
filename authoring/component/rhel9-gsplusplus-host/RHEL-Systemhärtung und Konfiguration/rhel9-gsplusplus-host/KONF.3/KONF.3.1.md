@@ -19,10 +19,10 @@ ______________________________________________________________________
 
 ## What is the solution and how is it implemented?
 
-RHEL stellt hardwaregestützte Schlüsselaufbewahrung über TPM 2.0 und PKCS#11-Geräte bereit: Das Clevis-Framework (Policy-Based Decryption) bindet mit dem tpm2-Pin LUKS-Volumeschlüssel an einen TPM-2.0-Chip, sodass der Master-Key manipulationsgeschützt im Hardwaremodul verbleibt; der pkcs11-Pin sowie Pakete wie opensc und tpm2-pkcs11 ermöglichen dieselbe Funktion über Smartcards oder HSM. Die erforderlichen Komponenten (tpm2-tools, tpm2-tss, clevis-pin-tpm2) sind in RHEL 9 verfügbar, werden aber nicht standardmäßig aktiviert — die Institution muss TPM-Hardware bzw. PKCS#11-Geräte bereitstellen und die Bindung (z. B. `clevis luks bind -d <device> tpm2 …`) selbst konfigurieren. Trusted Execution Environments oder dedizierte Security Components außerhalb von TPM/PKCS#11 erzwingt RHEL nicht; ohne vorhandene TPM- oder Token-Hardware bleibt nur softwarebasierte Schlüsselverwaltung.
+RHEL kann TPM 2.0  als einen kryptographischen Hardwarespeicher einbinden: Schlüssel und Geheimnisse können im Trusted Platform Module erzeugt, gespeichert und nur unter definierten Bedingungen freigegeben werden (z. B. persistente Schlüsselobjekte, versiegelte Geheimnisse an Platform Configuration Registers). Die Werkzeuge `tpm2-tools` und die Bibliothek `tpm2-tss` sind in RHEL 9 enthalten; mit `tpm2-pkcs11` können Anwendungen Schlüssel über eine PKCS#11-Schnittstelle nutzen, ohne dass private Schlüsselmaterial den TPM-Chip verlässt. TPM-Hardware (Firmware- oder Diskreter-Chip) wird von RHEL nicht erzwungen — die Institution muss sie bereitstellen, aktivieren und die Schlüsselverwaltung selbst konfigurieren.
 
-Weitere Informationen: [Policy-Based Decryption (Clevis/TPM2)](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/configuring-automated-unlocking-of-encrypted-volumes-using-policy-based-decryption_security-hardening), [Blockgeräte mit LUKS verschlüsseln](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/encrypting-block-devices-using-luks_security-hardening).
+Weitere Informationen:[Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
-### Implementation Status: partial
+### Implementation Status: planned
 
 ______________________________________________________________________
