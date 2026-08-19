@@ -23,10 +23,18 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Die primäre Fernwartung auf RHEL erfolgt über OpenSSH (`sshd`). Der Dienst bindet Anmeldeversuche an PAM (`UsePAM yes`), sodass dieselben Identitätsquellen wie bei lokalen Sitzungen greifen — lokale Konten, SSSD-angebundene Verzeichnisdienste (IdM, Active Directory, LDAP) sowie optional Smartcard oder Kerberos über PAM-Module. Unsichere Umgehungen wie leere Passwörter (`PermitEmptyPasswords no`), `.rhosts`- und hostbasierte Authentifizierung werden deaktiviert; öffentliche Schlüssel können ergänzend per `PubkeyAuthentication` genutzt werden. Die systemweite Crypto Policy wird über das OpenSSH-Drop-in eingebunden, sodass Transport- und Authentisierungsverfahren den kryptographischen Anforderungen entsprechen. Weitere in der Guidance genannte Fernwartungsprotokolle (RDP, proprietäre Remote-Support-Lösungen) sowie optionale Web-Konsolen wie Cockpit sind separate Dienste mit eigener Konfiguration; deren Authentifizierung muss institutionell an dieselben IAM-Vorgaben angepasst werden.
+Die primäre Fernwartung auf RHEL erfolgt über OpenSSH (`sshd`). Der Dienst bindet Anmeldeversuche an PAM (`UsePAM yes`), sodass dieselben Identitätsquellen wie bei lokalen Sitzungen greifen. Ebenfalls kann `sshd` so konfiguriert werden, dass keine Host-basierte Authentifizierung erfolgt (`HostbasedAuthentication no` und `IgnoreRhosts yes`). Die systemweite Crypto Policy wird über das OpenSSH-Drop-in eingebunden, sodass Transport- und Authentisierungsverfahren den kryptographischen Anforderungen entsprechen.
 
 Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index).
 
-### Implementation Status: partial
+### Rules:
+
+  - sshd_enable_pam
+  - sshd_disable_empty_passwords
+  - disable_host_auth
+  - sshd_disable_rhosts
+  - sshd_include_crypto_policy
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
