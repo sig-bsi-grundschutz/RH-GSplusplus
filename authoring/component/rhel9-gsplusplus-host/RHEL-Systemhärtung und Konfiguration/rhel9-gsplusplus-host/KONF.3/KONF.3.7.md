@@ -23,10 +23,20 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Unautorisierte USB- und andere Peripheriegeräte kann RHEL über USBGuard einschränken: Der `usbguard`-Dienst wertet eine Policy in `/etc/usbguard/rules.conf` aus und blockiert Geräte, die nicht explizit erlaubt sind; Tastatur und Maus lassen sich über eigene Allow-Regeln freischalten. Alternativ oder ergänzend kann der Kernel-Treiber `usb-storage` per modprobe-Blacklist deaktiviert werden, sodass USB-Massenspeicher nicht angebunden werden. Bluetooth-Geräte können über `rfkill` oder Dienstkonfiguration eingeschränkt werden. Welche Geräteklassen für einen Einsatzzweck zugelassen sind und wie Policy-Änderungen freigegeben werden, legt die Institution fest — RHEL liefert Mechanismen, keine Allowlist.
+Sofern USB benötigt wird, kann RHEL die Autorisierung der Geräte über USBGuard einschränken. Der `usbguard`-Dienst wertet eine Policy in `/etc/usbguard/rules.conf` aus und blockiert Geräte, die nicht explizit erlaubt sind. Sofern USB nicht benötigt wird, kann der Kernel-Treiber `usb-storage` per modprobe-Blacklist deaktiviert werden, sodass USB-Massenspeicher nicht angebunden werden. Ebenfalls können weitere nicht benötigte Kernel-Treiber wie `bluetooth`, `firewire` deaktiviert werden. Bei virtuellen Systemen ist die Deaktivierung nicht gewünschter Schnittstellen an der virtualisierten Hardware zu präferieren.
 
 Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
-### Implementation Status: partial
+### Rules:
+
+  - usbguard_generate_policy
+  - package_usbguard_installed
+  - service_usbguard_enabled
+  - service_bluetooth_disabled
+  - kernel_module_usb-storage_disabled
+  - kernel_module_bluetooth_disabled
+  - kernel_module_firewire-core_disabled
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
