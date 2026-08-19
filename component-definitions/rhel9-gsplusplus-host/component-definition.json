@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-19T08:05:12.882620-04:00",
+      "last-modified": "2026-08-19T08:54:24.577079-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2146,6 +2146,53 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "package_cryptsetup-luks_installed"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "4cc4b511-d5ec-51be-94a4-c13501c917ff",
+                "control-id": "KONF.3.7",
+                "description": "Sofern USB benötigt wird, kann RHEL die Autorisierung der Geräte über USBGuard einschränken. Der `usbguard`-Dienst wertet eine Policy in `/etc/usbguard/rules.conf` aus und blockiert Geräte, die nicht explizit erlaubt sind. Sofern USB nicht benötigt wird, kann der Kernel-Treiber `usb-storage` per modprobe-Blacklist deaktiviert werden, sodass USB-Massenspeicher nicht angebunden werden. Ebenfalls können weitere nicht benötigte Kernel-Treiber wie `bluetooth`, `firewire` deaktiviert werden. Bei virtuellen Systemen ist die Deaktivierung nicht gewünschter Schnittstellen an der virtualisierten Hardware zu präferieren.\n\nWeitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "usbguard_generate_policy"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_usbguard_installed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_usbguard_enabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_bluetooth_disabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "kernel_module_usb-storage_disabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "kernel_module_bluetooth_disabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "kernel_module_firewire-core_disabled"
                   },
                   {
                     "name": "implementation-status",
