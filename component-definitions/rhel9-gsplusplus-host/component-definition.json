@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-19T07:29:19.642602-04:00",
+      "last-modified": "2026-08-19T07:48:17.461460-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2262,6 +2262,28 @@
                     "name": "Rule_Id",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "sshd_disable_tcp_forwarding"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
+                  }
+                ]
+              },
+              {
+                "uuid": "bd0b5587-ed17-5dd1-8fa2-af1f5f68e056",
+                "control-id": "KONF.4.2",
+                "description": "RHEL konfiguriert die vom System verwendeten DNS-Resolver im Standard via NetworkManager. In Verbindungsprofilen (`nmcli`) trägt die Institution autorisierte Resolver — eigene oder externe Anbieter — als `ipv4.dns`/`ipv6.dns` ein. Diese Informationen werden im Optimalfall automatisiert via DHCP-Server verteilt. NetworkManager schreibt diese Einträge standardmäßig in `resolv.conf`. Eine manuelle Konfiguration der DNS-Server in `resolv.conf` ist ebenfalls möglich. Für kontinuierliche Auflösung auch beim Ausfall eines DNS-Servers sollten mindestens zwei Nameserver eingetragen sein. Welche IP-Adressen als autorisiert gelten und ob nur institutionelle Resolver erlaubt sind, definiert die Institution in Baseline und Provisioning — eine automatische Allowlist-Prüfung gibt es in RHEL nicht.\n\nWeitere Informationen: [Netzwerkkonfiguration und -verwaltung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/index), [Manuelle Konfiguration von /etc/resolv.conf](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/manually-configuring-the-etc-resolv-conf-file_configuring-and-managing-networking)",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "networkmanager_dns_mode"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "network_configure_name_resolution"
                   },
                   {
                     "name": "implementation-status",
