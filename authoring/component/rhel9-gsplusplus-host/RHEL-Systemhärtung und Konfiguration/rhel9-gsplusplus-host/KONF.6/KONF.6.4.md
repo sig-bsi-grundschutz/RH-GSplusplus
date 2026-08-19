@@ -23,10 +23,22 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Privilegierte Operationen steuert RHEL über `sudo` mit granularer sudoers-Konfiguration (`Cmnd_Alias`, Logging, kein pauschales `NOPASSWD`) und Polkit-Regeln für Desktop- und Dienst-Aktionen. Direkter Root-Login per SSH ist üblich deaktiviert (`PermitRootLogin no`); lokale Administration erfolgt über persönliche privilegierte Konten. Zentrales IdM kann sudo-Regeln und HBAC aus Verzeichnisdiensten beziehen. Die konkrete Command-Allowlist liegt bei der Institution.
+Privilegierte Operationen steuert RHEL über `sudo` mit granularer sudoers-Konfiguration (`Cmnd_Alias`, Logging, kein pauschales `NOPASSWD`) und Polkit-Regeln für Desktop- und Dienst-Aktionen. Direkter Root-Login per SSH ist üblicherweise deaktiviert (`PermitRootLogin no`). Red Hat IdM kann sudo-Regeln zentral im Verzeichnisdienst verwalten. Es ist empfehlenswert ein zentrales Konfigurationsmanagement (z.B. Ansible) einzusetzen, um einheitliche Vorgehensweisen bei der Nutzung von priveligierten Systemfunktionen zu gewährleisten. Hierdurch kann einem Großteil von Administratoren die notwendigen Berechtigungen entzogen werden, was sowohl die Anzahl an möglichen Innentätern als auch Konfigurationsfehler reduziert.
 
 Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
 
-### Implementation Status: partial
+
+### Rules:
+
+  - sudo_restrict_privilege_elevation_to_authorized
+  - sudo_require_authentication
+  - sudoers_explicit_command_args
+  - sudoers_no_command_negation
+  - sshd_disable_root_login
+  - use_pam_wheel_for_su
+  - accounts_no_uid_except_zero
+  - package_sudo_installed
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
