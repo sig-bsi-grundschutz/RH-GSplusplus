@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-20T04:33:16.008294-04:00",
+      "last-modified": "2026-08-20T05:04:51.368978-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2778,6 +2778,48 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "alternative"
+                  }
+                ]
+              },
+              {
+                "uuid": "d9e23948-28ba-5651-aabb-8fc748dfa5d4",
+                "control-id": "KONF.7.3",
+                "description": "AIDE (Advanced Intrusion Detection Environment) ermöglicht Intrusion Detection: Eine Baseline-Dateidatenbank wird erstellt und per systemd-Timer oder Cron periodisch verglichen; Abweichungen signalisieren unautorisierte Änderungen (Integrität). Ebenfalls bietet IMA (Integrity Measurement Architecture) eine Möglichkeit um zusätzliche Integritätsprüfungen des Kernels und von Dateien durchzuführen. In Kombination mit entsprechenden `auditd` Konfigurationen, können hierdurch an zentralen Stellen (i.e. SIEM) Integritätsereignisse der Hosts gesammelt werden. Zusätzlich kann über `fapolicy` eine Allow-List von Anwendungen implementiert werden, die eine Ausbreitung von Schadcode zusätzlich erschweren und einschränken kann.\n\nWeitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/configuring-audit-records_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [Integrity Measurement Architecture](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_monitoring_and_updating_the_kernel/enhancing-security-with-the-kernel-integrity-subsystem_assembly_managing-kernel-command-line-parameters-with-uki)",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_aide_installed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "aide_build_database"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "aide_periodic_cron_checking"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "aide_scan_notification"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_audit_installed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_auditd_enabled"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
                   }
                 ]
               }
