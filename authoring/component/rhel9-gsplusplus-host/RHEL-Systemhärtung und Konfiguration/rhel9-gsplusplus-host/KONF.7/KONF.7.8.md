@@ -23,10 +23,10 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Mehrere unterschiedliche Erkennungsengines parallel sind in RHEL nicht als supported Bundle enthalten: Kombination AIDE, auditd und optional Drittanbieter-AV ist eine institutionelle Dual-Engine-Strategie. Der supported Stack bleibt Integritätsprüfung plus Paketsignatur; eine zweite Engine (z. B. ClamAV aus EPEL) ist unsupported Third Party.
+Beim Einsatz von mehreren Scan-Engines auf einem RHEL Host ist eine gegenseitige negative Beeinflussung der Software zu erwarten.
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Is any virus protection software needed for Red Hat Enterprise Linux?](https://access.redhat.com/solutions/9203)
 
-### Implementation Status: alternative
+### Implementation Status: not-applicable
 
 ______________________________________________________________________
