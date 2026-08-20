@@ -23,9 +23,15 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Skript-Ausführung kann fapolicyd nach Pfad, Hash oder MIME-Typ einschränken; SELinux-Booleans wie `selinuxuser_execstack` härten Speicher-Execution. `noexec`-Mounts blockieren Skripte auf eingebundenen Medien. Interpretierte Sprachen (Python, Shell) erfordern explizite Allow-Regeln in der fapolicyd-Policy.
+Skript-Ausführung kann über `fapolicyd` eingeschränkt werden. Mitgeliefert wird ein Regelwerk, welches über `/usr/share/fapolicyd/sample-rules/72-shell.rules` Shell-Skripte explizit freigibt. Sofern dies nicht implementiert wird, sind Shell-Skripte verboten, da interpretierte Sprachen (Python, Shell)  explizite Allow-Regeln in der fapolicyd-Policy erfordern.
 
 Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+
+### Rules:
+
+  - fapolicy_default_deny
+  - package_fapolicyd_installed
+  - service_fapolicyd_enabled
 
 ### Implementation Status: partial
 

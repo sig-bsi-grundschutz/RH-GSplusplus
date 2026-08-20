@@ -23,10 +23,16 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Verschiedene Bibliotheken stellt Red Hat bereits mit RHEL bereit. Diese können über `dnf` installiert werden. Da diese Bibliotheken durch Red Hat nach SLSA Level3 gebaut werden, kann hier den Bibliotheken ein höheres Vertrauen entgegen gebracht werden. Zusätzlich stellt Red Hat für Entwickler im Rahmen von *Red Hat Advanced Developer Subscription* eine Trusted Library für weitere Softwarepakete bereit, die nach den gleichen Standards gebaut werden. Um die Anforderung konsequent umzusetzen, empfiehlt sich, die RHEL Systeme air-gapped zu betreiben und ausschließlich erlaubte Software in Repositories für die Systeme bereitzustellen. Dies kann mittels *Red Hat Satellite* und/oder ergänzende Artefakt-Stores erfolgen. Durch eine Netzwerkseitige Zugriffsunterbindung der RHEL-Systeme an das Internet, bleibt lediglich der Artefakt-Speicher als Quelle für vertrauenswürdige Software-Bibliotheken. Ein Prozess muss hierbei sicherstellen, dass die benötigte Software auch zur Verfügung steht und entsprechende Kontrollen der Institution (Zulieferer, Qualitätsmerkmale, Support, etc) eingehalten werden.
+Verschiedene Bibliotheken stellt Red Hat bereits mit RHEL bereit. Diese können über `dnf` installiert werden. Da diese Bibliotheken durch Red Hat nach SLSA Level3 gebaut werden, kann hier den Bibliotheken ein höheres Vertrauen entgegen gebracht werden. Zusätzlich stellt Red Hat für Entwickler im Rahmen von *Red Hat Advanced Developer Subscription* eine Trusted Library für weitere Softwarepakete bereit, die nach den gleichen Standards gebaut werden. Um die Anforderung konsequent umzusetzen, empfiehlt sich, die RHEL Systeme air-gapped zu betreiben und ausschließlich erlaubte Software in Repositories für die Systeme bereitzustellen. Dies kann mittels *Red Hat Satellite* und/oder ergänzende Artefakt-Stores erfolgen. Durch eine Netzwerkseitige Zugriffsunterbindung der RHEL-Systeme an das Internet, bleibt lediglich der Artefakt-Speicher als Quelle für vertrauenswürdige Software-Bibliotheken. Ein Prozess muss hierbei sicherstellen, dass die benötigte Software auch zur Verfügung steht und entsprechende Kontrollen der Institution (Zulieferer, Qualitätsmerkmale, Support, etc) eingehalten werden. Zusätzlich ist es über `fapolicyd` Regeln möglich, nur vertrauenswürdige Software auszuführen. Ebenfalls sind hier Entscheidungen auf Basis von Sprachen, Vetrauenslevel und anderen Kriterien zu treffen.
 
 Weitere Informationen: [Red Hat Trusted Libraries](https://docs.redhat.com/en/documentation/red_hat_trusted_libraries/1.0), [Red Hat Satellite - Custom File Type Repositories](https://docs.redhat.com/en/documentation/red_hat_satellite/6.19/html/managing_content/managing-custom-file-type-content)
 
-### Implementation Status: planned
+### Rules:
+
+  - fapolicy_default_deny
+  - package_fapolicyd_installed
+  - service_fapolicyd_enabled
+
+### Implementation Status: partial
 
 ______________________________________________________________________
