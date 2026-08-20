@@ -23,7 +23,7 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Host-basierte Erkennung von Netzangriffen ist in RHEL nicht als integrierter Dienst enthalten: nftables und firewalld können Logging (`nft log`, rich rules) aktivieren, aber signaturbasierte NIDS erfordert Drittanbieter-Software. Netfilter-Hooks erlauben technische Integration. Erkennung anhand von Netzverkehr auf dem Host selbst ist optional und organisatorisch zu bewerten — typische IDS laufen als separate Appliance oder Agent.
+Host-basierte Erkennung von Netzangriffen ist in RHEL nicht als integrierter Dienst enthalten: nftables und firewalld können Logging (`nft log`, rich rules) aktivieren, aber signaturbasierte NIDS erfordert Drittanbieter-Software. Netfilter-Hooks erlauben technische Integration.
 
 Weitere Informationen: [Netzwerke absichern](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/securing_networks/index).
 
