@@ -23,10 +23,17 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Einschränkung der Softwareinstallation: `dnf`/`yum` beziehen Pakete nur aus konfigurierten, gpggeprüften Repositories; Subscription Manager kanalisiert Red-Hat-Content. Privilegierte Installation bleibt an sudo/Polkit gebunden. Rootless-Nutzer können Binaries in `$HOME/.local` ablegen — fapolicyd mit deny-by-default oder organisatorische Software-Freigabe schränken Ad-hoc-Installation ein. Image-Mode- und Bootable-Container-Deployments reduzieren unkontrollierte Paketinstallation.
+Die Installation von Paketen via `dnf` ist an `sudo` gebunden. Rootless-Nutzer können Binaries in `$HOME/.local` ablegen. `fapolicyd` kann mit deny-by-default die Ad-hoc-Installation und Nutzung von Software einschränken. Eine Alternative ist der Einsatz von Image-Mode. Hier sind auf einem System ohne Build-Prozess Softwareinstallationen stark eingeschränkt.
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Image Mode](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/using_image_mode_for_rhel_to_build_deploy_and_manage_operating_systems/index), [fapolicyd](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_blocking-and-allowing-applications-using-fapolicyd_security-hardening)
 
-### Implementation Status: partial
+### Rules:
+
+  - fapolicy_default_deny
+  - package_fapolicyd_installed
+  - service_fapolicyd_enabled
+
+<!-- implemented, da wir technisch hier nichts prüfen können. Es ist default-verhalten -->
+### Implementation Status: implemented
 
 ______________________________________________________________________
