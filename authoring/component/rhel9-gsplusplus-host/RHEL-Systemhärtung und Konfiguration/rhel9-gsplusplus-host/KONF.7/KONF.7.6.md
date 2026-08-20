@@ -23,10 +23,8 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Automatische Aktualisierung von Schutzmechanismen stellt RHEL über `dnf-automatic` (optional security-only) und Red Hat Subscription für signierte Paket- und Policy-Updates bereit. SELinux-Policy-Pakete und Errata kommen über normale Update-Kanäle. Signatur-Updates für Drittanbieter-AV (z. B. `freshclam`) sind nicht Teil des supported Set und erfordern separate Automatisierung.
+Für mit den Internet verbundene Systeme wird Red Hat Lightspeed kontinuierlich durch Red Hat mit neuen Signaturen aktualisiert. Da in disconnected/air-gapped Systemen RHEL aktuell (Aug 2026) kein Malware-Scanning bereitstellt, obliegt hier die Implementation der entsprechenden 3rd Party Software.
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
-
-### Implementation Status: partial
+### Implementation Status: planned
 
 ______________________________________________________________________
