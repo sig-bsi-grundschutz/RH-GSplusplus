@@ -23,9 +23,21 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Ausführung nicht autorisierter Programme begrenzt fapolicyd mit deny-all/permit-by-exception-Policy auf lokale Dateisysteme; zusätzlich `noexec` auf Datenpartitionen und SELinux-Domains. Die Institution pflegt Whitelists in `/etc/fapolicyd/rules.d/`. Ausführung aus User-Home ohne Policy bleibt ein Risiko, das organisatorisch adressiert werden muss.
+SELinux beschränkt im Auslieferungszustand die Ausführung von Programmen und ihre Berechtigungen auf dem System, verhindert allerdings kein "Living of the Land" Szenario. Die Ausführung nicht autorisierter Programme wird durch `fapolicyd` mit deny-all/permit-by-exception-Policy eingeschränkt. Datenpartitionen können zusätzlich mittles `noexec` eingeschränkt werden. Die Ausführung von Containern kann via `podman` geschehen.
 
 Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+
+### Rules:
+
+  - fapolicy_default_deny
+  - package_fapolicyd_installed
+  - service_fapolicyd_enabled
+  - package_libselinux_installed
+  - grub2_enable_selinux
+  - selinux_not_disabled
+  - selinux_policytype
+  - selinux_state
+  - selinux_confinement_of_daemons
 
 ### Implementation Status: partial
 
