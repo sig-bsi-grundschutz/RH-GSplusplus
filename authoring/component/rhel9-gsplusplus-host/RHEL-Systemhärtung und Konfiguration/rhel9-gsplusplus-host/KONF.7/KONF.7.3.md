@@ -35,7 +35,10 @@ Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.
   - aide_scan_notification
   - package_audit_installed
   - service_auditd_enabled
+  - package_fapolicyd_installed
+  - service_fapolicyd_enabled
+  - fapolicy_default_deny
 
-### Implementation Status: partial
+### Implementation Status: implemented
 
 ______________________________________________________________________
