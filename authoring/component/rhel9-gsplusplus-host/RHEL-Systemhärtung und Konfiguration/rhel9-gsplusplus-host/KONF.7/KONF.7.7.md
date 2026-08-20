@@ -23,10 +23,8 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Funktionsfähigkeit des Schadcodeschutzes kann institutionell durch periodische AIDE-Läufe, Testinstallation signierter Pakete oder Monitoring auf fehlgeschlagene `dnf`-Verifikationen geprüft werden. ClamAV-Tests erfordern Drittanbieter — RHEL bietet keinen eingebauten Self-Test für Malware-Engines. Integritäts- und Paketprüf-Workflows sind die technische Basis für Funktionstests.
+Für Red Hat Lightspeed wird die Funktionsfähigkeit der Serverkomponenten kontinuierlich durch Red Hat wahrgenommen (SaaS-Responsibility). Da in disconnected/air-gapped Systemen RHEL aktuell (Aug 2026) kein Malware-Scanning bereitstellt, obliegt hier die Implementation der entsprechenden 3rd Party Software und den dort notwendigen Tools und Prozessen. Regelmäßige Tests mit EICAR-Teststrings sind Aufgabe der Organisation.
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
-
-### Implementation Status: partial
+### Implementation Status: planned
 
 ______________________________________________________________________
