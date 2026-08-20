@@ -23,9 +23,18 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Host-basierte Angriffserkennung kombiniert RHEL über auditd (syscall- und dateibasierte Ereignisprotokollierung mit Regelwerk) und optional AIDE für Integritätsvergleiche. Kein nativer Exploit- oder Anomalie-Detector — Ereignisse werden an SIEM oder Monitoring weitergeleitet. Netzwerk-IDS ist ein separates Thema. Die Institution muss Regeln, Korrelation und Alarmierung definieren.
+AIDE (Advanced Intrusion Detection Environment) ermöglicht Intrusion Detection: Eine Baseline-Dateidatenbank wird erstellt und per systemd-Timer oder Cron periodisch verglichen; Abweichungen signalisieren unautorisierte Änderungen (Integrität). Ebenfalls bietet IMA (Integrity Measurement Architecture) eine Möglichkeit um zusätzliche Integritätsprüfungen des Kernels und von Dateien durchzuführen. In Kombination mit entsprechenden `auditd` Konfigurationen, können hierdurch an zentralen Stellen (i.e. SIEM) Integritätsereignisse der Hosts gesammelt werden. Zusätzlich kann über `fapolicy` eine Allow-List von Anwendungen implementiert werden, die eine Ausbreitung von Schadcode zusätzlich erschweren und einschränken kann.
 
-Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/configuring-audit-records_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [Integrity Measurement Architecture](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_monitoring_and_updating_the_kernel/enhancing-security-with-the-kernel-integrity-subsystem_assembly_managing-kernel-command-line-parameters-with-uki)
+
+### Rules:
+
+  - package_aide_installed
+  - aide_build_database
+  - aide_periodic_cron_checking
+  - aide_scan_notification
+  - package_audit_installed
+  - service_auditd_enabled
 
 ### Implementation Status: partial
 
