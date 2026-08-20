@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-20T07:00:52.602899-04:00",
+      "last-modified": "2026-08-20T07:33:05.589590-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2910,6 +2910,33 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "not-applicable"
+                  }
+                ]
+              },
+              {
+                "uuid": "ae193c74-9494-575e-bda5-feacd711ff78",
+                "control-id": "KONF.7.9",
+                "description": "Die Installation von Paketen via `dnf` ist an `sudo` gebunden. Rootless-Nutzer können Binaries in `$HOME/.local` ablegen. `fapolicyd` kann mit deny-by-default die Ad-hoc-Installation und Nutzung von Software einschränken. Eine Alternative ist der Einsatz von Image-Mode. Hier sind auf einem System ohne Build-Prozess Softwareinstallationen stark eingeschränkt.\n\nWeitere Informationen: [Image Mode](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/using_image_mode_for_rhel_to_build_deploy_and_manage_operating_systems/index), [fapolicyd](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_blocking-and-allowing-applications-using-fapolicyd_security-hardening)",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "fapolicy_default_deny"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_fapolicyd_installed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_fapolicyd_enabled"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "implemented"
                   }
                 ]
               }
