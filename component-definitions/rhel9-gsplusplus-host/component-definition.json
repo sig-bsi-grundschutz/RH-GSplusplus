@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-20T05:43:06.789726-04:00",
+      "last-modified": "2026-08-20T06:00:10.072290-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2874,6 +2874,18 @@
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
                     "value": "partial"
+                  }
+                ]
+              },
+              {
+                "uuid": "e00ef5b0-0805-5cc7-a2ae-21efd969fbc0",
+                "control-id": "KONF.7.6",
+                "description": "Für mit den Internet verbundene Systeme wird Red Hat Lightspeed kontinuierlich durch Red Hat mit neuen Signaturen aktualisiert. Da in disconnected/air-gapped Systemen RHEL aktuell (Aug 2026) kein Malware-Scanning bereitstellt, obliegt hier die Implementation der entsprechenden 3rd Party Software.",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "planned"
                   }
                 ]
               }
