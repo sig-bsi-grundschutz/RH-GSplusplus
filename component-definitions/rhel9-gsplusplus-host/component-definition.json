@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-20T05:41:07.630005-04:00",
+      "last-modified": "2026-08-20T05:43:06.789726-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2855,6 +2855,21 @@
                 "control-id": "KONF.7.5",
                 "description": "Bei mit dem Internet verbundenen Systemen können wir Red Hat Lightspeed entsprechende Benachrichtungen konfiguriert werden. Für nicht verbundene Systeme können nur die mitigierenden Teilkomponenten Benachrichtigung an ein SIEM über die audit oder syslog Komponenten versenden. AIDE kann bei Abweichungen Mail oder Script-Hooks nutzen. `auditd`-Ereignisse lassen sich per `audisp` oder `rsyslog` an ein SIEM schicken.\n\nWeitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [Red Hat Lightspeed Malware Notification](https://docs.redhat.com/en/documentation/red_hat_lightspeed/1-latest/html/assessing_and_reporting_malware_signatures_on_rhel_systems/malware-svc-additional-concepts#con-mal-enabling-notifications-integrations_malware-svc-additional-collector-alerts).",
                 "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "aide_scan_notification"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "rsyslog_remote_loghost"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_rsyslog_enabled"
+                  },
                   {
                     "name": "implementation-status",
                     "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",

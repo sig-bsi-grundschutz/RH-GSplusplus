@@ -23,9 +23,15 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Benachrichtigung bei potenziellem Schadcode erfordert auf RHEL Integration in Monitoring: AIDE kann bei Abweichungen Mail oder Script-Hooks nutzen; auditd-Ereignisse lassen sich per `audisp` oder rsyslog an SIEM schicken. Kein vorgefertigter Malware-Alarm — die Institution koppelt Integritäts- und Audit-Alerts mit Monitoring (Red Hat Insights, Satellite oder externes SIEM).
+Bei mit dem Internet verbundenen Systemen können wir Red Hat Lightspeed entsprechende Benachrichtungen konfiguriert werden. Für nicht verbundene Systeme können nur die mitigierenden Teilkomponenten Benachrichtigung an ein SIEM über die audit oder syslog Komponenten versenden. AIDE kann bei Abweichungen Mail oder Script-Hooks nutzen. `auditd`-Ereignisse lassen sich per `audisp` oder `rsyslog` an ein SIEM schicken.
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [Systemstatus überwachen](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index).
+Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [Red Hat Lightspeed Malware Notification](https://docs.redhat.com/en/documentation/red_hat_lightspeed/1-latest/html/assessing_and_reporting_malware_signatures_on_rhel_systems/malware-svc-additional-concepts#con-mal-enabling-notifications-integrations_malware-svc-additional-collector-alerts).
+
+### Rules:
+
+  - aide_scan_notification
+  - rsyslog_remote_loghost
+  - service_rsyslog_enabled
 
 ### Implementation Status: partial
 
