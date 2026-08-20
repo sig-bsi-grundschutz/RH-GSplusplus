@@ -23,10 +23,10 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Bibliotheken-Ladung steuert fapolicyd über Regeln für dynamische Linker und Bibliothekspfade; SELinux verhindert unerlaubte cross-domain Library-Nutzung. Der Dynamic Linker und Distribution-Härtung in glibc reduzieren Angriffsflächen. Whitelist-Pflege für erlaubte Bibliotheken liegt bei der Institution.
+Verschiedene Bibliotheken stellt Red Hat bereits mit RHEL bereit. Diese können über `dnf` installiert werden. Da diese Bibliotheken durch Red Hat nach SLSA Level3 gebaut werden, kann hier den Bibliotheken ein höheres Vertrauen entgegen gebracht werden. Zusätzlich stellt Red Hat für Entwickler im Rahmen von *Red Hat Advanced Developer Subscription* eine Trusted Library für weitere Softwarepakete bereit, die nach den gleichen Standards gebaut werden. Um die Anforderung konsequent umzusetzen, empfiehlt sich, die RHEL Systeme air-gapped zu betreiben und ausschließlich erlaubte Software in Repositories für die Systeme bereitzustellen. Dies kann mittels *Red Hat Satellite* und/oder ergänzende Artefakt-Stores erfolgen. Durch eine Netzwerkseitige Zugriffsunterbindung der RHEL-Systeme an das Internet, bleibt lediglich der Artefakt-Speicher als Quelle für vertrauenswürdige Software-Bibliotheken. Ein Prozess muss hierbei sicherstellen, dass die benötigte Software auch zur Verfügung steht und entsprechende Kontrollen der Institution (Zulieferer, Qualitätsmerkmale, Support, etc) eingehalten werden.
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Red Hat Trusted Libraries](https://docs.redhat.com/en/documentation/red_hat_trusted_libraries/1.0), [Red Hat Satellite - Custom File Type Repositories](https://docs.redhat.com/en/documentation/red_hat_satellite/6.19/html/managing_content/managing-custom-file-type-content)
 
-### Implementation Status: partial
+### Implementation Status: planned
 
 ______________________________________________________________________
