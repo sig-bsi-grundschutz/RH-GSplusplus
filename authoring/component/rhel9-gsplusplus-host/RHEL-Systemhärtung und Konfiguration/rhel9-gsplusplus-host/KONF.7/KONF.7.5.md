@@ -3,6 +3,14 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  RHEL-Systemhärtung und Konfiguration:
+    - name: rsyslog_remote_loghost_address
+      values:
+        - logcollector_placeholder
+      component-values:
+        - logcollector_placeholder
+
 ---
 
 # KONF.7.5 - \[Schutz vor Schadcode\] Alarmierung

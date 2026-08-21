@@ -3,6 +3,14 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  "RHEL-Identität, Berechtigungen und Kryptografie":
+    - name: var_sudo_timestamp_timeout
+      values:
+        - "5"
+      component-values:
+        - "5"
+
 ---
 
 # BER.3.20 - \[Zugangskonten\] Zwischenspeicherung von Zugangsdaten

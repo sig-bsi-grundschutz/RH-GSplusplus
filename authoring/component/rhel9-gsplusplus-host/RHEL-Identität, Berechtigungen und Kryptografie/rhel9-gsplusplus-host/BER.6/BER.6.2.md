@@ -3,6 +3,19 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  "RHEL-Identität, Berechtigungen und Kryptografie":
+    - name: var_password_pam_remember
+      values:
+        - "5"
+      component-values:
+        - "5"
+    - name: var_password_pam_remember_control_flag
+      values:
+        - requisite
+      component-values:
+        - requisite
+
 ---
 
 # BER.6.2 - \[Passwortgebrauch\] Blockieren von Passwort Recycling

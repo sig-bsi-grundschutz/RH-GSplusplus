@@ -3,6 +3,14 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  RHEL-Systemhärtung und Konfiguration:
+    - name: var_networkmanager_dns_mode
+      values:
+        - default
+      component-values:
+        - default
+
 ---
 
 # KONF.4.2 - \[Vertrauenswürdige Basisdienste\] DNS-Anbindung
