@@ -23,10 +23,11 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Systemaufrufe pro Anwendung schränken Container und Podman über seccomp-Profile und systemd `SystemCallFilter` ein; libseccomp definiert erlaubte Syscalls. SELinux reduziert syscall-Nutzung indirekt über MAC. Feingranulare per-App-Syscall-Allowlists erfordern Custom seccomp oder LSM-Erweiterungen — nicht Standard-Desktop-Default.
+Für klassische Services erlaubt `systemd` die Filterung erlaubter Kernelcalls (Systemaufrufe) über die Spezifizierung von `SystemCallFilter` in der System-Unit können entweder über allow- oder über deny-listing entsprechende Kernelcalls eingeschränkt werden. Für containerisierte Anwendungen erlaubt `podman` das Aufzeichnen von Systemaufrufen (`sudo podman run --annotation io.containers.trace-syscall=of:/tmp/ls.json fedora:30 ls / > /dev/null`) und Speichern selbiger in einer Datei. Diese kann dann bei nachfolgenden Aufrufen des Containers als Allow-List mitgegeben werden (`sudo podman run --security-opt seccomp=/tmp/ls.json fedora ls -l / > /dev/null`). Für die Definition der SecComp-Profile ist zu berücksichtigen, dass sie den vollständigen Anwendungsfunktionsumfang abbilden müssen und daher während der automatisierten Tests der Anwendung erzeugt werden sollten. Nicht aufgezeichnete - und damit fehlende - Systemcalls können zu Fehlfunktionen der Anwendung um Produktivbetrieb führen. Weiterhin ist das Seccomp-Profil mit der Anwendung über Umgebungen zu transportieren (bspw. als RPM).
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [SystemCallFilter](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html), [Podman Seccomp](https://www.redhat.com/en/blog/container-security-seccomp)
 
-### Implementation Status: partial
+<!-- This cannot be checked automatically by rules, as the institution needs to take care of specifying this profiles -->
+### Implementation Status: not-applicable
 
 ______________________________________________________________________
