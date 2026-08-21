@@ -23,9 +23,14 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-Code-Signierung im Kernel: RHEL erzwingt signierte Kernel-Module — unsignierte Module werden beim Laden abgewiesen (`modprobe`/`kernel` module signing). Kernel-Images und kmod-Pakete stammen aus signierten Red-Hat-Builds. Optional erweitern IMA/EVM die Integritätsprüfung für Dateien und Prozesse; Standard ist Modul-Signierung über den Distribution-Kernel.
+RHEL kann den Einsatz signierter Kernel-Module erzwingen — unsignierte Module werden beim Laden abgewiesen (`modprobe`/`kernel` module signing). Kernel-Images und kmod-Pakete stammen im Standard aus signierten Red-Hat-Builds. Dies addressiert das Control Statement ("Code-Signierung im Betriebssystemkern"). Für das Ausführen von vertrauenswürdigen Skripten und Anwendungen (Langtext aus der Control Guidance) sind die Maßnahmen der vorherigen KONF.7.x zu berücksichtigen.
 
-Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index), [Signing a Kernel](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_monitoring_and_updating_the_kernel/signing-a-kernel-and-modules-for-secure-boot_assembly_managing-kernel-command-line-parameters-with-uki)
+
+### Rules:
+
+  - kernel_config_module_sig
+  - kernel_config_module_sig_all
 
 ### Implementation Status: implemented
 
