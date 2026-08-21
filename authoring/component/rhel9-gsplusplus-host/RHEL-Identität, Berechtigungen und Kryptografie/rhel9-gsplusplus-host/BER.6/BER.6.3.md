@@ -53,10 +53,7 @@ Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat
   - accounts_password_pam_dictcheck
   - accounts_password_pam_maxsequence
   - accounts_password_pam_maxrepeat
-  - var_password_pam_maxrepeat=3
-  - var_password_pam_maxsequence=3
-  - var_password_pam_dictcheck=1
 
-### Implementation Status: implemented
+### Implementation Status: partial
 
 ______________________________________________________________________
