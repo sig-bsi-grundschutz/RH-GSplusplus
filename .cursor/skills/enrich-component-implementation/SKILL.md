@@ -41,7 +41,7 @@ Requires `git`, `gh`, network for push/PR.
 ## Git safety
 
 1. Run `git branch --show-current`. **Never commit on that branch.**
-2. Create branch from current HEAD: `cursor/implement-{control-id}`
+2. Create branch from current HEAD of the `main` branch: `cursor/implement-{control-id}`
    (`control-id` = filename stem, e.g. `BER.2.4`).
 3. One control changed per PR unless the user explicitly asks for a single batch PR. For a
    requested set of controls, repeat Steps 0–8 per control, each on its own branch from the
@@ -105,6 +105,10 @@ Given a control ID, search
 Continue to Step 1 with the (now existing) component markdown file.
 
 ### Step 1 — Read and parse
+
+Read the review markdown file from `authoring/candidates/{artifact}/**/{control-id}.md`. Extract:
+
+- **Review** - from `## Review` body
 
 Read the target markdown file. Extract:
 
@@ -188,6 +192,19 @@ Delegate to the `find-rule` skill in the CaC-content clone instead of reimplemen
 "Suggested additional CaC rules" with one-line rationale each (reuse the rationale the find-rule
 skill produced).
 
+Also list the variables in the PR. Add in the PR body additional help how to use the variable with x-trestle.
+
+Example:
+```
+x-trestle-comp-def-rules-param-vals:
+  RHEL-Systemhärtung und Konfiguration:
+    - name: var_selinux_state
+      values:
+        - enforcing
+      component-values:
+        - enforcing
+```
+
 ### Step 5 — Draft implementation prose
 
 Write **German** prose replacing only the paragraph(s) between the HTML
@@ -252,7 +269,9 @@ Edit **only**:
 ```bash
 git checkout -b cursor/implement-{control-id}
 git add "{path/to/component.md}" "{path/to/profile.md if newly created}"
-git status --short  # confirm only the markdown files above are staged — never profile.json/component-definition.json
+# confirm no other commits than the ones needed are in the pr and that you are cleanly branched from main
+# confirm only the markdown files above are staged — never profile.json/component-definition.json
+git status --short
 git commit -m "$(cat <<'EOF'
 Enrich {control-id} implementation prose and status.
 
