@@ -41,7 +41,7 @@ Requires `git`, `gh`, network for push/PR.
 ## Git safety
 
 1. Run `git branch --show-current`. **Never commit on that branch.**
-2. Create branch from current HEAD: `cursor/implement-{control-id}`
+2. Create branch from current HEAD of the `main` branch: `cursor/implement-{control-id}`
    (`control-id` = filename stem, e.g. `BER.2.4`).
 3. One control changed per PR unless the user explicitly asks for a single batch PR. For a
    requested set of controls, repeat Steps 0–8 per control, each on its own branch from the
@@ -105,6 +105,10 @@ Given a control ID, search
 Continue to Step 1 with the (now existing) component markdown file.
 
 ### Step 1 — Read and parse
+
+Read the review markdown file from `authoring/candidates/{artifact}/**/{control-id}.md`. Extract:
+
+- **Review** - from `## Review` body
 
 Read the target markdown file. Extract:
 
@@ -188,14 +192,35 @@ Delegate to the `find-rule` skill in the CaC-content clone instead of reimplemen
 "Suggested additional CaC rules" with one-line rationale each (reuse the rationale the find-rule
 skill produced).
 
+Also list the variables in the PR. Add in the PR body additional help how to use the variable with x-trestle.
+
+Example:
+```
+x-trestle-comp-def-rules-param-vals:
+  RHEL-Systemhärtung und Konfiguration:
+    - name: var_selinux_state
+      values:
+        - enforcing
+      component-values:
+        - enforcing
+```
+
 ### Step 5 — Draft implementation prose
 
 Write **German** prose replacing only the paragraph(s) between the HTML
-comments and `### Rules:`.
+comments and `### Rules:` (section **What is the solution and how is it implemented?**).
 
 Requirements:
 
-- Describe **how RHEL implements** the control (mechanism, not restating the requirement)
+- Describe **how RHEL technically implements** the control — on-host mechanism and configuration
+  (PAM, `sshd_config`, LUKS, auditd, SSSD, systemd, …), not restating the requirement
+- **Do not mention the compliance-check layer in this prose.** Forbidden: CaC/ComplianceAsCode rule
+  IDs or names, OpenSCAP/oscap/check references, phrasing like „wird durch Regel X geprüft“ or
+  „die Regel `sshd_enable_pam` stellt sicher …“. CaC rules inform research (Steps 2 and 4) and
+  status (Step 6) only. List and cite them in `### Rules:` (read-only display), the PR body's
+  "Listed CaC rules reviewed" / "Suggested additional CaC rules", and the coverage matrix — not
+  here. See [reference.md — Implementation prose](reference.md#implementation-prose) for DO/DON'T
+  examples.
 - Cite Red Hat docs conceptually (e.g. auditd watch rules, augenrules) — no English paste blocks
 - State **honest limits** (org/IAM/process gaps, directory-only changes vs central IdM)
 - 2–5 sentences; match tone of existing files in `authoring/component/`
@@ -209,7 +234,8 @@ Leave both HTML comments intact.
 
 ### Step 6 — Implementation status
 
-Set `### Implementation Status:` using [status criteria](reference.md#implementation-status).
+Set `### Implementation Status:` using [status criteria](reference.md#implementation-status). CaC
+rules may drive this assessment and the PR coverage matrix; do not cite them in the Step 5 prose.
 
 Summary:
 
@@ -243,7 +269,9 @@ Edit **only**:
 ```bash
 git checkout -b cursor/implement-{control-id}
 git add "{path/to/component.md}" "{path/to/profile.md if newly created}"
-git status --short  # confirm only the markdown files above are staged — never profile.json/component-definition.json
+# confirm no other commits than the ones needed are in the pr and that you are cleanly branched from main
+# confirm only the markdown files above are staged — never profile.json/component-definition.json
+git status --short
 git commit -m "$(cat <<'EOF'
 Enrich {control-id} implementation prose and status.
 
