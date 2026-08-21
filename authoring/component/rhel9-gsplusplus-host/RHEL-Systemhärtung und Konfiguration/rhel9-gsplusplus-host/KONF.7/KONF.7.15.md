@@ -23,10 +23,17 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-RHEL stellt mit `firewalld` (nftables-Backend) eine hostbasierte Paketfilterung bereit. Zonen definieren Allowlist-Regeln für eingehenden und ausgehenden Verkehr; die Drop-Zone lehnt eingehende Pakete ab, sofern sie nicht explizit freigegeben sind. Betrieb und Wartung legen per `firewall-cmd` Zonen, Services und Ports fest — ohne organisatorische Freigabeliste bleibt nur ein generisches Default und keine vollständige Einschränkung aller Verbindungen.
+RHEL stellt mit `firewalld` (nftables-Backend) eine hostbasierte Paketfilterung bereit. Zonen definieren Allowlist-Regeln für eingehenden und ausgehenden Verkehr und die Drop-Zone lehnt eingehende Pakete ab, sofern sie nicht explizit freigegeben sind. Per `firewall-cmd` können Zonen, Services und Ports festgelegt werden. Diese sollten wie folgt konfiguriert sein: Default-Zone: Drop (damit default-deny gilt), für jede notwendige eingehende Verbindung sollte via `firewall-cmd` explizit der Port freigegeben werden.
 
 Weitere Informationen: [Firewalls und Paketfilter konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/index).
 
-### Implementation Status: partial
+### Rules:
+
+  - configured_firewalld_default_deny
+  - set_firewalld_default_zone
+  - package_firewalld_installed
+  - service_firewalld_enabled
+
+### Implementation Status: implemented
 
 ______________________________________________________________________
