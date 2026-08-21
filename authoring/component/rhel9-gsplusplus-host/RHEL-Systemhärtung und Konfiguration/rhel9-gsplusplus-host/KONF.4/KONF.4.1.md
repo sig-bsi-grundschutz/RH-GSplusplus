@@ -3,6 +3,14 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  RHEL-Systemhärtung und Konfiguration:
+    - name: var_authselect_profile
+      values:
+        - sssd
+      component-values:
+        - sssd
+
 ---
 
 # KONF.4.1 - \[Vertrauenswürdige Basisdienste\] Anbindung an Verzeichnisdienst

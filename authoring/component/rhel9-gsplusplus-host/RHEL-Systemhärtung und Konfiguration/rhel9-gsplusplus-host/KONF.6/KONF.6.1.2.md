@@ -3,6 +3,19 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  RHEL-Systemhärtung und Konfiguration:
+    - name: var_selinux_state
+      values:
+        - enforcing
+      component-values:
+        - enforcing
+    - name: var_selinux_policy_name
+      values:
+        - targeted
+      component-values:
+        - targeted
+
 ---
 
 # KONF.6.1.2 - \[Minimal erforderliche Berechtigungen für Anwendungen\] Isolierung von Anwendungen

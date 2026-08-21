@@ -3,6 +3,34 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  RHEL-Systemhärtung und Konfiguration:
+    - name: var_accounts_max_concurrent_login_sessions
+      values:
+        - "1"
+      component-values:
+        - "1"
+    - name: var_sshd_max_sessions
+      values:
+        - "10"
+      component-values:
+        - "10"
+    - name: var_accounts_tmout
+      values:
+        - "600"
+      component-values:
+        - "600"
+    - name: sshd_idle_timeout_value
+      values:
+        - "300"
+      component-values:
+        - "300"
+    - name: var_sshd_set_keepalive
+      values:
+        - "0"
+      component-values:
+        - "0"
+
 ---
 
 # KONF.5.2 - \[Authentifizierung\] Keine Mehrfachanmeldung

@@ -3,6 +3,29 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  RHEL-Systemhärtung und Konfiguration:
+    - name: var_authselect_profile
+      values:
+        - minimal
+      component-values:
+        - sssd
+    - name: inactivity_timeout_value
+      values:
+        - "900"
+      component-values:
+        - "900"
+    - name: var_screensaver_lock_delay
+      values:
+        - "0"
+      component-values:
+        - "0"
+    - name: var_system_crypto_policy
+      values:
+        - DEFAULT
+      component-values:
+        - DEFAULT
+
 ---
 
 # KONF.5.1 - \[Authentifizierung\] Authentifizierung am System

@@ -3,6 +3,29 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  "RHEL-Identität, Berechtigungen und Kryptografie":
+    - name: var_accounts_passwords_pam_faillock_deny
+      values:
+        - "3"
+      component-values:
+        - "3"
+    - name: var_accounts_passwords_pam_faillock_unlock_time
+      values:
+        - "0"
+      component-values:
+        - "0"
+    - name: var_accounts_passwords_pam_faillock_fail_interval
+      values:
+        - "900"
+      component-values:
+        - "900"
+    - name: var_accounts_passwords_pam_faillock_root_unlock_time
+      values:
+        - "0"
+      component-values:
+        - "0"
+
 ---
 
 # BER.3.10 - \[Zugangskonten\] Anmeldeversuchsgrenze am System

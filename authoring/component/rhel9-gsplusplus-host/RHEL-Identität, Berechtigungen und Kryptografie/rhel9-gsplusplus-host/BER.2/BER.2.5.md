@@ -3,6 +3,14 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  "RHEL-Identität, Berechtigungen und Kryptografie":
+    - name: var_account_disable_post_pw_expiration
+      values:
+        - "35"
+      component-values:
+        - "35"
+
 ---
 
 # BER.2.5 - \[Identitätsmanagement\] Deaktivierung bei Weggang

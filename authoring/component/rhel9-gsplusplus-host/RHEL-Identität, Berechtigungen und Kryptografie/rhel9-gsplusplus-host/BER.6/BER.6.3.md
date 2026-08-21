@@ -3,6 +3,23 @@ x-trestle-global:
   profile:
     title: Red Hat Enterprise Linux 9 — Grundschutz++ (Host-Umfang, kuratiert)
     href: trestle://profiles/rhel9-gsplusplus-host/profile.json
+x-trestle-comp-def-rules-param-vals:
+  "RHEL-Identität, Berechtigungen und Kryptografie":
+      - name: var_password_pam_dictcheck
+        values:
+          - "1"
+        component-values:
+          - "1"
+      - name: var_password_pam_maxsequence
+        values:
+          - "3"
+        component-values:
+          - "3"
+      - name: var_password_pam_maxrepeat
+        values:
+          - "3"
+        component-values:
+          - "3"
 ---
 
 # BER.6.3 - \[Passwortgebrauch\] Trivialpasswörter
@@ -30,16 +47,13 @@ Weitere Informationen: [Authentifizierung und Autorisierung](https://docs.redhat
 
 ### Rules:
 
-  - accounts_password_pam_dictcheck
-  - accounts_password_pam_minlen
-  - accounts_password_pam_minclass
-  - accounts_password_pam_dcredit
-  - accounts_password_pam_ucredit
-  - accounts_password_pam_lcredit
-  - accounts_password_pam_ocredit
-  - accounts_password_pam_pwquality_password_auth
+  - package_pam_pwquality_installed
   - accounts_password_pam_pwquality_system_auth
+  - accounts_password_pam_pwquality_password_auth
+  - accounts_password_pam_dictcheck
+  - accounts_password_pam_maxsequence
+  - accounts_password_pam_maxrepeat
 
-### Implementation Status: implemented
+### Implementation Status: partial
 
 ______________________________________________________________________
