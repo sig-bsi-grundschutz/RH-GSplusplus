@@ -23,10 +23,11 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-NetworkManager und der Kernel protokollieren Link- und Adressänderungen (Carrier, Disconnect, DHCP) im Journal; `auditd` kann zusätzlich Änderungen an der Netzkonfiguration (`/etc/NetworkManager/`, `sethostname`) überwachen. Heartbeat-Ausfälle und Schwellwerte für „Störung der Erreichbarkeit“ sind kein eingebauter Host-Check, sondern Sache eines zentralen Monitorings oder externer Probes.
+Red Hat Enterprise Linux enthält Performance Co-Pilot (`pcp`). Diese Werkzeug kann verschiedene Performance-Metriken sammeln und mittles `pmlogger` weiterleiten, zentralisieren und beispielsweise mittels Grafana visualisieren. Das Paket `pcp-pmda-netcheck` stellt hierfür Netzwerk-Prüfungen bereit. Diese können als Indikatoren für eine Störung der Netzerreichbarkeit oder Überlastung genutzt werden. Alternative Lösungen sind mittels Monitoring-Lösungen von 3rd-Parties marktverfügbar.
 
-Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening), [Grundlegende Systemeinstellungen](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index).
+Weitere Informationen: [Edge Network Monitoring](https://www.redhat.com/en/blog/lets-monitor-edge-computing-networks-rhel), [Performace Co-Pilot](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/monitoring_and_managing_system_status_and_performance/configuring-performance-co-pilot#installing-and-enabling-pcp)
 
-### Implementation Status: partial
+
+### Implementation Status: planned
 
 ______________________________________________________________________
