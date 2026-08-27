@@ -25,9 +25,16 @@ ______________________________________________________________________
 
 <!-- Note that the list of rules under ### Rules: is read-only and changes will not be captured after assembly to JSON -->
 
-RHEL zeichnet sicherheitsrelevante Host-Ereignisse mit dem Kernel-Audit-Subsystem (`auditd`, Paket `audit`) auf; der Dienst muss aktiv sein und kann bereits ab dem Bootloader mit `audit=1` eingeschaltet werden. Welche Syscalls, Dateiwatches und Anmeldeereignisse in `/etc/audit/rules.d/` landen, legt die Institution fest; `systemd-journald` ergänzt Kernel- und Dienstemeldungen. Die geforderte Mindestaufbewahrungsfrist sowie Anwendungs- und Cloud-Ereignisse außerhalb des Hosts bleiben organisatorisch bzw. beim zentralen Log-Aggregator.
+RHEL zeichnet sicherheitsrelevante Host-Ereignisse mit dem Kernel-Audit-Subsystem (`auditd`, Paket `audit`) auf. Der Dienst muss aktiv sein. Hierzu kann er bereits ab dem Bootloader (grub2) mit `audit=1` eingeschaltet werden. Die Festlegung, welche Ereignisse sicherheitsrelevant sind, sind durch die Institution zu treffen und entsprechende Regeln in `/etc/auditd/rules.d/` zu hinterlegen und mittels `augenrules` in `auditd` zu überführen. Im Verzeichnis `/usr/share/audit/sample-rules/` stehen Beispielhafte Regeln für bestimmte Anforderungen zur Verfügung. `auditd` auf dem OS arbeitet auf Basis der Logdatei-Größe, wodurch eine bestimmte Zeitfrist nicht garantiert werden kann. Um dies zu erreichen empfiehlt sich ein Forwarding (siehe andere DET Anforderungen) an ein zentrales Log-Management und die Sicherstellung der Zeit-Fristen dort. Alternativ kann dieser [Solution](https://access.redhat.com/solutions/661603) gefolgt werden (nicht supportet).
 
-Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+Weitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hcat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).
+
+### Rules:
+
+  - package_audit_installed
+  - service_auditd_enabled
+  - grub2_audit_argument
+  - service_systemd-journald_enabled
 
 ### Implementation Status: partial
 

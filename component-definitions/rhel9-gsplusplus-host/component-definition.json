@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-21T07:15:08.050520-04:00",
+      "last-modified": "2026-08-27T10:34:11.898605-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2071,6 +2071,38 @@
             "source": "trestle://profiles/rhel9-gsplusplus-host/profile.json",
             "description": "Grundschutz++-Anforderungen, umgesetzt durch RHEL-Protokollierung und Detektion (Artefakt rhel9-gsplusplus-host).",
             "implemented-requirements": [
+              {
+                "uuid": "40e580d2-4866-5fb7-8c5e-efef66211a07",
+                "control-id": "DET.3.1",
+                "description": "RHEL zeichnet sicherheitsrelevante Host-Ereignisse mit dem Kernel-Audit-Subsystem (`auditd`, Paket `audit`) auf. Der Dienst muss aktiv sein. Hierzu kann er bereits ab dem Bootloader (grub2) mit `audit=1` eingeschaltet werden. Die Festlegung, welche Ereignisse sicherheitsrelevant sind, sind durch die Institution zu treffen und entsprechende Regeln in `/etc/auditd/rules.d/` zu hinterlegen und mittels `augenrules` in `auditd` zu überführen. Im Verzeichnis `/usr/share/audit/sample-rules/` stehen Beispielhafte Regeln für bestimmte Anforderungen zur Verfügung. `auditd` auf dem OS arbeitet auf Basis der Logdatei-Größe, wodurch eine bestimmte Zeitfrist nicht garantiert werden kann. Um dies zu erreichen empfiehlt sich ein Forwarding (siehe andere DET Anforderungen) an ein zentrales Log-Management und die Sicherstellung der Zeit-Fristen dort. Alternativ kann dieser [Solution](https://access.redhat.com/solutions/661603) gefolgt werden (nicht supportet).\n\nWeitere Informationen: [Audit-Aufzeichnungen konfigurieren](https://docs.redhat.com/en/documentation/red_hcat_enterprise_linux/9/html-single/security_hardening/assembly_configuring-audit-records_security-hardening), [Sicherheitshärtung](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index).",
+                "props": [
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "package_audit_installed"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_auditd_enabled"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "grub2_audit_argument"
+                  },
+                  {
+                    "name": "Rule_Id",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "service_systemd-journald_enabled"
+                  },
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "partial"
+                  }
+                ]
+              },
               {
                 "uuid": "68ea2ac9-d5a7-579b-ab6f-0bfc8f317d84",
                 "control-id": "DET.3.1.1",
