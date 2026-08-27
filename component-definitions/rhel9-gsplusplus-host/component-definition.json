@@ -3,7 +3,7 @@
     "uuid": "35feea2e-6468-5b7e-b8c4-43d8fea040b1",
     "metadata": {
       "title": "Red Hat Enterprise Linux 9 — Grundschutz++ Host-Umsetzung",
-      "last-modified": "2026-08-27T10:34:11.898605-04:00",
+      "last-modified": "2026-08-27T11:02:25.384996-04:00",
       "version": "0.1.0",
       "oscal-version": "1.1.3",
       "links": [
@@ -2177,6 +2177,18 @@
                     "href": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index",
                     "rel": "reference",
                     "text": "Systemstatus und Leistung überwachen"
+                  }
+                ]
+              },
+              {
+                "uuid": "172f3071-902c-54a5-a3f1-e6be4a21ec3a",
+                "control-id": "DET.3.1.5",
+                "description": "Red Hat Enterprise Linux enthält Performance Co-Pilot (`pcp`). Diese Werkzeug kann verschiedene Performance-Metriken sammeln und mittles `pmlogger` weiterleiten, zentralisieren und beispielsweise mittels Grafana visualisieren. Das Paket `pcp-pmda-netcheck` stellt hierfür Netzwerk-Prüfungen bereit. Diese können als Indikatoren für eine Störung der Netzerreichbarkeit oder Überlastung genutzt werden. Alternative Lösungen sind mittels Monitoring-Lösungen von 3rd-Parties marktverfügbar.\n\nWeitere Informationen: [Edge Network Monitoring](https://www.redhat.com/en/blog/lets-monitor-edge-computing-networks-rhel), [Performace Co-Pilot](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/monitoring_and_managing_system_status_and_performance/configuring-performance-co-pilot#installing-and-enabling-pcp)",
+                "props": [
+                  {
+                    "name": "implementation-status",
+                    "ns": "https://oscal-compass.github.io/compliance-trestle/schemas/oscal/cd",
+                    "value": "planned"
                   }
                 ]
               },
